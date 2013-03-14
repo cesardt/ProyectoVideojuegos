@@ -19,13 +19,13 @@
 <intAttribute key="PLAYER_WIDTH" value="550"/>
 <stringAttribute key="POST_COMPILE_ANT" value=""/>
 <stringAttribute key="PRE_COMPILE_ANT" value=""/>
-<stringAttribute key="PROJECT_NAME" value="BFlixel"/>
+<stringAttribute key="PROJECT_NAME" value="ProyectoVideojuegos"/>
 <stringAttribute key="START_SWF_WITH" value="AIR Debug Launcher"/>
 <stringAttribute key="TARGET_PLATFORM" value="AirDesktop"/>
 <stringAttribute key="TARGET_PLATFORM_CONFIG" value="Primary"/>
 <booleanAttribute key="USE_PROJECT_COMPILER_ARGUMENTS" value="true"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/BFlixel"/>
+<listEntry value="/ProyectoVideojuegos"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="4"/>
