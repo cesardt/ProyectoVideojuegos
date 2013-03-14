@@ -12,6 +12,8 @@ package com.powerflasher.SampleApp {
 
 	public class NivelUno extends FlxState {
 		
+		//Prueba de sync
+		
 		[Embed(source = "Grass_tiles2.png")] public var mapaPNG:Class;
 		[Embed(source = "mapCSV_Group2_Pasto.csv" , mimeType="application/octet-stream")] public var mapaCSV:Class;
 		[Embed(source = "Tiles.png")] public var mapaPNG1:Class;
