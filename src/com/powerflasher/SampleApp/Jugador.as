@@ -16,7 +16,8 @@
 		velocity.y=10;
 		
 		loadGraphic(jugadorSpriteSheet, true, true, 16, 24, true);
-		addAnimation("nombre", [0,1,2],10,false);
+		addAnimation("izquierda",[3,4,5],15,false);
+		addAnimation("derecha", [0,1,2],15,false);
 
 		
 

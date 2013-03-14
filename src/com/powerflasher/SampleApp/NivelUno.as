@@ -1,4 +1,7 @@
 package com.powerflasher.SampleApp {
+	import org.flixel.system.FlxTile;
+	import org.flixel.FlxObject;
+	import org.flixel.FlxRect;
 	import org.flixel.FlxTilemap;
 	import org.flixel.FlxTileblock;
 	import org.flixel.FlxButton;
@@ -11,11 +14,17 @@ package com.powerflasher.SampleApp {
 		
 		[Embed(source = "Grass_tiles2.png")] public var mapaPNG:Class;
 		[Embed(source = "mapCSV_Group2_Pasto.csv" , mimeType="application/octet-stream")] public var mapaCSV:Class;
+		[Embed(source = "Tiles.png")] public var mapaPNG1:Class;
+		[Embed(source = "mapCSV_Group2_Map1.csv" , mimeType="application/octet-stream")] public var mapaCSV1:Class;
+		[Embed(source = "item.png")] public var mapaPNG2:Class;
+		[Embed(source = "mapCSV_Group2_Items.csv" , mimeType="application/octet-stream")] public var mapaCSV2:Class;
 		
 		private var texto:FlxText;
-		private var mario:Jugador;
-		private var piso:FlxTileblock;
+		private var astrid:Jugador;
 		private var mapa:FlxTilemap;
+		private var mapa2:FlxTilemap;
+		private var mapa3:FlxTilemap;
+		private var item:FlxTile;
 		
 		 public function NivelUno()
         {
@@ -34,46 +43,52 @@ package com.powerflasher.SampleApp {
  			texto=new FlxText(0, 300, FlxG.width, "Al infinito").setFormat(null, 21, 0xFFFFFF, "center");
          
            add(texto);
-		   mario=new Jugador();
-		   add(mario);
+		   astrid=new Jugador();
 		   
-		  // piso=new FlxTileblock(0, 130, 100, 30);
-		   //piso.makeGraphic(100, 5);
-		   //add(piso);
 		   mapa=new FlxTilemap();
+		   mapa2=new FlxTilemap();
+		   mapa3=new FlxTilemap();
+		   item=new FlxTile(mapa3, 2, 10, 10, true,1);
 		   mapa.loadMap(new mapaCSV(), mapaPNG,31,28);
+		   mapa.setTileProperties(6,FlxObject.UP);
+		   
 		   add(mapa);
+		   mapa2.loadMap(new mapaCSV1(), mapaPNG1,31,28);
+		   add(mapa2);
+		   mapa3.loadMap(new mapaCSV2(), mapaPNG2,10,10);
 		   
+		   add(mapa3);
+		   add(astrid);
 		   
-		   FlxG.camera.follow(mario);
+		  FlxG.camera.setBounds(0,0,2670,730,false);
+		   FlxG.worldBounds=new FlxRect(0,0,2670,730);
+		   FlxG.camera.follow(astrid);
+		   
 		}
 		   				
 		
 	override public function update():void {
-       	texto.x++;
 	    super.update();
+		astrid.velocity.y=0;
+		astrid.acceleration.y+=10;
 		if(FlxG.keys.pressed("RIGHT")){
-			mario.x+=1;
-			mario.play("nombre");
-			//mario.play("show");
+			astrid.x+=2;
+			astrid.play("derecha");
 		}
 		if(FlxG.keys.pressed("LEFT")){
-			mario.x-=1;
-			mario.play("nombre2");
+			astrid.x-=2;
+			astrid.play("izquierda");
 		}
 		if(FlxG.keys.pressed("DOWN")){
-			mario.y+=1;
-			//mario.play("show");
+			
 		}
 		if(FlxG.keys.pressed("UP")){
-			mario.y-=1;
+			
 		}
 		if(FlxG.keys.pressed("SPACE")){
-			mario.y-=4;
-			mario.play("nombre");
-			//mario.play("show");
+			astrid.y-=8;
 		}
-		FlxG.collide(mario,mapa);
+		FlxG.collide(astrid,mapa);
     }
 		
 	}
