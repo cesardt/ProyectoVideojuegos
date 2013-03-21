@@ -3,11 +3,11 @@
 	/**
 	 * @author ieiomeli
 	 */
-	public class Jugador extends FlxSprite{
+	public class Astrid extends FlxSprite{
 		
 		[Embed(source = "monitaXpeq.png")] public static var jugadorSpriteSheet:Class;
 		
-		public function Jugador()
+		public function Astrid()
 
 		{
 
