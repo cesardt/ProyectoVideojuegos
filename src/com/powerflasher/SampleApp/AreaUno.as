@@ -10,7 +10,7 @@ package com.powerflasher.SampleApp {
 	import org.flixel.FlxText;
 	import org.flixel.FlxState;
 
-	public class NivelUno extends FlxState {
+	public class AreaUno extends FlxState {
 		
 		//Prueba de sync
 		
@@ -22,13 +22,13 @@ package com.powerflasher.SampleApp {
 		[Embed(source = "mapCSV_Group2_Items.csv" , mimeType="application/octet-stream")] public var mapaCSV2:Class;
 		
 		private var texto:FlxText;
-		private var astrid:Jugador;
+		private var astrid:Astrid;
 		private var mapa:FlxTilemap;
 		private var mapa2:FlxTilemap;
 		private var mapa3:FlxTilemap;
 		private var item:FlxTile;
 		
-		 public function NivelUno()
+		 public function AreaUno()
         {
             super();
         }
@@ -45,7 +45,7 @@ package com.powerflasher.SampleApp {
  			texto=new FlxText(0, 300, FlxG.width, "Al infinito").setFormat(null, 21, 0xFFFFFF, "center");
          
            add(texto);
-		   astrid=new Jugador();
+		   astrid=new Astrid();
 		   
 		   mapa=new FlxTilemap();
 		   mapa2=new FlxTilemap();
