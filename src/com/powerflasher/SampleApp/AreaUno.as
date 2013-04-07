@@ -1,4 +1,5 @@
 package com.powerflasher.SampleApp {
+	import org.flixel.FlxGroup;
 	import org.flixel.system.FlxTile;
 	import org.flixel.FlxObject;
 	import org.flixel.FlxRect;
@@ -27,6 +28,10 @@ package com.powerflasher.SampleApp {
 		private var mapa2:FlxTilemap;
 		private var mapa3:FlxTilemap;
 		private var item:FlxTile;
+		//varibles àra recoger items
+		public var items:FlxGroup;
+		public var totalItems:int;
+		
 		
 		 public function AreaUno()
         {
