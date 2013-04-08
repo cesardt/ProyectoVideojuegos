@@ -111,7 +111,7 @@ package com.powerflasher.SampleApp {
 	    super.update();
 		 
 		
-		astrid.velocity.y=0;
+		astrid.velocity.y=30;
 		astrid.acceleration.y+=10;
 		if(FlxG.keys.pressed("RIGHT")){
 			astrid.x+=2;
