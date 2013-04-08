@@ -127,8 +127,9 @@ package com.powerflasher.SampleApp {
 		if(FlxG.keys.pressed("UP")){
 			
 		}
-		if(FlxG.keys.pressed("SPACE")){
+		if(FlxG.keys.justPressed("SPACE")){
 			astrid.y-=8;
+			astrid.acceleration.y+=20;
 		}
 		FlxG.collide(astrid,mapa);
     }
