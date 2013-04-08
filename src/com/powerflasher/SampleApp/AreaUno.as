@@ -31,6 +31,9 @@ package com.powerflasher.SampleApp {
 		//varibles àra recoger items
 		public var items:FlxGroup;
 		public var totalItems:int;
+		private var player:Astrid;
+		private var level:AreaUno;
+		private var score:FlxText;
 		
 		
 		 public function AreaUno()
@@ -44,9 +47,7 @@ package com.powerflasher.SampleApp {
             var s:FlxSprite = new FlxSprite();
 			s.makeGraphic(FlxG.width, FlxG.height, 0x9345Da);
             add(s);
-			
- 
-    
+			   
  			texto=new FlxText(0, 300, FlxG.width, "Al infinito").setFormat(null, 21, 0xFFFFFF, "center");
          
            add(texto);
@@ -64,8 +65,18 @@ package com.powerflasher.SampleApp {
 		   add(mapa2);
 		   mapa3.loadMap(new mapaCSV2(), mapaPNG2,10,10);
 		   
+		   
+		   score = new FlxText(0, 0, 100);
+			score.color = 0xffffffff;
+			score.shadow = 0xff000000;
+			score.scrollFactor.x = 0;
+			score.scrollFactor.y = 0;
+//			score.text = "0 / " + level.totalItems.toString();
 		   add(mapa3);
 		   add(astrid);
+		   add(score);
+		   
+		   parseItems();
 		   
 		  FlxG.camera.setBounds(0,0,2670,730,false);
 		   FlxG.worldBounds=new FlxRect(0,0,2670,730);
@@ -73,9 +84,33 @@ package com.powerflasher.SampleApp {
 		   
 		}
 		   				
+		private function parseItems():void
+		{
+			var itemsMap:FlxTilemap = new FlxTilemap();
+			
+			itemsMap.loadMap(new mapaCSV2(), mapaPNG2, 16, 16);
+			
+			items = new FlxGroup();
+			
+			for (var ty:int = 0; ty < itemsMap.heightInTiles; ty++)
+			{
+				for (var tx:int = 0; tx < itemsMap.widthInTiles; tx++)
+				{
+					if (itemsMap.getTile(tx, ty) == 1)
+					{
+						items.add(new Items(tx, ty));
+						totalItems++;
+					}
+				}
+			}
+		}
+		
+	
 		
 	override public function update():void {
 	    super.update();
+		 
+		
 		astrid.velocity.y=0;
 		astrid.acceleration.y+=10;
 		if(FlxG.keys.pressed("RIGHT")){
