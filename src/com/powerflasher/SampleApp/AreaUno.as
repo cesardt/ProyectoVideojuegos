@@ -109,7 +109,6 @@ package com.powerflasher.SampleApp {
 	
 		
 	override public function update():void {
-	    super.update();
 		 
 		astrid.acceleration.x = 0;
 		if(FlxG.keys.pressed("RIGHT")){
@@ -126,17 +125,11 @@ package com.powerflasher.SampleApp {
 		if(FlxG.keys.pressed("UP")){
 			trace(astrid.velocity.y);	
 		}
-		if(FlxG.keys.justPressed("SPACE") && astrid.velocity.y==6.72){
+		if(FlxG.keys.justPressed("SPACE") && astrid.isTouching(FlxObject.FLOOR)){
 			trace("Hola");
 			astrid.velocity.y = -astrid.maxVelocity.y;
-			trace(astrid.velocity.y);
-			/*if(astrid.velocity.x == 0){
-				astrid.play("idle");
-			}
-			else{
-				astrid.play("run");
-			}*/
 		}
+		super.update();
 		FlxG.collide(astrid,mapa);
     	//FlxG.overlap(astrid, level.items, hitItems);
     }

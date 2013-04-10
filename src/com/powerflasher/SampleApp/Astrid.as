@@ -12,7 +12,7 @@
 		public function Astrid()
 
 		{
-		var runV:uint = 100;
+		var runV:uint = 80;
 		super(150,570);
 		frame=3;
 			
@@ -22,8 +22,8 @@
 		drag.x = runV * 8;
 		jump = 200;
 		maxVelocity.x = runV;
-		acceleration.y = 420;
 		maxVelocity.y = jump;
+		acceleration.y = 500;
 		loadGraphic(jugadorSpriteSheet, true, true, 16, 24, true);
 		addAnimation("izquierda",[3,4,5],15,false);
 		addAnimation("derecha", [0,1,2],15,false);
