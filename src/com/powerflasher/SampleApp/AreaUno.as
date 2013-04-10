@@ -45,7 +45,7 @@ package com.powerflasher.SampleApp {
 		
 		 override public function create():void
         {
-            var s:FlxSprite = new FlxSprite();
+			var s:FlxSprite = new FlxSprite();
 			s.makeGraphic(FlxG.width, FlxG.height, 0x9345Da);
             add(s);
 			   
@@ -126,8 +126,7 @@ package com.powerflasher.SampleApp {
 			trace(astrid.velocity.y);	
 		}
 		if(FlxG.keys.justPressed("SPACE") && astrid.isTouching(FlxObject.FLOOR)){
-			trace("Hola");
-			astrid.velocity.y = -astrid.maxVelocity.y;
+			astrid.velocity.y = -astrid.maxVelocity.y;	
 		}
 		super.update();
 		FlxG.collide(astrid,mapa);
