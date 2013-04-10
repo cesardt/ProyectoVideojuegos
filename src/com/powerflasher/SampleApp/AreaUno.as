@@ -137,7 +137,17 @@ package com.powerflasher.SampleApp {
 			}*/
 		}
 		FlxG.collide(astrid,mapa);
+    	//FlxG.overlap(astrid, level.items, hitItems);
     }
+	private function hitItems(p:FlxObject, item:FlxObject):void
+		{
+			trace("colapse");
+//			item.kill();
+//			
+//			FlxG.score += 1;
+//			
+//			score.text = FlxG.score.toString() + " / " + level.totalItems.toString();
+		}
 		
 	}
 }
