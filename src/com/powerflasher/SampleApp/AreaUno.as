@@ -65,7 +65,7 @@ package com.powerflasher.SampleApp {
 		   add(mapa2);
 		   mapa3.loadMap(new mapaCSV2(), mapaPNG2,10,10);
 		   
-		   
+		  
 		   score = new FlxText(0, 0, 100);
 			score.color = 0xffffffff;
 			score.shadow = 0xff000000;
@@ -110,26 +110,31 @@ package com.powerflasher.SampleApp {
 	override public function update():void {
 	    super.update();
 		 
-		
-		astrid.velocity.y=30;
-		astrid.acceleration.y+=10;
+		astrid.acceleration.x = 0;
 		if(FlxG.keys.pressed("RIGHT")){
-			astrid.x+=2;
+			astrid.acceleration.x += astrid.drag.x;
 			astrid.play("derecha");
 		}
 		if(FlxG.keys.pressed("LEFT")){
-			astrid.x-=2;
+			astrid.acceleration.x -= astrid.drag.x;
 			astrid.play("izquierda");
 		}
 		if(FlxG.keys.pressed("DOWN")){
 			
 		}
 		if(FlxG.keys.pressed("UP")){
-			
+			trace(astrid.velocity.y);	
 		}
-		if(FlxG.keys.justPressed("SPACE")){
-			astrid.y-=40;
-			astrid.acceleration.y-=20;
+		if(FlxG.keys.justPressed("SPACE") && astrid.velocity.y==6.72){
+			trace("Hola");
+			astrid.velocity.y = -astrid.maxVelocity.y;
+			trace(astrid.velocity.y);
+			/*if(astrid.velocity.x == 0){
+				astrid.play("idle");
+			}
+			else{
+				astrid.play("run");
+			}*/
 		}
 		FlxG.collide(astrid,mapa);
     }
