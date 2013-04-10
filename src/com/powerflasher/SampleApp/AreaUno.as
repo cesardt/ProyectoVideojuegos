@@ -19,8 +19,9 @@ package com.powerflasher.SampleApp {
 		[Embed(source = "mapCSV_Group2_Pasto.csv" , mimeType="application/octet-stream")] public var mapaCSV:Class;
 		[Embed(source = "Tiles.png")] public var mapaPNG1:Class;
 		[Embed(source = "mapCSV_Group2_Map1.csv" , mimeType="application/octet-stream")] public var mapaCSV1:Class;
-		[Embed(source = "item.png")] public var mapaPNG2:Class;
 		[Embed(source = "mapCSV_Group2_Items.csv" , mimeType="application/octet-stream")] public var mapaCSV2:Class;
+		[Embed(source = "item.png")] public var itemsPNG:Class;
+
 		
 		private var texto:FlxText;
 		private var astrid:Astrid;
@@ -63,7 +64,7 @@ package com.powerflasher.SampleApp {
 		   add(mapa);
 		   mapa2.loadMap(new mapaCSV1(), mapaPNG1,31,28);
 		   add(mapa2);
-		   mapa3.loadMap(new mapaCSV2(), mapaPNG2,10,10);
+		   mapa3.loadMap(new mapaCSV2(), itemsPNG,10,10);
 		   
 		  
 		   score = new FlxText(0, 0, 100);
@@ -88,7 +89,7 @@ package com.powerflasher.SampleApp {
 		{
 			var itemsMap:FlxTilemap = new FlxTilemap();
 			
-			itemsMap.loadMap(new mapaCSV2(), mapaPNG2, 16, 16);
+			itemsMap.loadMap(new mapaCSV2(), itemsPNG, 16, 16);
 			
 			items = new FlxGroup();
 			
