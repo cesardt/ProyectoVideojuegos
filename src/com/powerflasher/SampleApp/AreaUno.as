@@ -64,7 +64,7 @@ package com.powerflasher.SampleApp {
 		   add(mapa);
 		   mapa2.loadMap(new mapaCSV1(), mapaPNG1,31,28);
 		   add(mapa2);
-		   mapa3.loadMap(new mapaCSV2(), itemsPNG,10,10);
+		  // mapa3.loadMap(new mapaCSV2(), itemsPNG,10,10);
 		   
 		  
 		   score = new FlxText(0, 0, 100);
@@ -72,12 +72,15 @@ package com.powerflasher.SampleApp {
 			score.shadow = 0xff000000;
 			score.scrollFactor.x = 0;
 			score.scrollFactor.y = 0;
-//			score.text = "0 / " + level.totalItems.toString();
-		   add(mapa3);
+			score.text = "0 / " + totalItems.toString();
+		   //add(mapa3);
 		   add(astrid);
+		   parseItems();
+		   //agrega score e items
+		   add(items);
 		   add(score);
 		   
-		   parseItems();
+		  
 		   
 		  FlxG.camera.setBounds(0,0,2670,730,false);
 		   FlxG.worldBounds=new FlxRect(0,0,2670,730);
@@ -89,7 +92,7 @@ package com.powerflasher.SampleApp {
 		{
 			var itemsMap:FlxTilemap = new FlxTilemap();
 			
-			itemsMap.loadMap(new mapaCSV2(), itemsPNG, 16, 16);
+			itemsMap.loadMap(new mapaCSV2(), itemsPNG, 10, 10);
 			
 			items = new FlxGroup();
 			
@@ -130,16 +133,16 @@ package com.powerflasher.SampleApp {
 		}
 		super.update();
 		FlxG.collide(astrid,mapa);
-    	//FlxG.overlap(astrid, level.items, hitItems);
+    	FlxG.overlap(astrid, items, hitItems);
     }
 	private function hitItems(p:FlxObject, item:FlxObject):void
 		{
-			trace("colapse");
-//			item.kill();
-//			
-//			FlxG.score += 1;
-//			
-//			score.text = FlxG.score.toString() + " / " + level.totalItems.toString();
+			//trace("colapse");
+			item.kill();
+			
+			FlxG.score += 1;
+			
+			score.text = FlxG.score.toString() + " / " + totalItems.toString();
 		}
 		
 	}
