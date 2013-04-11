@@ -65,14 +65,11 @@ package com.powerflasher.SampleApp {
 		   mapa.loadMap(new mapaCSV(), mapaPNG,31,28);
 		   
 		   mapa2.loadMap(new mapaCSV1(), mapaPNG1,31,28);
-<<<<<<< HEAD
 		   add(mapa2);
 		  // mapa3.loadMap(new mapaCSV2(), itemsPNG,10,10);
-=======
 		   mapa3.loadMap(new mapaCSV2(), itemsPNG,10,10);
 		   mapa4.loadMap(new mapaCSV3(), mapaPNG2,31,14);
 		   mapa4.setTileProperties(1,FlxObject.UP);
->>>>>>> correcciones mapa
 		   
 		  
 		   score = new FlxText(0, 0, 100);
@@ -80,16 +77,13 @@ package com.powerflasher.SampleApp {
 			score.shadow = 0xff000000;
 			score.scrollFactor.x = 0;
 			score.scrollFactor.y = 0;
-<<<<<<< HEAD
 			score.text = "0 / " + totalItems.toString();
 		   //add(mapa3);
-=======
 //			score.text = "0 / " + level.totalItems.toString();
 			add(mapa4);
 			add(mapa);
 			add(mapa2);
 		   add(mapa3);
->>>>>>> correcciones mapa
 		   add(astrid);
 		   parseItems();
 		   //agrega score e items
@@ -149,12 +143,9 @@ package com.powerflasher.SampleApp {
 		}
 		super.update();
 		FlxG.collide(astrid,mapa);
-<<<<<<< HEAD
     	FlxG.overlap(astrid, items, hitItems);
-=======
 		FlxG.collide(astrid,mapa4);
     	//FlxG.overlap(astrid, level.items, hitItems);
->>>>>>> correcciones mapa
     }
 	private function hitItems(p:FlxObject, item:FlxObject):void
 		{
