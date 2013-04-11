@@ -147,7 +147,7 @@ package com.powerflasher.SampleApp {
 			
 		}
 		if(FlxG.keys.justPressed("UP") && FlxG.collide(astrid,puerta)){
-			FlxG.switchState(new AreaDos());
+			//FlxG.switchState(new AreaDos());
 				
 		}
 		if(FlxG.keys.justPressed("SPACE") && astrid.isTouching(FlxObject.FLOOR)){
