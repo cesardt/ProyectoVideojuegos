@@ -90,6 +90,7 @@ package com.powerflasher.SampleApp {
 		   parseItems();
 		   //agrega items y el score,  conteo
 		   add(items);
+		   totalItems=0;
 		   add(score);
 		   score.text = "0 / " + totalItems.toString();
 		   
@@ -117,6 +118,7 @@ package com.powerflasher.SampleApp {
 					{
 						items.add(new Items(tx, ty));
 						totalItems++;
+						trace(totalItems)
 					}
 				}
 				
@@ -144,7 +146,10 @@ package com.powerflasher.SampleApp {
 			trace(astrid.velocity.y);	
 		}
 		if(FlxG.keys.justPressed("SPACE") && astrid.isTouching(FlxObject.FLOOR)){
-			astrid.velocity.y = -astrid.maxVelocity.y;	
+				astrid.velocity.y = -astrid.maxVelocity.y;
+		}
+		if(FlxG.keys.justPressed("SPACE") && totalItems==1 && !astrid.isTouching(FlxObject.FLOOR)){
+				astrid.velocity.y= -astrid.maxVelocity.y*50;	
 		}
 		super.update();
 		FlxG.collide(astrid,mapa);
