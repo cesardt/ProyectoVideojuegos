@@ -23,7 +23,7 @@ package com.powerflasher.SampleApp {
 		[Embed(source = "item.png")] public var itemsPNG:Class;
 		[Embed(source = "barras.png")] public var mapaPNG2:Class;
 		[Embed(source = "mapCSV_Group2_Map4.csv" , mimeType="application/octet-stream")] public var mapaCSV3:Class;
-
+	
 		
 		private var texto:FlxText;
 		private var astrid:Astrid;
@@ -32,12 +32,12 @@ package com.powerflasher.SampleApp {
 		private var mapa3:FlxTilemap;
 		private var mapa4:FlxTilemap;
 		private var item:FlxTile;
-		//varibles àra recoger items
+		//varibles para recoger items
 		public var items:FlxGroup;
 		public var totalItems:int;
+		private var score:FlxText;
 		private var player:Astrid;
 		private var level:AreaUno;
-		private var score:FlxText;
 		
 		
 		 public function AreaUno()
@@ -59,40 +59,43 @@ package com.powerflasher.SampleApp {
 		   
 		   mapa=new FlxTilemap();
 		   mapa2=new FlxTilemap();
-		   mapa3=new FlxTilemap();
+		   //mapa3=new FlxTilemap();
 		   mapa4=new FlxTilemap();
 		   item=new FlxTile(mapa3, 2, 10, 10, true,1);
 		   mapa.loadMap(new mapaCSV(), mapaPNG,31,28);
 		   
 		   mapa2.loadMap(new mapaCSV1(), mapaPNG1,31,28);
 		   add(mapa2);
-		  // mapa3.loadMap(new mapaCSV2(), itemsPNG,10,10);
-		   mapa3.loadMap(new mapaCSV2(), itemsPNG,10,10);
 		   mapa4.loadMap(new mapaCSV3(), mapaPNG2,31,14);
 		   mapa4.setTileProperties(1,FlxObject.UP);
-		   
+		 
+		  // mapa3.loadMap(new mapaCSV2(), itemsPNG,10,10);
+		  // mapa3.loadMap(new mapaCSV2(), itemsPNG,10,10);
 		  
-		   score = new FlxText(0, 0, 100);
+		   
+		   
+		  //atributos del score
+		    score = new FlxText(0, 0, 100);
 			score.color = 0xffffffff;
 			score.shadow = 0xff000000;
 			score.scrollFactor.x = 0;
 			score.scrollFactor.y = 0;
-			score.text = "0 / " + totalItems.toString();
-		   //add(mapa3);
-//			score.text = "0 / " + level.totalItems.toString();
-			add(mapa4);
-			add(mapa);
-			add(mapa2);
-		   add(mapa3);
+		   
+			
+		   add(mapa4);
+		   add(mapa);
+		   add(mapa2);
 		   add(astrid);
+		   //inicializa el grupo de items, del mapa al grupo
 		   parseItems();
-		   //agrega score e items
+		   //agrega items y el score,  conteo
 		   add(items);
 		   add(score);
+		   score.text = "0 / " + totalItems.toString();
 		   
 		  
-		   
-		  FlxG.camera.setBounds(0,0,2670,730,false);
+		   //de la camara
+		   FlxG.camera.setBounds(0,0,2670,730,false);
 		   FlxG.worldBounds=new FlxRect(0,0,2670,730);
 		   FlxG.camera.follow(astrid);
 		   
@@ -116,7 +119,9 @@ package com.powerflasher.SampleApp {
 						totalItems++;
 					}
 				}
+				
 			}
+			//trace("total de items: "+ totalItems);
 		}
 		
 	
@@ -143,17 +148,15 @@ package com.powerflasher.SampleApp {
 		}
 		super.update();
 		FlxG.collide(astrid,mapa);
-    	FlxG.overlap(astrid, items, hitItems);
 		FlxG.collide(astrid,mapa4);
-    	//FlxG.overlap(astrid, level.items, hitItems);
+    	FlxG.overlap(astrid, items, hitItems);
+		
     }
 	private function hitItems(p:FlxObject, item:FlxObject):void
 		{
 			//trace("colapse");
 			item.kill();
-			
 			FlxG.score += 1;
-			
 			score.text = FlxG.score.toString() + " / " + totalItems.toString();
 		}
 		
