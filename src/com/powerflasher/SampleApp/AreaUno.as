@@ -17,7 +17,7 @@ package com.powerflasher.SampleApp {
 		
 		[Embed(source = "Tiles_mapa1.png")] public var mapaPNG:Class;
 		[Embed(source = "mapCSV_Group2_Pasto.csv" , mimeType="application/octet-stream")] public var mapaCSV:Class;
-		[Embed(source = "Tiles.png")] public var mapaPNG1:Class;
+		[Embed(source = "agua.png")] public var mapaPNG1:Class;
 		[Embed(source = "mapCSV_Group2_Map1.csv" , mimeType="application/octet-stream")] public var mapaCSV1:Class;
 		[Embed(source = "mapCSV_Group2_Items.csv" , mimeType="application/octet-stream")] public var mapaCSV2:Class;
 		[Embed(source = "item.png")] public var itemsPNG:Class;
@@ -25,6 +25,8 @@ package com.powerflasher.SampleApp {
 		[Embed(source = "mapCSV_Group2_Map4.csv" , mimeType="application/octet-stream")] public var mapaCSV3:Class;
 		[Embed(source = "Sky.png")] public var fondo:Class;
 		[Embed(source = "mapCSV_Group2_Fondo.csv" , mimeType="application/octet-stream")] public var mapaCSV4:Class;
+		[Embed(source = "puertatile.png")] public var puertaPNG:Class;
+		[Embed(source = "mapCSV_Group2_Puerta.csv" , mimeType="application/octet-stream")] public var mapaCSV5:Class;
 		
 		private var texto:FlxText;
 		private var astrid:Astrid;
@@ -33,6 +35,7 @@ package com.powerflasher.SampleApp {
 		private var barras:FlxTilemap;
 		private var mapa4:FlxTilemap;
 		private var mapa5:FlxTilemap;
+		private var puerta:FlxTilemap;
 		private var item:FlxTile;
 		//varibles para recoger items
 		public var items:FlxGroup;
@@ -54,10 +57,6 @@ package com.powerflasher.SampleApp {
 			var s:FlxSprite = new FlxSprite();
 			s.makeGraphic(FlxG.width, FlxG.height, 0x9345Da);
             add(s);
-			   
- 			texto=new FlxText(0, 300, FlxG.width, "Al infinito").setFormat(null, 21, 0xFFFFFF, "center");
-         
-           add(texto);
 		   astrid=new Astrid();
 		   
 		   mapaPrincipal=new FlxTilemap();
@@ -65,6 +64,7 @@ package com.powerflasher.SampleApp {
 		   //mapa3=new FlxTilemap();
 		   mapa4=new FlxTilemap();
 		   mapa5=new FlxTilemap();
+		   puerta=new FlxTilemap();
 		   item=new FlxTile(barras, 2, 10, 10, true,1);
 		   mapa5.loadMap(new mapaCSV4(),fondo,31,28);
 		   mapaPrincipal.loadMap(new mapaCSV(),mapaPNG,31,28);
@@ -72,6 +72,8 @@ package com.powerflasher.SampleApp {
 		   agua.loadMap(new mapaCSV1(), mapaPNG1,31,28);
 		   mapa4.loadMap(new mapaCSV3(), mapaPNG2,31,14);
 		   mapa4.setTileProperties(1,FlxObject.UP);
+		   puerta.loadMap(new mapaCSV5(), puertaPNG,31,14);
+		   agua.setTileProperties(5,FlxObject.UP);
 		 
 		   
 		   
@@ -83,8 +85,9 @@ package com.powerflasher.SampleApp {
 			score.scrollFactor.y = 0;
 		   
 			add(mapa5);
-			add(agua);
 		   	add(mapa4);
+			add(agua);
+			add(puerta);
 		 	 add(mapaPrincipal);
 		   	add(astrid);
 		   
@@ -143,20 +146,22 @@ package com.powerflasher.SampleApp {
 		if(FlxG.keys.pressed("DOWN")){
 			
 		}
-		if(FlxG.keys.pressed("UP")){
-			trace(astrid.velocity.y);	
+		if(FlxG.keys.justPressed("UP") && FlxG.collide(astrid,puerta)){
+			FlxG.switchState(new AreaDos());
+				
 		}
 		if(FlxG.keys.justPressed("SPACE") && astrid.isTouching(FlxObject.FLOOR)){
 				astrid.velocity.y = -astrid.maxVelocity.y;
 				doubleJump=true;
 		}
-		if(FlxG.keys.justPressed("SPACE") && FlxG.score ==1 && !astrid.isTouching(FlxObject.FLOOR) && doubleJump==true){
+		if(FlxG.keys.justPressed("SPACE") && FlxG.score >0 && !astrid.isTouching(FlxObject.FLOOR) && doubleJump==true){
 				astrid.velocity.y= -astrid.maxVelocity.y;	
 				doubleJump=false;
 		}
 		super.update();
 		FlxG.collide(astrid,mapaPrincipal);
 		FlxG.collide(astrid,mapa4);
+		FlxG.collide(astrid,agua);
     	FlxG.overlap(astrid, items, hitItems);
 		
     }
