@@ -15,7 +15,7 @@ package com.powerflasher.SampleApp {
 		
 		//Prueba de sync
 		
-		[Embed(source = "Grass_tiles2.png")] public var mapaPNG:Class;
+		[Embed(source = "Tiles_mapa1.png")] public var mapaPNG:Class;
 		[Embed(source = "mapCSV_Group2_Pasto.csv" , mimeType="application/octet-stream")] public var mapaCSV:Class;
 		[Embed(source = "Tiles.png")] public var mapaPNG1:Class;
 		[Embed(source = "mapCSV_Group2_Map1.csv" , mimeType="application/octet-stream")] public var mapaCSV1:Class;
@@ -59,7 +59,7 @@ package com.powerflasher.SampleApp {
 		   mapa3=new FlxTilemap();
 		   item=new FlxTile(mapa3, 2, 10, 10, true,1);
 		   mapa.loadMap(new mapaCSV(), mapaPNG,31,28);
-		   mapa.setTileProperties(6,FlxObject.UP);
+		   mapa.setTileProperties(10,FlxObject.UP);
 		   
 		   add(mapa);
 		   mapa2.loadMap(new mapaCSV1(), mapaPNG1,31,28);
