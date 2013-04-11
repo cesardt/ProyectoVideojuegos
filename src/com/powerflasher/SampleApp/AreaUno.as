@@ -23,7 +23,8 @@ package com.powerflasher.SampleApp {
 		[Embed(source = "item.png")] public var itemsPNG:Class;
 		[Embed(source = "barras.png")] public var mapaPNG2:Class;
 		[Embed(source = "mapCSV_Group2_Map4.csv" , mimeType="application/octet-stream")] public var mapaCSV3:Class;
-	
+		[Embed(source = "Sky.png")] public var fondo:Class;
+		[Embed(source = "mapCSV_Group2_Fondo.csv" , mimeType="application/octet-stream")] public var mapaCSV4:Class;
 		
 		private var texto:FlxText;
 		private var astrid:Astrid;
@@ -31,6 +32,7 @@ package com.powerflasher.SampleApp {
 		private var mapa2:FlxTilemap;
 		private var mapa3:FlxTilemap;
 		private var mapa4:FlxTilemap;
+		private var mapa5:FlxTilemap;
 		private var item:FlxTile;
 		//varibles para recoger items
 		public var items:FlxGroup;
@@ -61,8 +63,10 @@ package com.powerflasher.SampleApp {
 		   mapa2=new FlxTilemap();
 		   //mapa3=new FlxTilemap();
 		   mapa4=new FlxTilemap();
+		   mapa5=new FlxTilemap();
 		   item=new FlxTile(mapa3, 2, 10, 10, true,1);
-		   mapa.loadMap(new mapaCSV(), mapaPNG,31,28);
+		   mapa5.loadMap(new mapaCSV4(),fondo,31,28);
+		   mapa.loadMap(new mapaCSV(),mapaPNG,31,28);
 		   
 		   mapa2.loadMap(new mapaCSV1(), mapaPNG1,31,28);
 		   add(mapa2);
@@ -81,11 +85,12 @@ package com.powerflasher.SampleApp {
 			score.scrollFactor.x = 0;
 			score.scrollFactor.y = 0;
 		   
-			
+			add(mapa5);
 		   add(mapa4);
 		   add(mapa);
 		   add(mapa2);
 		   add(astrid);
+		   
 		   //inicializa el grupo de items, del mapa al grupo
 		   parseItems();
 		   //agrega items y el score,  conteo
