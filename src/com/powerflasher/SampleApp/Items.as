@@ -7,7 +7,7 @@ package com.powerflasher.SampleApp {
 		
 		public function Items(X:int, Y:int)
 		{
-			super(X * 16, Y * 16, itemsPNG);
+			super(X * 10, Y * 10, itemsPNG);
 			
 			solid = true;
 		}
