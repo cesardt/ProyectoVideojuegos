@@ -23,7 +23,7 @@
 		jump = 200;
 		maxVelocity.x = runV;
 		maxVelocity.y = jump;
-		acceleration.y = 500;
+		acceleration.y = 450;
 		loadGraphic(jugadorSpriteSheet, true, true, 16, 24, true);
 		addAnimation("izquierda",[3,4,5],15,false);
 		addAnimation("derecha", [0,1,2],15,false);
