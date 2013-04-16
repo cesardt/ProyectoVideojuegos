@@ -6,7 +6,7 @@ import org.flixel.FlxGame;
 	public class Flixel extends FlxGame {
 		public function Flixel() {
 			
-			super(800, 250, AnimationState, 1, 60 ,30 ,true );
+			super(800, 250, Inicio, 1, 60 ,30 ,true );
 		}
 	}
 }

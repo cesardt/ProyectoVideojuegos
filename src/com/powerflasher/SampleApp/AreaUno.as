@@ -137,11 +137,18 @@ package com.powerflasher.SampleApp {
 		astrid.acceleration.x = 0;
 		if(FlxG.keys.pressed("RIGHT")){
 			astrid.acceleration.x += astrid.drag.x;
-			astrid.play("derecha");
+			astrid.lado="der";
+			if(astrid.velocity.y == 0){
+				astrid.play("derecha");
+			}
 		}
 		if(FlxG.keys.pressed("LEFT")){
 			astrid.acceleration.x -= astrid.drag.x;
-			astrid.play("izquierda");
+			astrid.lado="izq";
+			//astrid.facing=LEFT;
+			if(astrid.velocity.y == 0){
+				astrid.play("izquierda");
+			}
 		}
 		if(FlxG.keys.pressed("DOWN")){
 			
@@ -153,10 +160,23 @@ package com.powerflasher.SampleApp {
 		if(FlxG.keys.justPressed("SPACE") && astrid.isTouching(FlxObject.FLOOR)){
 				astrid.velocity.y = -astrid.maxVelocity.y;
 				doubleJump=true;
+				if(astrid.velocity.y != 0 ){
+					astrid.play("brincader");
+				}
+				if(astrid.velocity.y != 0 && astrid.lado=="izq"){
+					astrid.play("brincaizq");
+				}
+				//astrid.play("brincader");
 		}
 		if(FlxG.keys.justPressed("SPACE") && FlxG.score >0 && !astrid.isTouching(FlxObject.FLOOR) && doubleJump==true){
 				astrid.velocity.y= -astrid.maxVelocity.y;	
 				doubleJump=false;
+		}
+		if(astrid.justTouched(FlxObject.FLOOR)&& astrid.lado=="izq"){
+				astrid.play("nobrincaizq");
+		}
+		if(astrid.justTouched(FlxObject.FLOOR)&& astrid.lado=="der"){
+				astrid.play("nobrincader");
 		}
 		super.update();
 		FlxG.collide(astrid,mapaPrincipal);
