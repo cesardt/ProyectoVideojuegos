@@ -166,7 +166,6 @@ package com.powerflasher.SampleApp {
 				if(astrid.velocity.y != 0 && astrid.lado=="izq"){
 					astrid.play("brincaizq");
 				}
-				//astrid.play("brincader");
 		}
 		if(FlxG.keys.justPressed("SPACE") && FlxG.score >0 && !astrid.isTouching(FlxObject.FLOOR) && doubleJump==true){
 				astrid.velocity.y= -astrid.maxVelocity.y;	
