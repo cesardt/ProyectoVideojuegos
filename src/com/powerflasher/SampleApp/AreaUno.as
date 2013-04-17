@@ -135,6 +135,18 @@ package com.powerflasher.SampleApp {
 	override public function update():void {
 		 
 		astrid.acceleration.x = 0;
+		if(FlxG.keys.justPressed("SPACE") && astrid.isTouching(FlxObject.FLOOR)){
+				astrid.velocity.y = -astrid.maxVelocity.y;
+				doubleJump=true;
+				if(astrid.velocity.y != 0 ){
+					if(astrid.lado=="der"){
+						astrid.play("brincader");
+					}
+					if(astrid.lado=="izq"){
+						astrid.play("brincaizq");
+					}
+				}
+		}
 		if(FlxG.keys.justPressed("X") && astrid.lado=="izq"){
 				astrid.play("ataqueizq");
 		}
@@ -144,14 +156,14 @@ package com.powerflasher.SampleApp {
 		if(FlxG.keys.pressed("RIGHT")){
 			astrid.acceleration.x += astrid.drag.x;
 			astrid.lado="der";
-			if(astrid.velocity.y == 0){
+			if(astrid.velocity.y == 0 && !FlxG.keys.pressed("X")){
 				astrid.play("derecha");
 			}
 		}
 		if(FlxG.keys.pressed("LEFT")){
 			astrid.acceleration.x -= astrid.drag.x;
 			astrid.lado="izq";
-			if(astrid.velocity.y == 0){
+			if(astrid.velocity.y == 0 && !FlxG.keys.pressed("X")){
 				astrid.play("izquierda");
 			}
 		}
@@ -161,16 +173,6 @@ package com.powerflasher.SampleApp {
 		if(FlxG.keys.justPressed("UP") && FlxG.collide(astrid,puerta)){
 			FlxG.switchState(new AreaDos());
 				
-		}
-		if(FlxG.keys.justPressed("SPACE") && astrid.isTouching(FlxObject.FLOOR)){
-				astrid.velocity.y = -astrid.maxVelocity.y;
-				doubleJump=true;
-				if(astrid.velocity.y != 0 ){
-					astrid.play("brincader");
-				}
-				if(astrid.velocity.y != 0 && astrid.lado=="izq"){
-					astrid.play("brincaizq");
-				}
 		}
 		if(FlxG.keys.justPressed("SPACE") && FlxG.score >0 && !astrid.isTouching(FlxObject.FLOOR) && doubleJump==true){
 				astrid.velocity.y= -astrid.maxVelocity.y;	
