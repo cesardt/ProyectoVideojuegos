@@ -29,10 +29,13 @@
 		loadGraphic(jugadorSpriteSheet, true, true, 16, 24, true);
 		addAnimation("izquierda",[3,4,5],15,false);
 		addAnimation("derecha", [0,1,2],15,false);
-		addAnimation("brincader",[9],5,true);
-		addAnimation("brincaizq",[6],5,true);
+		addAnimation("brincader",[9],10,true);
+		addAnimation("brincaizq",[6],10,true);
 		addAnimation("nobrincaizq",[7],5,true);
 		addAnimation("nobrincader",[8],5,true);
+		addAnimation("ataqueizq",[11,10],4,false);
+		addAnimation("ataqueder",[12,13],4,false);
+		
 
 		
 

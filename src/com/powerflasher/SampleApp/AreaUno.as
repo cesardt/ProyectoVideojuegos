@@ -135,6 +135,12 @@ package com.powerflasher.SampleApp {
 	override public function update():void {
 		 
 		astrid.acceleration.x = 0;
+		if(FlxG.keys.justPressed("X") && astrid.lado=="izq"){
+				astrid.play("ataqueizq");
+		}
+		if(FlxG.keys.justPressed("X") && astrid.lado=="der"){
+				astrid.play("ataqueder");
+		}
 		if(FlxG.keys.pressed("RIGHT")){
 			astrid.acceleration.x += astrid.drag.x;
 			astrid.lado="der";
@@ -145,7 +151,6 @@ package com.powerflasher.SampleApp {
 		if(FlxG.keys.pressed("LEFT")){
 			astrid.acceleration.x -= astrid.drag.x;
 			astrid.lado="izq";
-			//astrid.facing=LEFT;
 			if(astrid.velocity.y == 0){
 				astrid.play("izquierda");
 			}
