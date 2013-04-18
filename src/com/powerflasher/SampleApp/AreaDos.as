@@ -43,6 +43,8 @@ package com.powerflasher.SampleApp {
 			s.makeGraphic(FlxG.width, FlxG.height, 0x9345Da);
             add(s);
 			 astrid=new Astrid();
+			 astrid.x=3100;
+			 astrid.y=60;
 		    
 			
 		   piso=new FlxTilemap();
