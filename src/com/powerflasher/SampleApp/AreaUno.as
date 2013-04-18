@@ -13,7 +13,6 @@ package com.powerflasher.SampleApp {
 
 	public class AreaUno extends FlxState {
 		
-		//Prueba de sync
 		
 		[Embed(source = "Tiles_mapa1.png")] public var mapaPNG:Class;
 		[Embed(source = "mapCSV_Group2_Pasto.csv" , mimeType="application/octet-stream")] public var mapaCSV:Class;
