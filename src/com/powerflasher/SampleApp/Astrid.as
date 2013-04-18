@@ -9,7 +9,7 @@
 		[Embed(source = "monitaXpeq.png")] public static var jugadorSpriteSheet:Class;
 
 		
-		var lado:String="der";
+		var lado:String;
 		protected var jump:int;
 		public function Astrid()
 
