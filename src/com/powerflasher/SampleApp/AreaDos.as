@@ -44,7 +44,8 @@ package com.powerflasher.SampleApp {
             add(s);
 			 astrid=new Astrid();
 			 astrid.x=3100;
-			 astrid.y=60;
+			  astrid.y=70;
+			 astrid.lado="izq";
 		    
 			
 		   piso=new FlxTilemap();
@@ -54,13 +55,27 @@ package com.powerflasher.SampleApp {
 		   enredaderas=new FlxTilemap();
 		   picos=new FlxTilemap();
 		   puerta=new FlxTilemap();
-		   piso.loadMap(new pisoCSV(),tiles,32,32);
 		   fondos.loadMap(new fondosCSV(),tiles,32,32);
 		   frente.loadMap(new frenteCSV(),tiles,32,32);
-		   plataformas.loadMap(new plataformasCSV(),tiles,32,32);
-		   enredaderas.loadMap(new enredaderasCSV(),tiles,32,32);
+		    enredaderas.loadMap(new enredaderasCSV(),tiles,32,32);
 		   picos.loadMap(new picosCSV(),tiles,32,32);
 		   puerta.loadMap(new puertaCSV(),tiles,32,32);
+		   piso.loadMap(new pisoCSV(),tiles,32,32);
+		   plataformas.loadMap(new plataformasCSV(),tiles,32,32);
+		 
+		   
+		    plataformas.setTileProperties(274,FlxObject.UP);
+			plataformas.setTileProperties(96,FlxObject.UP);
+			plataformas.setTileProperties(97,FlxObject.UP);
+			plataformas.setTileProperties(98,FlxObject.UP);
+			plataformas.setTileProperties(206,FlxObject.UP);
+			plataformas.setTileProperties(203,FlxObject.UP);
+			plataformas.setTileProperties(160,FlxObject.UP);
+			plataformas.setTileProperties(273,FlxObject.UP);
+			plataformas.setTileProperties(301,FlxObject.UP);
+			plataformas.setTileProperties(291,FlxObject.UP);
+			plataformas.setTileProperties(294,FlxObject.UP);
+			
 		    		  	   
 			add(piso);
 		   	add(fondos);
@@ -130,8 +145,9 @@ package com.powerflasher.SampleApp {
 		if(astrid.justTouched(FlxObject.FLOOR)&& astrid.lado=="der"){
 				astrid.play("nobrincader");
 		}
+		super.update();
 			FlxG.collide(astrid,piso);
-			super.update();
+			FlxG.collide(astrid,plataformas);
    		 }
 	}
 }

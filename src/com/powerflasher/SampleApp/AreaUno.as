@@ -47,7 +47,7 @@ package com.powerflasher.SampleApp {
 		
 		 public function AreaUno()
         {
-            super();
+			super();
         }
 		
 		
@@ -57,7 +57,7 @@ package com.powerflasher.SampleApp {
 			s.makeGraphic(FlxG.width, FlxG.height, 0x9345Da);
             add(s);
 		   astrid=new Astrid();
-		   
+		   astrid.lado="der"
 		   mapaPrincipal=new FlxTilemap();
 		   agua=new FlxTilemap();
 		   //mapa3=new FlxTilemap();
