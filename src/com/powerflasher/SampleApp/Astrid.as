@@ -6,7 +6,7 @@
 	 
 	public class Astrid extends FlxSprite{
 		
-		[Embed(source = "monitaXpeq.png")] public static var jugadorSpriteSheet:Class;
+		[Embed(source = "tilesmedastrid.png")] public static var jugadorSpriteSheet:Class;
 
 		
 		var lado:String;
@@ -26,7 +26,7 @@
 		maxVelocity.x = runV;
 		maxVelocity.y = jump;
 		acceleration.y = 450;
-		loadGraphic(jugadorSpriteSheet, true, true, 16, 24, true);
+		loadGraphic(jugadorSpriteSheet, true, true, 24, 36, true);
 		addAnimation("izquierda",[3,4,5],15,false);
 		addAnimation("derecha", [0,1,2],15,false);
 		addAnimation("brincader",[9],10,true);
@@ -34,7 +34,7 @@
 		addAnimation("nobrincaizq",[7],5,true);
 		addAnimation("nobrincader",[8],5,true);
 		addAnimation("ataqueizq",[11,10],4,false);
-		addAnimation("ataqueder",[12,13],4,false);
+		addAnimation("ataqueder",[13,12],4,false);
 		
 
 		
