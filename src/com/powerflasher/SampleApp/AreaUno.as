@@ -43,6 +43,7 @@ package com.powerflasher.SampleApp {
 		private var player:Astrid;
 		private var level:AreaUno;
 		private var doubleJump:Boolean;
+		public var enemies:FlxGroup;
 		
 		
 		 public function AreaUno()
