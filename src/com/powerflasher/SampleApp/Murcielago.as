@@ -24,14 +24,14 @@ package  com.powerflasher.SampleApp{
 		
 		  override public function update():void{
 			
-			if(Math.abs(_player.x - x)<30 && Math.abs(_player.y - y)<30){
+			if(Math.abs(_player.x - x)<30 && Math.abs(_player.y - y)>30){
 				 if(_player.x < x)
             {
                 facing = LEFT;
                 velocity.x -= _move_speed;
 				velocity.y = -Math.log(FlxG.elapsed);
             }
-            else
+            else if(Math.abs(_player.x - x)>30 && Math.abs(_player.y - y)>30)
             {
                 facing = RIGHT;
                 velocity.x += _move_speed; 
