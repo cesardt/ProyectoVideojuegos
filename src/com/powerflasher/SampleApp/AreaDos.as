@@ -12,7 +12,14 @@ package com.powerflasher.SampleApp {
 	import org.flixel.FlxState;
 
 	public class AreaDos extends FlxState {
-		[Embed(source = "dirt-tiles.png")] public var tiles:Class;
+		[Embed(source = "picos.png")] public var tilespicos:Class;
+		[Embed(source = "puerta.png")] public var tilespuerta:Class;
+		[Embed(source = "enredaderas.png")] public var tilesenredadera:Class;
+		[Embed(source = "frente.png")] public var tilesfrente:Class;
+		[Embed(source = "plataformas.png")] public var tilesplataforma:Class;
+		[Embed(source = "piso.png")] public var tilespiso:Class;
+		[Embed(source = "fondos.png")] public var tilesfondos:Class;
+		[Embed(source = "pared.png")] public var tilespared:Class;
 		[Embed(source = "mapCSV_Group1_Piso.csv" , mimeType="application/octet-stream")] public var pisoCSV:Class;
 		[Embed(source = "mapCSV_Group1_Picos.csv" , mimeType="application/octet-stream")] public var picosCSV:Class;
 		[Embed(source = "mapCSV_Group1_Frente.csv" , mimeType="application/octet-stream")] public var frenteCSV:Class;
@@ -20,6 +27,7 @@ package com.powerflasher.SampleApp {
 		[Embed(source = "mapCSV_Group1_Fondos.csv" , mimeType="application/octet-stream")] public var fondosCSV:Class;
 		[Embed(source = "mapCSV_Group1_Plataformas.csv" , mimeType="application/octet-stream")] public var plataformasCSV:Class;
 		[Embed(source = "mapCSV_Group1_Puerta.csv" , mimeType="application/octet-stream")] public var puertaCSV:Class;
+		[Embed(source = "mapCSV_Group1_Pared.csv" , mimeType="application/octet-stream")] public var paredCSV:Class;
 		
 		
 		private var astrid:Astrid;
@@ -28,6 +36,7 @@ package com.powerflasher.SampleApp {
 		private var frente:FlxTilemap;
 		private var enredaderas:FlxTilemap;
 		private var fondos:FlxTilemap;
+		private var pared:FlxTilemap;
 		private var plataformas:FlxTilemap;
 		private var puerta:FlxTilemap;
 		private var doubleJump:Boolean;
@@ -43,48 +52,50 @@ package com.powerflasher.SampleApp {
 			s.makeGraphic(FlxG.width, FlxG.height, 0x9345Da);
             add(s);
 			 astrid=new Astrid();
+			 astrid.play("caminaizq");
 			 astrid.x=3100;
 			  astrid.y=70;
 			 astrid.lado="izq";
 		    
 			
 		   piso=new FlxTilemap();
+		   pared=new FlxTilemap();
 		   fondos=new FlxTilemap();
 		   frente=new FlxTilemap();
 		   plataformas=new FlxTilemap();
 		   enredaderas=new FlxTilemap();
 		   picos=new FlxTilemap();
 		   puerta=new FlxTilemap();
-		   fondos.loadMap(new fondosCSV(),tiles,32,32);
-		   frente.loadMap(new frenteCSV(),tiles,32,32);
-		    enredaderas.loadMap(new enredaderasCSV(),tiles,32,32);
-		   picos.loadMap(new picosCSV(),tiles,32,32);
-		   puerta.loadMap(new puertaCSV(),tiles,32,32);
-		   piso.loadMap(new pisoCSV(),tiles,32,32);
-		   plataformas.loadMap(new plataformasCSV(),tiles,32,32);
+		   fondos.loadMap(new fondosCSV(),tilesfondos,32,32);
+		   pared.loadMap(new paredCSV(),tilespared,32,32);
+		   frente.loadMap(new frenteCSV(),tilesfrente,32,32);
+		   enredaderas.loadMap(new enredaderasCSV(),tilesenredadera,32,32);
+		   picos.loadMap(new picosCSV(),tilespicos,32,32);
+		   puerta.loadMap(new puertaCSV(),tilespuerta,32,32);
+		   piso.loadMap(new pisoCSV(),tilespiso,32,32);
+		   plataformas.loadMap(new plataformasCSV(),tilesplataforma,32,32);
 		 
 		   
-		    plataformas.setTileProperties(274,FlxObject.UP);
-			plataformas.setTileProperties(96,FlxObject.UP);
-			plataformas.setTileProperties(97,FlxObject.UP);
-			plataformas.setTileProperties(98,FlxObject.UP);
-			plataformas.setTileProperties(206,FlxObject.UP);
-			plataformas.setTileProperties(203,FlxObject.UP);
-			plataformas.setTileProperties(160,FlxObject.UP);
-			plataformas.setTileProperties(273,FlxObject.UP);
-			plataformas.setTileProperties(301,FlxObject.UP);
-			plataformas.setTileProperties(291,FlxObject.UP);
-			plataformas.setTileProperties(294,FlxObject.UP);
+		    plataformas.setTileProperties(1,FlxObject.UP);
+			plataformas.setTileProperties(2,FlxObject.UP);
+			plataformas.setTileProperties(3,FlxObject.UP);
+			plataformas.setTileProperties(4,FlxObject.UP);
+			plataformas.setTileProperties(5,FlxObject.UP);
+			plataformas.setTileProperties(6,FlxObject.UP);
+			plataformas.setTileProperties(7,FlxObject.UP);
+			plataformas.setTileProperties(8,FlxObject.UP);
+			plataformas.setTileProperties(9,FlxObject.UP);
 			
 		    		  	   
 			add(piso);
+			add(pared);
 		   	add(fondos);
-			add(frente);
 			add(plataformas);
 		 	add(enredaderas);
 			add(picos);
 		 	add(puerta);
 		   	add(astrid);
+			add(frente);
 		   
 		   
 		   //de la camara
