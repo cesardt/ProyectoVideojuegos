@@ -14,18 +14,18 @@ package com.powerflasher.SampleApp {
 	public class AreaUno extends FlxState {
 		
 		
-		[Embed(source = "Tiles_mapa1.png")] public var mapaPNG:Class;
-		[Embed(source = "mapCSV_Group2_Pasto.csv" , mimeType="application/octet-stream")] public var mapaCSV:Class;
-		[Embed(source = "agua.png")] public var mapaPNG1:Class;
-		[Embed(source = "mapCSV_Group2_Map1.csv" , mimeType="application/octet-stream")] public var mapaCSV1:Class;
-		[Embed(source = "mapCSV_Group2_Items.csv" , mimeType="application/octet-stream")] public var mapaCSV2:Class;
-		[Embed(source = "item.png")] public var itemsPNG:Class;
-		[Embed(source = "barras.png")] public var mapaPNG2:Class;
-		[Embed(source = "mapCSV_Group2_Map4.csv" , mimeType="application/octet-stream")] public var mapaCSV3:Class;
-		[Embed(source = "Sky.png")] public var fondo:Class;
-		[Embed(source = "mapCSV_Group2_Fondo.csv" , mimeType="application/octet-stream")] public var mapaCSV4:Class;
-		[Embed(source = "puertatile.png")] public var puertaPNG:Class;
-		[Embed(source = "mapCSV_Group2_Puerta.csv" , mimeType="application/octet-stream")] public var mapaCSV5:Class;
+		[Embed(source = "Area1/Tiles_mapa1.png")] public var mapaPNG:Class;
+		[Embed(source = "Area1/mapCSV_Group2_Pasto.csv" , mimeType="application/octet-stream")] public var mapaCSV:Class;
+		[Embed(source = "Area1/agua.png")] public var mapaPNG1:Class;
+		[Embed(source = "Area1/mapCSV_Group2_Map1.csv" , mimeType="application/octet-stream")] public var mapaCSV1:Class;
+		[Embed(source = "Area1/mapCSV_Group2_Items.csv" , mimeType="application/octet-stream")] public var mapaCSV2:Class;
+		[Embed(source = "Area1/item.png")] public var itemsPNG:Class;
+		[Embed(source = "Area1/barras.png")] public var mapaPNG2:Class;
+		[Embed(source = "Area1/mapCSV_Group2_Map4.csv" , mimeType="application/octet-stream")] public var mapaCSV3:Class;
+		[Embed(source = "Area1/Sky.png")] public var fondo:Class;
+		[Embed(source = "Area1/mapCSV_Group2_Fondo.csv" , mimeType="application/octet-stream")] public var mapaCSV4:Class;
+		[Embed(source = "Area1/puertatile.png")] public var puertaPNG:Class;
+		[Embed(source = "Area1/mapCSV_Group2_Puerta.csv" , mimeType="application/octet-stream")] public var mapaCSV5:Class;
 		
 		private var texto:FlxText;
 		private var astrid:Astrid;

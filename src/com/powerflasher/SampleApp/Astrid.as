@@ -6,7 +6,7 @@
 	 
 	public class Astrid extends FlxSprite{
 		
-		[Embed(source = "tilesmedastrid.png")] public static var jugadorSpriteSheet:Class;
+		[Embed(source = "Astrid/tilesmedastrid.png")] public static var jugadorSpriteSheet:Class;
 
 		
 		var lado:String;
@@ -35,6 +35,7 @@
 		addAnimation("nobrincader",[8],5,true);
 		addAnimation("ataqueizq",[11,10],4,false);
 		addAnimation("ataqueder",[13,12],4,false);
+		addAnimation("enredadera",[14,15],4,false);
 		
 
 		

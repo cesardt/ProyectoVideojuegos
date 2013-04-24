@@ -3,7 +3,7 @@ package com.powerflasher.SampleApp {
 
 	public class Items extends FlxSprite
 	{
-		[Embed(source = 'item.png')] private var itemsPNG:Class;
+		[Embed(source = 'Area1/item.png')] private var itemsPNG:Class;
 		
 		public function Items(X:int, Y:int)
 		{

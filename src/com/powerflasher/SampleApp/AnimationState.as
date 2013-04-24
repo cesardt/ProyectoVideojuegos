@@ -7,7 +7,7 @@ com.powerflasher.SampleApp{
    
     public class AnimationState extends FlxState
     {
-        [Embed(source="Bienvenida.swf")]private static var Animacion:Class;
+        /*[Embed(source="Bienvenida.swf")]private static var Animacion:Class;
         private var noFrames:Number = 100;
     
         private var animacion:MovieClip;
@@ -37,7 +37,7 @@ com.powerflasher.SampleApp{
             
                 
             }
-        }
+        }*/
         
         
         

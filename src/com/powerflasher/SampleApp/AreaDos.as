@@ -12,22 +12,22 @@ package com.powerflasher.SampleApp {
 	import org.flixel.FlxState;
 
 	public class AreaDos extends FlxState {
-		[Embed(source = "picos.png")] public var tilespicos:Class;
-		[Embed(source = "puerta.png")] public var tilespuerta:Class;
-		[Embed(source = "enredaderas.png")] public var tilesenredadera:Class;
-		[Embed(source = "frente.png")] public var tilesfrente:Class;
-		[Embed(source = "plataformas.png")] public var tilesplataforma:Class;
-		[Embed(source = "piso.png")] public var tilespiso:Class;
-		[Embed(source = "fondos.png")] public var tilesfondos:Class;
-		[Embed(source = "pared.png")] public var tilespared:Class;
-		[Embed(source = "mapCSV_Group1_Piso.csv" , mimeType="application/octet-stream")] public var pisoCSV:Class;
-		[Embed(source = "mapCSV_Group1_Picos.csv" , mimeType="application/octet-stream")] public var picosCSV:Class;
-		[Embed(source = "mapCSV_Group1_Frente.csv" , mimeType="application/octet-stream")] public var frenteCSV:Class;
-		[Embed(source = "mapCSV_Group1_Enredaderas.csv" , mimeType="application/octet-stream")] public var enredaderasCSV:Class;
-		[Embed(source = "mapCSV_Group1_Fondos.csv" , mimeType="application/octet-stream")] public var fondosCSV:Class;
-		[Embed(source = "mapCSV_Group1_Plataformas.csv" , mimeType="application/octet-stream")] public var plataformasCSV:Class;
-		[Embed(source = "mapCSV_Group1_Puerta.csv" , mimeType="application/octet-stream")] public var puertaCSV:Class;
-		[Embed(source = "mapCSV_Group1_Pared.csv" , mimeType="application/octet-stream")] public var paredCSV:Class;
+		[Embed(source = "Area2/picos.png")] public var tilespicos:Class;
+		[Embed(source = "Area2/puerta.png")] public var tilespuerta:Class;
+		[Embed(source = "Area2/enredaderas.png")] public var tilesenredadera:Class;
+		[Embed(source = "Area2/frente.png")] public var tilesfrente:Class;
+		[Embed(source = "Area2/plataformas.png")] public var tilesplataforma:Class;
+		[Embed(source = "Area2/piso.png")] public var tilespiso:Class;
+		[Embed(source = "Area2/fondos.png")] public var tilesfondos:Class;
+		[Embed(source = "Area2/pared.png")] public var tilespared:Class;
+		[Embed(source = "Area2/mapCSV_Group1_Piso.csv" , mimeType="application/octet-stream")] public var pisoCSV:Class;
+		[Embed(source = "Area2/mapCSV_Group1_Picos.csv" , mimeType="application/octet-stream")] public var picosCSV:Class;
+		[Embed(source = "Area2/mapCSV_Group1_Frente.csv" , mimeType="application/octet-stream")] public var frenteCSV:Class;
+		[Embed(source = "Area2/mapCSV_Group1_Enredaderas.csv" , mimeType="application/octet-stream")] public var enredaderasCSV:Class;
+		[Embed(source = "Area2/mapCSV_Group1_Fondos.csv" , mimeType="application/octet-stream")] public var fondosCSV:Class;
+		[Embed(source = "Area2/mapCSV_Group1_Plataformas.csv" , mimeType="application/octet-stream")] public var plataformasCSV:Class;
+		[Embed(source = "Area2/mapCSV_Group1_Puerta.csv" , mimeType="application/octet-stream")] public var puertaCSV:Class;
+		[Embed(source = "Area2/mapCSV_Group1_Pared.csv" , mimeType="application/octet-stream")] public var paredCSV:Class;
 		
 		
 		private var astrid:Astrid;
@@ -85,6 +85,7 @@ package com.powerflasher.SampleApp {
 			plataformas.setTileProperties(7,FlxObject.UP);
 			plataformas.setTileProperties(8,FlxObject.UP);
 			plataformas.setTileProperties(9,FlxObject.UP);
+			
 			
 		    		  	   
 			add(piso);
@@ -155,6 +156,10 @@ package com.powerflasher.SampleApp {
 		}
 		if(astrid.justTouched(FlxObject.FLOOR)&& astrid.lado=="der"){
 				astrid.play("nobrincader");
+		}
+		if(FlxG.collide(astrid,enredaderas) && FlxG.keys.pressed("DOWN")){
+			astrid.acceleration.y += astrid.drag.y;
+			astrid.play("enredadera");
 		}
 		super.update();
 			FlxG.collide(astrid,piso);
