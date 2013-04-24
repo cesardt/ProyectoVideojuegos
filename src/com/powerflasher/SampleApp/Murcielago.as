@@ -7,7 +7,7 @@ package  com.powerflasher.SampleApp{
 		
 		private var _player:FlxSprite;  
 		 private var _move_speed:int = 400;
-		[Embed(source = "Bat.png")] public static var batSpriteSheet:Class;
+		[Embed(source = "Area1/Bat.png")] public static var batSpriteSheet:Class;
 		
 		public function Murcielago(X:Number,Y:Number,ThePlayer:FlxSprite):void{
 			

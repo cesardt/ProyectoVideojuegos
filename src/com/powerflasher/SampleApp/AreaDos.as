@@ -57,7 +57,6 @@ package com.powerflasher.SampleApp {
 			s.makeGraphic(FlxG.width, FlxG.height, 0x9345Da);
             add(s);
 			 astrid=new Astrid();
-			 astrid.play("caminaizq");
 			 astrid.x=3100;
 			  astrid.y=70;
 			 astrid.lado="izq";
@@ -145,56 +144,6 @@ package com.powerflasher.SampleApp {
 			//trace("total de items: "+ totalItems);
 		}
 		override public function update():void {
-			astrid.acceleration.x = 0;
-		if(FlxG.keys.justPressed("SPACE") && astrid.isTouching(FlxObject.FLOOR)){
-				astrid.velocity.y = -astrid.maxVelocity.y;
-				doubleJump=true;
-				if(astrid.velocity.y != 0 ){
-					if(astrid.lado=="der"){
-						astrid.play("brincader");
-					}
-					if(astrid.lado=="izq"){
-						astrid.play("brincaizq");
-					}
-				}
-		}
-		if(FlxG.keys.justPressed("X") && astrid.lado=="izq"){
-				astrid.play("ataqueizq");
-		}
-		if(FlxG.keys.justPressed("X") && astrid.lado=="der"){
-				astrid.play("ataqueder");
-		}
-		if(FlxG.keys.pressed("RIGHT")){
-			astrid.acceleration.x += astrid.drag.x;
-			astrid.lado="der";
-			if(astrid.velocity.y == 0 && !FlxG.keys.pressed("X")){
-				astrid.play("derecha");
-			}
-		}
-		if(FlxG.keys.pressed("LEFT")){
-			astrid.acceleration.x -= astrid.drag.x;
-			astrid.lado="izq";
-			if(astrid.velocity.y == 0 && !FlxG.keys.pressed("X")){
-				astrid.play("izquierda");
-			}
-		}
-		if(FlxG.keys.pressed("DOWN")){
-			
-		}
-		if(FlxG.keys.justPressed("UP") && FlxG.collide(astrid,puerta)){
-			FlxG.switchState(new AreaDos());
-				
-		}
-		if(FlxG.keys.justPressed("SPACE") && FlxG.score >0 && !astrid.isTouching(FlxObject.FLOOR) && doubleJump==true){
-				astrid.velocity.y= -astrid.maxVelocity.y;	
-				doubleJump=false;
-		}
-		if(astrid.justTouched(FlxObject.FLOOR)&& astrid.lado=="izq"){
-				astrid.play("nobrincaizq");
-		}
-		if(astrid.justTouched(FlxObject.FLOOR)&& astrid.lado=="der"){
-				astrid.play("nobrincader");
-		}
 		if(FlxG.collide(astrid,enredaderas) && FlxG.keys.pressed("DOWN")){
 			astrid.acceleration.y += astrid.drag.y;
 			astrid.play("enredadera");

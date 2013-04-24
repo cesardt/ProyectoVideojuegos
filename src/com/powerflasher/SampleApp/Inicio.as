@@ -40,8 +40,7 @@
 		}
 
 		private function Iniciar() : void {
-			//texto.y--;
-			FlxG.switchState(new AreaDos());
+			FlxG.switchState(new AreaUno());
 		}
 
 		

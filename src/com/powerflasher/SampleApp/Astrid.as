@@ -1,4 +1,6 @@
-﻿package  com.powerflasher.SampleApp{
+﻿package com.powerflasher.SampleApp {
+	import org.flixel.FlxObject;
+	import org.flixel.FlxG;
 	import org.flixel.FlxSprite;
 	/**
 	 * @author ieiomeli
@@ -11,10 +13,11 @@
 		
 		var lado:String;
 		protected var jump:int;
-		public function Astrid()
-
-		{
 		var runV:uint = 80;
+		private var doubleJump:Boolean;
+		
+		
+		public function Astrid(){
 		super(150,570);
 		frame=3;
 			
@@ -40,6 +43,73 @@
 
 		
 
+		}
+		override public function update():void {
+		 
+		acceleration.x = 0;
+		if(FlxG.keys.justPressed("SPACE") && isTouching(FlxObject.FLOOR)){
+				velocity.y = -maxVelocity.y;
+				doubleJump=true;
+				if(velocity.y != 0 ){
+					if(lado=="der"){
+						play("brincader");
+					}
+					if(lado=="izq"){
+						play("brincaizq");
+					}
+				}
+		}
+		if(FlxG.keys.justPressed("X") && lado=="izq"){
+				play("ataqueizq");
+		}
+		if(FlxG.keys.justPressed("X") && lado=="der"){
+				play("ataqueder");
+		}
+		if(FlxG.keys.pressed("RIGHT")&& FlxG.keys.pressed("Z")){
+			//trace (astrid.drag.x*10);
+			runV=200;
+			acceleration.x += drag.x;
+			trace (acceleration.x);
+			lado="der";
+			if(velocity.y == 0 && !FlxG.keys.pressed("X")){
+				play("derecha");
+			}
+		}
+		if(FlxG.keys.pressed("LEFT")&& FlxG.keys.pressed("Z")){
+			acceleration.x -=drag.x*1000;
+			lado="izq";
+			if(velocity.y == 0 && !FlxG.keys.pressed("X")){
+				play("izquierda");
+			}
+		}
+		if(FlxG.keys.pressed("RIGHT")){
+			trace (acceleration.x);
+			acceleration.x += drag.x;
+			lado="der";
+			if(velocity.y == 0 && !FlxG.keys.pressed("X")){
+				play("derecha");
+			}
+		}
+		if(FlxG.keys.pressed("LEFT")){
+			acceleration.x -= drag.x;
+			lado="izq";
+			if(velocity.y == 0 && !FlxG.keys.pressed("X")){
+				play("izquierda");
+			}
+		}
+		if(FlxG.keys.pressed("DOWN")){
+			
+		}
+		if(FlxG.keys.justPressed("SPACE") && FlxG.score >0 && !isTouching(FlxObject.FLOOR) && doubleJump==true){
+				velocity.y= -maxVelocity.y;	
+				doubleJump=false;
+		}
+		if(justTouched(FlxObject.FLOOR)&& lado=="izq"){
+				play("nobrincaizq");
+		}
+		if(this.justTouched(FlxObject.FLOOR)&& lado=="der"){
+				play("nobrincader");
+		}
 		}
 	}
 }
