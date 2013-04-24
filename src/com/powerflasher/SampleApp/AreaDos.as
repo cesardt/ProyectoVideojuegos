@@ -148,6 +148,14 @@ package com.powerflasher.SampleApp {
 			astrid.acceleration.y += astrid.drag.y;
 			astrid.play("enredadera");
 		}
+		if(FlxG.keys.justPressed("UP") && FlxG.collide(astrid,puerta)){
+			astrid.lado="izq";
+			FlxG.switchState(new AreaDos());
+				
+		}
+		if(FlxG.collide(astrid,pared)){
+			astrid.velocity.y = -astrid.maxVelocity.y;
+		}
 		super.update();
 			FlxG.collide(astrid,piso);
 			FlxG.collide(astrid,plataformas);
