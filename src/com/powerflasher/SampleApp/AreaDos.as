@@ -21,7 +21,7 @@ package com.powerflasher.SampleApp {
 		[Embed(source = "Area2/fondos.png")] public var tilesfondos:Class;
 		[Embed(source = "Area2/pared.png")] public var tilespared:Class;
 		[Embed(source = "Area2/item.png")] public var itemsPNG:Class;
-		[Embed(source = "Area1/mapCSV_Group1_Items.csv" , mimeType="application/octet-stream")] public var itemsCSV:Class;
+		[Embed(source = "Area2/mapCSV_Group1_Items.csv" , mimeType="application/octet-stream")] public var itemsCSV:Class;
 		[Embed(source = "Area2/mapCSV_Group1_Piso.csv" , mimeType="application/octet-stream")] public var pisoCSV:Class;
 		[Embed(source = "Area2/mapCSV_Group1_Picos.csv" , mimeType="application/octet-stream")] public var picosCSV:Class;
 		[Embed(source = "Area2/mapCSV_Group1_Frente.csv" , mimeType="application/octet-stream")] public var frenteCSV:Class;
@@ -42,7 +42,10 @@ package com.powerflasher.SampleApp {
 		private var plataformas:FlxTilemap;
 		private var puerta:FlxTilemap;
 		private var doubleJump:Boolean;
-		
+		//varibles para recoger items
+		public var items:FlxGroup;
+		public var totalItems:int;
+		private var score:FlxText;
 		
 		
 		 public function AreaDos(){
@@ -68,6 +71,7 @@ package com.powerflasher.SampleApp {
 		   enredaderas=new FlxTilemap();
 		   picos=new FlxTilemap();
 		   puerta=new FlxTilemap();
+		   
 		   fondos.loadMap(new fondosCSV(),tilesfondos,32,32);
 		   pared.loadMap(new paredCSV(),tilespared,32,32);
 		   frente.loadMap(new frenteCSV(),tilesfrente,32,32);
@@ -88,7 +92,12 @@ package com.powerflasher.SampleApp {
 			plataformas.setTileProperties(8,FlxObject.UP);
 			plataformas.setTileProperties(9,FlxObject.UP);
 			
-			
+			//atributos del score
+		    score = new FlxText(0, 0, 100);
+			score.color = 0xffffffff;
+			score.shadow = 0xff000000;
+			score.scrollFactor.x = 0;
+			score.scrollFactor.y = 0;
 		    		  	   
 			add(piso);
 			add(pared);
@@ -99,7 +108,12 @@ package com.powerflasher.SampleApp {
 		 	add(puerta);
 		   	add(astrid);
 			add(frente);
-		   
+		   //inicializa el grupo de items, del mapa al grupo
+		   parseItems();
+		   //agrega items y el score,  conteo
+		   add(items);
+		   add(score);
+		   score.text = "0 / " + totalItems.toString();
 		   
 		   //de la camara
 		   FlxG.camera.setBounds(0,0,3200,1600,false);
@@ -107,7 +121,29 @@ package com.powerflasher.SampleApp {
 		   FlxG.camera.follow(astrid);
 		}
 		   				
-		
+		private function parseItems():void
+		{
+			var itemsMap:FlxTilemap = new FlxTilemap();
+			
+			itemsMap.loadMap(new itemsCSV(), itemsPNG, 10, 10);
+			
+			items = new FlxGroup();
+			
+			for (var ty:int = 0; ty < itemsMap.heightInTiles; ty++)
+			{
+				for (var tx:int = 0; tx < itemsMap.widthInTiles; tx++)
+				{
+					if (itemsMap.getTile(tx, ty) == 1)
+					{
+						items.add(new Items(tx, ty));
+						totalItems++;
+						trace(totalItems);
+					}
+				}
+				
+			}
+			//trace("total de items: "+ totalItems);
+		}
 		override public function update():void {
 			astrid.acceleration.x = 0;
 		if(FlxG.keys.justPressed("SPACE") && astrid.isTouching(FlxObject.FLOOR)){
@@ -166,6 +202,14 @@ package com.powerflasher.SampleApp {
 		super.update();
 			FlxG.collide(astrid,piso);
 			FlxG.collide(astrid,plataformas);
+			FlxG.overlap(astrid, items, hitItems);
    		 }
+		 private function hitItems(p:FlxObject, item:FlxObject):void
+		{
+			//trace("colapse");
+			item.kill();
+			FlxG.score += 1;
+			score.text = FlxG.score.toString() + " / " + totalItems.toString();
+		}
 	}
 }
