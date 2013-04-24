@@ -122,7 +122,7 @@ package com.powerflasher.SampleApp {
 					{
 						items.add(new Items(tx, ty));
 						totalItems++;
-						trace(totalItems)
+						trace(totalItems);
 					}
 				}
 				

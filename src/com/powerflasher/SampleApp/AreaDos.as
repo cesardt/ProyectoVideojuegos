@@ -20,6 +20,8 @@ package com.powerflasher.SampleApp {
 		[Embed(source = "Area2/piso.png")] public var tilespiso:Class;
 		[Embed(source = "Area2/fondos.png")] public var tilesfondos:Class;
 		[Embed(source = "Area2/pared.png")] public var tilespared:Class;
+		[Embed(source = "Area2/item.png")] public var itemsPNG:Class;
+		[Embed(source = "Area1/mapCSV_Group1_Items.csv" , mimeType="application/octet-stream")] public var itemsCSV:Class;
 		[Embed(source = "Area2/mapCSV_Group1_Piso.csv" , mimeType="application/octet-stream")] public var pisoCSV:Class;
 		[Embed(source = "Area2/mapCSV_Group1_Picos.csv" , mimeType="application/octet-stream")] public var picosCSV:Class;
 		[Embed(source = "Area2/mapCSV_Group1_Frente.csv" , mimeType="application/octet-stream")] public var frenteCSV:Class;
