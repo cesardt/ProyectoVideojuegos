@@ -21,6 +21,8 @@ package com.powerflasher.SampleApp {
 		[Embed(source = "Area1/mapCSV_Group2_Map1.csv" , mimeType="application/octet-stream")] public var mapaCSV1:Class;
 		[Embed(source = "Area1/mapCSV_Group2_Items.csv" , mimeType="application/octet-stream")] public var mapaCSV2:Class;
 		[Embed(source = "Area1/item.png")] public var itemsPNG:Class;
+		[Embed(source = "Area1/mapCSV_Group2_Bats.csv" , mimeType="application/octet-stream")] public var mapaBats:Class;
+		[Embed(source = "Area1/Bat.png")] public var batSpriteSheet:Class;
 		[Embed(source = "Area1/barras.png")] public var mapaPNG2:Class;
 		[Embed(source = "Area1/mapCSV_Group2_Map4.csv" , mimeType="application/octet-stream")] public var mapaCSV3:Class;
 		[Embed(source = "Area1/Sky.png")] public var fondo:Class;
@@ -37,10 +39,17 @@ package com.powerflasher.SampleApp {
 		private var mapa5:FlxTilemap;
 		private var puerta:FlxTilemap;
 		private var item:FlxTile;
+		
 		//varibles para recoger items
 		public var items:FlxGroup;
 		public var totalItems:int;
 		private var score:FlxText;
+		
+		//varibles para enemigos
+		public var enemigos:FlxGroup;
+		public var totalEnemigos:int;
+		private var scoreE:FlxText;
+		
 		private var player:Astrid;
 		private var level:AreaUno;
 		public var enemies:FlxGroup;
@@ -58,7 +67,7 @@ package com.powerflasher.SampleApp {
 			s.makeGraphic(FlxG.width, FlxG.height, 0x9345Da);
             add(s);
 		   astrid=new Astrid();
-		   astrid.lado="der"
+		   astrid.lado="der";
 		   mapaPrincipal=new FlxTilemap();
 		   agua=new FlxTilemap();
 		   //mapa3=new FlxTilemap();
@@ -83,6 +92,13 @@ package com.powerflasher.SampleApp {
 			score.shadow = 0xff000000;
 			score.scrollFactor.x = 0;
 			score.scrollFactor.y = 0;
+			 
+		//atributos del scoreEnemigo
+		    scoreE = new FlxText(0, 0, 100);
+			scoreE.color = 0xffffffff;
+			scoreE.shadow = 0xff000000;
+			scoreE.scrollFactor.x = 0;
+			scoreE.scrollFactor.y = 15;
 		   
 			add(mapa5);
 		   	add(mapa4);
@@ -93,10 +109,18 @@ package com.powerflasher.SampleApp {
 		   
 		   //inicializa el grupo de items, del mapa al grupo
 		   parseItems();
+		   //inicializa el grupo de enemigos, del mapa al grupo
+		   parseEnemigos();
+		   
 		   //agrega items y el score,  conteo
 		   add(items);
 		   add(score);
 		   score.text = "0 / " + totalItems.toString();
+		   
+		   //agrega items y el score,  conteo de enemigos
+		   add(enemigos);
+		   add(scoreE);
+		   scoreE.text = "0 / " + totalEnemigos.toString();
 		   
 		  
 		   //de la camara
@@ -105,7 +129,6 @@ package com.powerflasher.SampleApp {
 		   FlxG.camera.follow(astrid);
 		   
 		}
-		   				
 		private function parseItems():void
 		{
 			var itemsMap:FlxTilemap = new FlxTilemap();
@@ -129,6 +152,30 @@ package com.powerflasher.SampleApp {
 			}
 			//trace("total de items: "+ totalItems);
 		}
+		   				
+		private function parseEnemigos():void
+		{
+			var enemigoMap:FlxTilemap = new FlxTilemap();
+			
+			enemigoMap.loadMap(new mapaBats(), batSpriteSheet, 10, 10);
+			
+			items = new FlxGroup();
+			
+			for (var ty:int = 0; ty < enemigoMap.heightInTiles; ty++)
+			{
+				for (var tx:int = 0; tx < enemigoMap.widthInTiles; tx++)
+				{
+					if (enemigoMap.getTile(tx, ty) == 1)
+					{
+						enemigos.add(new Murcielago(tx, ty, astrid));
+						totalEnemigos++;
+						trace(totalEnemigos);
+					}
+				}
+				
+			}
+			//trace("total de items: "+ totalItems);
+		}
 		
 	
 		
@@ -143,6 +190,8 @@ package com.powerflasher.SampleApp {
 		FlxG.collide(astrid,mapa4);
 		FlxG.collide(astrid,agua);
     	FlxG.overlap(astrid, items, hitItems);
+		//overlap enemigos
+		FlxG.overlap(astrid, enemigos, hitEnemigos);
 		
     }
 	private function hitItems(p:FlxObject, item:FlxObject):void
@@ -151,6 +200,13 @@ package com.powerflasher.SampleApp {
 			item.kill();
 			FlxG.score += 1;
 			score.text = FlxG.score.toString() + " / " + totalItems.toString();
+		}
+		private function hitEnemigos(p:FlxObject, enemigo:FlxObject):void
+		{
+			//trace("colapse");
+			enemigo.kill();
+			//FlxG.scoreE += 1;
+			//scoreE.text = FlxG.scoreE.toString() + " / " + totalEnemigos.toString();
 		}
 		
 	}
