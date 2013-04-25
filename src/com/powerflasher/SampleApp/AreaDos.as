@@ -149,12 +149,19 @@ package com.powerflasher.SampleApp {
 			//trace("total de items: "+ totalItems);
 		}
 		override public function update():void {
-		if(astrid.overlaps(enredaderas)){
+			
+		astrid.acceleration.y=450;
+		if(astrid.overlaps(enredaderas) && !astrid.isTouching(FlxObject.FLOOR)){
 			astrid.play("enredadera");
+			astrid.velocity.y=0;
+			astrid.acceleration.y=0;
+			
 			if(FlxG.keys.pressed("DOWN")){
+				astrid.velocity.y=50;
 				astrid.acceleration.y += astrid.drag.y;	
 			}
 			if(FlxG.keys.pressed("UP")){
+					astrid.velocity.y=-50;
 				astrid.acceleration.y -= astrid.drag.y;	
 			}
 		}
@@ -173,6 +180,9 @@ package com.powerflasher.SampleApp {
 						astrid.play("caminaizq");
 					}
 			}
+		}
+		if(FlxG.collide(astrid,picos)){
+			astrid.kill();
 		}
 		super.update();
 			FlxG.collide(astrid,piso);
