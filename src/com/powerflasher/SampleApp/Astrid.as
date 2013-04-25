@@ -36,8 +36,8 @@
 		addAnimation("brincaizq",[6],10,true);
 		addAnimation("nobrincaizq",[7],5,true);
 		addAnimation("nobrincader",[8],5,true);
-		addAnimation("ataqueizq",[11,10],4,false);
-		addAnimation("ataqueder",[13,12],4,false);
+		addAnimation("ataqueizq",[10,11],4,false);
+		addAnimation("ataqueder",[12,13],4,false);
 		addAnimation("enredadera",[14,15],4,false);
 		
 

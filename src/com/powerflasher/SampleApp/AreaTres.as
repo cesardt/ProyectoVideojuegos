@@ -11,7 +11,7 @@ package com.powerflasher.SampleApp {
 	import org.flixel.FlxText;
 	import org.flixel.FlxState;
 
-	public class AreaDos extends FlxState {
+	public class AreaTres extends FlxState {
 		[Embed(source = "Area2/picos.png")] public var tilespicos:Class;
 		[Embed(source = "Area2/puerta.png")] public var tilespuerta:Class;
 		[Embed(source = "Area2/enredaderas.png")] public var tilesenredadera:Class;
@@ -21,7 +21,6 @@ package com.powerflasher.SampleApp {
 		[Embed(source = "Area2/fondos.png")] public var tilesfondos:Class;
 		[Embed(source = "Area2/pared.png")] public var tilespared:Class;
 		[Embed(source = "Area2/item.png")] public var itemsPNG:Class;
-		[Embed(source = "Area2/Sky.png")] public var tilesatras:Class;
 		[Embed(source = "Area2/mapCSV_Group1_Items.csv" , mimeType="application/octet-stream")] public var itemsCSV:Class;
 		[Embed(source = "Area2/mapCSV_Group1_Piso.csv" , mimeType="application/octet-stream")] public var pisoCSV:Class;
 		[Embed(source = "Area2/mapCSV_Group1_Picos.csv" , mimeType="application/octet-stream")] public var picosCSV:Class;
@@ -31,7 +30,7 @@ package com.powerflasher.SampleApp {
 		[Embed(source = "Area2/mapCSV_Group1_Plataformas.csv" , mimeType="application/octet-stream")] public var plataformasCSV:Class;
 		[Embed(source = "Area2/mapCSV_Group1_Puerta.csv" , mimeType="application/octet-stream")] public var puertaCSV:Class;
 		[Embed(source = "Area2/mapCSV_Group1_Pared.csv" , mimeType="application/octet-stream")] public var paredCSV:Class;
-		[Embed(source = "Area2/mapCSV_Group1_atras.csv" , mimeType="application/octet-stream")] public var atrasCSV:Class;
+		
 		
 		private var astrid:Astrid;
 		private var piso:FlxTilemap;
@@ -42,7 +41,6 @@ package com.powerflasher.SampleApp {
 		private var pared:FlxTilemap;
 		private var plataformas:FlxTilemap;
 		private var puerta:FlxTilemap;
-		private var atras:FlxTilemap;
 		private var doubleJump:Boolean;
 		//varibles para recoger items
 		public var items:FlxGroup;
@@ -50,7 +48,7 @@ package com.powerflasher.SampleApp {
 		private var score:FlxText;
 		
 		
-		 public function AreaDos(){
+		 public function AreaTres(){
             super();
         }
 		
@@ -72,7 +70,6 @@ package com.powerflasher.SampleApp {
 		   enredaderas=new FlxTilemap();
 		   picos=new FlxTilemap();
 		   puerta=new FlxTilemap();
-		   atras=new FlxTilemap();
 		   
 		   fondos.loadMap(new fondosCSV(),tilesfondos,32,32);
 		   pared.loadMap(new paredCSV(),tilespared,32,32);
@@ -82,7 +79,6 @@ package com.powerflasher.SampleApp {
 		   puerta.loadMap(new puertaCSV(),tilespuerta,32,32);
 		   piso.loadMap(new pisoCSV(),tilespiso,32,32);
 		   plataformas.loadMap(new plataformasCSV(),tilesplataforma,32,32);
-		   atras.loadMap(new atrasCSV(),tilesatras,32,32);
 		 
 		   
 		    plataformas.setTileProperties(1,FlxObject.UP);
@@ -102,7 +98,6 @@ package com.powerflasher.SampleApp {
 			score.scrollFactor.x = 0;
 			score.scrollFactor.y = 0;
 		    		  	   
-			add(atras);
 			add(piso);
 			add(pared);
 		   	add(fondos);
@@ -149,30 +144,17 @@ package com.powerflasher.SampleApp {
 			//trace("total de items: "+ totalItems);
 		}
 		override public function update():void {
-		if(astrid.overlaps(enredaderas)){
+		if(FlxG.collide(astrid,enredaderas) && FlxG.keys.pressed("DOWN")){
+			astrid.acceleration.y += astrid.drag.y;
 			astrid.play("enredadera");
-			if(FlxG.keys.pressed("DOWN")){
-				astrid.acceleration.y += astrid.drag.y;	
-			}
-			if(FlxG.keys.pressed("UP")){
-				astrid.acceleration.y -= astrid.drag.y;	
-			}
 		}
 		if(FlxG.keys.justPressed("UP") && FlxG.collide(astrid,puerta)){
 			astrid.lado="izq";
 			FlxG.switchState(new AreaTres());
 				
 		}
-		if(FlxG.collide(astrid,pared) && FlxG.keys.pressed("Z")){
+		if(FlxG.collide(astrid,pared)){
 			astrid.velocity.y = -astrid.maxVelocity.y;
-			if(astrid.velocity.y != 0 ){
-					if(astrid.lado=="izq"){
-						astrid.play("caminader");
-					}
-					if(astrid.lado=="der"){
-						astrid.play("caminaizq");
-					}
-			}
 		}
 		super.update();
 			FlxG.collide(astrid,piso);
