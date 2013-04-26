@@ -159,7 +159,7 @@ package com.powerflasher.SampleApp {
 		{
 			var enemigoMap:FlxTilemap = new FlxTilemap();
 			
-			enemigoMap.loadMap(new mapaBats(), batSpriteSheet, 10, 10);
+			enemigoMap.loadMap(new mapaBats(), batSpriteSheet, 24, 24);
 			
 			enemigos = new FlxGroup();
 			

@@ -32,6 +32,9 @@ package com.powerflasher.SampleApp {
 		[Embed(source = "Area2/mapCSV_Group1_Puerta.csv" , mimeType="application/octet-stream")] public var puertaCSV:Class;
 		[Embed(source = "Area2/mapCSV_Group1_Pared.csv" , mimeType="application/octet-stream")] public var paredCSV:Class;
 		[Embed(source = "Area2/mapCSV_Group1_atras.csv" , mimeType="application/octet-stream")] public var atrasCSV:Class;
+		//enemigos 
+		[Embed(source = "Area2/mapCSV_Group1_Bats.csv" , mimeType="application/octet-stream")] public var mapaBats:Class;
+		[Embed(source = "Area2/Bat.png")] public var batSpriteSheet:Class;
 		
 		private var astrid:Astrid;
 		private var piso:FlxTilemap;
@@ -49,6 +52,10 @@ package com.powerflasher.SampleApp {
 		public var totalItems:int;
 		private var score:FlxText;
 		
+		//varibles para enemigos
+		public var enemigos:FlxGroup;
+		public var totalEnemigos:int;
+		private var scoreE:FlxText;
 		
 		 public function AreaDos(){
             super();
@@ -95,12 +102,19 @@ package com.powerflasher.SampleApp {
 			plataformas.setTileProperties(8,FlxObject.UP);
 			plataformas.setTileProperties(9,FlxObject.UP);
 			
-			//atributos del score
+			//atributos del score items
 		    score = new FlxText(0, 0, 100);
 			score.color = 0xffffffff;
 			score.shadow = 0xff000000;
 			score.scrollFactor.x = 0;
 			score.scrollFactor.y = 0;
+			
+			//atributos del scoreEnemigo
+		    scoreE = new FlxText(0, 15, 100);
+			scoreE.color = 0xffffffff;
+			scoreE.shadow = 0xff000000;
+			scoreE.scrollFactor.x = 0;
+			scoreE.scrollFactor.y = 0;
 		    		  	   
 			add(atras);
 			add(piso);
@@ -118,6 +132,13 @@ package com.powerflasher.SampleApp {
 		   add(items);
 		   add(score);
 		   score.text = "0 / " + totalItems.toString();
+		   
+		    //inicializa el grupo de enemigos, del mapa al grupo
+		   parseEnemigos();
+		   //agrega items y el score,  conteo de enemigos
+		   add(enemigos);
+		   add(scoreE);
+		   scoreE.text = "0 / " + totalEnemigos.toString();
 		   
 		   //de la camara
 		   FlxG.camera.setBounds(0,0,3200,1600,false);
@@ -148,6 +169,30 @@ package com.powerflasher.SampleApp {
 			}
 			//trace("total de items: "+ totalItems);
 		}
+		
+		private function parseEnemigos():void
+		{
+			var enemigoMap:FlxTilemap = new FlxTilemap();
+			
+			enemigoMap.loadMap(new mapaBats(), batSpriteSheet, 24, 24);
+			
+			enemigos = new FlxGroup();
+			
+			for (var ty:int = 0; ty < enemigoMap.heightInTiles; ty++)
+			{
+				for (var tx:int = 0; tx < enemigoMap.widthInTiles; tx++)
+				{
+					if (enemigoMap.getTile(tx, ty) == 3)
+					{
+						enemigos.add(new Murcielago(tx, ty, astrid));
+						totalEnemigos++;
+						trace(totalEnemigos);
+					}
+				}
+				
+			}
+		}
+		
 		override public function update():void {
 			
 		astrid.acceleration.y=450;
