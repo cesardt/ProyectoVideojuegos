@@ -11,7 +11,7 @@ package  com.powerflasher.SampleApp{
 		
 		public function Murcielago(X:Number,Y:Number,ThePlayer:FlxSprite):void{
 			
-			super(X,Y);
+			super(X*24,Y*24, batSpriteSheet);
 			_player = ThePlayer;
 			health = 1;
 			maxVelocity.x = 200;
@@ -24,14 +24,14 @@ package  com.powerflasher.SampleApp{
 		
 		  override public function update():void{
 			
-			if(Math.abs(_player.x - x)<30 && Math.abs(_player.y - y)>30){
+			if(Math.abs(_player.x - x)<100 && Math.abs(_player.y - y)>30){
 				 if(_player.x < x)
             {
                 facing = LEFT;
                 velocity.x -= _move_speed;
-				velocity.y = -Math.log(FlxG.elapsed);
+				velocity.y = -Math.log(FlxG.elapsed)*20;
             }
-            else if(Math.abs(_player.x - x)>30 && Math.abs(_player.y - y)>30)
+            else if(Math.abs(_player.x - x)>100 && Math.abs(_player.y - y)>30)
             {
                 facing = RIGHT;
                 velocity.x += _move_speed; 

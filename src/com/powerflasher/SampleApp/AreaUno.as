@@ -94,11 +94,11 @@ package com.powerflasher.SampleApp {
 			score.scrollFactor.y = 0;
 			 
 		//atributos del scoreEnemigo
-		    scoreE = new FlxText(0, 0, 100);
+		    scoreE = new FlxText(0, 15, 100);
 			scoreE.color = 0xffffffff;
 			scoreE.shadow = 0xff000000;
 			scoreE.scrollFactor.x = 0;
-			scoreE.scrollFactor.y = 15;
+			scoreE.scrollFactor.y = 0;
 		   
 			add(mapa5);
 		   	add(mapa4);
@@ -112,15 +112,17 @@ package com.powerflasher.SampleApp {
 		   //inicializa el grupo de enemigos, del mapa al grupo
 		   parseEnemigos();
 		   
+		    //agrega items y el score,  conteo de enemigos
+		   add(enemigos);
+		   add(scoreE);
+		   scoreE.text = "0 / " + totalEnemigos.toString();
+		   
 		   //agrega items y el score,  conteo
 		   add(items);
 		   add(score);
 		   score.text = "0 / " + totalItems.toString();
 		   
-		   //agrega items y el score,  conteo de enemigos
-		   add(enemigos);
-		   add(scoreE);
-		   scoreE.text = "0 / " + totalEnemigos.toString();
+		  
 		   
 		  
 		   //de la camara
@@ -159,13 +161,13 @@ package com.powerflasher.SampleApp {
 			
 			enemigoMap.loadMap(new mapaBats(), batSpriteSheet, 10, 10);
 			
-			items = new FlxGroup();
+			enemigos = new FlxGroup();
 			
 			for (var ty:int = 0; ty < enemigoMap.heightInTiles; ty++)
 			{
 				for (var tx:int = 0; tx < enemigoMap.widthInTiles; tx++)
 				{
-					if (enemigoMap.getTile(tx, ty) == 1)
+					if (enemigoMap.getTile(tx, ty) == 3)
 					{
 						enemigos.add(new Murcielago(tx, ty, astrid));
 						totalEnemigos++;
@@ -205,8 +207,8 @@ package com.powerflasher.SampleApp {
 		{
 			//trace("colapse");
 			enemigo.kill();
-			//FlxG.scoreE += 1;
-			//scoreE.text = FlxG.scoreE.toString() + " / " + totalEnemigos.toString();
+			FlxG.score += 1;
+			scoreE.text = FlxG.score.toString() + " / " + totalEnemigos.toString();
 		}
 		
 	}
