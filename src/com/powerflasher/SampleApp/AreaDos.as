@@ -233,6 +233,8 @@ package com.powerflasher.SampleApp {
 			FlxG.collide(astrid,piso);
 			FlxG.collide(astrid,plataformas);
 			FlxG.overlap(astrid, items, hitItems);
+			//overlap enemigos
+			FlxG.overlap(astrid, enemigos, hitEnemigos);
    		 }
 		 private function hitItems(p:FlxObject, item:FlxObject):void
 		{
@@ -240,6 +242,13 @@ package com.powerflasher.SampleApp {
 			item.kill();
 			FlxG.score += 1;
 			score.text = FlxG.score.toString() + " / " + totalItems.toString();
+		}
+		private function hitEnemigos(p:FlxObject, enemigo:FlxObject):void
+		{
+			//trace("colapse");
+			enemigo.kill();
+			FlxG.score += 1;
+			scoreE.text = FlxG.score.toString() + " / " + totalEnemigos.toString();
 		}
 	}
 }
