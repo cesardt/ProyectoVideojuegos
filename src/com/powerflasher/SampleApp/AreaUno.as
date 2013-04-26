@@ -174,9 +174,7 @@ package com.powerflasher.SampleApp {
 						trace(totalEnemigos);
 					}
 				}
-				
 			}
-			//trace("total de items: "+ totalItems);
 		}
 		
 	
