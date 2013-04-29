@@ -53,6 +53,7 @@ package com.powerflasher.SampleApp {
 		private var player:Astrid;
 		private var level:AreaUno;
 		public var enemies:FlxGroup;
+		public var allowCollisions:uint
 		
 		
 		 public function AreaUno()
@@ -128,7 +129,10 @@ package com.powerflasher.SampleApp {
 		   //de la camara
 		   FlxG.camera.setBounds(0,0,2670,992,false);
 		   FlxG.worldBounds=new FlxRect(0,0,2670,992);
+		   mapaPrincipal.follow();
 		   FlxG.camera.follow(astrid);
+		   allowCollisions=FlxObject.RIGHT;
+		   astrid.allowCollisions;
 		   
 		}
 		private function parseItems():void
