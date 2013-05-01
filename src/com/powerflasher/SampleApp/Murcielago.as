@@ -6,7 +6,7 @@ package  com.powerflasher.SampleApp{
 	public class Murcielago extends FlxSprite{
 		
 		private var _player:FlxSprite;  
-		 private var _move_speed:int = 400;
+		private var _move_speed:int = 200;
 		[Embed(source = "Area1/Bat.png")] public static var batSpriteSheet:Class;
 		
 		public function Murcielago(X:Number,Y:Number,ThePlayer:FlxSprite):void{
@@ -24,20 +24,36 @@ package  com.powerflasher.SampleApp{
 		
 		  override public function update():void{
 			
-			if(Math.abs(_player.x - x)<100 && Math.abs(_player.y - y)>30){
+				var dify:int = y - _player.y;
+			
+			if(y - _player.y < 50 && y - _player.y > 20){
+				
+				if(_player.x - x < 20){
+					facing = LEFT;
+					velocity.x -= _move_speed;
+					velocity.y = -Math.log(FlxG.elapsed)* dify/10 ;
+				}
+				else if(_player.x - x > 20){
+					facing = RIGHT;
+					velocity.x += _move_speed;
+					velocity.y = -Math.log(FlxG.elapsed)*dify/20;
+				}
+			}
+			
+			/*if(Math.abs(_player.x - x)<100 && Math.abs(_player.y - y)>40){
 				 if(_player.x < x)
             {
                 facing = LEFT;
                 velocity.x -= _move_speed;
 				velocity.y = -Math.log(FlxG.elapsed)*20;
             }
-            else if(Math.abs(_player.x - x)>100 && Math.abs(_player.y - y)>30)
+            else if(Math.abs(_player.x - x)>100 && Math.abs(_player.y - y)>40)
             {
                 facing = RIGHT;
                 velocity.x += _move_speed; 
-				velocity.y = -Math.log(FlxG.elapsed);            
+				velocity.y = -Math.log(FlxG.elapsed)*20;            
             }
-			}
+			}*/
 			
 			
 			if(velocity.x != 0){
