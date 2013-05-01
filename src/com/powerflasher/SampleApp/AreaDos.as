@@ -143,8 +143,9 @@ package com.powerflasher.SampleApp {
 			add(enredaderas);
 			add(picos);
 			add(puerta);
-			add(astrid);
 			add(frente);
+			add(astrid);
+		
 			// inicializa el grupo de items, del mapa al grupo
 			parseItems();
 			// agrega items y el score,  conteo

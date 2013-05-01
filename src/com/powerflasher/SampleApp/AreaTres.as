@@ -76,15 +76,11 @@ package com.powerflasher.SampleApp {
 		}
 
 		override public function update() : void {
-			/*if(astrid.overlaps(puerta)){
-			FlxG.switchState(new AreaTres());
-			}
-			 */
 			if (astrid.overlaps(agua)) {
 				if (astrid.lado = "der") {
 					astrid.play("brincader");
 				}
-				if (astrid.lado = "izq") {
+				else if (astrid.lado = "izq") {
 					astrid.play("brincaizq");
 				}
 			}
