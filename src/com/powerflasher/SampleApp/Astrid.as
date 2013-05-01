@@ -1,4 +1,5 @@
 ﻿package com.powerflasher.SampleApp {
+	import org.flixel.FlxGroup;
 	import org.flixel.FlxObject;
 	import org.flixel.FlxG;
 	import org.flixel.FlxSprite;
@@ -9,16 +10,18 @@
 	public class Astrid extends FlxSprite {
 		[Embed(source = "Astrid/tilesmedastrid.png")]
 		public static var jugadorSpriteSheet : Class;
-		var lado : String;
+		public var lado : String;
 		protected var jump : int;
-		var runV : uint = 80;
+		protected var _restart:Number;
+		protected var _bullets:FlxGroup;
+		public var runV : uint = 80;
 		private var doubleJump : Boolean;
 
 		public function Astrid() {
-			var allowCollisions : uint;
 			super(150, 570);
 			frame = 3;
 
+			_restart = 0;
 			velocity.y = 10;
 			offset.x = 0;
 			offset.y = 0;
@@ -38,8 +41,22 @@
 			addAnimation("ataqueder", [12, 13], 4, false);
 			addAnimation("enredadera", [14, 15], 4, false);
 		}
+		override public function destroy():void
+		{
+			super.destroy();
+			_bullets = null;
+		}
 
 		override public function update() : void {
+			if(!alive)
+			{
+				_restart += FlxG.elapsed;
+				if(_restart > 2)
+					FlxG.resetState();
+				return;
+			}
+			
+				
 			acceleration.x = 0;
 			if (FlxG.keys.justPressed("SPACE") && isTouching(FlxObject.FLOOR)) {
 				velocity.y = -maxVelocity.y;
@@ -119,6 +136,35 @@
 			if (this.justTouched(FlxObject.FLOOR) && lado == "der") {
 				play("nobrincader");
 			}
+		}
+		
+		override public function hurt(Damage:Number):void
+		{
+			Damage = 0;
+			if(flickering)
+				return;
+			flicker(1.3);
+			if(FlxG.score > 1000) FlxG.score -= 1000;
+			if(velocity.x > 0)
+				velocity.x = -maxVelocity.x;
+			else
+				velocity.x = maxVelocity.x;
+			super.hurt(Damage);
+		}
+		override public function kill():void
+		{
+			if(!alive){
+				return;
+			}
+			solid = false;
+			super.kill();
+			flicker(0);
+			exists = true;
+			visible = false;
+			velocity.make();
+			acceleration.make();
+			FlxG.camera.shake(0.005,0.35);
+			FlxG.camera.flash(0xffd8eba2,0.35);
 		}
 	}
 }
