@@ -1,5 +1,4 @@
 package com.powerflasher.SampleApp {
-	import org.flixel.plugin.photonstorm.FlxCollision;
 	import org.flixel.FlxGroup;
 	import org.flixel.system.FlxTile;
 	import org.flixel.FlxObject;
