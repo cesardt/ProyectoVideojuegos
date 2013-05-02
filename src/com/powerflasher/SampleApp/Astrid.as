@@ -114,6 +114,15 @@
 				velocity.y = -maxVelocity.y;
 				doubleJump = false;
 			}
+			
+			//Salto de Pared
+			if(FlxG.keys.justPressed("SPACE") && !isTouching(FlxObject.FLOOR) && isTouching(WALL)){
+				velocity.y = -maxVelocity.y*4;
+				
+				velocity.x = -maxVelocity.x*5;
+				doubleJump = true;
+			}
+			
 			if (FlxG.keys.pressed("C")) {
 				if (FlxG.keys.pressed("RIGHT")) {
 					this.x+=2;
