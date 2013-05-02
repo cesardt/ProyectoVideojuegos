@@ -89,6 +89,8 @@ package com.powerflasher.SampleApp {
 			weapon = new FlxWeapon("shuriken", astrid, "x", "y");
 			weapon.makeImageBullet(50, Assets.Shuriken);
 			weapon.setBulletDirection(FlxWeapon.BULLET_RIGHT, 200);
+			weapon.bounds.width=2670;
+			weapon.bounds.height=992;
 			add(weapon.group);
 
 			// inicializa el grupo de items, del mapa al grupo
@@ -152,6 +154,8 @@ package com.powerflasher.SampleApp {
 		}
 
 		override public function update() : void {
+			
+			trace(astrid.x);
 			if (FlxG.mouse.justPressed()) {
 				weapon.fire();
 			}

@@ -1,11 +1,10 @@
 package com.powerflasher.SampleApp {
+	import org.Assets;
 	import org.flixel.FlxSprite;
 
 	import flash.display.Sprite;
 
 	public class bullets extends FlxSprite {
-		[Embed(source = "Astrid/shuriken1.png")]
-		public static var Shuriken : Class;
 
 		public function bullets(x : Number = 0, y : Number = 0) {
 			super(x, y);
@@ -21,7 +20,7 @@ package com.powerflasher.SampleApp {
 			this.y = 20;
 			this.exists = false;
 			this.acceleration.y = 9;
-			loadGraphic(Shuriken, true, true, 10, 9);
+			loadGraphic(Assets.Shuriken, true, true, 10, 9);
 		}
 
 		override public function update() : void {

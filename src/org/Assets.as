@@ -143,7 +143,7 @@ package org {
 		[Embed(source = "Area3/mapCSV_Group1_Plataformas.csv" , mimeType="application/octet-stream")]
 		public static var plataformaCSV : Class;
 		
-		[Embed(source = "Area3/Pared.csv" , mimeType="application/octet-stream")]
+		[Embed(source = "Area3/mapCSV_Group1_PisoPared.csv" , mimeType="application/octet-stream")]
 		public static var pisoCSV3 : Class;
 	}
 }

@@ -1,4 +1,5 @@
 package com.powerflasher.SampleApp {
+	import org.flixel.plugin.photonstorm.FlxWeapon;
 	import org.Assets;
 	import org.flixel.FlxGroup;
 	import org.flixel.system.FlxTile;
@@ -20,6 +21,7 @@ package com.powerflasher.SampleApp {
 		private var plataforma : FlxTilemap;
 		private var piso : FlxTilemap;
 		private var doubleJump : Boolean;
+		private var weapon : FlxWeapon;
 
 		public function AreaTres() {
 			super();
@@ -38,7 +40,7 @@ package com.powerflasher.SampleApp {
 			plataforma = new FlxTilemap();
 
 			agua.loadMap(new Assets.aguaCSV(), Assets.tilesa3, 32, 32);
-			piso.loadMap(new Assets.pisoCSV2(), Assets.tilesa3, 32, 32);
+			piso.loadMap(new Assets.pisoCSV3(), Assets.tilesa3, 32, 32);
 			cielo.loadMap(new Assets.cieloCSV(), Assets.tilessky, 32, 32);
 			fondo.loadMap(new Assets.fondoCSV(), Assets.tilesa3, 32, 32);
 			plataforma.loadMap(new Assets.plataformaCSV(), Assets.tilesa3, 32, 32);
@@ -48,10 +50,16 @@ package com.powerflasher.SampleApp {
 
 			add(cielo);
 			add(fondo);
-			add(piso);
 			add(plataforma);
 			add(astrid);
 			add(agua);
+			add(piso);
+			weapon = new FlxWeapon("shuriken", astrid, "x", "y");
+			weapon.makeImageBullet(50, Assets.Shuriken);
+			weapon.setBulletDirection(FlxWeapon.BULLET_RIGHT, 200);
+			weapon.bounds.width=2592;
+			weapon.bounds.height=4800;
+			add(weapon.group);
 
 			// de la camara
 			FlxG.camera.setBounds(0, 2496, 2592, 4800, false);
@@ -61,6 +69,9 @@ package com.powerflasher.SampleApp {
 		}
 
 		override public function update() : void {
+			if (FlxG.mouse.justPressed()) {
+				weapon.fire();
+			}
 			if (astrid.overlaps(agua)) {
 				if (astrid.lado == "der") {
 					astrid.play("brincader");
