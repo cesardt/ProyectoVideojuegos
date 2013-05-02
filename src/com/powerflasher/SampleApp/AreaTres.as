@@ -1,4 +1,5 @@
 package com.powerflasher.SampleApp {
+	import org.Assets;
 	import org.flixel.FlxGroup;
 	import org.flixel.system.FlxTile;
 	import org.flixel.FlxObject;
@@ -12,20 +13,6 @@ package com.powerflasher.SampleApp {
 	import org.flixel.FlxState;
 
 	public class AreaTres extends FlxState {
-		[Embed(source = "Area3/TilesA3.png")]
-		public var tilesa3 : Class;
-		[Embed(source = "Area3/Sky.png")]
-		public var tilessky : Class;
-		[Embed(source = "Area3/mapCSV_Group1_Agua.csv" , mimeType="application/octet-stream")]
-		public var aguaCSV : Class;
-		[Embed(source = "Area3/mapCSV_Group1_Cielo.csv" , mimeType="application/octet-stream")]
-		public var cieloCSV : Class;
-		[Embed(source = "Area3/mapCSV_Group1_FondoCastillo.csv" , mimeType="application/octet-stream")]
-		public var fondoCSV : Class;
-		[Embed(source = "Area3/mapCSV_Group1_Plataformas.csv" , mimeType="application/octet-stream")]
-		public var plataformaCSV : Class;
-		[Embed(source = "Area3/Pared.csv" , mimeType="application/octet-stream")]
-		public var pisoCSV : Class;
 		private var astrid : Astrid;
 		private var agua : FlxTilemap;
 		private var cielo : FlxTilemap;
@@ -42,10 +29,7 @@ package com.powerflasher.SampleApp {
 			var s : FlxSprite = new FlxSprite();
 			s.makeGraphic(FlxG.width, FlxG.height, 0x9345Da);
 			add(s);
-			astrid = new Astrid();
-			astrid.x = 70;
-			astrid.y = 4256;
-			astrid.lado = "der";
+			astrid = new Astrid(70,4256);
 
 			agua = new FlxTilemap();
 			piso = new FlxTilemap();
@@ -53,11 +37,11 @@ package com.powerflasher.SampleApp {
 			fondo = new FlxTilemap();
 			plataforma = new FlxTilemap();
 
-			agua.loadMap(new aguaCSV(), tilesa3, 32, 32);
-			piso.loadMap(new pisoCSV(), tilesa3, 32, 32);
-			cielo.loadMap(new cieloCSV(), tilessky, 32, 32);
-			fondo.loadMap(new fondoCSV(), tilesa3, 32, 32);
-			plataforma.loadMap(new plataformaCSV(), tilesa3, 32, 32);
+			agua.loadMap(new Assets.aguaCSV(), Assets.tilesa3, 32, 32);
+			piso.loadMap(new Assets.pisoCSV2(), Assets.tilesa3, 32, 32);
+			cielo.loadMap(new Assets.cieloCSV(), Assets.tilessky, 32, 32);
+			fondo.loadMap(new Assets.fondoCSV(), Assets.tilesa3, 32, 32);
+			plataforma.loadMap(new Assets.plataformaCSV(), Assets.tilesa3, 32, 32);
 
 			plataforma.setTileProperties(5, FlxObject.UP);
 			plataforma.setTileProperties(6, FlxObject.UP);
@@ -73,14 +57,15 @@ package com.powerflasher.SampleApp {
 			FlxG.camera.setBounds(0, 2496, 2592, 4800, false);
 			FlxG.worldBounds = new FlxRect(0, 2496, 2592, 4800);
 			FlxG.camera.follow(astrid);
+			super.create();
 		}
 
 		override public function update() : void {
 			if (astrid.overlaps(agua)) {
-				if (astrid.lado = "der") {
+				if (astrid.lado == "der") {
 					astrid.play("brincader");
 				}
-				else if (astrid.lado = "izq") {
+				else if (astrid.lado == "izq") {
 					astrid.play("brincaizq");
 				}
 			}

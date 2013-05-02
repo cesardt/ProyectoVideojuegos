@@ -29,8 +29,8 @@
             add(s);
 			
  
-    
- 			texto=new FlxText(0, 300, FlxG.width, "Astrid's Revenge").setFormat(null, 21, 0xFFFFFF, "center");
+    	
+ 			texto=new FlxText(0, 300, FlxG.width, "Al infinito").setFormat(null, 21, 0xFFFFFF, "center");
          
            add(texto);
 		   
@@ -40,7 +40,7 @@
 		}
 
 		private function Iniciar() : void {
-			FlxG.switchState(new AreaDos());
+			FlxG.switchState(new AreaUno());
 		}
 
 		

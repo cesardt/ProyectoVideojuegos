@@ -1,4 +1,6 @@
 package com.powerflasher.SampleApp {
+	import org.flixel.plugin.photonstorm.FlxWeapon;
+	import org.Assets;
 	import org.flixel.FlxBasic;
 	import org.flixel.FlxGroup;
 	import org.flixel.system.FlxTile;
@@ -13,51 +15,6 @@ package com.powerflasher.SampleApp {
 	import org.flixel.FlxState;
 
 	public class AreaDos extends FlxState {
-		[Embed(source = "Area2/picos.png")]
-		public var tilespicos : Class;
-		[Embed(source = "Area2/puerta.png")]
-		public var tilespuerta : Class;
-		[Embed(source = "Area2/enredaderas.png")]
-		public var tilesenredadera : Class;
-		[Embed(source = "Area2/frente.png")]
-		public var tilesfrente : Class;
-		[Embed(source = "Area2/plataformas.png")]
-		public var tilesplataforma : Class;
-		[Embed(source = "Area2/piso.png")]
-		public var tilespiso : Class;
-		[Embed(source = "Area2/fondos.png")]
-		public var tilesfondos : Class;
-		[Embed(source = "Area2/pared.png")]
-		public var tilespared : Class;
-		[Embed(source = "Area2/item.png")]
-		public var itemsPNG : Class;
-		[Embed(source = "Area2/Sky.png")]
-		public var tilesatras : Class;
-		[Embed(source = "Area2/mapCSV_Group1_Items.csv" , mimeType="application/octet-stream")]
-		public var itemsCSV : Class;
-		[Embed(source = "Area2/mapCSV_Group1_Piso.csv" , mimeType="application/octet-stream")]
-		public var pisoCSV : Class;
-		[Embed(source = "Area2/mapCSV_Group1_Picos.csv" , mimeType="application/octet-stream")]
-		public var picosCSV : Class;
-		[Embed(source = "Area2/mapCSV_Group1_Frente.csv" , mimeType="application/octet-stream")]
-		public var frenteCSV : Class;
-		[Embed(source = "Area2/mapCSV_Group1_Enredaderas.csv" , mimeType="application/octet-stream")]
-		public var enredaderasCSV : Class;
-		[Embed(source = "Area2/mapCSV_Group1_Fondos.csv" , mimeType="application/octet-stream")]
-		public var fondosCSV : Class;
-		[Embed(source = "Area2/mapCSV_Group1_Plataformas.csv" , mimeType="application/octet-stream")]
-		public var plataformasCSV : Class;
-		[Embed(source = "Area2/mapCSV_Group1_Puerta.csv" , mimeType="application/octet-stream")]
-		public var puertaCSV : Class;
-		[Embed(source = "Area2/mapCSV_Group1_Pared.csv" , mimeType="application/octet-stream")]
-		public var paredCSV : Class;
-		[Embed(source = "Area2/mapCSV_Group1_atras.csv" , mimeType="application/octet-stream")]
-		public var atrasCSV : Class;
-		// enemigos
-		[Embed(source = "Area2/mapCSV_Group1_Bats.csv" , mimeType="application/octet-stream")]
-		public var mapaBats : Class;
-		[Embed(source = "Area2/Bat.png")]
-		public var batSpriteSheet : Class;
 		private var astrid : Astrid;
 		private var piso : FlxTilemap;
 		private var picos : FlxTilemap;
@@ -77,6 +34,7 @@ package com.powerflasher.SampleApp {
 		public var enemigos : FlxGroup;
 		public var totalEnemigos : int;
 		private var scoreE : FlxText;
+		private var weapon : FlxWeapon;
 
 		public function AreaDos() {
 			super();
@@ -86,10 +44,7 @@ package com.powerflasher.SampleApp {
 			var s : FlxSprite = new FlxSprite();
 			s.makeGraphic(FlxG.width, FlxG.height, 0x9345Da);
 			add(s);
-			astrid = new Astrid();
-			astrid.x = 3100;
-			astrid.y = 70;
-			astrid.lado = "izq";
+			astrid = new Astrid(3100, 70);
 
 			piso = new FlxTilemap();
 			pared = new FlxTilemap();
@@ -101,15 +56,15 @@ package com.powerflasher.SampleApp {
 			puerta = new FlxTilemap();
 			atras = new FlxTilemap();
 
-			fondos.loadMap(new fondosCSV(), tilesfondos, 32, 32);
-			pared.loadMap(new paredCSV(), tilespared, 32, 32);
-			frente.loadMap(new frenteCSV(), tilesfrente, 32, 32);
-			enredaderas.loadMap(new enredaderasCSV(), tilesenredadera, 12, 32);
-			picos.loadMap(new picosCSV(), tilespicos, 32, 32);
-			puerta.loadMap(new puertaCSV(), tilespuerta, 32, 32);
-			piso.loadMap(new pisoCSV(), tilespiso, 32, 32);
-			plataformas.loadMap(new plataformasCSV(), tilesplataforma, 32, 32);
-			atras.loadMap(new atrasCSV(), tilesatras, 32, 32);
+			fondos.loadMap(new Assets.fondosCSV(), Assets.tilesfondos, 32, 32);
+			pared.loadMap(new Assets.paredCSV(), Assets.tilespared, 32, 32);
+			frente.loadMap(new Assets.frenteCSV(), Assets.tilesfrente, 32, 32);
+			enredaderas.loadMap(new Assets.enredaderasCSV(), Assets.tilesenredadera, 12, 32);
+			picos.loadMap(new Assets.picosCSV(), Assets.tilespicos, 32, 32);
+			puerta.loadMap(new Assets.puertaCSV(), Assets.tilespuerta, 32, 32);
+			piso.loadMap(new Assets.pisoCSV2(), Assets.tilespiso, 32, 32);
+			plataformas.loadMap(new Assets.plataformasCSV(), Assets.tilesplataforma, 32, 32);
+			atras.loadMap(new Assets.atrasCSV(), Assets.tilesatras, 32, 32);
 
 			plataformas.setTileProperties(1, FlxObject.UP);
 			plataformas.setTileProperties(2, FlxObject.UP);
@@ -145,7 +100,11 @@ package com.powerflasher.SampleApp {
 			add(puerta);
 			add(frente);
 			add(astrid);
-		
+			weapon = new FlxWeapon("shuriken", astrid, "x", "y");
+			weapon.makeImageBullet(50, Assets.Shuriken, 50);
+			weapon.setBulletDirection(FlxWeapon.BULLET_LEFT, 200);
+			add(weapon.group);
+
 			// inicializa el grupo de items, del mapa al grupo
 			parseItems();
 			// agrega items y el score,  conteo
@@ -164,12 +123,13 @@ package com.powerflasher.SampleApp {
 			FlxG.camera.setBounds(0, 0, 3200, 1600, false);
 			FlxG.worldBounds = new FlxRect(0, 0, 3200, 1600);
 			FlxG.camera.follow(astrid);
+			super.create();
 		}
 
 		private function parseItems() : void {
 			var itemsMap : FlxTilemap = new FlxTilemap();
 
-			itemsMap.loadMap(new itemsCSV(), itemsPNG, 10, 10);
+			itemsMap.loadMap(new Assets.itemsCSV(), Assets.itemsPNG, 10, 10);
 
 			items = new FlxGroup();
 
@@ -188,7 +148,7 @@ package com.powerflasher.SampleApp {
 		private function parseEnemigos() : void {
 			var enemigoMap : FlxTilemap = new FlxTilemap();
 
-			enemigoMap.loadMap(new mapaBats(), batSpriteSheet, 24, 24);
+			enemigoMap.loadMap(new Assets.mapaBats2(), Assets.batSpriteSheet2, 24, 24);
 
 			enemigos = new FlxGroup();
 
@@ -205,19 +165,23 @@ package com.powerflasher.SampleApp {
 
 		override public function update() : void {
 			astrid.acceleration.y = 450;
+			if (FlxG.mouse.justPressed()) {
+				weapon.fire();
+			}
+
 			if (astrid.overlaps(enredaderas)) {
 				astrid.velocity.y = 0;
 				astrid.acceleration.y = 0;
 
 				if (FlxG.keys.pressed("DOWN") && !astrid.isTouching(FlxObject.FLOOR)) {
 					astrid.play("enredadera");
-					astrid.lado ="ab";
+					astrid.lado = "ab";
 					astrid.velocity.y = 50;
 					astrid.acceleration.y += astrid.drag.y;
 				}
 				if (FlxG.keys.pressed("UP")) {
 					astrid.play("enredadera");
-					astrid.lado ="ar";
+					astrid.lado = "ar";
 					astrid.velocity.y = -50;
 					astrid.acceleration.y -= astrid.drag.y;
 				}
@@ -256,7 +220,7 @@ package com.powerflasher.SampleApp {
 			FlxG.collide(astrid, plataformas);
 			FlxG.overlap(astrid, items, hitItems);
 			// overlap enemigos
-			FlxG.overlap(astrid, enemigos, hitEnemigos);
+			FlxG.overlap(weapon.group, enemigos, hitEnemigos);
 		}
 
 		private function hitItems(p : FlxObject, item : FlxObject) : void {

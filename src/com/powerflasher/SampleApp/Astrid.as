@@ -1,15 +1,12 @@
 ﻿package com.powerflasher.SampleApp {
+	import org.Assets;
+	import org.osmf.traits.PlayState;
 	import org.flixel.FlxGroup;
 	import org.flixel.FlxObject;
 	import org.flixel.FlxG;
 	import org.flixel.FlxSprite;
 
-	/**
-	 * @author ieiomeli
-	 */
 	public class Astrid extends FlxSprite {
-		[Embed(source = "Astrid/tilesmedastrid.png")]
-		public static var jugadorSpriteSheet : Class;
 		public var lado : String;
 		protected var jump : int;
 		protected var _restart:Number;
@@ -17,8 +14,24 @@
 		public var runV : uint = 80;
 		private var doubleJump : Boolean;
 
-		public function Astrid() {
-			super(150, 570);
+		public function Astrid(x:Number,y:Number) {
+			super(x, y);
+			loadGraphic(Assets.jugadorSpriteSheet, true, true, 24, 36, true);
+			addAnimation("derecha", [0, 1, 2], 15, false);
+			addAnimation("izquierda", [3, 4, 5], 15, false);
+			addAnimation("brincader", [9], 10, true);
+			addAnimation("brincaizq", [6], 10, true);
+			addAnimation("nobrincaizq", [7], 5, true);
+			addAnimation("nobrincader", [8], 5, true);
+			addAnimation("ataqueizq", [10, 11], 4, false);
+			addAnimation("ataqueder", [12, 13], 4, false);
+			addAnimation("enredadera", [14, 15], 4, false);
+			if(x>500){
+				play("izquierda");
+			}
+			else{
+				play("derecha");
+			}
 			frame = 3;
 
 			_restart = 0;
@@ -30,16 +43,6 @@
 			maxVelocity.x = runV;
 			maxVelocity.y = jump;
 			acceleration.y = 450;
-			loadGraphic(jugadorSpriteSheet, true, true, 24, 36, true);
-			addAnimation("izquierda", [3, 4, 5], 15, false);
-			addAnimation("derecha", [0, 1, 2], 15, false);
-			addAnimation("brincader", [9], 10, true);
-			addAnimation("brincaizq", [6], 10, true);
-			addAnimation("nobrincaizq", [7], 5, true);
-			addAnimation("nobrincader", [8], 5, true);
-			addAnimation("ataqueizq", [10, 11], 4, false);
-			addAnimation("ataqueder", [12, 13], 4, false);
-			addAnimation("enredadera", [14, 15], 4, false);
 		}
 		override public function destroy():void
 		{

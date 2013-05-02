@@ -1,5 +1,5 @@
-
-package  com.powerflasher.SampleApp{
+package com.powerflasher.SampleApp {
+	import org.Assets;
 	import org.flixel.FlxG;
 	import org.flixel.FlxSprite;
 	
@@ -7,16 +7,15 @@ package  com.powerflasher.SampleApp{
 		
 		private var _player:FlxSprite;  
 		private var _move_speed:int = 200;
-		[Embed(source = "Area1/Bat.png")] public static var batSpriteSheet:Class;
-		
+			
 		public function Murcielago(X:Number,Y:Number,ThePlayer:FlxSprite):void{
 			
-			super(X*24,Y*24, batSpriteSheet);
+			super(X*24,Y*24, Assets.batSpriteSheet1);
 			_player = ThePlayer;
 			health = 1;
 			maxVelocity.x = 200;
             maxVelocity.y = 200;
-			loadGraphic(batSpriteSheet, true, true, 24, 24, true);
+			loadGraphic(Assets.batSpriteSheet1, true, true, 24, 24, true);
 			addAnimation("idle",[3], 0,false);
 			addAnimation("volar",[0,1,2], 15, false);
 			
