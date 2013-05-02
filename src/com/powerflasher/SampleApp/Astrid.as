@@ -59,11 +59,14 @@
 				return;
 			}
 			
+			if(isTouching(FlxObject.FLOOR)){
+				doubleJump = true;
+			}
+			
 				
 			acceleration.x = 0;
 			if (FlxG.keys.justPressed("SPACE") && isTouching(FlxObject.FLOOR)) {
 				velocity.y = -maxVelocity.y;
-				doubleJump = true;
 				if (velocity.y != 0 ) {
 					if (lado == "der") {
 						play("brincader");
@@ -120,8 +123,7 @@
 			
 			//Salto de Pared
 			if(FlxG.keys.justPressed("SPACE") && !isTouching(FlxObject.FLOOR) && isTouching(WALL)){
-				velocity.y = -maxVelocity.y*4;
-				
+				velocity.y = -maxVelocity.y*6;
 				velocity.x = -maxVelocity.x*5;
 				doubleJump = true;
 			}
