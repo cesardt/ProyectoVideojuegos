@@ -5,8 +5,9 @@
 	import org.flixel.FlxObject;
 	import org.flixel.FlxG;
 	import org.flixel.FlxSprite;
+	import org.flixel.plugin.photonstorm.FX.*;
 
-	public class Astrid extends FlxSprite {
+ 	public class Astrid extends FlxSprite {
 		public var lado : String;
 		protected var jump : int;
 		protected var _restart:Number;
@@ -43,6 +44,7 @@
 			maxVelocity.x = runV;
 			maxVelocity.y = jump;
 			acceleration.y = 450;
+			
 		}
 		override public function destroy():void
 		{

@@ -16,6 +16,7 @@
 
 package org.flixel.plugin.photonstorm 
 {
+	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.geom.Point;
