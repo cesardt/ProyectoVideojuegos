@@ -55,6 +55,9 @@ package org {
 		[Embed(source = "Area1/mapCSV_Group2_Puerta.csv" , mimeType="application/octet-stream")]
 		public static var mapaCSV5 : Class;
 		
+		[Embed(source = "Area1/robot.png")]
+		public static var robotSpriteSheet : Class;
+		
 		// Area2
 		[Embed(source = "Area2/picos.png")]
 		public static var tilespicos : Class;
