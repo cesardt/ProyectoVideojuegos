@@ -169,7 +169,7 @@ package com.powerflasher.SampleApp {
 			FlxG.collide(astrid, agua);
 			FlxG.overlap(astrid, items, hitItems);
 			// overlap enemigos
-			FlxG.overlap(weapon.group, enemies, hitEnemigos);
+			FlxG.overlap(astrid, enemies, hitEnemigos);
 		}
 
 		private function hitItems(p : FlxObject, item : FlxObject) : void {
@@ -189,11 +189,10 @@ package com.powerflasher.SampleApp {
 				add(emitter);
 				emitter.start();
 
-				p.kill();
-				enemigo.kill();
+			}
+			p.kill();
 				FlxG.score += 1;
 				scoreE.text = FlxG.score.toString() + " / " + totalEnemigos.toString();
-			}
 		}
 	}
 }
