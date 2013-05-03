@@ -34,6 +34,11 @@ package com.powerflasher.SampleApp {
 		public var enemigos : FlxGroup;
 		public var totalEnemigos : int;
 		private var scoreE : FlxText;
+		
+		public var soldados : FlxGroup;
+		public var totalSoldados : int;
+		private var scoreS : FlxText;
+		
 		private var weapon : FlxWeapon;
 
 		public function AreaDos() {
@@ -89,6 +94,13 @@ package com.powerflasher.SampleApp {
 			scoreE.shadow = 0xff000000;
 			scoreE.scrollFactor.x = 0;
 			scoreE.scrollFactor.y = 0;
+			
+			// atributos del scoreSoldados
+			scoreS = new FlxText(0, 25, 100);
+			scoreS.color = 0xffffffff;
+			scoreS.shadow = 0xff000000;
+			scoreS.scrollFactor.x = 0;
+			scoreS.scrollFactor.y = 0;
 
 			add(atras);
 			add(piso);
@@ -113,14 +125,17 @@ package com.powerflasher.SampleApp {
 			add(items);
 			add(score);
 			score.text = "0 / " + totalItems.toString();
-
+			parseSoldados();
+			
 			// inicializa el grupo de enemigos, del mapa al grupo
 			parseEnemigos();
 			// agrega items y el score,  conteo de enemigos
 			add(enemigos);
 			add(scoreE);
 			scoreE.text = "0 / " + totalEnemigos.toString();
-
+			add(soldados);
+			add(scoreS);
+			scoreS.text="0 / " + totalSoldados.toString();
 			// de la camara
 			FlxG.camera.setBounds(0, 0, 3200, 1600, false);
 			FlxG.worldBounds = new FlxRect(0, 0, 3200, 1600);
@@ -160,6 +175,24 @@ package com.powerflasher.SampleApp {
 						enemigos.add(new Murcielago(tx, ty, astrid));
 						totalEnemigos++;
 						trace(totalEnemigos);
+					}
+				}
+			}
+		}
+
+	private function parseSoldados() : void {
+			var soldadoMap : FlxTilemap = new FlxTilemap();
+
+			soldadoMap.loadMap(new Assets.soldados2(), Assets.enemigo, 24, 36);
+
+			soldados = new FlxGroup();
+
+			for (var ty : int = 0; ty < soldadoMap.heightInTiles; ty++) {
+				for (var tx : int = 0; tx < soldadoMap.widthInTiles; tx++) {
+					if (soldadoMap.getTile(tx, ty) == 3) {
+						soldados.add(new Murcielago(tx, ty, astrid));
+						totalSoldados++;
+						trace(totalSoldados);
 					}
 				}
 			}

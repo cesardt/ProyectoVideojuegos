@@ -179,7 +179,7 @@ package com.powerflasher.SampleApp {
 					if (soldadoMap.getTile(tx, ty) == 1) {
 						soldados.add(new soldado(tx, ty, astrid));
 						totalSoldados++;
-						trace(totalSoldados);
+						trace(soldados);
 					}
 				}
 			}

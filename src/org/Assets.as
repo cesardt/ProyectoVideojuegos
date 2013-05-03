@@ -133,6 +133,9 @@ package org {
 		public static var batSpriteSheet2 : Class;
 		
 		
+		[Embed(source = "Area2/mapCSV_Group1_soldado.csv" , mimeType="application/octet-stream")]
+		public static var soldados2 : Class;
+		
 		//Area3
 		
 				[Embed(source = "Area3/TilesA3.png")]
