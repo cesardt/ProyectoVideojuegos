@@ -37,6 +37,12 @@ package org {
 		[Embed(source = "Area1/Bat.png")]
 		public static var batSpriteSheet1 : Class;
 		
+		[Embed(source = "enemigos/soldado.png")]
+		public static var enemigo: Class;
+		
+		[Embed(source = "Area1/mapCSV_Group2_soldado.csv" , mimeType="application/octet-stream")]
+		public static var soldados : Class;
+		
 		[Embed(source = "Area1/barras.png")]
 		public static var mapaPNG2 : Class;
 		
