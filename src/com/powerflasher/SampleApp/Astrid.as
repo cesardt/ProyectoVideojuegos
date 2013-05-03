@@ -122,10 +122,24 @@
 			}
 			
 			//Salto de Pared
-			if(FlxG.keys.justPressed("SPACE") && !isTouching(FlxObject.FLOOR) && isTouching(WALL)){
-				velocity.y = -maxVelocity.y*6;
-				velocity.x = -maxVelocity.x*5;
-				doubleJump = true;
+			if(!isTouching(FlxObject.FLOOR) && isTouching(FlxObject.WALL)){
+				velocity.y =  velocity.y*.9;
+				if(FlxG.keys.justPressed("SPACE")){
+					if(lado == "der"){
+						lado = "izq";
+						velocity.y = -maxVelocity.y*25;
+						velocity.x = -maxVelocity.x*40;
+						play("brincaizq");
+					
+					}
+					else{
+						lado = "der";
+						velocity.y = -maxVelocity.y*25;
+						velocity.x = maxVelocity.x*40;
+						play("brincader");
+					}
+					doubleJump = true;
+				}
 			}
 			
 			if (FlxG.keys.pressed("C")) {
