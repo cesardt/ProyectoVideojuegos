@@ -45,6 +45,9 @@ package org {
 		public static var mapaCSV5 : Class;
 		[Embed(source = "Area1/robot.png")]
 		public static var robotSpriteSheet : Class;
+		
+		[Embed(source = "enemigos/brujo1.png")]
+		public static var brujo : Class;
 		// Area2
 		[Embed(source = "Area2/picos.png")]
 		public static var tilespicos : Class;
