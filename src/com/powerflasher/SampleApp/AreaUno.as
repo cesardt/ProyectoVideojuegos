@@ -1,4 +1,6 @@
 package com.powerflasher.SampleApp {
+	import flashx.textLayout.formats.Direction;
+	import org.flixel.plugin.photonstorm.FlxBar;
 	import org.flixel.FlxEmitter;
 	import org.flixel.plugin.photonstorm.FlxWeapon;
 	import org.Assets;
@@ -43,6 +45,7 @@ package com.powerflasher.SampleApp {
 		private var level : AreaUno;
 		//public var enemies : FlxGroup;
 		private var weapon : FlxWeapon;
+		private var vida:FlxBar;
 
 		public function AreaUno() {
 			super();
@@ -104,6 +107,12 @@ package com.powerflasher.SampleApp {
 			weapon.bounds.height=992;
 			add(weapon.group);
 
+			vida=new FlxBar(660, 3,1,120,20);
+			vida.scrollFactor.x=0;
+			vida.scrollFactor.y=0;
+			vida.createImageBar(Assets.barravida,Assets.barravida1);
+			add(vida);
+
 			// inicializa el grupo de items, del mapa al grupo
 			parseItems();
 			// inicializa el grupo de enemigos, del mapa al grupo
@@ -148,6 +157,12 @@ package com.powerflasher.SampleApp {
 			}
 			// ("total de items: "+ totalItems);
 		}
+		public function health():void{
+			if(player.health==100){
+					vida.exists=false;
+				}
+		}
+
 
 		private function parseEnemigos() : void {
 			var enemigoMap : FlxTilemap = new FlxTilemap();

@@ -44,6 +44,7 @@
 			maxVelocity.x = runV;
 			maxVelocity.y = jump;
 			acceleration.y = 450;
+			health=100;
 			
 		}
 		override public function destroy():void
