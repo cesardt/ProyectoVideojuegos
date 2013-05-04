@@ -1,4 +1,5 @@
 package com.powerflasher.SampleApp {
+	import org.flixel.plugin.photonstorm.FlxBar;
 	import org.flixel.plugin.photonstorm.FlxWeapon;
 	import org.Assets;
 	import org.flixel.FlxGroup;
@@ -22,6 +23,7 @@ package com.powerflasher.SampleApp {
 		private var piso : FlxTilemap;
 		private var doubleJump : Boolean;
 		private var weapon : FlxWeapon;
+			private var vida : FlxBar;
 
 	// varibles para recoger items
 		public var items : FlxGroup;
@@ -94,7 +96,14 @@ package com.powerflasher.SampleApp {
 			weapon.bounds.width=2592;
 			weapon.bounds.height=4800;
 			add(weapon.group);
-
+			
+			vida = new FlxBar(620, 3);
+			vida.scrollFactor.x = 0;
+			vida.scrollFactor.y = 0;
+			//vida.setParent(astrid,"vida");
+			vida.createImageBar(Assets.barravida, Assets.barravida1,0x00AB00,0xFF00FF00);
+			vida.currentValue=0;
+			add(vida);
 			// inicializa el grupo de items, del mapa al grupo
 			parseItems();
 			// agrega items y el score,  conteo
@@ -189,6 +198,9 @@ private function parseItems() : void {
 					astrid.play("brincaizq");
 				}
 			}
+			if(vida.currentValue==100){
+				astrid.kill();
+			}
 			super.update();
 			FlxG.collide(astrid, piso);
 			FlxG.collide(astrid, plataforma);
@@ -209,6 +221,10 @@ private function parseItems() : void {
 		private function hitEnemigos(p : FlxObject, enemigo : FlxObject) : void {
 			// trace("colapse");
 			enemigo.kill();
+			//Vida de astrid
+			p.health-=1;
+			//Barra de vida
+			vida.currentValue+=1;
 			FlxG.score += 1;
 			scoreE.text = FlxG.score.toString() + " / " + totalEnemigos.toString();
 		}
