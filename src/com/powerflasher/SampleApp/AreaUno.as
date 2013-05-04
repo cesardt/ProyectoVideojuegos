@@ -50,6 +50,12 @@ package com.powerflasher.SampleApp {
 		private var vida : FlxBar;
 		private var vidaBoss : FlxBar;
 		private var vidaBrujo : FlxBar;
+		private var rampa:FlxTileblock;
+		private var rampa1:FlxTileblock;
+		private var rampa2:FlxTileblock;
+		private var rampa3:FlxTileblock;
+		private var rampa4:FlxTileblock;
+		private var rampa5:FlxTileblock;
 		
 
 		public function AreaUno() {
@@ -110,6 +116,23 @@ package com.powerflasher.SampleApp {
 			add(robot);
 			add(brujo);
 			add(agua);
+			rampa = new FlxTileblock(2173, 405, 44, 29);
+			rampa.angle=-40;
+		  	 //rampa.alpha=0;
+		   	rampa.makeGraphic(44, 29);
+		   	add(rampa);
+			
+			rampa1 = new FlxTileblock(2310, 405, 44, 29);
+			rampa1.angle=40;
+		  	 //rampa.alpha=0;
+		   	rampa1.makeGraphic(44, 29);
+		   	add(rampa1);
+			
+				rampa2= new FlxTileblock(1355, 480, 300, 10);
+			rampa2.angle=-39;
+		  	 //rampa.alpha=0;
+		   	rampa2.makeGraphic(1000, 10);
+		   	add(rampa2);
 			
 			weapon = new FlxWeapon("shuriken", astrid, "x", "y");
 			weapon.makeImageBullet(50, Assets.Shuriken);
@@ -223,7 +246,8 @@ package com.powerflasher.SampleApp {
 		}
 
 		override public function update() : void {
-			// trace(astrid.x);
+			trace(astrid.x);
+				trace(astrid.y);
 			if (FlxG.mouse.justPressed()) {
 				weapon.fire();
 			}

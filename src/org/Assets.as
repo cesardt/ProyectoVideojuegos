@@ -9,7 +9,7 @@ package org {
 		[Embed(source = "Astrid/shuriken1.png")]
 		public static var Shuriken : Class;
 		// Area1
-		[Embed(source = "Area1/Tiles_mapa1.png")]
+		[Embed(source = "Area1/Tiles_mapa1c.png")]
 		public static var mapaPNG : Class;
 		[Embed(source = "Area1/mapCSV_Group2_Pasto.csv" , mimeType="application/octet-stream")]
 		public static var mapaCSV : Class;
