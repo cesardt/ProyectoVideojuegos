@@ -10,9 +10,10 @@ package com.powerflasher.SampleApp {
 			
 		public function BossRobot(X:Number,Y:Number,ThePlayer:FlxSprite):void{
 			
-			super(X*49,Y*61, Assets.robotSpriteSheet);
+			super(X,Y, Assets.robotSpriteSheet);
 			_player = ThePlayer;
 			health = 30;
+			acceleration.y = 600;
 			maxVelocity.x = 100;
             maxVelocity.y = 0;
 			loadGraphic(Assets.robotSpriteSheet, true, true, 49, 61, true);

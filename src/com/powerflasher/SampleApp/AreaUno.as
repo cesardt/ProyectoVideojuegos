@@ -23,6 +23,8 @@ package com.powerflasher.SampleApp {
 	public class AreaUno extends FlxState {
 		private var texto : FlxText;
 		private var astrid : Astrid;
+		//boss robot
+		private var robot: BossRobot;
 		private var mapaPrincipal : FlxTilemap;
 		private var agua : FlxTilemap;
 		private var barras : FlxTilemap;
@@ -56,6 +58,7 @@ package com.powerflasher.SampleApp {
 			add(s);
 
 			astrid = new Astrid(150, 530);
+			robot= new BossRobot(180, 780, astrid);
 			mapaPrincipal = new FlxTilemap();
 			agua = new FlxTilemap();
 			// mapa3=new FlxTilemap();
@@ -98,6 +101,7 @@ package com.powerflasher.SampleApp {
 			add(puerta);
 			add(mapaPrincipal);
 			add(astrid);
+			add(robot);
 			add(agua);
 			weapon = new FlxWeapon("shuriken", astrid, "x", "y");
 			weapon.makeImageBullet(50, Assets.Shuriken);
@@ -215,6 +219,7 @@ package com.powerflasher.SampleApp {
 			FlxG.collide(astrid, agua);
 			FlxG.collide(soldados,mapaPrincipal);
 			FlxG.collide(soldados,mapa4);
+			FlxG.collide(robot,mapaPrincipal);
 			FlxG.overlap(astrid, items, hitItems);
 			// overlap enemigos
 			FlxG.overlap(astrid, enemigos, hitEnemigos);
