@@ -40,7 +40,11 @@
 		}
 
 		private function Iniciar() : void {
+<<<<<<< HEAD
 			FlxG.switchState(new AreaUno());
+=======
+			FlxG.switchState(new AreaTres());
+>>>>>>> Soldados everywhere!
 		}
 
 		

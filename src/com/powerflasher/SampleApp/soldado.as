@@ -14,8 +14,8 @@ package com.powerflasher.SampleApp {
 			_player = ThePlayer;
 			health = 1;
 			acceleration.y=450;
-			maxVelocity.x = 200;
-            maxVelocity.y = 200;
+			maxVelocity.x = 20;
+            maxVelocity.y = 20;
 			loadGraphic(Assets.soldado, true, true, 24, 36, true);
 //			addAnimation("quieto",[1], 0,false);
 //			addAnimation("camina",[2,3,4], 15, false);

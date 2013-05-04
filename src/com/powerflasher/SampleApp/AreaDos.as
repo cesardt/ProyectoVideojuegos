@@ -259,6 +259,7 @@ package com.powerflasher.SampleApp {
 			FlxG.overlap(astrid, items, hitItems);
 			// overlap enemigos
 			FlxG.overlap(astrid, enemigos, hitEnemigos);
+			FlxG.overlap(astrid, soldados, hitEnemigos);
 			//overlap bala enemigo
 			FlxG.overlap(weapon.group, enemigos, hitBullet);
 		}

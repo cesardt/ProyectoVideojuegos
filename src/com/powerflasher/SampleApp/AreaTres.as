@@ -23,6 +23,19 @@ package com.powerflasher.SampleApp {
 		private var doubleJump : Boolean;
 		private var weapon : FlxWeapon;
 
+	// varibles para recoger items
+		public var items : FlxGroup;
+		public var totalItems : int;
+		private var score : FlxText;
+		// varibles para enemigos
+		public var enemigos : FlxGroup;
+		public var totalEnemigos : int;
+		private var scoreE : FlxText;
+		
+		public var soldados : FlxGroup;
+		public var totalSoldados : int;
+		private var scoreS : FlxText;
+
 		public function AreaTres() {
 			super();
 		}
@@ -47,6 +60,27 @@ package com.powerflasher.SampleApp {
 
 			plataforma.setTileProperties(5, FlxObject.UP);
 			plataforma.setTileProperties(6, FlxObject.UP);
+			
+			// atributos del score items
+			score = new FlxText(0, 0, 100);
+			score.color = 0xffffffff;
+			score.shadow = 0xff000000;
+			score.scrollFactor.x = 0;
+			score.scrollFactor.y = 0;
+
+			// atributos del scoreEnemigo
+			scoreE = new FlxText(0, 15, 100);
+			scoreE.color = 0xffffffff;
+			scoreE.shadow = 0xff000000;
+			scoreE.scrollFactor.x = 0;
+			scoreE.scrollFactor.y = 0;
+			
+			// atributos del scoreSoldados
+			scoreS = new FlxText(0, 25, 100);
+			scoreS.color = 0xffffffff;
+			scoreS.shadow = 0xff000000;
+			scoreS.scrollFactor.x = 0;
+			scoreS.scrollFactor.y = 0;
 
 			add(cielo);
 			add(fondo);
@@ -61,12 +95,87 @@ package com.powerflasher.SampleApp {
 			weapon.bounds.height=4800;
 			add(weapon.group);
 
+			// inicializa el grupo de items, del mapa al grupo
+			parseItems();
+			// agrega items y el score,  conteo
+			add(items);
+			add(score);
+			score.text = "0 / " + totalItems.toString();
+			parseSoldados();
+			
+			// inicializa el grupo de enemigos, del mapa al grupo
+			parseEnemigos();
+			// agrega items y el score,  conteo de enemigos
+			//add(enemigos);
+			add(scoreE);
+			scoreE.text = "0 / " + totalEnemigos.toString();
+			add(soldados);
+			add(scoreS);
+			scoreS.text="0 / " + totalSoldados.toString();
+
 			// de la camara
 			FlxG.camera.setBounds(0, 2496, 2592, 4800, false);
 			FlxG.worldBounds = new FlxRect(0, 2496, 2592, 4800);
 			FlxG.camera.follow(astrid);
 			super.create();
 		}
+
+private function parseItems() : void {
+			var itemsMap : FlxTilemap = new FlxTilemap();
+
+			itemsMap.loadMap(new Assets.items3(), Assets.itemsPNG, 10, 10);
+
+			items = new FlxGroup();
+
+			for (var ty : int = 0; ty < itemsMap.heightInTiles; ty++) {
+				for (var tx : int = 0; tx < itemsMap.widthInTiles; tx++) {
+					if (itemsMap.getTile(tx, ty) == 1) {
+						items.add(new Items(tx, ty));
+						totalItems++;
+						//trace(totalItems);
+					}
+				}
+			}
+			// trace("total de items: "+ totalItems);
+		}
+
+		private function parseEnemigos() : void {
+			var enemigoMap : FlxTilemap = new FlxTilemap();
+
+			enemigoMap.loadMap(new Assets.murcielagos3(), Assets.batSpriteSheet2, 24, 24);
+
+			enemigos = new FlxGroup();
+
+			for (var ty : int = 0; ty < enemigoMap.heightInTiles; ty++) {
+				for (var tx : int = 0; tx < enemigoMap.widthInTiles; tx++) {
+					if (enemigoMap.getTile(tx, ty) == 3) {
+						enemigos.add(new Murcielago(tx, ty, astrid));
+						totalEnemigos++;
+						//trace(totalEnemigos);
+					}
+				}
+			}
+		}
+
+	private function parseSoldados() : void {
+			var soldadoMap : FlxTilemap = new FlxTilemap();
+
+			soldadoMap.loadMap(new Assets.soldados3(), Assets.soldado, 24, 36);
+
+			soldados = new FlxGroup();
+
+			for (var ty : int = 0; ty < soldadoMap.heightInTiles; ty++) {
+				for (var tx : int = 0; tx < soldadoMap.widthInTiles; tx++) {
+					if (soldadoMap.getTile(tx, ty) == 1) {
+						soldados.add(new soldado(tx, ty, astrid));
+						totalSoldados++;
+						trace(soldados.length);
+						
+					}
+				}
+			}
+		}
+
 
 		override public function update() : void {
 			if (FlxG.mouse.justPressed()) {
@@ -83,6 +192,33 @@ package com.powerflasher.SampleApp {
 			super.update();
 			FlxG.collide(astrid, piso);
 			FlxG.collide(astrid, plataforma);
+			FlxG.collide(soldados,piso);
+			FlxG.collide(soldados,plataforma);
+			FlxG.overlap(astrid, items, hitItems);
+			// overlap enemigos
+			FlxG.overlap(astrid, enemigos, hitEnemigos);
+			FlxG.overlap(astrid, soldados, hitEnemigos);
+		}
+		private function hitItems(p : FlxObject, item : FlxObject) : void {
+			// trace("colapse");
+			item.kill();
+			FlxG.score += 1;
+			score.text = FlxG.score.toString() + " / " + totalItems.toString();
+		}
+
+		private function hitEnemigos(p : FlxObject, enemigo : FlxObject) : void {
+			// trace("colapse");
+			enemigo.kill();
+			FlxG.score += 1;
+			scoreE.text = FlxG.score.toString() + " / " + totalEnemigos.toString();
+		}
+		
+		private function hitBullet(p : FlxObject, enemigo : FlxObject) : void {
+			// trace("colapse");
+			p.kill();
+			enemigo.kill();
+			FlxG.score += 1;
+			scoreE.text = FlxG.score.toString() + " / " + totalEnemigos.toString();
 		}
 	}
 }
