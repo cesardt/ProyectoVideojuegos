@@ -110,8 +110,9 @@ package com.powerflasher.SampleApp {
 			vida = new FlxBar(660, 3, 1, 120, 20);
 			vida.scrollFactor.x = 0;
 			vida.scrollFactor.y = 0;
-			vida.createImageBar(Assets.barravida, Assets.barravida1);
+			vida.createImageBar(Assets.barravida, Assets.barravida1,0x00AB00,0xFF00FF00);
 			add(vida);
+			
 
 			// inicializa el grupo de items, del mapa al grupo
 			parseItems();
@@ -185,7 +186,7 @@ package com.powerflasher.SampleApp {
 		private function parseSoldados() : void {
 			var soldadoMap : FlxTilemap = new FlxTilemap();
 
-			soldadoMap.loadMap(new Assets.soldados(), Assets.soldado, 24, 36);
+			soldadoMap.loadMap(new Assets.soldados(), Assets.enemigo, 24, 36);
 
 			soldados = new FlxGroup();
 
