@@ -23,8 +23,8 @@ package com.powerflasher.SampleApp {
 	public class AreaUno extends FlxState {
 		private var texto : FlxText;
 		private var astrid : Astrid;
-		//boss robot
-		private var robot: BossRobot;
+		// boss robot
+		private var robot : BossRobot;
 		private var mapaPrincipal : FlxTilemap;
 		private var agua : FlxTilemap;
 		private var barras : FlxTilemap;
@@ -58,7 +58,7 @@ package com.powerflasher.SampleApp {
 			add(s);
 
 			astrid = new Astrid(150, 530);
-			robot= new BossRobot(180, 780, astrid);
+			robot = new BossRobot(180, 780, astrid);
 			mapaPrincipal = new FlxTilemap();
 			agua = new FlxTilemap();
 			// mapa3=new FlxTilemap();
@@ -105,7 +105,7 @@ package com.powerflasher.SampleApp {
 			add(agua);
 			weapon = new FlxWeapon("shuriken", astrid, "x", "y");
 			weapon.makeImageBullet(50, Assets.Shuriken);
-			weapon.setBulletDirection(FlxWeapon.BULLET_RIGHT, 200);
+			weapon.setBulletDirection(FlxWeapon.BULLET_LEFT, 200);
 			weapon.bounds.width = 2670;
 			weapon.bounds.height = 992;
 			add(weapon.group);
@@ -113,17 +113,16 @@ package com.powerflasher.SampleApp {
 			vida = new FlxBar(620, 3);
 			vida.scrollFactor.x = 0;
 			vida.scrollFactor.y = 0;
-			//vida.setParent(astrid,"vida");
-			vida.createImageBar(Assets.barravida, Assets.barravida1,0x00AB00,0xFF00FF00);
-			vida.currentValue=0;
+			// vida.setParent(astrid,"vida");
+			vida.createImageBar(Assets.barravida, Assets.barravida1, 0x00AB00, 0xFF00FF00);
+			vida.currentValue = 0;
 			add(vida);
-			
 
 			// inicializa el grupo de items, del mapa al grupo
 			parseItems();
 			// inicializa el grupo de enemigos, del mapa al grupo
 			parseEnemigos();
-			//parseSoldados();
+			 parseSoldados();
 			// agrega items y el score,  conteo de enemigos
 			add(enemigos);
 			add(scoreE);
@@ -209,26 +208,27 @@ package com.powerflasher.SampleApp {
 				astrid.lado = "izq";
 				FlxG.switchState(new AreaDos());
 			}
-			
-			if(vida.currentValue==100){
+
+			if (vida.currentValue == 100) {
 				astrid.kill();
 			}
-			robot.acceleration.y=600;
+			robot.acceleration.y = 600;
 			super.update();
 			FlxG.collide(astrid, mapaPrincipal);
 			FlxG.collide(astrid, mapa4);
 			FlxG.collide(astrid, agua);
-			FlxG.collide(soldados,mapaPrincipal);
-			FlxG.collide(soldados,mapa4);
-			FlxG.collide(robot,mapaPrincipal);
+			FlxG.collide(soldados, mapaPrincipal);
+			FlxG.collide(soldados, mapa4);
+			FlxG.collide(robot, mapaPrincipal);
 			FlxG.overlap(astrid, items, hitItems);
 			// overlap enemigos
 			FlxG.overlap(astrid, enemigos, hitEnemigos);
 			FlxG.overlap(astrid, soldados, hitEnemigos);
-			//overlap bala enemigo
+			FlxG.overlap(astrid, robot, hitEnemigos);
+			// overlap bala enemigo
 			FlxG.overlap(weapon.group, enemigos, hitBullet);
 			FlxG.overlap(weapon.group, soldados, hitBullet);
-			
+			FlxG.overlap(weapon.group, robot, hitBullet);
 		}
 
 		private function hitItems(p : FlxObject, item : FlxObject) : void {
@@ -248,20 +248,33 @@ package com.powerflasher.SampleApp {
 				add(emitter);
 				emitter.start();
 			}
-			//Vida de astrid
-			p.health-=1;
-			//Barra de vida
-			vida.currentValue+=1;
+			if (enemigo == robot) {
+				// Vida de astrid
+				p.health -= 3;
+				// Barra de vida
+				vida.currentValue += 3;
+			} else {
+				// Vida de astrid
+				p.health -= 1;
+				// Barra de vida
+				vida.currentValue += 1;
+			}
+
 			FlxG.score += 1;
 			scoreE.text = FlxG.score.toString() + " / " + totalEnemigos.toString();
 		}
-		
+
 		private function hitBullet(p : FlxObject, enemigo : FlxObject) : void {
 			// trace("colapse");
-			p.kill();
-			enemigo.kill();
-			FlxG.score += 1;
-			scoreE.text = FlxG.score.toString() + " / " + totalEnemigos.toString();
+			if(enemigo==robot){
+				trace("bajarVidaRobot");
+			}
+			else{
+				p.kill();
+				enemigo.kill();
+				FlxG.score += 1;
+				scoreE.text = FlxG.score.toString() + " / " + totalEnemigos.toString();
+			}
 		}
 	}
 }
