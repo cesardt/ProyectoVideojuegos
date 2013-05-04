@@ -185,7 +185,7 @@ package com.powerflasher.SampleApp {
 		private function parseSoldados() : void {
 			var soldadoMap : FlxTilemap = new FlxTilemap();
 
-			soldadoMap.loadMap(new Assets.soldados(), Assets.enemigo, 24, 36);
+			soldadoMap.loadMap(new Assets.soldados(), Assets.soldado, 24, 36);
 
 			soldados = new FlxGroup();
 

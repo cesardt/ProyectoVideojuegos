@@ -10,15 +10,15 @@ package com.powerflasher.SampleApp {
 			
 		public function soldado(X:Number,Y:Number,ThePlayer:FlxSprite):void{
 			
-			super(X*24,Y*36, Assets.enemigo);
+			super(X*24,Y*36, Assets.soldado);
 			_player = ThePlayer;
 			health = 1;
 			acceleration.y=450;
 			maxVelocity.x = 200;
             maxVelocity.y = 200;
-			loadGraphic(Assets.enemigo, true, true, 24, 36, true);
-			addAnimation("quieto",[1], 0,false);
-			addAnimation("camina",[2,3,4], 15, false);
+			loadGraphic(Assets.soldado, true, true, 24, 36, true);
+//			addAnimation("quieto",[1], 0,false);
+//			addAnimation("camina",[2,3,4], 15, false);
 			
 		}
 		

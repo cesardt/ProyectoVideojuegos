@@ -183,7 +183,7 @@ package com.powerflasher.SampleApp {
 	private function parseSoldados() : void {
 			var soldadoMap : FlxTilemap = new FlxTilemap();
 
-			soldadoMap.loadMap(new Assets.soldados2(), Assets.enemigo, 24, 36);
+			soldadoMap.loadMap(new Assets.soldados2(), Assets.soldado, 24, 36);
 
 			soldados = new FlxGroup();
 
@@ -192,7 +192,8 @@ package com.powerflasher.SampleApp {
 					if (soldadoMap.getTile(tx, ty) == 1) {
 						soldados.add(new soldado(tx, ty, astrid));
 						totalSoldados++;
-						trace(totalSoldados);
+						trace(soldados.length);
+						
 					}
 				}
 			}
@@ -253,6 +254,8 @@ package com.powerflasher.SampleApp {
 			super.update();
 			FlxG.collide(astrid, piso);
 			FlxG.collide(astrid, plataformas);
+			FlxG.collide(soldados,piso);
+			FlxG.collide(soldados,plataformas);
 			FlxG.overlap(astrid, items, hitItems);
 			// overlap enemigos
 			FlxG.overlap(astrid, enemigos, hitEnemigos);
