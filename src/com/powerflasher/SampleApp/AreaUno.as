@@ -131,7 +131,7 @@ package com.powerflasher.SampleApp {
 			vidaBoss.scrollFactor.x = 0;
 			vidaBoss.scrollFactor.y = 0;
 			// vida.setParent(astrid,"vida");
-			vidaBoss.createImageBar(Assets.barravidaboss, Assets.barravida1);
+			vidaBoss.createImageBar(Assets.barravidaboss, Assets.barravidaboss1);
 			vidaBoss.currentValue = 0;
 			
 			// inicializa el grupo de items, del mapa al grupo
