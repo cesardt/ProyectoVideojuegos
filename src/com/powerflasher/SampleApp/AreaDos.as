@@ -55,7 +55,7 @@ package com.powerflasher.SampleApp {
 			add(s);
 			astrid = new Astrid(3100, 70);
 			//bosses
-			boss = new BossArea2(3100, 70, astrid);
+			boss = new BossArea2(2058, 1610, astrid);
 			
 			piso = new FlxTilemap();
 			pared = new FlxTilemap();
@@ -271,6 +271,7 @@ package com.powerflasher.SampleApp {
 				astrid.kill();
 			}
 			super.update();
+			trace(astrid.x+" , "+astrid.y);
 			FlxG.collide(astrid, piso);
 			FlxG.collide(astrid, plataformas);
 			FlxG.collide(soldados,piso);
