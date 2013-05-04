@@ -25,16 +25,12 @@ package org {
 		public static var mapaBats1 : Class;
 		[Embed(source = "Area1/Bat.png")]
 		public static var batSpriteSheet1 : Class;
-<<<<<<< HEAD
 		
 		[Embed(source = "enemigos/soldado.png")]
 		public static var enemigo: Class;
 		
 		[Embed(source = "Area1/mapCSV_Group2_soldado.csv" , mimeType="application/octet-stream")]
 		public static var soldados : Class;
-		
-=======
->>>>>>> cambio pequeños
 		[Embed(source = "Area1/barras.png")]
 		public static var mapaPNG2 : Class;
 		[Embed(source = "Area1/mapCSV_Group2_Map4.csv" , mimeType="application/octet-stream")]
@@ -95,19 +91,13 @@ package org {
 		public static var mapaBats2 : Class;
 		[Embed(source = "Area2/Bat.png")]
 		public static var batSpriteSheet2 : Class;
-<<<<<<< HEAD
 		
 		
 		[Embed(source = "Area2/mapCSV_Group1_soldado.csv" , mimeType="application/octet-stream")]
 		public static var soldados2 : Class;
 		
-		//Area3
-		
-				[Embed(source = "Area3/TilesA3.png")]
-=======
 		// Area3
 		[Embed(source = "Area3/TilesA3.png")]
->>>>>>> cambio pequeños
 		public static var tilesa3 : Class;
 		[Embed(source = "Area3/Sky.png")]
 		public static var tilessky : Class;
