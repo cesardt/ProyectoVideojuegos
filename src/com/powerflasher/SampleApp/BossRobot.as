@@ -35,9 +35,11 @@ package com.powerflasher.SampleApp {
 				}
 				if(facing == LEFT){
 					velocity.x -= _move_speed;
+					play("caminar");
 				}
 				else{
 					velocity.x += _move_speed;
+					play("caminar");
 				}
 			
 			
