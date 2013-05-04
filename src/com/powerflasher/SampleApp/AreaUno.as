@@ -1,5 +1,6 @@
 package com.powerflasher.SampleApp {
 	import flashx.textLayout.formats.Direction;
+
 	import org.flixel.plugin.photonstorm.FlxBar;
 	import org.flixel.FlxEmitter;
 	import org.flixel.plugin.photonstorm.FlxWeapon;
@@ -40,12 +41,11 @@ package com.powerflasher.SampleApp {
 		public var soldados : FlxGroup;
 		public var totalSoldados : int;
 		private var scoreS : FlxText;
-		
 		private var player : Astrid;
 		private var level : AreaUno;
-		//public var enemies : FlxGroup;
+		// public var enemies : FlxGroup;
 		private var weapon : FlxWeapon;
-		private var vida:FlxBar;
+		private var vida : FlxBar;
 
 		public function AreaUno() {
 			super();
@@ -86,7 +86,7 @@ package com.powerflasher.SampleApp {
 			scoreE.shadow = 0xff000000;
 			scoreE.scrollFactor.x = 0;
 			scoreE.scrollFactor.y = 0;
-			
+
 			// atributos del scoreSoldados
 			scoreS = new FlxText(0, 25, 100);
 			scoreS.color = 0xffffffff;
@@ -103,14 +103,14 @@ package com.powerflasher.SampleApp {
 			weapon = new FlxWeapon("shuriken", astrid, "x", "y");
 			weapon.makeImageBullet(50, Assets.Shuriken);
 			weapon.setBulletDirection(FlxWeapon.BULLET_RIGHT, 200);
-			weapon.bounds.width=2670;
-			weapon.bounds.height=992;
+			weapon.bounds.width = 2670;
+			weapon.bounds.height = 992;
 			add(weapon.group);
 
-			vida=new FlxBar(660, 3,1,120,20);
-			vida.scrollFactor.x=0;
-			vida.scrollFactor.y=0;
-			vida.createImageBar(Assets.barravida,Assets.barravida1);
+			vida = new FlxBar(660, 3, 1, 120, 20);
+			vida.scrollFactor.x = 0;
+			vida.scrollFactor.y = 0;
+			vida.createImageBar(Assets.barravida, Assets.barravida1);
 			add(vida);
 
 			// inicializa el grupo de items, del mapa al grupo
@@ -121,11 +121,11 @@ package com.powerflasher.SampleApp {
 			// agrega items y el score,  conteo de enemigos
 			add(enemigos);
 			add(scoreE);
-			
+
 			add(soldados);
 			add(scoreS);
 			scoreE.text = "0 / " + totalEnemigos.toString();
-			scoreS.text="0 / " + totalSoldados.toString();
+			scoreS.text = "0 / " + totalSoldados.toString();
 			// agrega items y el score,  conteo
 			add(items);
 			add(score);
@@ -151,18 +151,18 @@ package com.powerflasher.SampleApp {
 					if (itemsMap.getTile(tx, ty) == 1) {
 						items.add(new Items(tx, ty));
 						totalItems++;
-						//trace(totalItems);
+						// trace(totalItems);
 					}
 				}
 			}
 			// ("total de items: "+ totalItems);
 		}
-		public function health():void{
-			if(player.health==100){
-					vida.exists=false;
-				}
-		}
 
+		public function health() : void {
+			if (player.health == 100) {
+				vida.exists = false;
+			}
+		}
 
 		private function parseEnemigos() : void {
 			var enemigoMap : FlxTilemap = new FlxTilemap();
@@ -176,13 +176,13 @@ package com.powerflasher.SampleApp {
 					if (enemigoMap.getTile(tx, ty) == 3) {
 						enemigos.add(new Murcielago(tx, ty, astrid));
 						totalEnemigos++;
-						//trace(totalEnemigos);
+						// trace(totalEnemigos);
 					}
 				}
 			}
 		}
 
-	private function parseSoldados() : void {
+		private function parseSoldados() : void {
 			var soldadoMap : FlxTilemap = new FlxTilemap();
 
 			soldadoMap.loadMap(new Assets.soldados(), Assets.enemigo, 24, 36);
@@ -199,9 +199,9 @@ package com.powerflasher.SampleApp {
 				}
 			}
 		}
+
 		override public function update() : void {
-			
-			//trace(astrid.x);
+			// trace(astrid.x);
 			if (FlxG.mouse.justPressed()) {
 				weapon.fire();
 			}
@@ -216,7 +216,7 @@ package com.powerflasher.SampleApp {
 			FlxG.overlap(astrid, items, hitItems);
 			// overlap enemigos
 			FlxG.overlap(astrid, enemigos, hitEnemigos);
-			FlxG.overlap(astrid,soldados,hitEnemigos);
+			FlxG.overlap(astrid, soldados, hitEnemigos);
 		}
 
 		private function hitItems(p : FlxObject, item : FlxObject) : void {
@@ -235,11 +235,10 @@ package com.powerflasher.SampleApp {
 				emitter.at(p);
 				add(emitter);
 				emitter.start();
-
 			}
 			p.kill();
-				FlxG.score += 1;
-				scoreE.text = FlxG.score.toString() + " / " + totalEnemigos.toString();
+			FlxG.score += 1;
+			scoreE.text = FlxG.score.toString() + " / " + totalEnemigos.toString();
 		}
 	}
 }
