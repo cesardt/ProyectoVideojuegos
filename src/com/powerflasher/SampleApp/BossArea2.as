@@ -3,12 +3,12 @@ package com.powerflasher.SampleApp {
 	import org.flixel.FlxG;
 	import org.flixel.FlxSprite;
 	
-	public class Brujo extends FlxSprite{
+	public class BossArea2 extends FlxSprite{
 		
 		private var _player:FlxSprite;  
 		private var _move_speed:int = 100;
 			
-		public function Brujo(X:Number,Y:Number,ThePlayer:FlxSprite):void{
+		public function BossArea2(X:Number,Y:Number,ThePlayer:FlxSprite):void{
 			
 			super(X,Y, Assets.brujo);
 			_player = ThePlayer;
