@@ -49,6 +49,7 @@ package com.powerflasher.SampleApp {
 		private var weapon : FlxWeapon;
 		private var vida : FlxBar;
 		private var vidaBoss : FlxBar;
+		private var vidaBrujo : FlxBar;
 		
 
 		public function AreaUno() {
@@ -63,7 +64,7 @@ package com.powerflasher.SampleApp {
 			astrid = new Astrid(150, 530);
 			//bosses
 			robot = new BossRobot(180, 780, astrid);
-			brujo= new Brujo(300, 780, astrid);
+			brujo= new Brujo(300, 450, astrid);
 			mapaPrincipal = new FlxTilemap();
 			agua = new FlxTilemap();
 			// mapa3=new FlxTilemap();
@@ -121,7 +122,7 @@ package com.powerflasher.SampleApp {
 			parseItems();
 			// inicializa el grupo de enemigos, del mapa al grupo
 			parseEnemigos();
-			 parseSoldados();
+			// parseSoldados();
 			// agrega items y el score,  conteo de enemigos
 			add(enemigos);
 			add(scoreE);
@@ -149,6 +150,13 @@ package com.powerflasher.SampleApp {
 			// vida.setParent(astrid,"vida");
 			vidaBoss.createImageBar(Assets.barravidaboss, Assets.barravidaboss1);
 			vidaBoss.currentValue = 0;
+			
+			vidaBrujo = new FlxBar(300, 3,2,100,10,null,"",0,50);
+			vidaBrujo.scrollFactor.x = 0;
+			vidaBrujo.scrollFactor.y = 0;
+			// vida.setParent(astrid,"vida");
+			vidaBrujo.createImageBar(Assets.barravidabrujo, Assets.barravidabrujo1);
+			vidaBrujo.currentValue = 0;
 			
 		
 			// de la camara
@@ -269,6 +277,12 @@ package com.powerflasher.SampleApp {
 				p.health -= 3;
 				// Barra de vida
 				vida.currentValue += 3;
+			}
+			if (enemigo == brujo) {
+				// Vida de astrid
+				p.health -= 5;
+				// Barra de vida
+				vida.currentValue += 3;
 			} else {
 				// Vida de astrid
 				p.health -= 1;
@@ -282,12 +296,21 @@ package com.powerflasher.SampleApp {
 
 		private function hitBullet(p : FlxObject, enemigo : FlxObject) : void {
 			p.kill();
-			trace(robot.health);
 			if(enemigo==robot){
 				add(vidaBoss);
 				enemigo.health-=2;
 				// Barra de vida
 				vidaBoss.currentValue += 2;
+				
+				if(enemigo.health==0){
+					enemigo.kill();
+				}
+			}
+			else if(enemigo==brujo){
+				add(vidaBrujo);
+				enemigo.health-=2;
+				// Barra de vida
+				vidaBrujo.currentValue += 2;
 				
 				if(enemigo.health==0){
 					enemigo.kill();
