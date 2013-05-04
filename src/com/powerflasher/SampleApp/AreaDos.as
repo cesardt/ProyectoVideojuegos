@@ -1,4 +1,5 @@
 package com.powerflasher.SampleApp {
+	import org.flixel.plugin.photonstorm.FlxBar;
 	import org.flixel.plugin.photonstorm.FlxWeapon;
 	import org.Assets;
 	import org.flixel.FlxBasic;
@@ -40,6 +41,7 @@ package com.powerflasher.SampleApp {
 		private var scoreS : FlxText;
 		
 		private var weapon : FlxWeapon;
+		private var vida : FlxBar;
 
 		public function AreaDos() {
 			super();
@@ -60,6 +62,7 @@ package com.powerflasher.SampleApp {
 			picos = new FlxTilemap();
 			puerta = new FlxTilemap();
 			atras = new FlxTilemap();
+			
 
 			fondos.loadMap(new Assets.fondosCSV(), Assets.tilesfondos, 32, 32);
 			pared.loadMap(new Assets.paredCSV(), Assets.tilespared, 32, 32);
@@ -118,6 +121,14 @@ package com.powerflasher.SampleApp {
 			weapon.bounds.width=3200;
 			weapon.bounds.height=1600;
 			add(weapon.group);
+			
+			vida = new FlxBar(620, 3);
+			vida.scrollFactor.x = 0;
+			vida.scrollFactor.y = 0;
+			//vida.setParent(astrid,"vida");
+			vida.createImageBar(Assets.barravida, Assets.barravida1,0x00AB00,0xFF00FF00);
+			vida.currentValue=0;
+			add(vida);
 
 			// inicializa el grupo de items, del mapa al grupo
 			parseItems();
@@ -251,6 +262,9 @@ package com.powerflasher.SampleApp {
 			if (FlxG.collide(astrid, picos)) {
 				astrid.kill();
 			}
+			if(vida.currentValue==100){
+				astrid.kill();
+			}
 			super.update();
 			FlxG.collide(astrid, piso);
 			FlxG.collide(astrid, plataformas);
@@ -270,10 +284,13 @@ package com.powerflasher.SampleApp {
 			FlxG.score += 1;
 			score.text = FlxG.score.toString() + " / " + totalItems.toString();
 		}
-
 		private function hitEnemigos(p : FlxObject, enemigo : FlxObject) : void {
 			// trace("colapse");
 			enemigo.kill();
+			//Vida de astrid
+			p.health-=1;
+			//Barra de vida
+			vida.currentValue+=1;
 			FlxG.score += 1;
 			scoreE.text = FlxG.score.toString() + " / " + totalEnemigos.toString();
 		}
