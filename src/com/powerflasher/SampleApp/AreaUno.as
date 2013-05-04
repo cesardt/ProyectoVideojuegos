@@ -41,7 +41,6 @@ package com.powerflasher.SampleApp {
 		public var soldados : FlxGroup;
 		public var totalSoldados : int;
 		private var scoreS : FlxText;
-		private var player : Astrid;
 		private var level : AreaUno;
 		// public var enemies : FlxGroup;
 		private var weapon : FlxWeapon;
@@ -161,12 +160,6 @@ package com.powerflasher.SampleApp {
 			// ("total de items: "+ totalItems);
 		}
 
-		public function health() : void {
-			if (player.health == 100) {
-				vida.exists = false;
-			}
-		}
-
 		private function parseEnemigos() : void {
 			var enemigoMap : FlxTilemap = new FlxTilemap();
 
@@ -220,10 +213,13 @@ package com.powerflasher.SampleApp {
 			FlxG.collide(astrid, mapaPrincipal);
 			FlxG.collide(astrid, mapa4);
 			FlxG.collide(astrid, agua);
+			FlxG.collide(soldados,mapaPrincipal);
+			FlxG.collide(soldados,mapa4);
 			FlxG.overlap(astrid, items, hitItems);
 			// overlap enemigos
 			FlxG.overlap(astrid, enemigos, hitEnemigos);
 			FlxG.overlap(astrid, soldados, hitEnemigos);
+			
 		}
 
 		private function hitItems(p : FlxObject, item : FlxObject) : void {
@@ -243,7 +239,9 @@ package com.powerflasher.SampleApp {
 				add(emitter);
 				emitter.start();
 			}
+			//Vida de astrid
 			p.health-=1;
+			//Barra de vida
 			vida.currentValue+=1;
 			FlxG.score += 1;
 			scoreE.text = FlxG.score.toString() + " / " + totalEnemigos.toString();
