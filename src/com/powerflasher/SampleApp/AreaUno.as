@@ -63,7 +63,7 @@ package com.powerflasher.SampleApp {
 			astrid = new Astrid(150, 530);
 			//bosses
 			robot = new BossRobot(180, 780, astrid);
-			brujo= new Brujo(180, 780, astrid);
+			brujo= new Brujo(300, 780, astrid);
 			mapaPrincipal = new FlxTilemap();
 			agua = new FlxTilemap();
 			// mapa3=new FlxTilemap();
@@ -109,30 +109,13 @@ package com.powerflasher.SampleApp {
 			add(robot);
 			add(brujo);
 			add(agua);
+			
 			weapon = new FlxWeapon("shuriken", astrid, "x", "y");
 			weapon.makeImageBullet(50, Assets.Shuriken);
 			weapon.setBulletDirection(FlxWeapon.BULLET_LEFT, 200);
 			weapon.bounds.width = 2670;
 			weapon.bounds.height = 992;
 			add(weapon.group);
-			
-			
-			
-
-			vida = new FlxBar(620, 3);
-			vida.scrollFactor.x = 0;
-			vida.scrollFactor.y = 0;
-			// vida.setParent(astrid,"vida");
-			vida.createImageBar(Assets.barravida, Assets.barravida1, 0x00AB00, 0xFF00FF00);
-			vida.currentValue = 0;
-			add(vida);
-			
-			vidaBoss = new FlxBar(300, 3,2,100,10,null,"",0,30);
-			vidaBoss.scrollFactor.x = 0;
-			vidaBoss.scrollFactor.y = 0;
-			// vida.setParent(astrid,"vida");
-			vidaBoss.createImageBar(Assets.barravidaboss, Assets.barravidaboss1);
-			vidaBoss.currentValue = 0;
 			
 			// inicializa el grupo de items, del mapa al grupo
 			parseItems();
@@ -152,6 +135,22 @@ package com.powerflasher.SampleApp {
 			add(score);
 			score.text = "0 / " + totalItems.toString();
 
+			vida = new FlxBar(620, 3);
+			vida.scrollFactor.x = 0;
+			vida.scrollFactor.y = 0;
+			// vida.setParent(astrid,"vida");
+			vida.createImageBar(Assets.barravida, Assets.barravida1, 0x00AB00, 0xFF00FF00);
+			vida.currentValue = 0;
+			add(vida);
+			
+			vidaBoss = new FlxBar(300, 3,2,100,10,null,"",0,30);
+			vidaBoss.scrollFactor.x = 0;
+			vidaBoss.scrollFactor.y = 0;
+			// vida.setParent(astrid,"vida");
+			vidaBoss.createImageBar(Assets.barravidaboss, Assets.barravidaboss1);
+			vidaBoss.currentValue = 0;
+			
+		
 			// de la camara
 			FlxG.camera.setBounds(0, 0, 2670, 992, false);
 			FlxG.worldBounds = new FlxRect(0, 0, 2670, 992);
@@ -236,6 +235,7 @@ package com.powerflasher.SampleApp {
 			FlxG.collide(soldados, mapaPrincipal);
 			FlxG.collide(soldados, mapa4);
 			FlxG.collide(robot, mapaPrincipal);
+			FlxG.collide(brujo, mapaPrincipal);
 			FlxG.overlap(astrid, items, hitItems);
 			// overlap enemigos
 			FlxG.overlap(astrid, enemigos, hitEnemigos);
