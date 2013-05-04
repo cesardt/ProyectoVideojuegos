@@ -265,12 +265,14 @@ package com.powerflasher.SampleApp {
 		}
 
 		private function hitBullet(p : FlxObject, enemigo : FlxObject) : void {
-			// trace("colapse");
+			p.kill();
 			if(enemigo==robot){
-				trace("bajarVidaRobot");
+				enemigo.health-=2;
+				if(enemigo.health==0){
+					enemigo.kill;
+				}
 			}
 			else{
-				p.kill();
 				enemigo.kill();
 				FlxG.score += 1;
 				scoreE.text = FlxG.score.toString() + " / " + totalEnemigos.toString();
