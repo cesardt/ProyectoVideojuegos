@@ -123,7 +123,7 @@ package com.powerflasher.SampleApp {
 			parseItems();
 			// inicializa el grupo de enemigos, del mapa al grupo
 			parseEnemigos();
-			parseSoldados();
+			//parseSoldados();
 			// agrega items y el score,  conteo de enemigos
 			add(enemigos);
 			add(scoreE);
@@ -213,6 +213,7 @@ package com.powerflasher.SampleApp {
 			if(vida.currentValue==100){
 				astrid.kill();
 			}
+			robot.acceleration.y=600;
 			super.update();
 			FlxG.collide(astrid, mapaPrincipal);
 			FlxG.collide(astrid, mapa4);
