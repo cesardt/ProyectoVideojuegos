@@ -15,7 +15,7 @@ package com.powerflasher.SampleApp {
 			health = 30;
 			acceleration.y = 600;
 			maxVelocity.x = 100;
-            maxVelocity.y = 0;
+            maxVelocity.y = 100;
 			loadGraphic(Assets.robotSpriteSheet, true, true, 49, 61, true);
 			addAnimation("idle",[0], 0,false);
 			addAnimation("caminar",[0,1,2], 15, false);
