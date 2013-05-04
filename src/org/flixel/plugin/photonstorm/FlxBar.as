@@ -121,7 +121,7 @@ package org.flixel.plugin.photonstorm
 		 * @param	max			The maximum value the bar can reach. I.e. for a progress bar this would typically be 100.
 		 * @param	border		Include a 1px border around the bar? (if true it adds +2 to width and height to accommodate it)
 		 */
-		public function FlxBar(x:int, y:int, direction:uint = FILL_HORIZONTAL_INSIDE_OUT, width:int = 100, height:int = 10, parentRef:* = null, variable:String = "", min:Number = 0, max:Number = 100, border:Boolean = false):void
+		public function FlxBar(x:int, y:int, direction:uint = FILL_RIGHT_TO_LEFT, width:int = 100, height:int = 10, parentRef:* = null, variable:String = "", min:Number = 0, max:Number = 100, border:Boolean = false):void
 		{
 			super(x, y);
 			

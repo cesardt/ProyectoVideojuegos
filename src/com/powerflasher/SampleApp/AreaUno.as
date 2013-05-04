@@ -107,10 +107,12 @@ package com.powerflasher.SampleApp {
 			weapon.bounds.height = 992;
 			add(weapon.group);
 
-			vida = new FlxBar(660, 3, 1, 120, 20);
+			vida = new FlxBar(620, 3);
 			vida.scrollFactor.x = 0;
 			vida.scrollFactor.y = 0;
+			//vida.setParent(astrid,"vida");
 			vida.createImageBar(Assets.barravida, Assets.barravida1,0x00AB00,0xFF00FF00);
+			vida.currentValue=0;
 			add(vida);
 			
 
@@ -186,7 +188,7 @@ package com.powerflasher.SampleApp {
 		private function parseSoldados() : void {
 			var soldadoMap : FlxTilemap = new FlxTilemap();
 
-			soldadoMap.loadMap(new Assets.soldados(), Assets.enemigo, 24, 36);
+			soldadoMap.loadMap(new Assets.soldados(), Assets.soldado, 24, 36);
 
 			soldados = new FlxGroup();
 
@@ -209,6 +211,10 @@ package com.powerflasher.SampleApp {
 			if (FlxG.keys.justPressed("UP") && FlxG.collide(astrid, puerta)) {
 				astrid.lado = "izq";
 				FlxG.switchState(new AreaDos());
+			}
+			
+			if(vida.killOnEmpty){
+				astrid.kill();
 			}
 			super.update();
 			FlxG.collide(astrid, mapaPrincipal);
@@ -237,7 +243,8 @@ package com.powerflasher.SampleApp {
 				add(emitter);
 				emitter.start();
 			}
-			p.kill();
+			p.health-=1;
+			vida.currentValue+=1;
 			FlxG.score += 1;
 			scoreE.text = FlxG.score.toString() + " / " + totalEnemigos.toString();
 		}
