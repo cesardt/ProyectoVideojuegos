@@ -130,7 +130,7 @@ package com.powerflasher.SampleApp {
 			// inicializa el grupo de enemigos, del mapa al grupo
 			parseEnemigos();
 			// agrega items y el score,  conteo de enemigos
-			add(enemigos);
+			//add(enemigos);
 			add(scoreE);
 			scoreE.text = "0 / " + totalEnemigos.toString();
 			add(soldados);
@@ -155,7 +155,7 @@ package com.powerflasher.SampleApp {
 					if (itemsMap.getTile(tx, ty) == 1) {
 						items.add(new Items(tx, ty));
 						totalItems++;
-						trace(totalItems);
+						//trace(totalItems);
 					}
 				}
 			}
@@ -174,7 +174,7 @@ package com.powerflasher.SampleApp {
 					if (enemigoMap.getTile(tx, ty) == 3) {
 						enemigos.add(new Murcielago(tx, ty, astrid));
 						totalEnemigos++;
-						trace(totalEnemigos);
+						//trace(totalEnemigos);
 					}
 				}
 			}
@@ -189,8 +189,8 @@ package com.powerflasher.SampleApp {
 
 			for (var ty : int = 0; ty < soldadoMap.heightInTiles; ty++) {
 				for (var tx : int = 0; tx < soldadoMap.widthInTiles; tx++) {
-					if (soldadoMap.getTile(tx, ty) == 3) {
-						soldados.add(new Murcielago(tx, ty, astrid));
+					if (soldadoMap.getTile(tx, ty) == 1) {
+						soldados.add(new soldado(tx, ty, astrid));
 						totalSoldados++;
 						trace(totalSoldados);
 					}
@@ -269,10 +269,11 @@ package com.powerflasher.SampleApp {
 
 		private function hitEnemigos(p : FlxObject, enemigo : FlxObject) : void {
 			// trace("colapse");
-			p.kill();
+			enemigo.kill();
 			FlxG.score += 1;
 			scoreE.text = FlxG.score.toString() + " / " + totalEnemigos.toString();
 		}
+		
 		private function hitBullet(p : FlxObject, enemigo : FlxObject) : void {
 			// trace("colapse");
 			p.kill();
