@@ -124,5 +124,7 @@ package org {
 		public static var barravida : Class;
 		[Embed(source = "Astrid/barra_vida_prueba1.png")]
 		public static var barravida1 : Class;
+		[Embed(source = "Astrid/barra_vida_boss.png")]
+		public static var barravidaboss : Class;
 	}
 }

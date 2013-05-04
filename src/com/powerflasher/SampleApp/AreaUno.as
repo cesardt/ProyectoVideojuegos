@@ -47,6 +47,7 @@ package com.powerflasher.SampleApp {
 		// public var enemies : FlxGroup;
 		private var weapon : FlxWeapon;
 		private var vida : FlxBar;
+		private var vidaBoss : FlxBar;
 
 		public function AreaUno() {
 			super();
@@ -109,6 +110,9 @@ package com.powerflasher.SampleApp {
 			weapon.bounds.width = 2670;
 			weapon.bounds.height = 992;
 			add(weapon.group);
+			
+			
+			
 
 			vida = new FlxBar(620, 3);
 			vida.scrollFactor.x = 0;
@@ -117,7 +121,14 @@ package com.powerflasher.SampleApp {
 			vida.createImageBar(Assets.barravida, Assets.barravida1, 0x00AB00, 0xFF00FF00);
 			vida.currentValue = 0;
 			add(vida);
-
+			
+			vidaBoss = new FlxBar(300, 3,2,100,10,null,"",0,30);
+			vidaBoss.scrollFactor.x = 0;
+			vidaBoss.scrollFactor.y = 0;
+			// vida.setParent(astrid,"vida");
+			vidaBoss.createImageBar(Assets.barravidaboss, Assets.barravida1);
+			vidaBoss.currentValue = 0;
+			
 			// inicializa el grupo de items, del mapa al grupo
 			parseItems();
 			// inicializa el grupo de enemigos, del mapa al grupo
@@ -266,10 +277,15 @@ package com.powerflasher.SampleApp {
 
 		private function hitBullet(p : FlxObject, enemigo : FlxObject) : void {
 			p.kill();
+			trace(robot.health);
 			if(enemigo==robot){
+				add(vidaBoss);
 				enemigo.health-=2;
+				// Barra de vida
+				vidaBoss.currentValue += 2;
+				
 				if(enemigo.health==0){
-					enemigo.kill;
+					enemigo.kill();
 				}
 			}
 			else{
