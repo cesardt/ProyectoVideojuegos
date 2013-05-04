@@ -276,6 +276,7 @@ package com.powerflasher.SampleApp {
 			FlxG.overlap(astrid, soldados, hitEnemigos);
 			//overlap bala enemigo
 			FlxG.overlap(weapon.group, enemigos, hitBullet);
+			FlxG.overlap(weapon.group, soldados, hitBullet);
 		}
 
 		private function hitItems(p : FlxObject, item : FlxObject) : void {
@@ -286,7 +287,6 @@ package com.powerflasher.SampleApp {
 		}
 		private function hitEnemigos(p : FlxObject, enemigo : FlxObject) : void {
 			// trace("colapse");
-			enemigo.kill();
 			//Vida de astrid
 			p.health-=1;
 			//Barra de vida

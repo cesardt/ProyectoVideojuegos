@@ -210,6 +210,9 @@ private function parseItems() : void {
 			// overlap enemigos
 			FlxG.overlap(astrid, enemigos, hitEnemigos);
 			FlxG.overlap(astrid, soldados, hitEnemigos);
+			//overlap bala enemigo
+			FlxG.overlap(weapon.group, enemigos, hitBullet);
+			FlxG.overlap(weapon.group, soldados, hitBullet);
 		}
 		private function hitItems(p : FlxObject, item : FlxObject) : void {
 			// trace("colapse");
