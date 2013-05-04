@@ -26,7 +26,7 @@ package org {
 		[Embed(source = "Area1/Bat.png")]
 		public static var batSpriteSheet1 : Class;
 		
-		[Embed(source = "enemigos/soldado.png")]
+		[Embed(source = "enemigos/soldadoprueba.png")]
 		public static var soldado: Class;
 		
 		[Embed(source = "Area1/mapCSV_Group2_soldado.csv" , mimeType="application/octet-stream")]
