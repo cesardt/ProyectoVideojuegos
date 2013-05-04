@@ -16,7 +16,7 @@ package com.powerflasher.SampleApp {
 			acceleration.y = 600;
 			maxVelocity.x = 100;
             maxVelocity.y = 100;
-			loadGraphic(Assets.brujo, true, true, 60, 60, true);
+			loadGraphic(Assets.brujo, true, true, 33, 43, true);
 			addAnimation("idle",[0], 0,false);
 			addAnimation("caminar",[0,1,2], 15, false);
 			facing = LEFT;

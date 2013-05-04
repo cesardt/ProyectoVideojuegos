@@ -23,8 +23,9 @@ package com.powerflasher.SampleApp {
 	public class AreaUno extends FlxState {
 		private var texto : FlxText;
 		private var astrid : Astrid;
-		// boss robot
+		// bosses
 		private var robot : BossRobot;
+		private var brujo: Brujo;
 		private var mapaPrincipal : FlxTilemap;
 		private var agua : FlxTilemap;
 		private var barras : FlxTilemap;
@@ -48,6 +49,7 @@ package com.powerflasher.SampleApp {
 		private var weapon : FlxWeapon;
 		private var vida : FlxBar;
 		private var vidaBoss : FlxBar;
+		
 
 		public function AreaUno() {
 			super();
@@ -59,7 +61,9 @@ package com.powerflasher.SampleApp {
 			add(s);
 
 			astrid = new Astrid(150, 530);
+			//bosses
 			robot = new BossRobot(180, 780, astrid);
+			brujo= new Brujo(180, 780, astrid);
 			mapaPrincipal = new FlxTilemap();
 			agua = new FlxTilemap();
 			// mapa3=new FlxTilemap();
@@ -103,6 +107,7 @@ package com.powerflasher.SampleApp {
 			add(mapaPrincipal);
 			add(astrid);
 			add(robot);
+			add(brujo);
 			add(agua);
 			weapon = new FlxWeapon("shuriken", astrid, "x", "y");
 			weapon.makeImageBullet(50, Assets.Shuriken);
