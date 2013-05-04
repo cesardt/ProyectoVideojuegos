@@ -213,7 +213,7 @@ package com.powerflasher.SampleApp {
 				FlxG.switchState(new AreaDos());
 			}
 			
-			if(vida.killOnEmpty){
+			if(vida.currentValue==100){
 				astrid.kill();
 			}
 			super.update();
