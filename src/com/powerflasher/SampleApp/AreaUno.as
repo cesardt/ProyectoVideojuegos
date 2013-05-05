@@ -256,11 +256,11 @@ package com.powerflasher.SampleApp {
 		override public function update() : void {
 			trace(astrid.x);
 			trace(astrid.y);
-			if (FlxG.keys.justPressed("Z") && astrid.facing==0) {
+			if (FlxG.keys.justPressed("Z") && astrid.facing==1) {
 				weapon.setBulletDirection(FlxWeapon.BULLET_LEFT, 200);
 				weapon.fire();
 			}
-			if (FlxG.keys.justPressed("Z") && astrid.facing==1) {
+			if (FlxG.keys.justPressed("Z") && astrid.facing==0) {
 				weapon.setBulletDirection(FlxWeapon.BULLET_RIGHT, 200);
 				weapon.fire();
 			}
