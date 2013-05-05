@@ -28,6 +28,7 @@ package com.powerflasher.SampleApp {
 		private var plataformas : FlxTilemap;
 		private var puerta : FlxTilemap;
 		private var atras : FlxTilemap;
+		private var invisible: FlxTilemap;
 		private var doubleJump : Boolean;
 		// varibles para recoger items
 		public var items : FlxGroup;
@@ -66,7 +67,7 @@ package com.powerflasher.SampleApp {
 			picos = new FlxTilemap();
 			puerta = new FlxTilemap();
 			atras = new FlxTilemap();
-			
+			invisible= new FlxTilemap();
 
 			fondos.loadMap(new Assets.fondosCSV(), Assets.tilesfondos, 32, 32);
 			pared.loadMap(new Assets.paredCSV(), Assets.tilespared, 32, 32);
@@ -77,7 +78,8 @@ package com.powerflasher.SampleApp {
 			piso.loadMap(new Assets.pisoCSV2(), Assets.tilespiso, 32, 32);
 			plataformas.loadMap(new Assets.plataformasCSV(), Assets.tilesplataforma, 32, 32);
 			atras.loadMap(new Assets.atrasCSV(), Assets.tilesatras, 32, 32);
-
+			invisible.loadMap(new Assets.invisble2(), Assets.tilespuerta, 32, 32);
+			
 			plataformas.setTileProperties(1, FlxObject.UP);
 			plataformas.setTileProperties(2, FlxObject.UP);
 			plataformas.setTileProperties(3, FlxObject.UP);
@@ -87,6 +89,8 @@ package com.powerflasher.SampleApp {
 			plataformas.setTileProperties(7, FlxObject.UP);
 			plataformas.setTileProperties(8, FlxObject.UP);
 			plataformas.setTileProperties(9, FlxObject.UP);
+			
+			
 
 			// atributos del score items
 			score = new FlxText(0, 0, 100);
@@ -117,6 +121,7 @@ package com.powerflasher.SampleApp {
 			add(enredaderas);
 			add(picos);
 			add(puerta);
+			add(invisible);
 			add(frente);
 			add(astrid);
 			add(boss);
@@ -208,7 +213,7 @@ package com.powerflasher.SampleApp {
 					if (soldadoMap.getTile(tx, ty) == 1) {
 						soldados.add(new soldado(tx, ty, astrid));
 						totalSoldados++;
-						trace(soldados.length);
+						//trace(soldados.length);
 						
 					}
 				}
@@ -271,12 +276,13 @@ package com.powerflasher.SampleApp {
 				astrid.kill();
 			}
 			super.update();
-			trace(astrid.x+" , "+astrid.y);
+			//trace(astrid.x+" , "+astrid.y);
 			FlxG.collide(astrid, piso);
 			FlxG.collide(astrid, plataformas);
 			FlxG.collide(soldados,piso);
 			FlxG.collide(soldados,plataformas);
 			FlxG.collide(soldados, enredaderas);
+			FlxG.collide(soldados, invisible);
 			FlxG.collide(boss,piso);
 			FlxG.overlap(astrid, items, hitItems);
 			// overlap enemigos
