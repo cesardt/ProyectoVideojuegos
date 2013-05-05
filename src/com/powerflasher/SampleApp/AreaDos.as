@@ -16,9 +16,11 @@ package com.powerflasher.SampleApp {
 	import org.flixel.FlxState;
 
 	public class AreaDos extends FlxState {
+		//astrid
 		private var astrid : Astrid;
-		// bosses
+		// boss
 		private var boss :BossArea2;
+		//mapa
 		private var piso : FlxTilemap;
 		private var picos : FlxTilemap;
 		private var frente : FlxTilemap;
@@ -28,7 +30,12 @@ package com.powerflasher.SampleApp {
 		private var plataformas : FlxTilemap;
 		private var puerta : FlxTilemap;
 		private var atras : FlxTilemap;
+<<<<<<< HEAD
 		//private var invisible: FlxTilemap;
+=======
+		private var invisible: FlxTilemap;
+		//propiedad
+>>>>>>> cambios astrid
 		private var doubleJump : Boolean;
 		// varibles para recoger items
 		public var items : FlxGroup;
@@ -38,12 +45,12 @@ package com.powerflasher.SampleApp {
 		public var enemigos : FlxGroup;
 		public var totalEnemigos : int;
 		private var scoreE : FlxText;
-		
 		public var soldados : FlxGroup;
 		public var totalSoldados : int;
 		private var scoreS : FlxText;
-		
+		//arma
 		private var weapon : FlxWeapon;
+		//vida
 		private var vida : FlxBar;
 
 		public function AreaDos() {
@@ -54,12 +61,21 @@ package com.powerflasher.SampleApp {
 			var s : FlxSprite = new FlxSprite();
 			s.makeGraphic(FlxG.width, FlxG.height, 0x9345Da);
 			add(s);
+<<<<<<< HEAD
 			astrid = new Astrid(2900,200);
+=======
+			//crear a astrid
+			astrid = new Astrid(3100, 70);
+>>>>>>> cambios astrid
 			//bosses
 
 			boss = new BossArea2(3100,1450, astrid);
+<<<<<<< HEAD
 
 			
+=======
+			//crear mapa
+>>>>>>> cambios astrid
 			piso = new FlxTilemap();
 			pared = new FlxTilemap();
 			fondos = new FlxTilemap();
@@ -69,8 +85,14 @@ package com.powerflasher.SampleApp {
 			picos = new FlxTilemap();
 			puerta = new FlxTilemap();
 			atras = new FlxTilemap();
+<<<<<<< HEAD
 			//invisible= new FlxTilemap();
 
+=======
+			invisible= new FlxTilemap();
+			invisible.visible=false;
+			//cargar mapa
+>>>>>>> cambios astrid
 			fondos.loadMap(new Assets.fondosCSV(), Assets.tilesfondos, 32, 32);
 			pared.loadMap(new Assets.paredCSV(), Assets.tilespared, 32, 32);
 			frente.loadMap(new Assets.frenteCSV(), Assets.tilesfrente, 32, 32);
@@ -80,8 +102,13 @@ package com.powerflasher.SampleApp {
 			piso.loadMap(new Assets.pisoCSV2(), Assets.tilespiso, 32, 32);
 			plataformas.loadMap(new Assets.plataformasCSV(), Assets.tilesplataforma, 32, 32);
 			atras.loadMap(new Assets.atrasCSV(), Assets.tilesatras, 32, 32);
+<<<<<<< HEAD
 			//invisible.loadMap(new Assets.invisble2(), Assets.tilespuerta, 32, 32);
 			
+=======
+			invisible.loadMap(new Assets.invisble2(), Assets.tilespuerta, 32, 32);
+			//Propiedades de las plataformas
+>>>>>>> cambios astrid
 			plataformas.setTileProperties(1, FlxObject.UP);
 			plataformas.setTileProperties(2, FlxObject.UP);
 			plataformas.setTileProperties(3, FlxObject.UP);
@@ -91,8 +118,6 @@ package com.powerflasher.SampleApp {
 			plataformas.setTileProperties(7, FlxObject.UP);
 			plataformas.setTileProperties(8, FlxObject.UP);
 			plataformas.setTileProperties(9, FlxObject.UP);
-			
-			
 
 			// atributos del score items
 			score = new FlxText(0, 0, 100);
@@ -114,7 +139,7 @@ package com.powerflasher.SampleApp {
 			scoreS.shadow = 0xff000000;
 			scoreS.scrollFactor.x = 0;
 			scoreS.scrollFactor.y = 0;
-
+			//Añadir el mapa, boss y astrid
 			add(atras);
 			add(piso);
 			add(pared);
@@ -127,17 +152,19 @@ package com.powerflasher.SampleApp {
 			add(frente);
 			add(astrid);
 			add(boss);
+			
+			//Añadirle arma a astrid
 			weapon = new FlxWeapon("shuriken", astrid, "x", "y");
-			weapon.makeImageBullet(50, Assets.Shuriken, 5,0,true,10,1);
-			weapon.setBulletDirection(FlxWeapon.BULLET_LEFT,100);
+			weapon.makeImageBullet(200, Assets.Shuriken, 0,15,true,10,1);
+			weapon.setBulletDirection(FlxWeapon.BULLET_LEFT,200);
 			weapon.bounds.width=3200;
 			weapon.bounds.height=1600;
 			add(weapon.group);
 			
-			vida = new FlxBar(620, 3);
+			//Añadirle barra de vida a astrid
+			vida = new FlxBar(610, 3);
 			vida.scrollFactor.x = 0;
 			vida.scrollFactor.y = 0;
-			//vida.setParent(astrid,"vida");
 			vida.createImageBar(Assets.barravida, Assets.barravida1,0x00AB00,0xFF00FF00);
 			vida.currentValue=0;
 			add(vida);
@@ -159,7 +186,8 @@ package com.powerflasher.SampleApp {
 			add(soldados);
 			add(scoreS);
 			scoreS.text="0 / " + totalSoldados.toString();
-			// de la camara
+			
+			// Propiedades de la camara
 			FlxG.camera.setBounds(0, 0, 3200, 1600, false);
 			FlxG.worldBounds = new FlxRect(0, 0, 3200, 1600);
 			FlxG.camera.follow(astrid);
@@ -223,8 +251,9 @@ package com.powerflasher.SampleApp {
 		}
 
 		override public function update() : void {
-			if (FlxG.mouse.justPressed()) {
+			if (FlxG.keys.justPressed("Z")){
 				weapon.fire();
+				astrid.play("ataque");
 			}
 			astrid.acceleration.y = 450;
 
@@ -234,47 +263,33 @@ package com.powerflasher.SampleApp {
 
 				if (FlxG.keys.pressed("DOWN") && !astrid.isTouching(FlxObject.FLOOR)) {
 					astrid.play("enredadera");
-					astrid.lado = "ab";
 					astrid.velocity.y = 50;
 					astrid.acceleration.y += astrid.drag.y;
 				}
 				if (FlxG.keys.pressed("UP")) {
 					astrid.play("enredadera");
-					astrid.lado = "ar";
 					astrid.velocity.y = -50;
 					astrid.acceleration.y -= astrid.drag.y;
 				}
 				if (FlxG.keys.pressed("SPACE")) {
 					astrid.velocity.y = -astrid.maxVelocity.y;
 					doubleJump = true;
-
-					if (astrid.lado == "der") {
-						astrid.play("brincader");
-					}
-					if (astrid.lado == "izq") {
-						astrid.play("brincaizq");
-					}
+					astrid.play("brincar");
 				}
 			}
-			if (FlxG.keys.justPressed("UP") && FlxG.collide(astrid, puerta)) {
-				astrid.lado = "izq";
+			if (FlxG.keys.justPressed("UP") && FlxG.collide(puerta,astrid)) {
 				FlxG.switchState(new AreaTres());
 			}
-			if (FlxG.collide(astrid, pared) && FlxG.keys.pressed("Z")) {
+			/*if (FlxG.collide(astrid, pared) && FlxG.keys.pressed("Z")) {
 				astrid.velocity.y = -astrid.maxVelocity.y;
 				if (astrid.velocity.y != 0 ) {
-					if (astrid.lado == "izq") {
-						astrid.play("caminader");
-					}
-					if (astrid.lado == "der") {
-						astrid.play("caminaizq");
-					}
+					astrid.play("caminar");
 				}
-			}
+			}*/
 			if (FlxG.collide(astrid, picos)) {
-				astrid.kill();
+				astrid.health-=2;
 			}
-			if(vida.currentValue==100){
+			if(astrid.health==0){
 				astrid.kill();
 			}
 			super.update();
@@ -286,6 +301,7 @@ package com.powerflasher.SampleApp {
 			FlxG.collide(soldados, enredaderas);
 			//FlxG.collide(soldados, invisible);
 			FlxG.collide(boss,piso);
+			//overlap items
 			FlxG.overlap(astrid, items, hitItems);
 			// overlap enemigos
 			FlxG.overlap(astrid, enemigos, hitEnemigos);
@@ -296,6 +312,7 @@ package com.powerflasher.SampleApp {
 			FlxG.overlap(weapon.group, enemigos, hitBullet);
 			FlxG.overlap(weapon.group, soldados, hitBullet);
 			FlxG.overlap(weapon.group, boss, hitBullet);
+			
 		}
 
 		private function hitItems(p : FlxObject, item : FlxObject) : void {

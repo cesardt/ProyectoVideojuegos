@@ -214,12 +214,7 @@ private function parseItems() : void {
 				weapon.fire();
 			}
 			if (astrid.overlaps(agua)) {
-				if (astrid.lado == "der") {
-					astrid.play("brincader");
-				}
-				else if (astrid.lado == "izq") {
-					astrid.play("brincaizq");
-				}
+				astrid.play("brincar");
 			}
 			if(vida.currentValue==100){
 				astrid.kill();

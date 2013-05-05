@@ -8,6 +8,10 @@
 	import org.flixel.plugin.photonstorm.FX.*;
 
  	public class Astrid extends FlxSprite {
+		public static const LEFT:uint = 0;
+		public static const RIGHT:uint = 1;
+		public static const UP:uint = 2;
+		public static const DOWN:uint = 3;
 		protected var jump : int;
 		protected var _restart:Number;
 		protected var _bullets:FlxGroup;
@@ -18,21 +22,22 @@
 			super(x, y);
 			loadGraphic(Assets.jugadorSpriteSheet, true, true, 24, 36, true);
 			//animaciones
-			addAnimation("derecha", [0, 1, 2], 15, false);
+			addAnimation("caminar", [0, 1, 2], 15, false);
 			addAnimation("izquierda", [3, 4, 5], 15, false);
-			addAnimation("brincader", [9], 10, true);
+			addAnimation("brincar", [9], 10, true);
 			addAnimation("brincaizq", [6], 10, true);
-			addAnimation("nobrincaizq", [7], 5, true);
-			addAnimation("nobrincader", [8], 5, true);
+			addAnimation("nobrincarizq", [7], 5, true);
+			addAnimation("nobrincar", [8], 5, true);
 			addAnimation("ataqueizq", [10, 11], 4, false);
-			addAnimation("ataqueder", [12, 13], 4, false);
+			addAnimation("ataque", [12, 13], 4, false);
 			addAnimation("enredadera", [14, 15], 4, false);
 			if(x>500){
-				play("izquierda");
+				_facing=0;
 			}
 			else{
-				play("derecha");
+				_facing=1;
 			}
+			_facing=1;
 			frame = 3;
 
 			//Propiedades astrid
@@ -46,7 +51,6 @@
 			maxVelocity.y = jump;
 			acceleration.y = 450;
 			health=100;
-			facing=RIGHT;
 			
 		}
 		override public function destroy():void
@@ -67,56 +71,54 @@
 			if(isTouching(FlxObject.FLOOR)){
 				doubleJump = true;
 			}
-			
 				
 			acceleration.x = 0;
 			if (FlxG.keys.justPressed("SPACE") && isTouching(FlxObject.FLOOR)) {
 				velocity.y = -maxVelocity.y;
 				if (velocity.y != 0 ) {
-					play("brincader");
+					play("brincar");
 					
 				}
 			}
-			if (FlxG.keys.justPressed("X")) {
-				play("ataqueder");
-			}
+			/*if (FlxG.keys.justPressed("X")) {
+				play("ataque");
+			}*/
 			
-			if (FlxG.keys.pressed("RIGHT") && FlxG.keys.pressed("Z")) {
-				// trace (astrid.drag.x*10);
+			/*if (FlxG.keys.pressed("RIGHT") && FlxG.keys.pressed("Z")) {
 				runV = 200;
 				acceleration.x += drag.x;
 				trace(acceleration.x);
-				facing=RIGHT;
+				_facing=1;
 				if (velocity.y == 0 && !FlxG.keys.pressed("X")) {
 					play("derecha");
 				}
 			}
 			if (FlxG.keys.pressed("LEFT") && FlxG.keys.pressed("Z")) {
 				acceleration.x -= drag.x * 1000;
-				facing=LEFT;
+				_facing=0;
 				if (velocity.y == 0 && !FlxG.keys.pressed("X")) {
 					play("derecha");
 				}
-			}
+			}*/
 			if (FlxG.keys.pressed("RIGHT")) {
-				trace(acceleration.x);
 				acceleration.x += drag.x;
-				facing=RIGHT;
+				_facing=1;
 				if (velocity.y == 0 && !FlxG.keys.pressed("X")) {
-					play("derecha");
+					play("caminar");
 				}
 			}
 			if (FlxG.keys.pressed("LEFT")) {
 				acceleration.x -= drag.x;
-				facing=LEFT;
+				_facing=0;
 				if (velocity.y == 0 && !FlxG.keys.pressed("X")) {
-					play("derecha");
+					play("caminar");
 				}
 			}
 			if (FlxG.keys.pressed("DOWN")) {
 			}
 			if (FlxG.keys.justPressed("SPACE") && FlxG.score > 0 && !isTouching(FlxObject.FLOOR) && doubleJump == true) {
 				velocity.y = -maxVelocity.y;
+				play("brincar");
 				doubleJump = false;
 			}
 			
@@ -124,41 +126,41 @@
 			if(!isTouching(FlxObject.FLOOR) && isTouching(FlxObject.WALL)){
 				velocity.y =  velocity.y*.9;
 				if(FlxG.keys.justPressed("SPACE")){
-					if(facing==RIGHT){
-						facing=LEFT;
+					if(_facing==1){
+						_facing=0;
 						velocity.y = -maxVelocity.y*25;
 						velocity.x = -maxVelocity.x*40;
-						play("brincaizq");
+						play("brincar");
 					
 					}
-					else{
-						facing=RIGHT;
+					else if(_facing==0){
+						_facing=1;
 						velocity.y = -maxVelocity.y*25;
 						velocity.x = maxVelocity.x*40;
-						play("brincader");
+						play("brincar");
 					}
-					doubleJump = true;
+					//doubleJump = true;
 				}
 			}
 			
 			if (FlxG.keys.pressed("C")) {
 				if (FlxG.keys.pressed("RIGHT")) {
 					this.x+=2;
-					facing=RIGHT;
+					_facing=1;
 					if (velocity.y == 0 && !FlxG.keys.pressed("X")) {
-						play("derecha");
+						play("caminar");
 					}
 				}
 				if (FlxG.keys.pressed("LEFT")) {
 					this.x-=2;
-					facing=LEFT;
+					_facing=0;
 					if (velocity.y == 0 && !FlxG.keys.pressed("X")) {
-						play("derecha");
+						play("caminar");
 					}
 				}
 			}
 			if (justTouched(FlxObject.FLOOR)){
-				play("nobrincader");
+				play("nobrincar");
 			}
 
 
