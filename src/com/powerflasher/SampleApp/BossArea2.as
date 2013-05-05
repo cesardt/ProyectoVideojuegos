@@ -6,7 +6,7 @@ package com.powerflasher.SampleApp {
 	public class BossArea2 extends FlxSprite{
 		
 		private var _player:FlxSprite;  
-		private var _move_speed:int = 100;
+		private var _move_speed:int = 25;
 			
 		public function BossArea2(X:Number,Y:Number,ThePlayer:FlxSprite):void{
 			

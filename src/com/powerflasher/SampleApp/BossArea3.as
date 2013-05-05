@@ -1,4 +1,5 @@
 package com.powerflasher.SampleApp {
+	import org.flixel.FlxGroup;
 	import org.flixel.plugin.photonstorm.FlxWeapon;
 	import org.Assets;
 	import org.flixel.FlxG;
@@ -7,9 +8,8 @@ package com.powerflasher.SampleApp {
 	public class BossArea3 extends FlxSprite{
 		
 		private var _player:FlxSprite;  
-		private var _move_speed:int = 100;
-		private var weapon : FlxWeapon;
-		private var contador:int=0;	
+		private var _move_speed:int = 50;
+		protected var _bullets:FlxGroup;
 		public function BossArea3(X:Number,Y:Number,ThePlayer:FlxSprite):void{
 			
 			super(X,Y, Assets.brujo);
@@ -22,32 +22,20 @@ package com.powerflasher.SampleApp {
 			addAnimation("idle",[0], 0,false);
 			addAnimation("caminar",[0,1,2], 15, false);
 						facing = LEFT;
-			weapon = new FlxWeapon("shuriken", this, "x", "y");
-			weapon.makeImageBullet(50, Assets.Shuriken, 5,0,true,10,1);
-			weapon.setBulletDirection(FlxWeapon.BULLET_LEFT,100);
-			weapon.bounds.width=3200;
-			weapon.bounds.height=1600;
-			weapon.group;
-						
+									
 			
+		}
+		override public function destroy():void
+		{
+			super.destroy();
+			_bullets = null;
 		}
 		
 		  override public function update():void{
 			
 				var dify:int = y - _player.y;
 				var difx:int = x - _player.x;
-				trace(contador);
-				if(contador==500){
-					trace("dispara");
-					weapon.fire();
-					weapon.fire();
-					weapon.fire();
-					weapon.fire();
-					weapon.fire();
-					contador=0;
-				}else{
-					contador++;
-				}
+				
 			if(difx<200 && difx>-200){
 				if(difx<100 && difx>0){
 					facing = LEFT;

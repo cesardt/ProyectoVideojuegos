@@ -25,6 +25,8 @@ package com.powerflasher.SampleApp {
 		private var piso : FlxTilemap;
 		private var doubleJump : Boolean;
 		private var weapon : FlxWeapon;
+		private var weaponB : FlxWeapon;
+		private var contador:int=0;	
 		private var invisible: FlxTilemap;
 		
 			private var vida : FlxBar;
@@ -110,6 +112,13 @@ package com.powerflasher.SampleApp {
 			weapon.bounds.width=2592;
 			weapon.bounds.height=4800;
 			add(weapon.group);
+			
+			weaponB = new FlxWeapon("shuriken", boss, "x", "y");
+			weaponB.makeImageBullet(50, Assets.Shuriken, 5,0,true,10,1);
+			//weaponB.setBulletDirection(FlxWeapon.BULLET_LEFT,100);
+			weaponB.bounds.width=3200;
+			weaponB.bounds.height=1600;
+			add(weaponB.group);
 			
 			vida = new FlxBar(620, 3);
 			vida.scrollFactor.x = 0;
@@ -216,6 +225,15 @@ private function parseItems() : void {
 				astrid.kill();
 			}
 			super.update();
+			if(contador==500){
+					trace("dispara");
+					weaponB.fireAtTarget(astrid);
+					weaponB.fireAtTarget(astrid);
+					contador=0;
+			}else{
+					contador++;
+			
+			}
 			//trace(astrid.x, astrid.y);
 			FlxG.collide(astrid, piso);
 			FlxG.collide(boss, piso);
