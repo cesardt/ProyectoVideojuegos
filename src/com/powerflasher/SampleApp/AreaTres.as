@@ -25,6 +25,8 @@ package com.powerflasher.SampleApp {
 		private var piso : FlxTilemap;
 		private var doubleJump : Boolean;
 		private var weapon : FlxWeapon;
+		private var invisible: FlxTilemap;
+		
 			private var vida : FlxBar;
 
 	// varibles para recoger items
@@ -58,12 +60,16 @@ package com.powerflasher.SampleApp {
 			cielo = new FlxTilemap();
 			fondo = new FlxTilemap();
 			plataforma = new FlxTilemap();
+			invisible= new FlxTilemap();
+			
 
 			agua.loadMap(new Assets.aguaCSV(), Assets.tilesa3, 32, 32);
 			piso.loadMap(new Assets.pisoCSV3(), Assets.tilesa3, 32, 32);
 			cielo.loadMap(new Assets.cieloCSV(), Assets.tilessky, 32, 32);
 			fondo.loadMap(new Assets.fondoCSV(), Assets.tilesa3, 32, 32);
 			plataforma.loadMap(new Assets.plataformaCSV(), Assets.tilesa3, 32, 32);
+			invisible.loadMap(new Assets.invisble3(), Assets.tilespuerta, 32, 32);
+
 
 			plataforma.setTileProperties(5, FlxObject.UP);
 			plataforma.setTileProperties(6, FlxObject.UP);
@@ -96,6 +102,8 @@ package com.powerflasher.SampleApp {
 			add(boss);
 			add(agua);
 			add(piso);
+			add(invisible);
+			invisible.visible=false;
 			weapon = new FlxWeapon("shuriken", astrid, "x", "y");
 			weapon.makeImageBullet(50, Assets.Shuriken);
 			weapon.setBulletDirection(FlxWeapon.BULLET_RIGHT, 200);
@@ -211,9 +219,13 @@ private function parseItems() : void {
 			//trace(astrid.x, astrid.y);
 			FlxG.collide(astrid, piso);
 			FlxG.collide(boss, piso);
+			FlxG.collide(boss, invisible);
+			
 			FlxG.collide(astrid, plataforma);
 			FlxG.collide(soldados,piso);
 			FlxG.collide(soldados,plataforma);
+			FlxG.collide(soldados,invisible);
+			
 			FlxG.overlap(astrid, items, hitItems);
 			// overlap enemigos
 			FlxG.overlap(astrid, enemigos, hitEnemigos);
@@ -228,24 +240,44 @@ private function parseItems() : void {
 			FlxG.score += 1;
 			score.text = FlxG.score.toString() + " / " + totalItems.toString();
 		}
-
 		private function hitEnemigos(p : FlxObject, enemigo : FlxObject) : void {
 			// trace("colapse");
-			enemigo.kill();
 			//Vida de astrid
+			if (enemigo == boss) {
+				// Vida de astrid
+				p.health -= 3;
+				// Barra de vida
+				vida.currentValue += 3;
+			} else {
+				// Vida de astrid
+				p.health -= 1;
+				// Barra de vida
+				vida.currentValue += 1;
 			p.health-=1;
 			//Barra de vida
 			vida.currentValue+=1;
 			FlxG.score += 1;
 			scoreE.text = FlxG.score.toString() + " / " + totalEnemigos.toString();
+			}
 		}
 		
 		private function hitBullet(p : FlxObject, enemigo : FlxObject) : void {
-			// trace("colapse");
-			p.kill();
+				p.kill();
+				if(enemigo==boss){
+				//add(vidaBoss);
+				enemigo.health-=2;
+				// Barra de vida
+				//vidaBoss.currentValue += 2;
+				
+				if(enemigo.health==0){
+					enemigo.kill();
+				}
+			}
+			else{
 			enemigo.kill();
 			FlxG.score += 1;
 			scoreE.text = FlxG.score.toString() + " / " + totalEnemigos.toString();
+			}
 		}
 	}
 }

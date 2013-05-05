@@ -120,6 +120,8 @@ package org {
 		public static var plataformaCSV : Class;
 		[Embed(source = "Area3/mapCSV_Group1_PisoPared.csv" , mimeType="application/octet-stream")]
 		public static var pisoCSV3 : Class;
+		[Embed(source = "Area3/mapCSV_Group1_invisible.csv" , mimeType="application/octet-stream")]
+		public static var invisble3: Class;
 		
 		[Embed(source = "Area3/mapCSV_Group1_bats.csv" , mimeType="application/octet-stream")]
 		public static var murcielagos3 : Class;
