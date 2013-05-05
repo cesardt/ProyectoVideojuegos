@@ -30,12 +30,9 @@ package com.powerflasher.SampleApp {
 		private var plataformas : FlxTilemap;
 		private var puerta : FlxTilemap;
 		private var atras : FlxTilemap;
-<<<<<<< HEAD
 		//private var invisible: FlxTilemap;
-=======
 		private var invisible: FlxTilemap;
 		//propiedad
->>>>>>> cambios astrid
 		private var doubleJump : Boolean;
 		// varibles para recoger items
 		public var items : FlxGroup;
@@ -61,21 +58,13 @@ package com.powerflasher.SampleApp {
 			var s : FlxSprite = new FlxSprite();
 			s.makeGraphic(FlxG.width, FlxG.height, 0x9345Da);
 			add(s);
-<<<<<<< HEAD
-			astrid = new Astrid(2900,200);
-=======
 			//crear a astrid
-			astrid = new Astrid(3100, 70);
->>>>>>> cambios astrid
+			astrid = new Astrid(2900,200);
 			//bosses
 
 			boss = new BossArea2(3100,1450, astrid);
-<<<<<<< HEAD
-
 			
-=======
 			//crear mapa
->>>>>>> cambios astrid
 			piso = new FlxTilemap();
 			pared = new FlxTilemap();
 			fondos = new FlxTilemap();
@@ -85,14 +74,12 @@ package com.powerflasher.SampleApp {
 			picos = new FlxTilemap();
 			puerta = new FlxTilemap();
 			atras = new FlxTilemap();
-<<<<<<< HEAD
 			//invisible= new FlxTilemap();
 
-=======
-			invisible= new FlxTilemap();
-			invisible.visible=false;
+			//invisible= new FlxTilemap();
+			//invisible.visible=false;
+			
 			//cargar mapa
->>>>>>> cambios astrid
 			fondos.loadMap(new Assets.fondosCSV(), Assets.tilesfondos, 32, 32);
 			pared.loadMap(new Assets.paredCSV(), Assets.tilespared, 32, 32);
 			frente.loadMap(new Assets.frenteCSV(), Assets.tilesfrente, 32, 32);
@@ -102,13 +89,10 @@ package com.powerflasher.SampleApp {
 			piso.loadMap(new Assets.pisoCSV2(), Assets.tilespiso, 32, 32);
 			plataformas.loadMap(new Assets.plataformasCSV(), Assets.tilesplataforma, 32, 32);
 			atras.loadMap(new Assets.atrasCSV(), Assets.tilesatras, 32, 32);
-<<<<<<< HEAD
 			//invisible.loadMap(new Assets.invisble2(), Assets.tilespuerta, 32, 32);
 			
-=======
-			invisible.loadMap(new Assets.invisble2(), Assets.tilespuerta, 32, 32);
+			
 			//Propiedades de las plataformas
->>>>>>> cambios astrid
 			plataformas.setTileProperties(1, FlxObject.UP);
 			plataformas.setTileProperties(2, FlxObject.UP);
 			plataformas.setTileProperties(3, FlxObject.UP);
