@@ -43,12 +43,15 @@ package org {
 		public static var puertaPNG : Class;
 		[Embed(source = "Area1/mapCSV_Group2_Puerta.csv" , mimeType="application/octet-stream")]
 		public static var mapaCSV5 : Class;
+		
+		
 		[Embed(source = "Area1/robot.png")]
 		public static var robotSpriteSheet : Class;
 		
 		[Embed(source = "enemigos/brujo1.png")]
 		public static var brujo : Class;
 		// Area2
+		
 		[Embed(source = "Area2/picos.png")]
 		public static var tilespicos : Class;
 		[Embed(source = "Area2/puerta.png")]
@@ -89,6 +92,9 @@ package org {
 		public static var paredCSV : Class;
 		[Embed(source = "Area2/mapCSV_Group1_atras.csv" , mimeType="application/octet-stream")]
 		public static var atrasCSV : Class;
+		[Embed(source = "Area2/mapCSV_Group1_invisible.csv" , mimeType="application/octet-stream")]
+		public static var invisble2: Class;
+	
 		// enemigos area2
 		[Embed(source = "Area2/mapCSV_Group1_Bats.csv" , mimeType="application/octet-stream")]
 		public static var mapaBats2 : Class;
