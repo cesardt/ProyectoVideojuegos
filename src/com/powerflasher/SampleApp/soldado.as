@@ -6,10 +6,11 @@ package com.powerflasher.SampleApp {
 	public class soldado extends FlxSprite{
 		
 		private var _player:FlxSprite;  
-		private var _move_speed:int = 10;
+		private var _move_speed:int = 150;
 		private var detected:Boolean;
 		private var maxX:int = 0;
 		private var minX:int = 0;
+		private var cont:int = 0;
 			
 		public function soldado(X:Number,Y:Number,ThePlayer:FlxSprite):void{
 			
@@ -21,8 +22,8 @@ package com.powerflasher.SampleApp {
             maxVelocity.y = 20;
 			detected = false;
 			
-			minX = x - 50;
-			maxX = x + 50;
+			minX = x - 100;
+			maxX = x + 100;
 			
 			loadGraphic(Assets.soldado, true, true, 24, 36, true);
 //			addAnimation("quieto",[1], 0,false);
@@ -45,20 +46,21 @@ package com.powerflasher.SampleApp {
 //				}
 //				detected = true;
 //			}
-			
 				
-			if(isTouching(LEFT)){
-				facing = RIGHT;
-			}
-			if(isTouching(RIGHT)){
-				facing = LEFT;
-			}
-			if(x > maxX){
-				velocity.x -= _move_speed;
-			}
-			if(x < minX){
-				velocity.x += _move_speed;
-			}
+				if(x <= minX){
+					facing = RIGHT;
+				}
+				if(x >= maxX){
+					facing = LEFT;
+				}
+				if(facing == LEFT){
+					velocity.x -= _move_speed;
+					play("caminar");
+				}
+				else{
+					velocity.x += _move_speed;
+					play("caminar");
+				}
 		}
 	}
 }
