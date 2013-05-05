@@ -27,24 +27,35 @@ package com.powerflasher.SampleApp {
 			
 				var dify:int = y - _player.y;
 				var difx:int = x - _player.x;
-				
-				if(isTouching(LEFT)){
+				trace("su x: "+ x);
+				trace("mi x :"+ _player.x)
+			if(difx<20 && difx>-20){
+				if(difx<20 && difx>0){
 					facing = RIGHT;
-				}
-				if(isTouching(RIGHT)){
-					facing = LEFT;
-				}
-				if(facing == LEFT){
 					velocity.x -= _move_speed;
-					play("caminar");
-				}
-				else{
+				}else{
+					facing = LEFT;
+					
 					velocity.x += _move_speed;
-					play("caminar");
+					
 				}
-			
-			
-		  }
+		  	}else{
+					if(isTouching(LEFT)){
+						facing = RIGHT;
+					}
+					if(isTouching(RIGHT)){
+						facing = LEFT;
+					}
+					if(facing == LEFT){
+						velocity.x -= _move_speed;
+						play("caminar");
+					}
+					else{
+						velocity.x += _move_speed;
+						play("caminar");
+					}
+			}
 
+		}
 	}
 }
