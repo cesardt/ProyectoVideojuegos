@@ -14,7 +14,6 @@
 		public static const DOWN:uint = 3;
 		protected var jump : int;
 		protected var _restart:Number;
-		protected var _bullets:FlxGroup;
 		public var runV : uint = 80;
 		private var doubleJump : Boolean;
 
@@ -23,12 +22,8 @@
 			loadGraphic(Assets.jugadorSpriteSheet, true, true, 24, 36, true);
 			//animaciones
 			addAnimation("caminar", [0, 1, 2], 15, false);
-			addAnimation("izquierda", [3, 4, 5], 15, false);
 			addAnimation("brincar", [9], 10, true);
-			addAnimation("brincaizq", [6], 10, true);
-			addAnimation("nobrincarizq", [7], 5, true);
 			addAnimation("nobrincar", [8], 5, true);
-			addAnimation("ataqueizq", [10, 11], 4, false);
 			addAnimation("ataque", [12, 13], 4, false);
 			addAnimation("enredadera", [14, 15], 4, false);
 			_facing=RIGHT;
@@ -46,11 +41,6 @@
 			acceleration.y = 450;
 			health=100;
 			
-		}
-		override public function destroy():void
-		{
-			super.destroy();
-			_bullets = null;
 		}
 
 		override public function update() : void {

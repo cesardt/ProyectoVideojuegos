@@ -1,5 +1,6 @@
 package com.powerflasher.SampleApp {
 	import org.flixel.FlxSave;
+
 	import flashx.textLayout.formats.Direction;
 
 	import org.flixel.plugin.photonstorm.FlxBar;
@@ -29,6 +30,8 @@ package com.powerflasher.SampleApp {
 		private var brujo : Brujo;
 		private var mapaPrincipal : FlxTilemap;
 		private var agua : FlxTilemap;
+		private var platagua : FlxTilemap;
+		private var flotar : FlxTilemap;
 		private var barras : FlxTilemap;
 		private var mapa4 : FlxTilemap;
 		private var mapa5 : FlxTilemap;
@@ -51,16 +54,8 @@ package com.powerflasher.SampleApp {
 		private var vida : FlxBar;
 		private var vidaBoss : FlxBar;
 		private var vidaBrujo : FlxBar;
-		//Rampas, no sirven
-		private var rampa : FlxTileblock;
-		private var rampa1 : FlxTileblock;
-		private var rampa2 : FlxTileblock;
-		private var rampa3 : FlxTileblock;
-		private var rampa4 : FlxTileblock;
-		private var rampa5 : FlxTileblock;
-		//Para guardar
+		// Para guardar
 		private var Saver : FlxSave;
-		
 
 		public function AreaUno() {
 			super();
@@ -70,30 +65,33 @@ package com.powerflasher.SampleApp {
 			var s : FlxSprite = new FlxSprite();
 			s.makeGraphic(FlxG.width, FlxG.height, 0x9345Da);
 			add(s);
-			Saver=new FlxSave();
-			//crear a astrid
+			Saver = new FlxSave();
+			// crear a astrid
 			astrid = new Astrid(150, 530);
 			// bosses
 			robot = new BossRobot(180, 780, astrid);
 			brujo = new Brujo(1680, 188, astrid);
-			//Mapa
+			// Mapa
 			mapaPrincipal = new FlxTilemap();
 			agua = new FlxTilemap();
+			platagua = new FlxTilemap();
+			flotar = new FlxTilemap();
 			mapa4 = new FlxTilemap();
 			mapa5 = new FlxTilemap();
 			puerta = new FlxTilemap();
 			item = new FlxTile(barras, 2, 10, 10, true, 1);
-			//Cargar MApa
+			// Cargar MApa
 			mapa5.loadMap(new Assets.mapaCSV4(), Assets.fondo, 31, 28);
+			platagua.loadMap(new Assets.platagua(), Assets.mapaPNG2, 31, 14);
+			flotar.loadMap(new Assets.mapaflotar(), Assets.mapaPNG1, 31, 14);
 			mapaPrincipal.loadMap(new Assets.mapaCSV(), Assets.mapaPNG, 31, 28);
 			agua.loadMap(new Assets.mapaCSV1(), Assets.mapaPNG1, 31, 28);
 			mapa4.loadMap(new Assets.mapaCSV3(), Assets.mapaPNG2, 31, 14);
 			puerta.loadMap(new Assets.mapaCSV5(), Assets.puertaPNG, 31, 14);
-			//Propiedades Tiles
+			// Propiedades Tiles
 			mapa4.setTileProperties(1, FlxObject.UP);
 			agua.setTileProperties(5, FlxObject.UP);
-			mapaPrincipal.setTileProperties(4,FlxObject.NONE);
-			mapaPrincipal.setTileProperties(5,FlxObject.NONE);
+
 			// atributos del score
 			score = new FlxText(0, 0, 100);
 			score.color = 0xffffffff;
@@ -114,7 +112,9 @@ package com.powerflasher.SampleApp {
 			scoreS.shadow = 0xff000000;
 			scoreS.scrollFactor.x = 0;
 			scoreS.scrollFactor.y = 0;
-			//Añadir el mapa, astrid y enemigos
+			// Añadir el mapa, astrid y enemigos
+
+			add(flotar);
 			add(mapa5);
 			add(mapa4);
 			add(puerta);
@@ -123,29 +123,11 @@ package com.powerflasher.SampleApp {
 			add(robot);
 			add(brujo);
 			add(agua);
-			//rampas no sirven
-			rampa = new FlxTileblock(2173, 405, 44, 29);
-			rampa.angle = -40;
-			// rampa.alpha=0;
-			rampa.makeGraphic(44, 29);
-			add(rampa);
+			add(platagua);
 
-			rampa1 = new FlxTileblock(2310, 405, 44, 29);
-			rampa1.angle = 40;
-			// rampa.alpha=0;
-			rampa1.makeGraphic(44, 29);
-			add(rampa1);
-
-			/*rampa2 = new FlxTileblock(1355, 480, 300, 10);
-			rampa2.angle = -38;
-			rampa2.alpha=0;
-			rampa2.makeGraphic(1000, 10);
-			//add(rampa2);*/
-			
-			
-			//añadir arma a astrid
+			// añadir arma a astrid
 			weapon = new FlxWeapon("shuriken", astrid, "x", "y");
-			weapon.makeImageBullet(50, Assets.Shuriken, 0,15,true,10,1);
+			weapon.makeImageBullet(50, Assets.Shuriken, astrid.origin.x, astrid.origin.y, true, 10, 1);
 			weapon.bounds.width = 2670;
 			weapon.bounds.height = 992;
 			add(weapon.group);
@@ -167,16 +149,16 @@ package com.powerflasher.SampleApp {
 			add(items);
 			add(score);
 			score.text = "0 / " + totalItems.toString();
-			
-			//barra de vida de astrid
+
+			// barra de vida de astrid
 			vida = new FlxBar(620, 3);
 			vida.scrollFactor.x = 0;
 			vida.scrollFactor.y = 0;
 			vida.createImageBar(Assets.barravida, Assets.barravida1, 0x00AB00, 0xFF00FF00);
 			vida.currentValue = 0;
 			add(vida);
-			
-			//barra vida bosses
+
+			// barra vida bosses
 			vidaBoss = new FlxBar(300, 3, 2, 100, 10, null, "", 0, 30);
 			vidaBoss.scrollFactor.x = 0;
 			vidaBoss.scrollFactor.y = 0;
@@ -256,14 +238,27 @@ package com.powerflasher.SampleApp {
 		override public function update() : void {
 			trace(astrid.x);
 			trace(astrid.y);
-			if (FlxG.keys.justPressed("Z") && astrid.facing==1) {
+
+			if (FlxG.keys.justPressed("Z") && astrid.facing == 1 && FlxG.keys.pressed("UP")) {
+				weapon.setBulletDirection(FlxWeapon.BULLET_NORTH_WEST, 200);
+				weapon.fire();
+			} else if (FlxG.keys.justPressed("Z") && astrid.facing == 0 && FlxG.keys.pressed("UP")) {
+				weapon.setBulletDirection(FlxWeapon.BULLET_NORTH_EAST, 200);
+				weapon.fire();
+			} else if (FlxG.keys.justPressed("Z") && astrid.facing == 0 && FlxG.keys.pressed("DOWN")) {
+				weapon.setBulletDirection(FlxWeapon.BULLET_SOUTH_EAST, 200);
+				weapon.fire();
+			} else if (FlxG.keys.justPressed("Z") && astrid.facing == 1 && FlxG.keys.pressed("DOWN")) {
+				weapon.setBulletDirection(FlxWeapon.BULLET_SOUTH_WEST, 200);
+				weapon.fire();
+			} else if (FlxG.keys.justPressed("Z") && astrid.facing == 1) {
 				weapon.setBulletDirection(FlxWeapon.BULLET_LEFT, 200);
 				weapon.fire();
-			}
-			if (FlxG.keys.justPressed("Z") && astrid.facing==0) {
+			} else if (FlxG.keys.justPressed("Z") && astrid.facing == 0) {
 				weapon.setBulletDirection(FlxWeapon.BULLET_RIGHT, 200);
 				weapon.fire();
 			}
+
 			if (FlxG.keys.justPressed("UP") && FlxG.collide(astrid, puerta)) {
 				FlxG.switchState(new AreaDos());
 			}
@@ -273,14 +268,14 @@ package com.powerflasher.SampleApp {
 			}
 			robot.acceleration.y = 600;
 			super.update();
-			
-			//collides mapa
+
+			// collides mapa
 			FlxG.collide(astrid, mapaPrincipal);
 			FlxG.collide(astrid, mapa4);
-			FlxG.collide(astrid, agua);
-			FlxG.collide(astrid, rampa);
-			FlxG.collide(astrid, rampa1);
-			FlxG.collide(astrid,rampa2);
+			FlxG.collide(astrid, platagua);
+			if (FlxG.collide(astrid, flotar)) {
+				astrid.play("brincar");
+			}
 			FlxG.collide(soldados, mapaPrincipal);
 			FlxG.collide(soldados, mapa4);
 			FlxG.collide(robot, mapaPrincipal);
@@ -307,12 +302,12 @@ package com.powerflasher.SampleApp {
 			FlxSave(Saver);
 			// trace("colapse");
 			/*if (enemigo.alive) {
-				var emitter : FlxEmitter = new FlxEmitter();
-				//emitter.makeParticles(Assets.Shuriken, 4);
-				emitter.gravity = 400;
-				emitter.at(enemigo);
-				add(emitter);
-				emitter.start();
+			var emitter : FlxEmitter = new FlxEmitter();
+			// emitter.makeParticles(Assets.Shuriken, 4);
+			emitter.gravity = 400;
+			emitter.at(enemigo);
+			add(emitter);
+			emitter.start();
 			}*/
 			if (enemigo == robot) {
 				// Vida de astrid

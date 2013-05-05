@@ -59,7 +59,7 @@ package com.powerflasher.SampleApp {
 			s.makeGraphic(FlxG.width, FlxG.height, 0x9345Da);
 			add(s);
 			//crear a astrid
-			astrid = new Astrid(2900,200);
+			astrid = new Astrid(3100,70);
 			//bosses
 
 			boss = new BossArea2(3100,1450, astrid);
@@ -235,10 +235,31 @@ package com.powerflasher.SampleApp {
 		}
 
 		override public function update() : void {
-			if (FlxG.keys.justPressed("Z")){
+			if (FlxG.keys.justPressed("Z") && astrid.facing==1 && FlxG.keys.pressed("UP")) {
+				weapon.setBulletDirection(FlxWeapon.BULLET_NORTH_WEST, 200);
 				weapon.fire();
-				astrid.play("ataque");
 			}
+			else if (FlxG.keys.justPressed("Z") && astrid.facing==0 && FlxG.keys.pressed("UP")) {
+				weapon.setBulletDirection(FlxWeapon.BULLET_NORTH_EAST, 200);
+				weapon.fire();
+			}
+			else if (FlxG.keys.justPressed("Z") && astrid.facing==0 && FlxG.keys.pressed("DOWN")) {
+				weapon.setBulletDirection(FlxWeapon.BULLET_SOUTH_EAST, 200);
+				weapon.fire();
+			}
+			else if (FlxG.keys.justPressed("Z") && astrid.facing==1 && FlxG.keys.pressed("DOWN")) {
+				weapon.setBulletDirection(FlxWeapon.BULLET_SOUTH_WEST, 200);
+				weapon.fire();
+			}
+			else if (FlxG.keys.justPressed("Z") && astrid.facing==1) {
+				weapon.setBulletDirection(FlxWeapon.BULLET_LEFT, 200);
+				weapon.fire();
+			}
+			else if (FlxG.keys.justPressed("Z") && astrid.facing==0) {
+				weapon.setBulletDirection(FlxWeapon.BULLET_RIGHT, 200);
+				weapon.fire();
+			}
+			
 			astrid.acceleration.y = 450;
 
 			if (astrid.overlaps(enredaderas)) {
@@ -271,7 +292,7 @@ package com.powerflasher.SampleApp {
 				}
 			}*/
 			if (FlxG.collide(astrid, picos)) {
-				astrid.health-=2;
+				astrid.kill();
 			}
 			if(astrid.health==0){
 				astrid.kill();
@@ -280,9 +301,11 @@ package com.powerflasher.SampleApp {
 			//trace(astrid.x+" , "+astrid.y);
 			FlxG.collide(astrid, piso);
 			FlxG.collide(astrid, plataformas);
+			FlxG.collide(astrid, pared);
 			FlxG.collide(soldados,piso);
 			FlxG.collide(soldados,plataformas);
 			FlxG.collide(soldados, enredaderas);
+			FlxG.collide(soldados, pared);
 			//FlxG.collide(soldados, invisible);
 			FlxG.collide(boss,piso);
 			//overlap items

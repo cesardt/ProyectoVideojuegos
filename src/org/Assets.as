@@ -9,14 +9,18 @@ package org {
 		[Embed(source = "Astrid/shuriken1.png")]
 		public static var Shuriken : Class;
 		// Area1
-		[Embed(source = "Area1/Tiles_mapa1c.png")]
+		[Embed(source = "Area1/Tiles_mapa1.png")]
 		public static var mapaPNG : Class;
+		[Embed(source = "Area1/mapCSV_Group2_col.csv" , mimeType="application/octet-stream")]
+		public static var mapaflotar : Class;
 		[Embed(source = "Area1/mapCSV_Group2_Pasto.csv" , mimeType="application/octet-stream")]
 		public static var mapaCSV : Class;
 		[Embed(source = "Area1/agua.png")]
 		public static var mapaPNG1 : Class;
 		[Embed(source = "Area1/mapCSV_Group2_Map1.csv" , mimeType="application/octet-stream")]
 		public static var mapaCSV1 : Class;
+		[Embed(source = "Area1/mapCSV_Group2_plat_agua.csv" , mimeType="application/octet-stream")]
+		public static var platagua : Class;
 		[Embed(source = "Area1/mapCSV_Group2_Items.csv" , mimeType="application/octet-stream")]
 		public static var mapaCSV2 : Class;
 		[Embed(source = "Area1/item.png")]
