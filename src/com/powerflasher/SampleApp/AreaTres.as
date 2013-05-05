@@ -48,7 +48,9 @@ package com.powerflasher.SampleApp {
 			var s : FlxSprite = new FlxSprite();
 			s.makeGraphic(FlxG.width, FlxG.height, 0x9345Da);
 			add(s);
-			astrid = new Astrid(70,4256);
+			//astrid = new Astrid(70,4256);
+			astrid = new Astrid(790,3000);
+			
 			boss = new BossArea3(818, 3030, astrid);
 
 			agua = new FlxTilemap();
@@ -182,7 +184,7 @@ private function parseItems() : void {
 					if (soldadoMap.getTile(tx, ty) == 1) {
 						soldados.add(new soldado(tx, ty, astrid));
 						totalSoldados++;
-						trace(soldados.length);
+						//trace(soldados.length);
 						
 					}
 				}
@@ -206,7 +208,7 @@ private function parseItems() : void {
 				astrid.kill();
 			}
 			super.update();
-			trace(astrid.x, astrid.y);
+			//trace(astrid.x, astrid.y);
 			FlxG.collide(astrid, piso);
 			FlxG.collide(boss, piso);
 			FlxG.collide(astrid, plataforma);

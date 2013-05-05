@@ -27,8 +27,7 @@ package com.powerflasher.SampleApp {
 			
 				var dify:int = y - _player.y;
 				var difx:int = x - _player.x;
-				trace("su x: "+ x);
-				trace("mi x :"+ _player.x)
+				
 			if(difx<20 && difx>-20){
 				if(difx<20 && difx>0){
 					facing = RIGHT;
