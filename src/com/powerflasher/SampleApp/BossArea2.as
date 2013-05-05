@@ -23,7 +23,7 @@ package com.powerflasher.SampleApp {
 			
 		}
 		
-		  /*override public function update():void{
+		  override public function update():void{
 			
 				var dify:int = y - _player.y;
 				var difx:int = x - _player.x;
@@ -44,7 +44,7 @@ package com.powerflasher.SampleApp {
 				}
 			
 			
-		  }*/
+		  }
 
 	}
 }

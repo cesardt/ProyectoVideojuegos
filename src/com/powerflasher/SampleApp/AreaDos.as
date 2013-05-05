@@ -56,7 +56,7 @@ package com.powerflasher.SampleApp {
 			add(s);
 			astrid = new Astrid(3100, 70);
 			//bosses
-			boss = new BossArea2(2058, 1610, astrid);
+			boss = new BossArea2(3100,1450, astrid);
 			
 			piso = new FlxTilemap();
 			pared = new FlxTilemap();
