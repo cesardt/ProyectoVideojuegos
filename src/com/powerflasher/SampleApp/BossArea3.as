@@ -48,13 +48,12 @@ package com.powerflasher.SampleApp {
 				}else{
 					contador++;
 				}
-			if(difx<20 && difx>-20){
-				if(difx<20 && difx>0){
-					facing = RIGHT;
+			if(difx<200 && difx>-200){
+				if(difx<100 && difx>0){
+					facing = LEFT;
 					velocity.x -= _move_speed;
 				}else{
-					facing = LEFT;
-					
+					facing = RIGHT;
 					velocity.x += _move_speed;
 					
 				}
