@@ -10,7 +10,6 @@ package com.powerflasher.SampleApp {
 		private var detected:Boolean;
 		private var maxX:int = 0;
 		private var minX:int = 0;
-		private var cont:int = 0;
 			
 		public function soldado(X:Number,Y:Number,ThePlayer:FlxSprite):void{
 			
@@ -35,17 +34,6 @@ package com.powerflasher.SampleApp {
 				var dify:int = y - _player.y;
 				var difx:int = x - _player.x;
 				
-//			if(dify < 10 && !detected){	
-//				if(difx < 0 && difx > -50){
-//					facing = LEFT;
-//					velocity.x -= _move_speed;
-//				}
-//				else if(difx > 0 && difx < 10){
-//					facing = RIGHT;
-//					velocity.x += _move_speed;
-//				}
-//				detected = true;
-//			}
 				
 				if(x <= minX){
 					facing = RIGHT;

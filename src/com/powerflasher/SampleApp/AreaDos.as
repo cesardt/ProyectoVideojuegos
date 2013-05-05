@@ -54,9 +54,13 @@ package com.powerflasher.SampleApp {
 			var s : FlxSprite = new FlxSprite();
 			s.makeGraphic(FlxG.width, FlxG.height, 0x9345Da);
 			add(s);
-			astrid = new Astrid(3100, 70);
+			astrid = new Astrid(2000,1510);
 			//bosses
+<<<<<<< HEAD
 			boss = new BossArea2(3100,1450, astrid);
+=======
+			boss = new BossArea2(2058, 1510, astrid);
+>>>>>>> mi boss area 2 se cae
 			
 			piso = new FlxTilemap();
 			pared = new FlxTilemap();

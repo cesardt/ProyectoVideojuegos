@@ -7,6 +7,8 @@ package com.powerflasher.SampleApp {
 		
 		private var _player:FlxSprite;  
 		private var _move_speed:int = 100;
+		private var maxX:int = 0;
+		private var minX:int = 0;
 			
 		public function Brujo(X:Number,Y:Number,ThePlayer:FlxSprite):void{
 			
@@ -16,6 +18,8 @@ package com.powerflasher.SampleApp {
 			acceleration.y = 600;
 			maxVelocity.x = 100;
             maxVelocity.y = 100;
+			minX = x - 100;
+			maxX = x + 100;
 			loadGraphic(Assets.brujo, true, true, 60, 78, true);
 			addAnimation("idle",[0], 0,false);
 			addAnimation("caminar",[0,1,2], 15, false);
@@ -28,10 +32,11 @@ package com.powerflasher.SampleApp {
 				var dify:int = y - _player.y;
 				var difx:int = x - _player.x;
 				
-				if(isTouching(LEFT)){
+			
+				if(x <= minX){
 					facing = RIGHT;
 				}
-				if(isTouching(RIGHT)){
+				if(x >= maxX){
 					facing = LEFT;
 				}
 				if(facing == LEFT){
