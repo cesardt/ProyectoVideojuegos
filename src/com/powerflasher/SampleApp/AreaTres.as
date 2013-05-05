@@ -16,6 +16,8 @@ package com.powerflasher.SampleApp {
 
 	public class AreaTres extends FlxState {
 		private var astrid : Astrid;
+		// bosses
+		private var boss :BossArea3;
 		private var agua : FlxTilemap;
 		private var cielo : FlxTilemap;
 		private var fondo : FlxTilemap;
@@ -47,6 +49,7 @@ package com.powerflasher.SampleApp {
 			s.makeGraphic(FlxG.width, FlxG.height, 0x9345Da);
 			add(s);
 			astrid = new Astrid(70,4256);
+			boss = new BossArea3(818, 3030, astrid);
 
 			agua = new FlxTilemap();
 			piso = new FlxTilemap();
@@ -88,6 +91,7 @@ package com.powerflasher.SampleApp {
 			add(fondo);
 			add(plataforma);
 			add(astrid);
+			add(boss);
 			add(agua);
 			add(piso);
 			weapon = new FlxWeapon("shuriken", astrid, "x", "y");
@@ -202,7 +206,9 @@ private function parseItems() : void {
 				astrid.kill();
 			}
 			super.update();
+			trace(astrid.x, astrid.y);
 			FlxG.collide(astrid, piso);
+			FlxG.collide(boss, piso);
 			FlxG.collide(astrid, plataforma);
 			FlxG.collide(soldados,piso);
 			FlxG.collide(soldados,plataforma);

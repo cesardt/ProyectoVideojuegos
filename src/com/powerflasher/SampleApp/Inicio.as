@@ -40,7 +40,7 @@
 		}
 
 		private function Iniciar() : void {
-			FlxG.switchState(new AreaDos());
+			FlxG.switchState(new AreaTres());
 		}
 
 		
