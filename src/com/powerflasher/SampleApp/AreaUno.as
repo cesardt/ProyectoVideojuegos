@@ -281,22 +281,22 @@ package com.powerflasher.SampleApp {
 			// trace(astrid.x+" "+astrid.y);
 			ejercito.text = "Ejército: " + Inicio.soldados.toString() + " soldados ";
 			if (FlxG.keys.justPressed("Z") && astrid.facing == 1 && FlxG.keys.pressed("UP")) {
-				weapon.setBulletDirection(FlxWeapon.BULLET_NORTH_WEST, 200);
+				weapon.setBulletDirection(FlxWeapon.BULLET_NORTH_WEST, 300);
 				weapon.fire();
 			} else if (FlxG.keys.justPressed("Z") && astrid.facing == 0 && FlxG.keys.pressed("UP")) {
-				weapon.setBulletDirection(FlxWeapon.BULLET_NORTH_EAST, 200);
+				weapon.setBulletDirection(FlxWeapon.BULLET_NORTH_EAST, 300);
 				weapon.fire();
 			} else if (FlxG.keys.justPressed("Z") && astrid.facing == 0 && FlxG.keys.pressed("DOWN")) {
-				weapon.setBulletDirection(FlxWeapon.BULLET_SOUTH_EAST, 200);
+				weapon.setBulletDirection(FlxWeapon.BULLET_SOUTH_EAST, 300);
 				weapon.fire();
 			} else if (FlxG.keys.justPressed("Z") && astrid.facing == 1 && FlxG.keys.pressed("DOWN")) {
-				weapon.setBulletDirection(FlxWeapon.BULLET_SOUTH_WEST, 200);
+				weapon.setBulletDirection(FlxWeapon.BULLET_SOUTH_WEST, 300);
 				weapon.fire();
 			} else if (FlxG.keys.justPressed("Z") && astrid.facing == 1) {
-				weapon.setBulletDirection(FlxWeapon.BULLET_LEFT, 200);
+				weapon.setBulletDirection(FlxWeapon.BULLET_LEFT, 400);
 				weapon.fire();
 			} else if (FlxG.keys.justPressed("Z") && astrid.facing == 0) {
-				weapon.setBulletDirection(FlxWeapon.BULLET_RIGHT, 200);
+				weapon.setBulletDirection(FlxWeapon.BULLET_RIGHT, 400);
 				weapon.fire();
 			}
 			if (astrid.overlaps(agua)) {
