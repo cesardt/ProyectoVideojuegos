@@ -77,12 +77,8 @@ package com.powerflasher.SampleApp {
 			astrid = new Astrid(150, 530);
 			// bosses
 			robot = new BossRobot(180, 780, astrid);
-<<<<<<< HEAD
 			brujo = new Brujo(1749, 100, astrid);
-=======
 			robot1 = new BossRobot(600, 100, astrid);
-			brujo = new Brujo(1680, 188, astrid);
->>>>>>> robot
 			// Mapa
 			mapaPrincipal = new FlxTilemap();
 			agua = new FlxTilemap();
