@@ -42,15 +42,7 @@
 		}
 
 		private function Iniciar() : void {
-<<<<<<< HEAD
-			FlxG.switchState(new AreaUno());
-=======
-<<<<<<< HEAD
-			FlxG.switchState(new AreaDos());
-=======
 			FlxG.switchState(new AreaTres());
->>>>>>> Y por fin funciona en boss area 3 :D
->>>>>>> Y por fin funciona en boss area 3 :D
 		}
 
 		
