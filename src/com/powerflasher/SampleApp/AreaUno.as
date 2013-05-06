@@ -140,9 +140,10 @@ package com.powerflasher.SampleApp {
 			parseItems();
 			// inicializa el grupo de enemigos, del mapa al grupo
 			parseEnemigos();
-			// parseSoldados();
+			parseSoldados();
 			// agrega items y el score,  conteo de enemigos
 			add(enemigos);
+			add(soldados);
 			add(scoreE);
 
 			add(soldados);
