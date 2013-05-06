@@ -11,8 +11,12 @@ package org {
 		// Area1
 		[Embed(source = "Area1/Tiles_mapa1.png")]
 		public static var mapaPNG : Class;
+		[Embed(source = "Area3/pisomalo.png")]
+		public static var picosagua : Class;
 		[Embed(source = "Area1/mapCSV_Group2_col.csv" , mimeType="application/octet-stream")]
 		public static var mapaflotar : Class;
+		[Embed(source = "Area1/mapCSV_Group2_picos.csv" , mimeType="application/octet-stream")]
+		public static var picos1 : Class;
 		[Embed(source = "Area1/mapCSV_Group2_Pasto.csv" , mimeType="application/octet-stream")]
 		public static var mapaCSV : Class;
 		[Embed(source = "Area1/agua.png")]
@@ -47,6 +51,8 @@ package org {
 		public static var puertaPNG : Class;
 		[Embed(source = "Area1/mapCSV_Group2_Puerta.csv" , mimeType="application/octet-stream")]
 		public static var mapaCSV5 : Class;
+		[Embed(source = "Area3/mapCSV_Group1_picos.csv" , mimeType="application/octet-stream")]
+		public static var picos3 : Class;
 		
 		
 		[Embed(source = "Area1/robot.png")]

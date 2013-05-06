@@ -32,6 +32,7 @@ package com.powerflasher.SampleApp {
 		private var agua : FlxTilemap;
 		private var platagua : FlxTilemap;
 		private var flotar : FlxTilemap;
+		private var picosagua : FlxTilemap;
 		private var barras : FlxTilemap;
 		private var mapa4 : FlxTilemap;
 		private var mapa5 : FlxTilemap;
@@ -57,6 +58,7 @@ package com.powerflasher.SampleApp {
 		// Para guardar
 		private var Saver : FlxSave;
 
+
 		public function AreaUno() {
 			super();
 		}
@@ -74,6 +76,7 @@ package com.powerflasher.SampleApp {
 			// Mapa
 			mapaPrincipal = new FlxTilemap();
 			agua = new FlxTilemap();
+			picosagua = new FlxTilemap();
 			platagua = new FlxTilemap();
 			flotar = new FlxTilemap();
 			mapa4 = new FlxTilemap();
@@ -82,6 +85,7 @@ package com.powerflasher.SampleApp {
 			item = new FlxTile(barras, 2, 10, 10, true, 1);
 			// Cargar MApa
 			mapa5.loadMap(new Assets.mapaCSV4(), Assets.fondo, 31, 28);
+			picosagua.loadMap(new Assets.picos1(), Assets.picosagua, 16, 16);
 			platagua.loadMap(new Assets.platagua(), Assets.mapaPNG2, 31, 14);
 			flotar.loadMap(new Assets.mapaflotar(), Assets.mapaPNG1, 31, 14);
 			mapaPrincipal.loadMap(new Assets.mapaCSV(), Assets.mapaPNG, 31, 28);
@@ -112,10 +116,11 @@ package com.powerflasher.SampleApp {
 			scoreS.shadow = 0xff000000;
 			scoreS.scrollFactor.x = 0;
 			scoreS.scrollFactor.y = 0;
-			// Añadir el mapa, astrid y enemigos
 
+			
 			add(flotar);
 			add(mapa5);
+			add(picosagua);
 			add(mapa4);
 			add(puerta);
 			add(mapaPrincipal);
@@ -168,7 +173,6 @@ package com.powerflasher.SampleApp {
 			vidaBrujo = new FlxBar(300, 3, 2, 100, 10, null, "", 0, 50);
 			vidaBrujo.scrollFactor.x = 0;
 			vidaBrujo.scrollFactor.y = 0;
-			// vida.setParent(astrid,"vida");
 			vidaBrujo.createImageBar(Assets.barravidabrujo, Assets.barravidabrujo1);
 			vidaBrujo.currentValue = 0;
 
@@ -238,7 +242,6 @@ package com.powerflasher.SampleApp {
 		override public function update() : void {
 			trace(astrid.x);
 			trace(astrid.y);
-
 			if (FlxG.keys.justPressed("Z") && astrid.facing == 1 && FlxG.keys.pressed("UP")) {
 				weapon.setBulletDirection(FlxWeapon.BULLET_NORTH_WEST, 200);
 				weapon.fire();
@@ -258,7 +261,16 @@ package com.powerflasher.SampleApp {
 				weapon.setBulletDirection(FlxWeapon.BULLET_RIGHT, 200);
 				weapon.fire();
 			}
-
+			if(astrid.overlaps(agua)){
+				astrid.play("brincar");
+				if(FlxG.keys.justPressed("X")){
+					astrid.velocity.y = -astrid.maxVelocity.y/3;
+				}
+			}
+			if(astrid.overlaps(picosagua)){
+				astrid.kill();
+			}
+			
 			if (FlxG.keys.justPressed("UP") && FlxG.collide(astrid, puerta)) {
 				FlxG.switchState(new AreaDos());
 			}
@@ -273,9 +285,9 @@ package com.powerflasher.SampleApp {
 			FlxG.collide(astrid, mapaPrincipal);
 			FlxG.collide(astrid, mapa4);
 			FlxG.collide(astrid, platagua);
-			if (FlxG.collide(astrid, flotar)) {
+			/*if (FlxG.collide(astrid, flotar)) {
 				astrid.play("brincar");
-			}
+			}*/
 			FlxG.collide(soldados, mapaPrincipal);
 			FlxG.collide(soldados, mapa4);
 			FlxG.collide(robot, mapaPrincipal);
