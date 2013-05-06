@@ -57,8 +57,7 @@ package org {
 		public static var mapaCSV5 : Class;
 		[Embed(source = "Area3/mapCSV_Group1_picos.csv" , mimeType="application/octet-stream")]
 		public static var picos3 : Class;
-		[Embed(source = "Area1/mapCSV_Group2_invisble.csv" , mimeType="application/octet-stream")]
-		public static var invisble1: Class;
+		
 		
 		[Embed(source = "Area1/robot.png")]
 		public static var robotSpriteSheet : Class;
