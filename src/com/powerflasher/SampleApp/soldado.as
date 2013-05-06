@@ -35,12 +35,14 @@ package com.powerflasher.SampleApp {
 				var difx:int = x - _player.x;
 				
 				
-				if(x <= minX){
+				if(x <= minX || isTouching(LEFT)){
 					facing = RIGHT;
 				}
-				if(x >= maxX){
+				if(x >= maxX || isTouching(RIGHT)){
 					facing = LEFT;
 				}
+				
+				
 				if(facing == LEFT){
 					velocity.x -= _move_speed;
 					play("caminar");
