@@ -41,7 +41,12 @@ package com.powerflasher.SampleApp {
 					facing = LEFT;
 					velocity.x -= _move_speed;
 				}else{
-					facing = RIGHT;
+					if(dify > 5){
+						facing = LEFT;
+					}
+					if(_player.x > x){
+						facing = RIGHT;
+					}
 					velocity.x += _move_speed;
 					
 				}

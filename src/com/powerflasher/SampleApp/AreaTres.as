@@ -53,7 +53,8 @@ package com.powerflasher.SampleApp {
 			s.makeGraphic(FlxG.width, FlxG.height, 0x9345Da);
 			add(s);
 
-			astrid = new Astrid(70, 4230);
+			//astrid = new Astrid(70, 4230);
+			astrid = new Astrid(818, 3000);
 
 			boss = new BossArea3(818, 3030, astrid);
 
@@ -118,9 +119,16 @@ package com.powerflasher.SampleApp {
 			add(weapon.group);
 
 			weaponB = new FlxWeapon("shuriken", boss, "x", "y");
+<<<<<<< HEAD
 			weaponB.makeImageBullet(50, Assets.Shuriken, boss.origin.x, boss.origin.y, true, 10, 1);
 			weaponB.bounds.width = 3200;
 			weaponB.bounds.height = 1600;
+=======
+			weaponB.makeImageBullet(50, Assets.Shuriken);
+			weaponB.setBulletDirection(FlxWeapon.BULLET_RIGHT, 100);
+			weaponB.bounds.width = 2592;
+			weaponB.bounds.height = 4800;
+>>>>>>> Y por fin funciona en boss area 3 :D
 			add(weaponB.group);
 
 			vida = new FlxBar(620, 3);
@@ -211,8 +219,8 @@ package com.powerflasher.SampleApp {
 		}
 
 		override public function update() : void {
-			trace(astrid.x);
-			trace(astrid.y);
+			//trace(astrid.x);
+			//trace(astrid.y);
 			if (FlxG.keys.justPressed("Z") && astrid.facing == 1 && FlxG.keys.pressed("UP")) {
 				weapon.setBulletDirection(FlxWeapon.BULLET_NORTH_WEST, 200);
 				weapon.fire();
@@ -256,10 +264,20 @@ package com.powerflasher.SampleApp {
 				astrid.kill();
 			}
 			super.update();
-			if (contador == 500) {
-				trace("dispara");
-				weaponB.fireAtTarget(astrid);
-				weaponB.fireAtTarget(astrid);
+			if (contador == 100) {
+				weaponB.setBulletSpeed(100);
+				var deltaX:int = astrid.x - boss.x;
+				var deltaY:int = astrid.y - boss.y;
+				
+				var angle:int = Math.atan(deltaY / deltaX) * 180 / Math.PI;
+				
+				if(angle <= 90 && angle >= 80 ){
+					angle = angle * -1;
+				}
+				
+				weaponB.setBulletDirection(angle, 100);
+				trace("dispara" + angle);
+				weaponB.fire();
 				contador = 0;
 			} else {
 				contador++;
@@ -274,6 +292,7 @@ package com.powerflasher.SampleApp {
 			FlxG.collide(soldados, plataforma);
 			FlxG.collide(soldados, invisible);
 			FlxG.collide(weapon.group, piso);
+			FlxG.collide(weaponB.group, piso);
 
 			FlxG.overlap(astrid, items, hitItems);
 			// overlap enemigos
