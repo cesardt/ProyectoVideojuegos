@@ -338,8 +338,15 @@ package com.powerflasher.SampleApp {
 				// vidaBoss.currentValue += 2;
 				if (enemigo.health == 0) {
 					enemigo.kill();
+					//vidaBoss.kill();
+					Inicio.soldados+=5;
 				}
-			} else if(enemigo==astrid){
+			}
+			else if (enemigo == soldados) {
+					enemigo.kill();
+					Inicio.soldados+=1;
+				}
+			else if(enemigo==astrid){
 				enemigo.health=-10;
 			}else{
 				enemigo.kill();

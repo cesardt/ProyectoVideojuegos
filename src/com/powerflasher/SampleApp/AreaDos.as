@@ -366,8 +366,14 @@ package com.powerflasher.SampleApp {
 				
 				if(enemigo.health==0){
 					enemigo.kill();
+					//vidaBoss.kill();
+					Inicio.soldados+=5;
 				}
 			}
+			else if (enemigo == soldados) {
+					enemigo.kill();
+					Inicio.soldados+=1;
+				}
 			else{
 			enemigo.kill();
 			FlxG.score += 1;

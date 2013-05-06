@@ -372,9 +372,14 @@ package com.powerflasher.SampleApp {
 				if (enemigo.health == 0) {
 					enemigo.kill();
 					vidaBoss.kill();
+					Inicio.soldados+=5;
 					
 				}
-			} else if (enemigo == brujo) {
+			} else if (enemigo == soldados) {
+					enemigo.kill();
+					Inicio.soldados+=1;
+				}
+				 else if (enemigo == brujo) {
 				add(vidaBrujo);
 				enemigo.health -= 2;
 				// Barra de vida
@@ -383,6 +388,7 @@ package com.powerflasher.SampleApp {
 				if (enemigo.health == 0) {
 					enemigo.kill();
 					vidaBrujo.kill();
+					Inicio.soldados+=5;
 				}
 			} else {
 				enemigo.kill();
