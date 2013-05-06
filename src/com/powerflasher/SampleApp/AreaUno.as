@@ -53,6 +53,7 @@ package com.powerflasher.SampleApp {
 		// public var enemies : FlxGroup;
 		private var weapon : FlxWeapon;
 		private var vida : FlxBar;
+		private var vidas : FlxBar;
 		private var vidaBoss : FlxBar;
 		private var vidaBrujo : FlxBar;
 		// Para guardar
@@ -160,6 +161,13 @@ package com.powerflasher.SampleApp {
 			vida.createImageBar(Assets.barravida, Assets.barravida1, 0x00AB00, 0xFF00FF00);
 			vida.currentValue = 0;
 			add(vida);
+			
+			vidas = new FlxBar(650, 40);
+			vidas.scrollFactor.x = 0;
+			vidas.scrollFactor.y = 0;
+			vidas.createImageBar(Assets.vidafull, Assets.vidaempty);
+			vidas.currentValue = 0;
+			add(vidas);
 
 			// barra vida bosses
 			vidaBoss = new FlxBar(300, 3, 2, 100, 10, null, "", 0, 30);

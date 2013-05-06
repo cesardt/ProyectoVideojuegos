@@ -149,6 +149,10 @@ package org {
 		// Barra de vida
 		[Embed(source = "Astrid/barra_vida_prueba.png")]
 		public static var barravida : Class;
+		[Embed(source = "Astrid/vidasfull.png")]
+		public static var vidafull : Class;
+		[Embed(source = "Astrid/vidasempty.png")]
+		public static var vidaempty : Class;
 		[Embed(source = "Astrid/barra_vida_prueba1.png")]
 		public static var barravida1 : Class;
 		[Embed(source = "Astrid/barra_vida_boss.png")]

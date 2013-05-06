@@ -13,6 +13,8 @@
 	
 	public class Inicio extends FlxState {
 		private static var _numitems : Number=0;
+		private static var _vidas : Number=6;
+		private static var _soldados : Number=0;
 		
 		
 		private var texto:FlxText;
@@ -40,7 +42,7 @@
 		}
 
 		private function Iniciar() : void {
-			FlxG.switchState(new AreaDos());
+			FlxG.switchState(new AreaUno());
 		}
 
 		
@@ -58,6 +60,12 @@
 		}
 		public static function set numitems(items:Number):void {
 			_numitems=items;
+		}
+		public static function get soldados() : Number {
+			return _soldados;
+		}
+		public static function set vidas(soldados:Number):void {
+			_soldados=soldados;
 		}
 		
 	}
