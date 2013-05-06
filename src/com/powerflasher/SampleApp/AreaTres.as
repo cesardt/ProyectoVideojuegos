@@ -30,9 +30,9 @@ package com.powerflasher.SampleApp {
 		private var weaponB : FlxWeapon;
 		private var contador : int = 0;
 		private var invisible : FlxTilemap;
-		private var puertasec:FlxTilemap;
-
+		private var puertasec : FlxTilemap;
 		private var vida : FlxBar;
+		private var vidas:FlxBar;
 		// varibles para recoger items
 		public var items : FlxGroup;
 		public var totalItems : int;
@@ -55,7 +55,7 @@ package com.powerflasher.SampleApp {
 			s.makeGraphic(FlxG.width, FlxG.height, 0x9345Da);
 			add(s);
 
-			//astrid = new Astrid(70, 4230);
+			// astrid = new Astrid(70, 4230);
 			astrid = new Astrid(900, 2900);
 
 			boss = new BossArea3(818, 3030, astrid);
@@ -69,7 +69,7 @@ package com.powerflasher.SampleApp {
 			invisible = new FlxTilemap();
 			picosagua = new FlxTilemap();
 			flotar = new FlxTilemap();
-			puertasec= new FlxTilemap();
+			puertasec = new FlxTilemap();
 			flotar.loadMap(new Assets.flotar(), Assets.mapaPNG1, 32, 16);
 			puerta.loadMap(new Assets.puerta3(), Assets.tilespuerta, 32, 16);
 			picosagua.loadMap(new Assets.picos3(), Assets.picosagua, 16, 16);
@@ -85,12 +85,12 @@ package com.powerflasher.SampleApp {
 			plataforma.setTileProperties(6, FlxObject.UP);
 
 			// atributos del score items
-			score = new FlxText(0,60, 100);
+			score = new FlxText(0, 60, 100);
 			score.color = 0xffffffff;
 			score.shadow = 0xff000000;
 			score.scrollFactor.x = 0;
 			score.scrollFactor.y = 0;
-			
+
 			// atributos del score ejercito
 			ejercito = new FlxText(0, 0, 100);
 			ejercito.color = 0xffffffff;
@@ -144,12 +144,20 @@ package com.powerflasher.SampleApp {
 			vida.createImageBar(Assets.barravida, Assets.barravida1, 0x00AB00, 0xFF00FF00);
 			vida.currentValue = 0;
 			add(vida);
+			
+			vidas = new FlxBar(530, 40,1);
+			vidas.setRange(0, 12);
+			vidas.scrollFactor.x = 0;
+			vidas.scrollFactor.y = 0;
+			vidas.createImageBar(Assets.vidafull, Assets.vidaempty);
+			vidas.currentValue =12-Inicio.vidas;
+			add(vidas);
 			// inicializa el grupo de items, del mapa al grupo
 			parseItems();
 			// agrega items y el score,  conteo
 			add(items);
 			add(ejercito);
-			//add(score);
+			// add(score);
 			score.text = "0 / " + totalItems.toString();
 			parseSoldados();
 
@@ -157,10 +165,10 @@ package com.powerflasher.SampleApp {
 			parseEnemigos();
 			// agrega items y el score,  conteo de enemigos
 			add(enemigos);
-			//add(scoreE);
+			// add(scoreE);
 			scoreE.text = "0 / " + totalEnemigos.toString();
 			add(soldados);
-			//add(scoreS);
+			// add(scoreS);
 			scoreS.text = "0 / " + totalSoldados.toString();
 
 			// de la camara
@@ -226,17 +234,17 @@ package com.powerflasher.SampleApp {
 		}
 
 		override public function update() : void {
-			//trace(astrid.x);
-			//trace(astrid.y);
+			// trace(astrid.x);
+			// trace(astrid.y);
 			ejercito.text = "Ejército: " + Inicio.soldados.toString() + " soldados ";
-			
-			if(Inicio.numitems>8 && Inicio.soldados>150){
+
+			if (Inicio.numitems > 8 && Inicio.soldados > 150) {
 				add(puertasec);
-				if(FlxG.keys.justPressed("UP") && astrid.overlaps(puertasec)){
+				if (FlxG.keys.justPressed("UP") && astrid.overlaps(puertasec)) {
 					trace("Ganaste. Recuperaste a tu hermano");
 				}
 			}
-			
+
 			if (FlxG.keys.justPressed("Z") && astrid.facing == 1 && FlxG.keys.pressed("UP")) {
 				weapon.setBulletDirection(FlxWeapon.BULLET_NORTH_WEST, 200);
 				weapon.fire();
@@ -256,15 +264,15 @@ package com.powerflasher.SampleApp {
 				weapon.setBulletDirection(FlxWeapon.BULLET_RIGHT, 300);
 				weapon.fire();
 			}
-			if(FlxG.collide(astrid,picosagua)){
+			if (FlxG.collide(astrid, picosagua)) {
 				astrid.kill();
 			}
 			if (FlxG.keys.justPressed("UP") && astrid.overlaps(puerta)) {
-				FlxG.switchState(new AreaUno());
+				FlxG.switchState(new AreaCuatro());
 			}
 			if (astrid.overlaps(agua)) {
 				astrid.play("brincar");
-				if(FlxG.keys.pressed("RIGHT") || FlxG.keys.pressed("LEFT")){
+				if (FlxG.keys.pressed("RIGHT") || FlxG.keys.pressed("LEFT")) {
 					astrid.play("brincar");
 				}
 				if (Inicio.numitems > 6) {
@@ -278,21 +286,22 @@ package com.powerflasher.SampleApp {
 
 			if (astrid.health == 0) {
 				astrid.kill();
+
 			}
 			super.update();
 			if (contador == 100) {
 				weaponB.setBulletSpeed(100);
-				var deltaX:int = astrid.x - boss.x;
-				var deltaY:int = astrid.y - boss.y;
-				
-				var angle:int = Math.atan(deltaY / deltaX) * 180 / Math.PI;
-				
-				if(angle <= 90 && angle >= 80 ){
+				var deltaX : int = astrid.x - boss.x;
+				var deltaY : int = astrid.y - boss.y;
+
+				var angle : int = Math.atan(deltaY / deltaX) * 180 / Math.PI;
+
+				if (angle <= 90 && angle >= 80 ) {
 					angle = angle * -1;
 				}
-				
+
 				weaponB.setBulletDirection(angle, 100);
-				//trace("dispara" + angle);
+				// trace("dispara" + angle);
 				weaponB.fire();
 				contador = 0;
 			} else {
@@ -318,7 +327,7 @@ package com.powerflasher.SampleApp {
 			// overlap bala enemigo
 			FlxG.overlap(weapon.group, enemigos, hitBullet);
 			FlxG.overlap(weapon.group, soldados, hitBullet);
-			FlxG.overlap(weaponB.group,astrid,hitBullet);
+			FlxG.overlap(weaponB.group, astrid, hitBullet);
 		}
 
 		private function hitItems(p : FlxObject, item : FlxObject) : void {
@@ -326,6 +335,14 @@ package com.powerflasher.SampleApp {
 			item.kill();
 			FlxG.score += 1;
 			Inicio.numitems++;
+			if (Inicio.numitems == 7 || Inicio.numitems == 10 || (Inicio.numitems > 11 && Inicio.numitems % 2 != 0)) {
+				Inicio.vidas++;
+				vidas.currentValue=12-Inicio.vidas;
+			}
+			if (Inicio.numitems == 9 || (Inicio.numitems > 11 && Inicio.numitems % 2 == 0)) {
+				astrid.health += 20;
+				vida.currentValue -= 20;
+			}
 			score.text = FlxG.score.toString() + " / " + totalItems.toString();
 		}
 
@@ -333,7 +350,7 @@ package com.powerflasher.SampleApp {
 			// trace("colapse");
 			// Vida de astrid
 			if (enemigo == boss) {
-			// Vida de astrid
+				// Vida de astrid
 				p.health -= 2;
 				// Barra de vida
 				vida.currentValue += 2;
@@ -359,19 +376,18 @@ package com.powerflasher.SampleApp {
 				// vidaBoss.currentValue += 2;
 				if (enemigo.health == 0) {
 					enemigo.kill();
-					//vidaBoss.kill();
-					Inicio.soldados+=5;
+					// vidaBoss.kill();
+					Inicio.soldados += 5;
 				}
 			}
-/*			else if (enemigo == soldados) {
-					enemigo.kill();
-					Inicio.soldados+=1;
-				}*/
-			else if(enemigo==astrid){
-				enemigo.health=-10;
-			}else{
+			/*			else if (enemigo == soldados) {
+			enemigo.kill();
+			Inicio.soldados+=1;
+			}*/ else if (enemigo == astrid) {
+				enemigo.health = -10;
+			} else {
 				enemigo.kill();
-				Inicio.soldados+=1;
+				Inicio.soldados += 1;
 				FlxG.score += 1;
 				scoreE.text = FlxG.score.toString() + " / " + totalEnemigos.toString();
 			}

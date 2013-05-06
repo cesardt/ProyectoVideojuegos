@@ -1,4 +1,6 @@
-﻿package com.powerflasher.SampleApp{
+﻿package com.powerflasher.SampleApp {
+	import org.Assets;
+	import org.flixel.FlxSound;
 	import org.flixel.FlxButton;
 	/**
 	 * @author ieiomeli
@@ -15,6 +17,7 @@
 		private static var _numitems : Number=0;
 		private static var _vidas : Number=3;
 		private static var _soldados : Number=0;
+		protected var Music:FlxSound = new FlxSound();
 		
 		
 		private var texto:FlxText;
@@ -29,9 +32,10 @@
             var s:FlxSprite = new FlxSprite();
 			s.makeGraphic(FlxG.width, FlxG.height, 0x000000);
             add(s);
+			FlxG.music = Music;
+			FlxG.playMusic(Assets.Music);
 			
- 
-    	
+ 	
  			texto=new FlxText(0, 300, FlxG.width, "Al infinito").setFormat(null, 21, 0xFFFFFF, "center");
          
            add(texto);

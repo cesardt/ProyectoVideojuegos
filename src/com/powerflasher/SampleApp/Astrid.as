@@ -149,20 +149,7 @@
 
 
 		}
-		
-		override public function hurt(Damage:Number):void
-		{
-			Damage = 0;
-			if(flickering)
-				return;
-			flicker(1.3);
-			if(FlxG.score > 1000) FlxG.score -= 1000;
-			if(velocity.x > 0)
-				velocity.x = -maxVelocity.x;
-			else
-				velocity.x = maxVelocity.x;
-			super.hurt(Damage);
-		}
+
 		override public function kill():void
 		{
 			if(!alive){

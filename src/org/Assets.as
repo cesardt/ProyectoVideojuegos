@@ -3,6 +3,8 @@ package org {
 	 * @author Loree
 	 */
 	public class Assets {
+		[Embed(source="music2.mp3")] 	
+		public static var Music:Class;
 		// Astrid
 		[Embed(source = "Astrid/tilesmedastrid.png")]
 		public static var jugadorSpriteSheet : Class;
@@ -27,16 +29,16 @@ package org {
 		public static var platagua : Class;
 		[Embed(source = "Area1/mapCSV_Group2_Items.csv" , mimeType="application/octet-stream")]
 		public static var mapaCSV2 : Class;
+		[Embed(source = "Area1/mapCSV_Group2_otrosItems.csv" , mimeType="application/octet-stream")]
+		public static var otrositems : Class;
 		[Embed(source = "Area1/item.png")]
 		public static var itemsPNG1 : Class;
 		[Embed(source = "Area1/mapCSV_Group2_muercielgos.csv" , mimeType="application/octet-stream")]
 		public static var mapaBats1 : Class;
 		[Embed(source = "Area1/Bat.png")]
 		public static var batSpriteSheet1 : Class;
-		
 		[Embed(source = "enemigos/soldadoprueba.png")]
-		public static var soldado: Class;
-		
+		public static var soldado : Class;
 		[Embed(source = "Area1/mapCSV_Group2_soldado.csv" , mimeType="application/octet-stream")]
 		public static var soldados : Class;
 		[Embed(source = "Area1/barras.png")]
@@ -52,14 +54,11 @@ package org {
 		[Embed(source = "Area1/mapCSV_Group2_Puerta.csv" , mimeType="application/octet-stream")]
 		public static var mapaCSV5 : Class;
 		[Embed(source = "Area1/mapCSV_Group2_invisble.csv" , mimeType="application/octet-stream")]
-		public static var invisble1: Class;
-		
+		public static var invisble1 : Class;
 		[Embed(source = "Area1/robot.png")]
 		public static var robotSpriteSheet : Class;
 		[Embed(source = "enemigos/brujo1.png")]
 		public static var brujo : Class;
-		
-		
 		// Area2
 		[Embed(source = "Area2/picos.png")]
 		public static var tilespicos : Class;
@@ -102,18 +101,16 @@ package org {
 		[Embed(source = "Area2/mapCSV_Group1_atras.csv" , mimeType="application/octet-stream")]
 		public static var atrasCSV : Class;
 		[Embed(source = "Area2/mapCSV_Group1_invisible.csv" , mimeType="application/octet-stream")]
-		public static var invisble2: Class;
+		public static var invisble2 : Class;
 		[Embed(source = "Area2/mapCSV_Group1_P_ultima.csv" , mimeType="application/octet-stream")]
 		public static var puertasec2 : Class;
-	
 		// enemigos area2
 		[Embed(source = "Area2/mapCSV_Group1_Bats.csv" , mimeType="application/octet-stream")]
 		public static var mapaBats2 : Class;
 		[Embed(source = "Area2/Bat.png")]
-		public static var batSpriteSheet2 : Class;	
+		public static var batSpriteSheet2 : Class;
 		[Embed(source = "Area2/mapCSV_Group1_soldado.csv" , mimeType="application/octet-stream")]
 		public static var soldados2 : Class;
-		
 		// Area3
 		[Embed(source = "Area3/TilesA3.png")]
 		public static var tilesa3 : Class;
@@ -132,7 +129,7 @@ package org {
 		[Embed(source = "Area3/mapCSV_Group1_PisoPared.csv" , mimeType="application/octet-stream")]
 		public static var pisoCSV3 : Class;
 		[Embed(source = "Area3/mapCSV_Group1_invisible.csv" , mimeType="application/octet-stream")]
-		public static var invisble3: Class;
+		public static var invisble3 : Class;
 		[Embed(source = "Area3/pisomalo.png")]
 		public static var picosagua : Class;
 		[Embed(source = "Area3/mapCSV_Group1_flota.csv" , mimeType="application/octet-stream")]
@@ -147,7 +144,6 @@ package org {
 		public static var soldados3 : Class;
 		[Embed(source = "Area3/mapCSV_Group1_P_ultima.csv" , mimeType="application/octet-stream")]
 		public static var puertasec3 : Class;
-		
 		// Barra de vida
 		[Embed(source = "Astrid/barra_vida_prueba.png")]
 		public static var barravida : Class;
