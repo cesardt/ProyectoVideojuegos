@@ -33,7 +33,7 @@ package org {
 		public static var mapaCSV2 : Class;
 		[Embed(source = "Area1/item.png")]
 		public static var itemsPNG1 : Class;
-		[Embed(source = "Area1/mapCSV_Group2_Bats.csv" , mimeType="application/octet-stream")]
+		[Embed(source = "Area1/mapCSV_Group2_muercielgos.csv" , mimeType="application/octet-stream")]
 		public static var mapaBats1 : Class;
 		[Embed(source = "Area1/Bat.png")]
 		public static var batSpriteSheet1 : Class;
