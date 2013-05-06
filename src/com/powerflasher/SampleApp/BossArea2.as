@@ -28,13 +28,17 @@ package com.powerflasher.SampleApp {
 				var dify:int = y - _player.y;
 				var difx:int = x - _player.x;
 				
-			if(difx<20 && difx>-20){
-				if(difx<20 && difx>0){
-					facing = RIGHT;
+			if(difx<200 && difx>-200){
+				if(difx<100 && difx>0){
+					facing = LEFT;
 					velocity.x -= _move_speed;
 				}else{
-					facing = LEFT;
-					
+					if(dify > 5){
+						facing = LEFT;
+					}
+					if(_player.x > x){
+						facing = RIGHT;
+					}
 					velocity.x += _move_speed;
 					
 				}

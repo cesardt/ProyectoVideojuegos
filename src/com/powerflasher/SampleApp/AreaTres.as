@@ -54,7 +54,7 @@ package com.powerflasher.SampleApp {
 			add(s);
 
 			//astrid = new Astrid(70, 4230);
-			astrid = new Astrid(818, 3000);
+			astrid = new Astrid(900, 2900);
 
 			boss = new BossArea3(818, 3030, astrid);
 
@@ -298,9 +298,11 @@ package com.powerflasher.SampleApp {
 			// overlap enemigos
 			FlxG.overlap(astrid, enemigos, hitEnemigos);
 			FlxG.overlap(astrid, soldados, hitEnemigos);
+			FlxG.overlap(astrid, boss, hitEnemigos);
 			// overlap bala enemigo
 			FlxG.overlap(weapon.group, enemigos, hitBullet);
 			FlxG.overlap(weapon.group, soldados, hitBullet);
+			FlxG.overlap(weaponB.group,astrid,hitBullet);
 		}
 
 		private function hitItems(p : FlxObject, item : FlxObject) : void {
@@ -315,10 +317,10 @@ package com.powerflasher.SampleApp {
 			// trace("colapse");
 			// Vida de astrid
 			if (enemigo == boss) {
-				// Vida de astrid
-				p.health -= 3;
+			// Vida de astrid
+				p.health -= 2;
 				// Barra de vida
-				vida.currentValue += 3;
+				vida.currentValue += 2;
 			} else {
 				// Vida de astrid
 				p.health -= 1;
@@ -339,11 +341,12 @@ package com.powerflasher.SampleApp {
 				enemigo.health -= 2;
 				// Barra de vida
 				// vidaBoss.currentValue += 2;
-
 				if (enemigo.health == 0) {
 					enemigo.kill();
 				}
-			} else {
+			} else if(enemigo==astrid){
+				enemigo.health=-10;
+			}else{
 				enemigo.kill();
 				FlxG.score += 1;
 				scoreE.text = FlxG.score.toString() + " / " + totalEnemigos.toString();
