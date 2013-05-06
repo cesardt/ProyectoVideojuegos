@@ -241,6 +241,7 @@ package com.powerflasher.SampleApp {
 			if (Inicio.numitems > 8 && Inicio.soldados > 150) {
 				add(puertasec);
 				if (FlxG.keys.justPressed("UP") && astrid.overlaps(puertasec)) {
+					FlxG.switchState(new FinalState());
 					trace("Ganaste. Recuperaste a tu hermano");
 				}
 			}

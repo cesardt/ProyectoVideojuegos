@@ -2,9 +2,6 @@
 	import org.Assets;
 	import org.flixel.FlxSound;
 	import org.flixel.FlxButton;
-	/**
-	 * @author ieiomeli
-	 */
 	
 	import flash.events.MouseEvent;
  
