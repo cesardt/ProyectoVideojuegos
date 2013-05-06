@@ -38,6 +38,7 @@ package com.powerflasher.SampleApp {
 		public var items : FlxGroup;
 		public var totalItems : int;
 		private var score : FlxText;
+		private var ejercito: FlxText;
 		// varibles para enemigos
 		public var enemigos : FlxGroup;
 		public var totalEnemigos : int;
@@ -109,7 +110,15 @@ package com.powerflasher.SampleApp {
 			score.shadow = 0xff000000;
 			score.scrollFactor.x = 0;
 			score.scrollFactor.y = 0;
-
+			
+			
+			//Ejercito
+			ejercito = new FlxText(0, 0, 100);
+			ejercito.color = 0xffffffff;
+			ejercito.shadow = 0xff000000;
+			ejercito.scrollFactor.x = 0;
+			ejercito.scrollFactor.y = 0;
+			
 			// atributos del scoreEnemigo
 			scoreE = new FlxText(0, 15, 100);
 			scoreE.color = 0xffffffff;
@@ -151,7 +160,8 @@ package com.powerflasher.SampleApp {
 			parseItems();
 			// agrega items y el score,  conteo
 			add(items);
-			add(score);
+			//add(score);
+			add(ejercito);
 			score.text = "0 / " + totalItems.toString();
 			parseSoldados();
 			
@@ -159,10 +169,10 @@ package com.powerflasher.SampleApp {
 			parseEnemigos();
 			// agrega items y el score,  conteo de enemigos
 			add(enemigos);
-			add(scoreE);
+			//add(scoreE);
 			scoreE.text = "0 / " + totalEnemigos.toString();
 			add(soldados);
-			add(scoreS);
+			//add(scoreS);
 			scoreS.text="0 / " + totalSoldados.toString();
 			
 			vida = new FlxBar(610, 3);
@@ -236,7 +246,7 @@ package com.powerflasher.SampleApp {
 		}
 
 		override public function update() : void {
-			trace(score);
+			ejercito.text = "Ejército: " + Inicio.soldados.toString() + " soldados ";
 			if (FlxG.keys.justPressed("Z") && astrid.facing==1 && FlxG.keys.pressed("UP")) {
 				weapon.setBulletDirection(FlxWeapon.BULLET_NORTH_WEST, 200);
 				weapon.fire();
@@ -370,12 +380,13 @@ package com.powerflasher.SampleApp {
 					Inicio.soldados+=5;
 				}
 			}
-			else if (enemigo == soldados) {
+/*			else if (enemigo == soldados) {
 					enemigo.kill();
 					Inicio.soldados+=1;
-				}
+				}*/
 			else{
 			enemigo.kill();
+			Inicio.soldados+=1;
 			FlxG.score += 1;
 			scoreE.text = FlxG.score.toString() + " / " + totalEnemigos.toString();
 			}
