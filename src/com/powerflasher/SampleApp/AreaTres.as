@@ -243,7 +243,7 @@ package com.powerflasher.SampleApp {
 				if(FlxG.keys.pressed("RIGHT") || FlxG.keys.pressed("LEFT")){
 					astrid.play("brincar");
 				}
-				if (Inicio.numitems > 5) {
+				if (Inicio.numitems > 6) {
 					if (FlxG.keys.justPressed("X")) {
 						astrid.velocity.y = -astrid.maxVelocity.y / 3;
 					}
