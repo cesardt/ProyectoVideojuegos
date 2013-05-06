@@ -236,7 +236,7 @@ package com.powerflasher.SampleApp {
 				astrid.kill();
 			}
 			if (FlxG.keys.justPressed("UP") && astrid.overlaps(puerta)) {
-				FlxG.switchState(new AreaTres());
+				FlxG.switchState(new AreaUno());
 			}
 			if (astrid.overlaps(agua)) {
 				astrid.play("brincar");

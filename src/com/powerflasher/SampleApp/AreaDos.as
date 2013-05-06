@@ -263,8 +263,10 @@ package com.powerflasher.SampleApp {
 			}
 			
 			astrid.acceleration.y = 450;
-
-			if (astrid.overlaps(enredaderas)) {
+			if(Inicio.numitems<5){
+				FlxG.collide(astrid,enredaderas);
+			}
+			if (astrid.overlaps(enredaderas) && Inicio.numitems>5) {
 				astrid.velocity.y = 0;
 				astrid.acceleration.y = 0;
 
