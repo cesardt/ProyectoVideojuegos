@@ -30,7 +30,6 @@ package com.powerflasher.SampleApp {
 		private var brujo : Brujo;
 		private var mapaPrincipal : FlxTilemap;
 		private var agua : FlxTilemap;
-		private var invisible: FlxTilemap;
 		private var platagua : FlxTilemap;
 		private var flotar : FlxTilemap;
 		private var picosagua : FlxTilemap;
@@ -84,10 +83,6 @@ package com.powerflasher.SampleApp {
 			mapa5 = new FlxTilemap();
 			puerta = new FlxTilemap();
 			item = new FlxTile(barras, 2, 10, 10, true, 1);
-			invisible= new FlxTilemap();
-
-			invisible.visible=false;
-		
 			// Cargar MApa
 			mapa5.loadMap(new Assets.mapaCSV4(), Assets.fondo, 31, 28);
 			picosagua.loadMap(new Assets.picos1(), Assets.picosagua, 16, 16);
@@ -97,8 +92,6 @@ package com.powerflasher.SampleApp {
 			agua.loadMap(new Assets.mapaCSV1(), Assets.mapaPNG1, 31, 28);
 			mapa4.loadMap(new Assets.mapaCSV3(), Assets.mapaPNG2, 31, 14);
 			puerta.loadMap(new Assets.mapaCSV5(), Assets.puertaPNG, 31, 14);
-			invisible.loadMap(new Assets.invisble2(), Assets.tilespuerta, 32, 32);
-			
 			// Propiedades Tiles
 			mapa4.setTileProperties(1, FlxObject.UP);
 			agua.setTileProperties(5, FlxObject.UP);
@@ -311,7 +304,6 @@ package com.powerflasher.SampleApp {
 			}*/
 			FlxG.collide(soldados, mapaPrincipal);
 			FlxG.collide(soldados, mapa4);
-			FlxG.collide(soldados, invisible);
 			FlxG.collide(robot, mapaPrincipal);
 			FlxG.collide(brujo, mapaPrincipal);
 			FlxG.overlap(astrid, items, hitItems);
