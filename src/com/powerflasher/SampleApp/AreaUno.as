@@ -38,6 +38,8 @@ package com.powerflasher.SampleApp {
 		private var mapa5 : FlxTilemap;
 		private var puerta : FlxTilemap;
 		private var item : FlxTile;
+		private var invisible: FlxTilemap;
+		
 		// varibles para recoger items
 		public var items : FlxGroup;
 		public var totalItems : int;
@@ -73,7 +75,7 @@ package com.powerflasher.SampleApp {
 			astrid = new Astrid(150, 530);
 			// bosses
 			robot = new BossRobot(180, 780, astrid);
-			brujo = new Brujo(1749, 188, astrid);
+			brujo = new Brujo(1749, 100, astrid);
 			// Mapa
 			mapaPrincipal = new FlxTilemap();
 			agua = new FlxTilemap();
@@ -83,6 +85,7 @@ package com.powerflasher.SampleApp {
 			mapa4 = new FlxTilemap();
 			mapa5 = new FlxTilemap();
 			puerta = new FlxTilemap();
+			invisible= new FlxTilemap();
 			item = new FlxTile(barras, 2, 10, 10, true, 1);
 			// Cargar MApa
 			mapa5.loadMap(new Assets.mapaCSV4(), Assets.fondo, 31, 28);
@@ -93,6 +96,8 @@ package com.powerflasher.SampleApp {
 			agua.loadMap(new Assets.mapaCSV1(), Assets.mapaPNG1, 31, 28);
 			mapa4.loadMap(new Assets.mapaCSV3(), Assets.mapaPNG2, 31, 14);
 			puerta.loadMap(new Assets.mapaCSV5(), Assets.puertaPNG, 31, 14);
+			invisible.loadMap(new Assets.invisble1(), Assets.puertaPNG, 14, 14);
+			
 			// Propiedades Tiles
 			mapa4.setTileProperties(1, FlxObject.UP);
 			agua.setTileProperties(5, FlxObject.UP);
@@ -129,12 +134,15 @@ package com.powerflasher.SampleApp {
 			add(picosagua);
 			add(mapa4);
 			add(puerta);
+			add(invisible);
 			add(mapaPrincipal);
 			add(astrid);
 			add(robot);
 			add(brujo);
 			add(agua);
 			add(platagua);
+			invisible.visible=false;
+			
 			Inicio.numitems = 0;
 			// añadir arma a astrid
 			weapon = new FlxWeapon("shuriken", astrid, "x", "y");
@@ -248,14 +256,15 @@ package com.powerflasher.SampleApp {
 					if (soldadoMap.getTile(tx, ty) == 1) {
 						soldados.add(new soldado(tx, ty, astrid));
 						totalSoldados++;
-						trace(soldados);
+						//trace(soldados);
 					}
 				}
 			}
 		}
 
 		override public function update() : void {
-			trace(Inicio.numitems);
+			//trace(Inicio.numitems);
+			trace(astrid.x+" "+astrid.y);
 			ejercito.text = "Ejército: " + Inicio.soldados.toString() + " soldados ";
 			if (FlxG.keys.justPressed("Z") && astrid.facing == 1 && FlxG.keys.pressed("UP")) {
 				weapon.setBulletDirection(FlxWeapon.BULLET_NORTH_WEST, 200);
@@ -314,6 +323,7 @@ package com.powerflasher.SampleApp {
 			FlxG.collide(soldados, mapa4);
 			FlxG.collide(robot, mapaPrincipal);
 			FlxG.collide(brujo, mapaPrincipal);
+			FlxG.collide(brujo, invisible);
 			FlxG.overlap(astrid, items, hitItems);
 			// overlap enemigos
 			FlxG.overlap(astrid, enemigos, hitEnemigos);
