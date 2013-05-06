@@ -132,6 +132,8 @@ package org {
 		public static var fondoCSV : Class;
 		[Embed(source = "Area3/mapCSV_Group1_Plataformas.csv" , mimeType="application/octet-stream")]
 		public static var plataformaCSV : Class;
+		[Embed(source = "Area3/mapCSV_Group1_puerta.csv" , mimeType="application/octet-stream")]
+		public static var puerta3 : Class;
 		[Embed(source = "Area3/mapCSV_Group1_PisoPared.csv" , mimeType="application/octet-stream")]
 		public static var pisoCSV3 : Class;
 		[Embed(source = "Area3/mapCSV_Group1_invisible.csv" , mimeType="application/octet-stream")]

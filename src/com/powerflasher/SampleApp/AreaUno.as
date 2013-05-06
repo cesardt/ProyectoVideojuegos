@@ -276,7 +276,7 @@ package com.powerflasher.SampleApp {
 				astrid.kill();
 			}
 
-			if (FlxG.keys.justPressed("UP") && FlxG.collide(astrid, puerta)) {
+			if (FlxG.keys.justPressed("UP") && astrid.overlaps(puerta)) {
 				FlxG.switchState(new AreaDos());
 			}
 

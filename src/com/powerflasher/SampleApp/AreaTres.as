@@ -20,6 +20,7 @@ package com.powerflasher.SampleApp {
 		private var boss : BossArea3;
 		private var agua : FlxTilemap;
 		private var flotar : FlxTilemap;
+		private var puerta : FlxTilemap;
 		private var cielo : FlxTilemap;
 		private var fondo : FlxTilemap;
 		private var plataforma : FlxTilemap;
@@ -57,6 +58,7 @@ package com.powerflasher.SampleApp {
 			boss = new BossArea3(818, 3030, astrid);
 
 			agua = new FlxTilemap();
+			puerta = new FlxTilemap();
 			piso = new FlxTilemap();
 			cielo = new FlxTilemap();
 			fondo = new FlxTilemap();
@@ -65,6 +67,7 @@ package com.powerflasher.SampleApp {
 			picosagua = new FlxTilemap();
 			flotar = new FlxTilemap();
 			flotar.loadMap(new Assets.flotar(), Assets.mapaPNG1, 32, 16);
+			puerta.loadMap(new Assets.puerta3(), Assets.tilespuerta, 32, 16);
 			picosagua.loadMap(new Assets.picos3(), Assets.picosagua, 16, 16);
 			agua.loadMap(new Assets.aguaCSV(), Assets.tilesa3, 32, 32);
 			piso.loadMap(new Assets.pisoCSV3(), Assets.tilesa3, 32, 32);
@@ -106,9 +109,8 @@ package com.powerflasher.SampleApp {
 			add(piso);
 			add(picosagua);
 			add(agua);
-			add(invisible);
+			add(puerta);
 
-			invisible.visible = false;
 			weapon = new FlxWeapon("shuriken", astrid, "x", "y");
 			weapon.makeImageBullet(50, Assets.Shuriken, astrid.origin.x, astrid.origin.y);
 			weapon.bounds.width = 2592;
@@ -232,6 +234,9 @@ package com.powerflasher.SampleApp {
 			}
 			if(FlxG.collide(astrid,picosagua)){
 				astrid.kill();
+			}
+			if (FlxG.keys.justPressed("UP") && astrid.overlaps(puerta)) {
+				FlxG.switchState(new AreaTres());
 			}
 			if (astrid.overlaps(agua)) {
 				astrid.play("brincar");

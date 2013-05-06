@@ -284,7 +284,7 @@ package com.powerflasher.SampleApp {
 					astrid.play("brincar");
 				}
 			}
-			if (FlxG.keys.justPressed("UP") && FlxG.collide(puerta,astrid)) {
+			if (FlxG.keys.justPressed("UP") && astrid.overlaps(puerta)) {
 				FlxG.switchState(new AreaTres());
 			}
 			/*if (FlxG.collide(astrid, pared) && FlxG.keys.pressed("Z")) {
