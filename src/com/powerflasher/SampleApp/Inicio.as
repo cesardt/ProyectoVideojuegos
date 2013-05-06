@@ -13,7 +13,7 @@
 	
 	public class Inicio extends FlxState {
 		private static var _numitems : Number=0;
-		private static var _vidas : Number=6;
+		private static var _vidas : Number=3;
 		private static var _soldados : Number=0;
 		
 		

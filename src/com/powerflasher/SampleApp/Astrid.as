@@ -177,6 +177,7 @@
 			acceleration.make();
 			FlxG.camera.shake(0.005,0.35);
 			FlxG.camera.flash(0xffd8eba2,0.35);
+			Inicio.vidas-=1;
 		}
 	}
 }

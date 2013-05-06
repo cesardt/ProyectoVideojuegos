@@ -30,6 +30,7 @@ package com.powerflasher.SampleApp {
 		private var weaponB : FlxWeapon;
 		private var contador : int = 0;
 		private var invisible : FlxTilemap;
+		private var puertasec:FlxTilemap;
 
 		private var vida : FlxBar;
 		// varibles para recoger items
@@ -68,6 +69,7 @@ package com.powerflasher.SampleApp {
 			invisible = new FlxTilemap();
 			picosagua = new FlxTilemap();
 			flotar = new FlxTilemap();
+			puertasec= new FlxTilemap();
 			flotar.loadMap(new Assets.flotar(), Assets.mapaPNG1, 32, 16);
 			puerta.loadMap(new Assets.puerta3(), Assets.tilespuerta, 32, 16);
 			picosagua.loadMap(new Assets.picos3(), Assets.picosagua, 16, 16);
@@ -77,6 +79,7 @@ package com.powerflasher.SampleApp {
 			fondo.loadMap(new Assets.fondoCSV(), Assets.tilesa3, 32, 32);
 			plataforma.loadMap(new Assets.plataformaCSV(), Assets.tilesa3, 32, 32);
 			invisible.loadMap(new Assets.invisble3(), Assets.tilespuerta, 32, 32);
+			puerta.loadMap(new Assets.puertasec3(), Assets.tilespuerta, 32, 16);
 
 			plataforma.setTileProperties(5, FlxObject.UP);
 			plataforma.setTileProperties(6, FlxObject.UP);
@@ -226,6 +229,14 @@ package com.powerflasher.SampleApp {
 			//trace(astrid.x);
 			//trace(astrid.y);
 			ejercito.text = "Ejército: " + Inicio.soldados.toString() + " soldados ";
+			
+			if(Inicio.numitems>8 && Inicio.soldados>150){
+				add(puertasec);
+				if(FlxG.keys.justPressed("UP") && astrid.overlaps(puertasec)){
+					trace("Ganaste. Recuperaste a tu hermano");
+				}
+			}
+			
 			if (FlxG.keys.justPressed("Z") && astrid.facing == 1 && FlxG.keys.pressed("UP")) {
 				weapon.setBulletDirection(FlxWeapon.BULLET_NORTH_WEST, 200);
 				weapon.fire();

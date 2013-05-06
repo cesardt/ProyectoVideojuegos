@@ -27,6 +27,7 @@ package com.powerflasher.SampleApp {
 		private var astrid : Astrid;
 		// bosses
 		private var robot : BossRobot;
+		private var robot1 : BossRobot;
 		private var brujo : Brujo;
 		private var mapaPrincipal : FlxTilemap;
 		private var agua : FlxTilemap;
@@ -58,6 +59,7 @@ package com.powerflasher.SampleApp {
 		private var vida : FlxBar;
 		private var vidas : FlxBar;
 		private var vidaBoss : FlxBar;
+		private var vidaBoss1 : FlxBar;
 		private var vidaBrujo : FlxBar;
 		// Para guardar
 		private var Saver : FlxSave;
@@ -75,7 +77,12 @@ package com.powerflasher.SampleApp {
 			astrid = new Astrid(150, 530);
 			// bosses
 			robot = new BossRobot(180, 780, astrid);
+<<<<<<< HEAD
 			brujo = new Brujo(1749, 100, astrid);
+=======
+			robot1 = new BossRobot(600, 100, astrid);
+			brujo = new Brujo(1680, 188, astrid);
+>>>>>>> robot
 			// Mapa
 			mapaPrincipal = new FlxTilemap();
 			agua = new FlxTilemap();
@@ -138,6 +145,7 @@ package com.powerflasher.SampleApp {
 			add(mapaPrincipal);
 			add(astrid);
 			add(robot);
+			add(robot1);
 			add(brujo);
 			add(agua);
 			add(platagua);
@@ -173,27 +181,38 @@ package com.powerflasher.SampleApp {
 
 			// barra de vida de astrid
 			vida = new FlxBar(620, 3);
+			vida.setRange(0,100)
 			vida.scrollFactor.x = 0;
 			vida.scrollFactor.y = 0;
-			vida.createImageBar(Assets.barravida, Assets.barravida1, 0x00AB00, 0xFF00FF00);
+			vida.createImageBar(Assets.barravida, Assets.barravida1);
 			vida.currentValue = 0;
 			add(vida);
 
-			vidas = new FlxBar(530, 40);
+			vidas = new FlxBar(530, 40,1);
+			vidas.setRange(0, 12);
 			vidas.scrollFactor.x = 0;
 			vidas.scrollFactor.y = 0;
 			vidas.createImageBar(Assets.vidafull, Assets.vidaempty);
-			vidas.currentValue = 0;
+			vidas.currentValue =12-Inicio.vidas;
 			add(vidas);
 
 			// barra vida bosses
-			vidaBoss = new FlxBar(300, 3, 2, 100, 10, null, "", 0, 30);
+			vidaBoss = new FlxBar(300, 3);
+			vidaBoss.setRange(0, 30);
 			vidaBoss.scrollFactor.x = 0;
 			vidaBoss.scrollFactor.y = 0;
 			vidaBoss.createImageBar(Assets.barravidaboss, Assets.barravidaboss1);
 			vidaBoss.currentValue = 0;
+			
+			vidaBoss1 = new FlxBar(300, 3);
+			vidaBoss1.setRange(0, 30);		
+			vidaBoss1.scrollFactor.x = 0;
+			vidaBoss1.scrollFactor.y = 0;
+			vidaBoss1.createImageBar(Assets.barravidaboss, Assets.barravidaboss1);
+			vidaBoss1.currentValue = 0;
 
-			vidaBrujo = new FlxBar(300, 3, 2, 100, 10, null, "", 0, 50);
+			vidaBrujo = new FlxBar(300, 3);
+			vidaBrujo.setRange(0, 50);
 			vidaBrujo.scrollFactor.x = 0;
 			vidaBrujo.scrollFactor.y = 0;
 			vidaBrujo.createImageBar(Assets.barravidabrujo, Assets.barravidabrujo1);
@@ -300,16 +319,19 @@ package com.powerflasher.SampleApp {
 			}
 			if (astrid.overlaps(picosagua)) {
 				astrid.kill();
+				Inicio.vidas=Inicio.vidas-1;
 			}
 
 			if (FlxG.keys.justPressed("UP") && astrid.overlaps(puerta)) {
 				FlxG.switchState(new AreaDos());
 			}
 
-			if (astrid.health == 0) {
+			if (astrid.health <= 0) {
 				astrid.kill();
+				Inicio.vidas=Inicio.vidas-1;
 			}
 			robot.acceleration.y = 600;
+			robot1.acceleration.y = 600;
 			super.update();
 
 			// collides mapa
@@ -322,6 +344,7 @@ package com.powerflasher.SampleApp {
 			FlxG.collide(soldados, mapaPrincipal);
 			FlxG.collide(soldados, mapa4);
 			FlxG.collide(robot, mapaPrincipal);
+			FlxG.collide(robot1, mapaPrincipal);
 			FlxG.collide(brujo, mapaPrincipal);
 			FlxG.collide(brujo, invisible);
 			FlxG.overlap(astrid, items, hitItems);
@@ -329,11 +352,13 @@ package com.powerflasher.SampleApp {
 			FlxG.overlap(astrid, enemigos, hitEnemigos);
 			FlxG.overlap(astrid, soldados, hitEnemigos);
 			FlxG.overlap(astrid, robot, hitEnemigos);
+			FlxG.overlap(astrid, robot1, hitEnemigos);
 			FlxG.overlap(astrid, brujo, hitEnemigos);
 			// overlap bala enemigo
 			FlxG.overlap(weapon.group, enemigos, hitBullet);
 			FlxG.overlap(weapon.group, soldados, hitBullet);
 			FlxG.overlap(weapon.group, robot, hitBullet);
+			FlxG.overlap(weapon.group, robot1, hitBullet);
 			FlxG.overlap(weapon.group, brujo, hitBullet);
 		}
 
@@ -356,7 +381,7 @@ package com.powerflasher.SampleApp {
 			add(emitter);
 			emitter.start();
 			}*/
-			if (enemigo == robot) {
+			if (enemigo == robot || enemigo==robot1) {
 				// Vida de astrid
 				p.health -= 3;
 				// Barra de vida
@@ -366,7 +391,7 @@ package com.powerflasher.SampleApp {
 				// Vida de astrid
 				p.health -= 5;
 				// Barra de vida
-				vida.currentValue += 3;
+				vida.currentValue += 5;
 			} else {
 				// Vida de astrid
 				p.health -= 1;
@@ -387,12 +412,24 @@ package com.powerflasher.SampleApp {
 				// Barra de vida
 				vidaBoss.currentValue += 2;
 
-				if (enemigo.health == 0) {
+				if (enemigo.health <= 0) {
 					enemigo.kill();
 					vidaBoss.kill();
 					Inicio.soldados += 5;
 				}
-			} /*else if (enemigo == soldados ) {
+			} 
+			if (enemigo == robot1) {
+				add(vidaBoss1);
+				enemigo.health -= 2;
+				// Barra de vida
+				vidaBoss1.currentValue += 2;
+
+				if (enemigo.health <= 0) {
+					enemigo.kill();
+					vidaBoss1.kill();
+					Inicio.soldados += 5;
+				}
+			}/*else if (enemigo == soldados ) {
 				enemigo.kill();
 				Inicio.soldados += 1;
 			} */else if (enemigo == brujo) {
@@ -401,7 +438,7 @@ package com.powerflasher.SampleApp {
 				// Barra de vida
 				vidaBrujo.currentValue += 2;
 
-				if (enemigo.health == 0) {
+				if (enemigo.health <= 0) {
 					enemigo.kill();
 					vidaBrujo.kill();
 					Inicio.soldados += 5;

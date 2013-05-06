@@ -28,6 +28,7 @@ package com.powerflasher.SampleApp {
 		private var fondos : FlxTilemap;
 		private var pared : FlxTilemap;
 		private var plataformas : FlxTilemap;
+		private var puertasec:FlxTilemap;
 		private var puerta : FlxTilemap;
 		private var atras : FlxTilemap;
 		//private var invisible: FlxTilemap;
@@ -75,6 +76,7 @@ package com.powerflasher.SampleApp {
 			picos = new FlxTilemap();
 			puerta = new FlxTilemap();
 			atras = new FlxTilemap();
+			puertasec=new FlxTilemap();
 			//invisible= new FlxTilemap();
 
 			//invisible= new FlxTilemap();
@@ -90,6 +92,7 @@ package com.powerflasher.SampleApp {
 			piso.loadMap(new Assets.pisoCSV2(), Assets.tilespiso, 32, 32);
 			plataformas.loadMap(new Assets.plataformasCSV(), Assets.tilesplataforma, 32, 32);
 			atras.loadMap(new Assets.atrasCSV(), Assets.tilesatras, 32, 32);
+			puertasec.loadMap(new Assets.puertasec2(), Assets.tilespuerta, 32, 32);
 			//invisible.loadMap(new Assets.invisble2(), Assets.tilespuerta, 32, 32);
 			
 			
@@ -247,6 +250,14 @@ package com.powerflasher.SampleApp {
 
 		override public function update() : void {
 			ejercito.text = "Ejército: " + Inicio.soldados.toString() + " soldados ";
+			
+			if(Inicio.numitems>8 && Inicio.soldados>150){
+				add(puertasec);
+				if(FlxG.keys.justPressed("UP") && astrid.overlaps(puertasec)){
+					trace("Ganaste. Recuperaste a tu hermano");
+				}
+			}
+			
 			if (FlxG.keys.justPressed("Z") && astrid.facing==1 && FlxG.keys.pressed("UP")) {
 				weapon.setBulletDirection(FlxWeapon.BULLET_NORTH_WEST, 200);
 				weapon.fire();
