@@ -33,7 +33,7 @@
 			FlxG.playMusic(Assets.Music);
 			
  	
- 			texto=new FlxText(0, 300, FlxG.width, "Al infinito").setFormat(null, 21, 0xFFFFFF, "center");
+ 			texto=new FlxText(0, 300, FlxG.width, "Astrid's Revenge").setFormat(null, 21, 0xFFFFFF, "center");
          
            add(texto);
 		   
