@@ -6,8 +6,8 @@ package com.powerflasher.SampleApp {
 	public class Murcielago extends FlxSprite{
 		
 		private var _player:FlxSprite;  
-		private var _move_speed:int = 200;
-		private var detected:Boolean;
+		private var _move_speed:int = 150;
+		private var _detected:Boolean;
 			
 		public function Murcielago(X:Number,Y:Number,ThePlayer:FlxSprite):void{
 			
@@ -16,7 +16,7 @@ package com.powerflasher.SampleApp {
 			health = 1;
 			maxVelocity.x = 200;
             maxVelocity.y = 200;
-			detected = false;
+			_detected = false;
 			loadGraphic(Assets.batSpriteSheet1, true, true, 24, 24, true);
 			addAnimation("idle",[3], 0,false);
 			addAnimation("volar",[0,1,2], 15, false);
@@ -27,26 +27,30 @@ package com.powerflasher.SampleApp {
 			
 				var dify:int = y - _player.y;
 				var difx:int = _player.x - x;
+				
+				trace("Detectado: ");
+				trace(_detected);
 			
-			if(dify < 10 && !detected){	
-				if(difx < 0 && difx > -50){
+			if(dify < 10 && !_detected){
+				if(difx < 0 && difx > -150){
 					facing = LEFT;
 					velocity.x -= _move_speed;
-					velocity.y = Math.log(FlxG.elapsed)* dify ;
+					velocity.y = Math.log(FlxG.elapsed)* dify/2 ;
 				}
-				else if(difx > 0 && difx < 10){
+				else if(difx > 0 && difx < 150){
 					facing = RIGHT;
 					velocity.x += _move_speed;
-					velocity.y = Math.log(FlxG.elapsed)*dify;
+					velocity.y = Math.log(FlxG.elapsed)*dify/2;
 				}
-				detected = true;
 			}
 			
 			if(velocity.x != 0){
 				play("volar");
+				_detected = true;
 			}
 			else{
 				play("idle");
+				_detected = false;
 			}
 		  }
 
