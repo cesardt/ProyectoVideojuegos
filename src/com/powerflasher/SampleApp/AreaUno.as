@@ -49,6 +49,7 @@ package com.powerflasher.SampleApp {
 		public var soldados : FlxGroup;
 		public var totalSoldados : int;
 		private var scoreS : FlxText;
+		private var ejercito:FlxText;
 		private var level : AreaUno;
 		// public var enemies : FlxGroup;
 		private var weapon : FlxWeapon;
@@ -109,7 +110,13 @@ package com.powerflasher.SampleApp {
 			scoreE.shadow = 0xff000000;
 			scoreE.scrollFactor.x = 0;
 			scoreE.scrollFactor.y = 0;
-
+			//Ejercito
+			ejercito = new FlxText(0, 0, 100);
+			ejercito.color = 0xffffffff;
+			ejercito.shadow = 0xff000000;
+			ejercito.scrollFactor.x = 0;
+			ejercito.scrollFactor.y = 0;
+			
 			// atributos del scoreSoldados
 			scoreS = new FlxText(0, 25, 100);
 			scoreS.color = 0xffffffff;
@@ -128,7 +135,7 @@ package com.powerflasher.SampleApp {
 			add(brujo);
 			add(agua);
 			add(platagua);
-			Inicio.numitems=0;
+			Inicio.numitems = 0;
 			// añadir arma a astrid
 			weapon = new FlxWeapon("shuriken", astrid, "x", "y");
 			weapon.makeImageBullet(50, Assets.Shuriken, astrid.origin.x, astrid.origin.y);
@@ -144,15 +151,16 @@ package com.powerflasher.SampleApp {
 			// agrega items y el score,  conteo de enemigos
 			add(enemigos);
 			add(soldados);
-			add(scoreE);
+			//add(scoreE);
+			add(ejercito);
 
 			add(soldados);
-			add(scoreS);
+		//	add(scoreS);
 			scoreE.text = "0 / " + totalEnemigos.toString();
 			scoreS.text = "0 / " + totalSoldados.toString();
 			// agrega items y el score,  conteo
 			add(items);
-			add(score);
+		//	add(score);
 			score.text = "0 / " + totalItems.toString();
 
 			// barra de vida de astrid
@@ -162,7 +170,7 @@ package com.powerflasher.SampleApp {
 			vida.createImageBar(Assets.barravida, Assets.barravida1, 0x00AB00, 0xFF00FF00);
 			vida.currentValue = 0;
 			add(vida);
-			
+
 			vidas = new FlxBar(530, 40);
 			vidas.scrollFactor.x = 0;
 			vidas.scrollFactor.y = 0;
@@ -248,6 +256,7 @@ package com.powerflasher.SampleApp {
 
 		override public function update() : void {
 			trace(Inicio.numitems);
+			ejercito.text = "Ejército: " + Inicio.soldados.toString() + " soldados ";
 			if (FlxG.keys.justPressed("Z") && astrid.facing == 1 && FlxG.keys.pressed("UP")) {
 				weapon.setBulletDirection(FlxWeapon.BULLET_NORTH_WEST, 200);
 				weapon.fire();
@@ -268,9 +277,8 @@ package com.powerflasher.SampleApp {
 				weapon.fire();
 			}
 			if (astrid.overlaps(agua)) {
-				
 				astrid.play("brincar");
-				if(FlxG.keys.pressed("RIGHT") || FlxG.keys.pressed("LEFT")){
+				if (FlxG.keys.pressed("RIGHT") || FlxG.keys.pressed("LEFT")) {
 					astrid.play("brincar");
 				}
 				if (Inicio.numitems > 6) {
@@ -372,14 +380,12 @@ package com.powerflasher.SampleApp {
 				if (enemigo.health == 0) {
 					enemigo.kill();
 					vidaBoss.kill();
-					Inicio.soldados+=5;
-					
+					Inicio.soldados += 5;
 				}
-			} else if (enemigo == soldados) {
-					enemigo.kill();
-					Inicio.soldados+=1;
-				}
-				 else if (enemigo == brujo) {
+			} /*else if (enemigo == soldados ) {
+				enemigo.kill();
+				Inicio.soldados += 1;
+			} */else if (enemigo == brujo) {
 				add(vidaBrujo);
 				enemigo.health -= 2;
 				// Barra de vida
@@ -388,10 +394,11 @@ package com.powerflasher.SampleApp {
 				if (enemigo.health == 0) {
 					enemigo.kill();
 					vidaBrujo.kill();
-					Inicio.soldados+=5;
+					Inicio.soldados += 5;
 				}
 			} else {
 				enemigo.kill();
+				Inicio.soldados += 1;
 				FlxG.score += 1;
 				scoreE.text = FlxG.score.toString() + " / " + totalEnemigos.toString();
 			}

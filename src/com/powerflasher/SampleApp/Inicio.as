@@ -64,8 +64,14 @@
 		public static function get soldados() : Number {
 			return _soldados;
 		}
-		public static function set vidas(soldados:Number):void {
+		public static function set soldados(soldados:Number):void {
 			_soldados=soldados;
+		}
+		public static function get vidas() : Number {
+			return _vidas;
+		}
+		public static function set vidas(vidas:Number):void {
+			_vidas=vidas;
 		}
 		
 	}
