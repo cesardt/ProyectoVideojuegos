@@ -119,16 +119,11 @@ package com.powerflasher.SampleApp {
 			add(weapon.group);
 
 			weaponB = new FlxWeapon("shuriken", boss, "x", "y");
-<<<<<<< HEAD
-			weaponB.makeImageBullet(50, Assets.Shuriken, boss.origin.x, boss.origin.y, true, 10, 1);
-			weaponB.bounds.width = 3200;
-			weaponB.bounds.height = 1600;
-=======
 			weaponB.makeImageBullet(50, Assets.Shuriken);
 			weaponB.setBulletDirection(FlxWeapon.BULLET_RIGHT, 100);
 			weaponB.bounds.width = 2592;
 			weaponB.bounds.height = 4800;
->>>>>>> Y por fin funciona en boss area 3 :D
+
 			add(weaponB.group);
 
 			vida = new FlxBar(620, 3);
