@@ -72,7 +72,7 @@ package com.powerflasher.SampleApp {
 			astrid = new Astrid(150, 530);
 			// bosses
 			robot = new BossRobot(180, 780, astrid);
-			brujo = new Brujo(1680, 188, astrid);
+			brujo = new Brujo(1749, 188, astrid);
 			// Mapa
 			mapaPrincipal = new FlxTilemap();
 			agua = new FlxTilemap();
@@ -240,14 +240,14 @@ package com.powerflasher.SampleApp {
 					if (soldadoMap.getTile(tx, ty) == 1) {
 						soldados.add(new soldado(tx, ty, astrid));
 						totalSoldados++;
-						trace(soldados);
+						//trace(soldados);
 					}
 				}
 			}
 		}
 
 		override public function update() : void {
-			trace(Inicio.numitems);
+			//trace(Inicio.numitems);
 			if (FlxG.keys.justPressed("Z") && astrid.facing == 1 && FlxG.keys.pressed("UP")) {
 				weapon.setBulletDirection(FlxWeapon.BULLET_NORTH_WEST, 200);
 				weapon.fire();
@@ -294,7 +294,7 @@ package com.powerflasher.SampleApp {
 			}
 			robot.acceleration.y = 600;
 			super.update();
-
+			trace(astrid.x+ "  "+ astrid.y);
 			// collides mapa
 			FlxG.collide(astrid, mapaPrincipal);
 			FlxG.collide(astrid, mapa4);
