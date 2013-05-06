@@ -139,19 +139,13 @@ package com.powerflasher.SampleApp {
 			
 			//Añadirle arma a astrid
 			weapon = new FlxWeapon("shuriken", astrid, "x", "y");
-			weapon.makeImageBullet(200, Assets.Shuriken, 0,15,true,10,1);
+			weapon.makeImageBullet(50, Assets.Shuriken, astrid.origin.x, astrid.origin.y);
 			weapon.setBulletDirection(FlxWeapon.BULLET_LEFT,200);
 			weapon.bounds.width=3200;
 			weapon.bounds.height=1600;
 			add(weapon.group);
 			
 			//Añadirle barra de vida a astrid
-			vida = new FlxBar(610, 3);
-			vida.scrollFactor.x = 0;
-			vida.scrollFactor.y = 0;
-			vida.createImageBar(Assets.barravida, Assets.barravida1,0x00AB00,0xFF00FF00);
-			vida.currentValue=0;
-			add(vida);
 
 			// inicializa el grupo de items, del mapa al grupo
 			parseItems();
@@ -170,6 +164,13 @@ package com.powerflasher.SampleApp {
 			add(soldados);
 			add(scoreS);
 			scoreS.text="0 / " + totalSoldados.toString();
+			
+			vida = new FlxBar(610, 3);
+			vida.scrollFactor.x = 0;
+			vida.scrollFactor.y = 0;
+			vida.createImageBar(Assets.barravida, Assets.barravida1,0x00AB00,0xFF00FF00);
+			vida.currentValue=0;
+			add(vida);
 			
 			// Propiedades de la camara
 			FlxG.camera.setBounds(0, 0, 3200, 1600, false);
@@ -235,6 +236,7 @@ package com.powerflasher.SampleApp {
 		}
 
 		override public function update() : void {
+			trace(score);
 			if (FlxG.keys.justPressed("Z") && astrid.facing==1 && FlxG.keys.pressed("UP")) {
 				weapon.setBulletDirection(FlxWeapon.BULLET_NORTH_WEST, 200);
 				weapon.fire();
@@ -314,6 +316,8 @@ package com.powerflasher.SampleApp {
 			FlxG.overlap(astrid, enemigos, hitEnemigos);
 			FlxG.overlap(astrid, soldados, hitEnemigos);
 			FlxG.overlap(astrid, boss, hitEnemigos);
+			FlxG.collide(weapon.group,piso);
+			FlxG.collide(weapon.group,plataformas);
 			
 			//overlap bala enemigo
 			FlxG.overlap(weapon.group, enemigos, hitBullet);
@@ -326,6 +330,7 @@ package com.powerflasher.SampleApp {
 			// trace("colapse");
 			item.kill();
 			FlxG.score += 1;
+			Inicio.numitems++;
 			score.text = FlxG.score.toString() + " / " + totalItems.toString();
 		}
 		private function hitEnemigos(p : FlxObject, enemigo : FlxObject) : void {

@@ -14,7 +14,7 @@ package com.powerflasher.SampleApp {
 			_player = ThePlayer;
 			health = 30;
 			acceleration.y = 600;
-			maxVelocity.x = 100;
+			maxVelocity.x = 50;
             maxVelocity.y = 100;
 			loadGraphic(Assets.brujo, true, true, 60, 78, true);
 			addAnimation("idle",[0], 0,false);

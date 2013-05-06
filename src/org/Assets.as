@@ -8,6 +8,8 @@ package org {
 		public static var jugadorSpriteSheet : Class;
 		[Embed(source = "Astrid/shuriken1.png")]
 		public static var Shuriken : Class;
+		[Embed(source = "Astrid/shuriken1.png")]
+		public static var shuriken : Class;
 		// Area1
 		[Embed(source = "Area1/Tiles_mapa1.png")]
 		public static var mapaPNG : Class;
@@ -15,6 +17,8 @@ package org {
 		public static var picosagua : Class;
 		[Embed(source = "Area1/mapCSV_Group2_col.csv" , mimeType="application/octet-stream")]
 		public static var mapaflotar : Class;
+		[Embed(source = "Area3/mapCSV_Group1_flota.csv" , mimeType="application/octet-stream")]
+		public static var flotar : Class;
 		[Embed(source = "Area1/mapCSV_Group2_picos.csv" , mimeType="application/octet-stream")]
 		public static var picos1 : Class;
 		[Embed(source = "Area1/mapCSV_Group2_Pasto.csv" , mimeType="application/octet-stream")]

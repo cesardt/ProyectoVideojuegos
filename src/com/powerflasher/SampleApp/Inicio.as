@@ -11,11 +11,11 @@
     import org.flixel.FlxState;
     import org.flixel.FlxText;
 	
-	public class Inicio extends FlxState{
+	public class Inicio extends FlxState {
+		private static var _numitems : Number=0;
 		
 		
 		private var texto:FlxText;
-		
 		 public function Inicio()
         {
             super();
@@ -40,7 +40,7 @@
 		}
 
 		private function Iniciar() : void {
-			FlxG.switchState(new AreaUno());
+			FlxG.switchState(new AreaDos());
 		}
 
 		
@@ -51,7 +51,14 @@
     {
        
         super.update();
-    }
+		}
+
+		public static function get numitems() : Number {
+			return _numitems;
+		}
+		public static function set numitems(items:Number):void {
+			_numitems=items;
+		}
 		
 	}
 }

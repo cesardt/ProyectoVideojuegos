@@ -21,8 +21,8 @@ package com.powerflasher.SampleApp {
             maxVelocity.y = 20;
 			detected = false;
 			
-			minX = x - 100;
-			maxX = x + 100;
+			minX = x - 50;
+			maxX = x + 50;
 			
 			loadGraphic(Assets.soldado, true, true, 24, 36, true);
 //			addAnimation("quieto",[1], 0,false);

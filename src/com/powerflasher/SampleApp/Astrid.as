@@ -87,27 +87,27 @@
 			if (FlxG.keys.pressed("RIGHT")) {
 				acceleration.x += drag.x;
 				_facing=RIGHT;
-				if (velocity.y == 0 && !FlxG.keys.pressed("X")) {
+				if (velocity.y == 0 ) {
 					play("caminar");
 				}
 			}
 			if (FlxG.keys.pressed("LEFT")) {
 				acceleration.x -= drag.x;
 				_facing=LEFT;
-				if (velocity.y == 0 && !FlxG.keys.pressed("X")) {
+				if (velocity.y == 0 ) {
 					play("caminar");
 				}
 			}
 			if (FlxG.keys.pressed("DOWN")) {
 			}
-			if (FlxG.keys.justPressed("SPACE") && FlxG.score > 0 && !isTouching(FlxObject.FLOOR) && doubleJump == true) {
+			if (FlxG.keys.justPressed("SPACE") && Inicio.numitems > 0 && !isTouching(FlxObject.FLOOR) && doubleJump == true) {
 				velocity.y = -maxVelocity.y;
 				play("brincar");
 				doubleJump = false;
 			}
 			
 			//Salto de Pared
-			if(!isTouching(FlxObject.FLOOR) && isTouching(FlxObject.WALL)){
+			if(!isTouching(FlxObject.FLOOR) && isTouching(FlxObject.WALL) && Inicio.numitems > 2){
 				velocity.y =  velocity.y*.9;
 				if(FlxG.keys.justPressed("SPACE")){
 					if(_facing==RIGHT){
@@ -127,7 +127,7 @@
 				}
 			}
 			
-			if (FlxG.keys.pressed("C")) {
+			if (FlxG.keys.pressed("C") && Inicio.numitems > 1 ) {
 				if (FlxG.keys.pressed("RIGHT")) {
 					this.x+=2;
 					_facing=RIGHT;

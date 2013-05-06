@@ -58,7 +58,6 @@ package com.powerflasher.SampleApp {
 		// Para guardar
 		private var Saver : FlxSave;
 
-
 		public function AreaUno() {
 			super();
 		}
@@ -117,7 +116,6 @@ package com.powerflasher.SampleApp {
 			scoreS.scrollFactor.x = 0;
 			scoreS.scrollFactor.y = 0;
 
-			
 			add(flotar);
 			add(mapa5);
 			add(picosagua);
@@ -129,10 +127,10 @@ package com.powerflasher.SampleApp {
 			add(brujo);
 			add(agua);
 			add(platagua);
-
+			Inicio.numitems=0;
 			// añadir arma a astrid
 			weapon = new FlxWeapon("shuriken", astrid, "x", "y");
-			weapon.makeImageBullet(50, Assets.Shuriken, astrid.origin.x, astrid.origin.y, true, 10, 1);
+			weapon.makeImageBullet(50, Assets.Shuriken, astrid.origin.x, astrid.origin.y);
 			weapon.bounds.width = 2670;
 			weapon.bounds.height = 992;
 			add(weapon.group);
@@ -240,8 +238,7 @@ package com.powerflasher.SampleApp {
 		}
 
 		override public function update() : void {
-			trace(astrid.x);
-			trace(astrid.y);
+			trace(Inicio.numitems);
 			if (FlxG.keys.justPressed("Z") && astrid.facing == 1 && FlxG.keys.pressed("UP")) {
 				weapon.setBulletDirection(FlxWeapon.BULLET_NORTH_WEST, 200);
 				weapon.fire();
@@ -261,16 +258,24 @@ package com.powerflasher.SampleApp {
 				weapon.setBulletDirection(FlxWeapon.BULLET_RIGHT, 200);
 				weapon.fire();
 			}
-			if(astrid.overlaps(agua)){
+			if (astrid.overlaps(agua)) {
+				
 				astrid.play("brincar");
-				if(FlxG.keys.justPressed("X")){
-					astrid.velocity.y = -astrid.maxVelocity.y/3;
+				if(FlxG.keys.pressed("RIGHT") || FlxG.keys.pressed("LEFT")){
+					astrid.play("brincar");
+				}
+				if (Inicio.numitems > 5) {
+					if (FlxG.keys.justPressed("X")) {
+						astrid.velocity.y = -astrid.maxVelocity.y / 3;
+					}
+				} else {
+					FlxG.collide(astrid, flotar);
 				}
 			}
-			if(astrid.overlaps(picosagua)){
+			if (astrid.overlaps(picosagua)) {
 				astrid.kill();
 			}
-			
+
 			if (FlxG.keys.justPressed("UP") && FlxG.collide(astrid, puerta)) {
 				FlxG.switchState(new AreaDos());
 			}
@@ -286,7 +291,7 @@ package com.powerflasher.SampleApp {
 			FlxG.collide(astrid, mapa4);
 			FlxG.collide(astrid, platagua);
 			/*if (FlxG.collide(astrid, flotar)) {
-				astrid.play("brincar");
+			astrid.play("brincar");
 			}*/
 			FlxG.collide(soldados, mapaPrincipal);
 			FlxG.collide(soldados, mapa4);
@@ -307,6 +312,7 @@ package com.powerflasher.SampleApp {
 			// trace("colapse");
 			item.kill();
 			FlxG.score += 1;
+			Inicio.numitems++;
 			score.text = FlxG.score.toString() + " / " + totalItems.toString();
 		}
 

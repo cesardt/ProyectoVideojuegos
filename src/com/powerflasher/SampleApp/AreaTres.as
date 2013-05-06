@@ -19,12 +19,12 @@ package com.powerflasher.SampleApp {
 		// bosses
 		private var boss : BossArea3;
 		private var agua : FlxTilemap;
+		private var flotar : FlxTilemap;
 		private var cielo : FlxTilemap;
 		private var fondo : FlxTilemap;
 		private var plataforma : FlxTilemap;
 		private var picosagua : FlxTilemap;
 		private var piso : FlxTilemap;
-		private var doubleJump : Boolean;
 		private var weapon : FlxWeapon;
 		private var weaponB : FlxWeapon;
 		private var contador : int = 0;
@@ -63,7 +63,8 @@ package com.powerflasher.SampleApp {
 			plataforma = new FlxTilemap();
 			invisible = new FlxTilemap();
 			picosagua = new FlxTilemap();
-			
+			flotar = new FlxTilemap();
+			flotar.loadMap(new Assets.flotar(), Assets.mapaPNG1, 31, 14);
 			picosagua.loadMap(new Assets.picos3(), Assets.picosagua, 16, 16);
 			agua.loadMap(new Assets.aguaCSV(), Assets.tilesa3, 32, 32);
 			piso.loadMap(new Assets.pisoCSV3(), Assets.tilesa3, 32, 32);
@@ -96,7 +97,7 @@ package com.powerflasher.SampleApp {
 			scoreS.scrollFactor.x = 0;
 			scoreS.scrollFactor.y = 0;
 
-
+			add(flotar);
 			add(cielo);
 			add(fondo);
 			add(plataforma);
@@ -109,14 +110,13 @@ package com.powerflasher.SampleApp {
 
 			invisible.visible = false;
 			weapon = new FlxWeapon("shuriken", astrid, "x", "y");
-			weapon.makeImageBullet(50, Assets.Shuriken);
-			weapon.setBulletDirection(FlxWeapon.BULLET_RIGHT, 200);
+			weapon.makeImageBullet(50, Assets.Shuriken, astrid.origin.x, astrid.origin.y);
 			weapon.bounds.width = 2592;
 			weapon.bounds.height = 4800;
 			add(weapon.group);
 
 			weaponB = new FlxWeapon("shuriken", boss, "x", "y");
-			weaponB.makeImageBullet(50, Assets.Shuriken, astrid.origin.x, astrid.origin.y, true, 10, 1);
+			weaponB.makeImageBullet(50, Assets.Shuriken, boss.origin.x, boss.origin.y, true, 10, 1);
 			weaponB.bounds.width = 3200;
 			weaponB.bounds.height = 1600;
 			add(weaponB.group);
@@ -224,31 +224,28 @@ package com.powerflasher.SampleApp {
 				weapon.setBulletDirection(FlxWeapon.BULLET_SOUTH_WEST, 200);
 				weapon.fire();
 			} else if (FlxG.keys.justPressed("Z") && astrid.facing == 1) {
-				weapon.setBulletDirection(FlxWeapon.BULLET_LEFT, 200);
+				weapon.setBulletDirection(FlxWeapon.BULLET_LEFT, 300);
 				weapon.fire();
 			} else if (FlxG.keys.justPressed("Z") && astrid.facing == 0) {
-				weapon.setBulletDirection(FlxWeapon.BULLET_RIGHT, 200);
+				weapon.setBulletDirection(FlxWeapon.BULLET_RIGHT, 300);
 				weapon.fire();
 			}
-			/*if(FlxG.overlap(astrid,a) || FlxG.overlap(astrid,b) || FlxG.overlap(astrid,c) || FlxG.overlap(astrid,d)){
-				if(FlxG.keys.justPressed("X")){
-					astrid.velocity.y = -astrid.maxVelocity.y/3;
-					astrid.play("brincar");
-				}
-			}*/
 
-
-			if (FlxG.mouse.justPressed()) {
-				weapon.fire();
-			}
 			if (astrid.overlaps(agua)) {
-				if(FlxG.keys.justPressed("X")){
-					astrid.velocity.y = -astrid.maxVelocity.y/3;
+				astrid.play("brincar");
+				if(FlxG.keys.pressed("RIGHT") || FlxG.keys.pressed("LEFT")){
 					astrid.play("brincar");
+				}
+				if (Inicio.numitems > 5) {
+					if (FlxG.keys.justPressed("X")) {
+						astrid.velocity.y = -astrid.maxVelocity.y / 3;
+					}
+				} else {
+					FlxG.collide(astrid, flotar);
 				}
 			}
 
-			if (vida.currentValue == 100) {
+			if (astrid.health == 0) {
 				astrid.kill();
 			}
 			super.update();
@@ -284,6 +281,7 @@ package com.powerflasher.SampleApp {
 			// trace("colapse");
 			item.kill();
 			FlxG.score += 1;
+			Inicio.numitems++;
 			score.text = FlxG.score.toString() + " / " + totalItems.toString();
 		}
 
