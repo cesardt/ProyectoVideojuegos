@@ -86,7 +86,6 @@ package com.powerflasher.SampleApp {
 			item = new FlxTile(barras, 2, 10, 10, true, 1);
 			invisible= new FlxTilemap();
 
-			invisible.visible=false;
 		
 			// Cargar MApa
 			mapa5.loadMap(new Assets.mapaCSV4(), Assets.fondo, 31, 28);
@@ -97,7 +96,9 @@ package com.powerflasher.SampleApp {
 			agua.loadMap(new Assets.mapaCSV1(), Assets.mapaPNG1, 31, 28);
 			mapa4.loadMap(new Assets.mapaCSV3(), Assets.mapaPNG2, 31, 14);
 			puerta.loadMap(new Assets.mapaCSV5(), Assets.puertaPNG, 31, 14);
-			invisible.loadMap(new Assets.invisble2(), Assets.tilespuerta, 32, 32);
+			invisible.loadMap(new Assets.invisble1(), Assets.tilespuerta, 32, 32);
+			
+			//invisible.visible=false;
 			
 			// Propiedades Tiles
 			mapa4.setTileProperties(1, FlxObject.UP);
