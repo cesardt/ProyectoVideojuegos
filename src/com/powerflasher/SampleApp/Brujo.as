@@ -18,8 +18,8 @@ package com.powerflasher.SampleApp {
 			acceleration.y = 600;
 			maxVelocity.x = 100;
             maxVelocity.y = 100;
-			minX = x - 100;
-			maxX = x + 100;
+			minX = x - 600;
+			maxX = x + 600;
 			loadGraphic(Assets.brujo, true, true, 60, 78, true);
 			addAnimation("idle",[0], 0,false);
 			addAnimation("caminar",[0,1,2], 15, false);
@@ -33,12 +33,14 @@ package com.powerflasher.SampleApp {
 				var difx:int = x - _player.x;
 				
 			
-				if(x <= minX){
+				if(x <= minX || isTouching(LEFT)){
 					facing = RIGHT;
 				}
-				if(x >= maxX){
+				if(x >= maxX || isTouching(RIGHT)){
 					facing = LEFT;
 				}
+				
+				
 				if(facing == LEFT){
 					velocity.x -= _move_speed;
 					play("caminar");
@@ -47,9 +49,6 @@ package com.powerflasher.SampleApp {
 					velocity.x += _move_speed;
 					play("caminar");
 				}
-			
-			
-		  }
-
+		}
 	}
 }
