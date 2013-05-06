@@ -27,9 +27,6 @@ package com.powerflasher.SampleApp {
 			
 				var dify:int = y - _player.y;
 				var difx:int = _player.x - x;
-				
-				trace("Detectado: ");
-				trace(_detected);
 			
 			if(dify < 10 && !_detected){
 				if(difx < 0 && difx > -150){
