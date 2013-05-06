@@ -14,6 +14,7 @@
 		private static var _numitems : Number=0;
 		private static var _vidas : Number=3;
 		private static var _soldados : Number=0;
+		private static var _health : Number=100;
 		protected var Music:FlxSound = new FlxSound();
 		
 		
@@ -73,6 +74,13 @@
 		}
 		public static function set vidas(vidas:Number):void {
 			_vidas=vidas;
+		}
+		
+		public static function get health() : Number {
+			return _health;
+		}
+		public static function set health(vidas:Number):void {
+			_health=health;
 		}
 		
 	}

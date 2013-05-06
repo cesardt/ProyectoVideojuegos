@@ -171,7 +171,7 @@ package com.powerflasher.SampleApp {
 			vida.scrollFactor.x = 0;
 			vida.scrollFactor.y = 0;
 			vida.createImageBar(Assets.barravida, Assets.barravida1);
-			vida.currentValue = 0;
+			vida.currentValue = Inicio.health;
 			add(vida);
 
 			vidas = new FlxBar(530, 40,1);
@@ -303,7 +303,7 @@ package com.powerflasher.SampleApp {
 				FlxG.switchState(new AreaDos());
 			}
 
-			if (astrid.health <= 0) {
+			if (vida.currentValue >= 100) {
 				astrid.kill();
 				Inicio.vidas=Inicio.vidas-1;
 			}
@@ -344,7 +344,7 @@ package com.powerflasher.SampleApp {
 				Inicio.vidas++;
 			}
 			if(Inicio.numitems==9 ||  (Inicio.numitems>11 && Inicio.numitems%2 ==0)){
-				astrid.health+=20;
+				Inicio.health+=20;
 				vida.currentValue-=20;
 			}
 			score.text = FlxG.score.toString() + " / " + totalItems.toString();
@@ -364,12 +364,14 @@ package com.powerflasher.SampleApp {
 			if (enemigo == robot || enemigo==robot1) {
 				// Vida de astrid
 				p.health -= 3;
+				Inicio.health-=3;
 				// Barra de vida
 				vida.currentValue += 3;
 			}
 			 else {
 				// Vida de astrid
 				p.health -= 1;
+				Inicio.health-=1;
 				// Barra de vida
 				vida.currentValue += 1;
 			}

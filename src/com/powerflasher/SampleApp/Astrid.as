@@ -39,7 +39,7 @@
 			maxVelocity.x = runV;
 			maxVelocity.y = jump;
 			acceleration.y = 450;
-			health=100;
+			health=Inicio.health;
 			
 		}
 
@@ -165,6 +165,7 @@
 			FlxG.camera.shake(0.005,0.35);
 			FlxG.camera.flash(0xffd8eba2,0.35);
 			Inicio.vidas-=1;
+			Inicio.health=100;
 		}
 	}
 }

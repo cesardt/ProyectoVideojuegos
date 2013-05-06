@@ -142,7 +142,7 @@ package com.powerflasher.SampleApp {
 			vida.scrollFactor.y = 0;
 			// vida.setParent(astrid,"vida");
 			vida.createImageBar(Assets.barravida, Assets.barravida1, 0x00AB00, 0xFF00FF00);
-			vida.currentValue = 0;
+			vida.currentValue = Inicio.health;
 			add(vida);
 			
 			vidas = new FlxBar(530, 40,1);
@@ -285,7 +285,7 @@ package com.powerflasher.SampleApp {
 				}
 			}
 
-			if (astrid.health == 0) {
+			if (vida.currentValue >= 100) {
 				astrid.kill();
 
 			}
@@ -341,7 +341,7 @@ package com.powerflasher.SampleApp {
 				vidas.currentValue=12-Inicio.vidas;
 			}
 			if (Inicio.numitems == 9 || (Inicio.numitems > 11 && Inicio.numitems % 2 == 0)) {
-				astrid.health += 20;
+				Inicio.health += 20;
 				vida.currentValue -= 20;
 			}
 			score.text = FlxG.score.toString() + " / " + totalItems.toString();
@@ -353,14 +353,13 @@ package com.powerflasher.SampleApp {
 			if (enemigo == boss) {
 				// Vida de astrid
 				p.health -= 2;
+				Inicio.health-=2;
 				// Barra de vida
 				vida.currentValue += 2;
 			} else {
 				// Vida de astrid
 				p.health -= 1;
-				// Barra de vida
-				vida.currentValue += 1;
-				p.health -= 1;
+				Inicio.health-=1;
 				// Barra de vida
 				vida.currentValue += 1;
 				FlxG.score += 1;

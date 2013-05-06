@@ -175,7 +175,7 @@ package com.powerflasher.SampleApp {
 
 			// barra de vida de astrid
 			vida = new FlxBar(620, 3);
-			vida.setRange(0, 100)
+			vida.setRange(0, 100);
 			vida.scrollFactor.x = 0;
 			vida.scrollFactor.y = 0;
 			vida.createImageBar(Assets.barravida, Assets.barravida1);
@@ -320,7 +320,7 @@ package com.powerflasher.SampleApp {
 				FlxG.switchState(new AreaDos());
 			}
 
-			if (astrid.health <= 0) {
+			if (vida.currentValue >= 100) {
 				astrid.kill();
 			}
 			robot.acceleration.y = 600;
@@ -365,7 +365,7 @@ package com.powerflasher.SampleApp {
 				vidas.currentValue = 12 - Inicio.vidas;
 			}
 			if (Inicio.numitems == 9 || (Inicio.numitems > 11 && Inicio.numitems % 2 == 0)) {
-				astrid.health += 20;
+				Inicio.health += 20;
 				vida.currentValue -= 20;
 			}
 			score.text = FlxG.score.toString() + " / " + totalItems.toString();
@@ -384,6 +384,7 @@ package com.powerflasher.SampleApp {
 			}*/
 			if (enemigo == robot || enemigo == robot1) {
 				// Vida de astrid
+				Inicio.health-=3;
 				p.health -= 3;
 				// Barra de vida
 				vida.currentValue += 3;
@@ -391,11 +392,13 @@ package com.powerflasher.SampleApp {
 			if (enemigo == brujo) {
 				// Vida de astrid
 				p.health -= 5;
+				Inicio.health-=5;
 				// Barra de vida
 				vida.currentValue += 5;
 			} else {
 				// Vida de astrid
 				p.health -= 1;
+				Inicio.health-=1;
 				// Barra de vida
 				vida.currentValue += 1;
 			}
