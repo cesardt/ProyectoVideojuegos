@@ -64,7 +64,7 @@ package com.powerflasher.SampleApp {
 			invisible = new FlxTilemap();
 			picosagua = new FlxTilemap();
 			flotar = new FlxTilemap();
-			flotar.loadMap(new Assets.flotar(), Assets.mapaPNG1, 31, 14);
+			flotar.loadMap(new Assets.flotar(), Assets.mapaPNG1, 32, 16);
 			picosagua.loadMap(new Assets.picos3(), Assets.picosagua, 16, 16);
 			agua.loadMap(new Assets.aguaCSV(), Assets.tilesa3, 32, 32);
 			piso.loadMap(new Assets.pisoCSV3(), Assets.tilesa3, 32, 32);
@@ -97,8 +97,8 @@ package com.powerflasher.SampleApp {
 			scoreS.scrollFactor.x = 0;
 			scoreS.scrollFactor.y = 0;
 
-			add(flotar);
 			add(cielo);
+			add(flotar);
 			add(fondo);
 			add(plataforma);
 			add(astrid);
@@ -139,7 +139,7 @@ package com.powerflasher.SampleApp {
 			// inicializa el grupo de enemigos, del mapa al grupo
 			parseEnemigos();
 			// agrega items y el score,  conteo de enemigos
-			// add(enemigos);
+			add(enemigos);
 			add(scoreE);
 			scoreE.text = "0 / " + totalEnemigos.toString();
 			add(soldados);
@@ -230,7 +230,9 @@ package com.powerflasher.SampleApp {
 				weapon.setBulletDirection(FlxWeapon.BULLET_RIGHT, 300);
 				weapon.fire();
 			}
-
+			if(FlxG.collide(astrid,picosagua)){
+				astrid.kill();
+			}
 			if (astrid.overlaps(agua)) {
 				astrid.play("brincar");
 				if(FlxG.keys.pressed("RIGHT") || FlxG.keys.pressed("LEFT")){

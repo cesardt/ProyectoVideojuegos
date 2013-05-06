@@ -302,10 +302,12 @@ package com.powerflasher.SampleApp {
 			FlxG.overlap(astrid, enemigos, hitEnemigos);
 			FlxG.overlap(astrid, soldados, hitEnemigos);
 			FlxG.overlap(astrid, robot, hitEnemigos);
+			FlxG.overlap(astrid, brujo, hitEnemigos);
 			// overlap bala enemigo
 			FlxG.overlap(weapon.group, enemigos, hitBullet);
 			FlxG.overlap(weapon.group, soldados, hitBullet);
 			FlxG.overlap(weapon.group, robot, hitBullet);
+			FlxG.overlap(weapon.group, brujo, hitBullet);
 		}
 
 		private function hitItems(p : FlxObject, item : FlxObject) : void {
@@ -360,6 +362,8 @@ package com.powerflasher.SampleApp {
 
 				if (enemigo.health == 0) {
 					enemigo.kill();
+					vidaBoss.kill();
+					
 				}
 			} else if (enemigo == brujo) {
 				add(vidaBrujo);
@@ -369,6 +373,7 @@ package com.powerflasher.SampleApp {
 
 				if (enemigo.health == 0) {
 					enemigo.kill();
+					vidaBrujo.kill();
 				}
 			} else {
 				enemigo.kill();
