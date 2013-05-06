@@ -271,7 +271,7 @@ package com.powerflasher.SampleApp {
 				}
 				
 				weaponB.setBulletDirection(angle, 100);
-				trace("dispara" + angle);
+				//trace("dispara" + angle);
 				weaponB.fire();
 				contador = 0;
 			} else {
