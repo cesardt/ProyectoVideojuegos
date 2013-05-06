@@ -162,7 +162,7 @@ package com.powerflasher.SampleApp {
 			vida.currentValue = 0;
 			add(vida);
 			
-			vidas = new FlxBar(650, 40);
+			vidas = new FlxBar(530, 40);
 			vidas.scrollFactor.x = 0;
 			vidas.scrollFactor.y = 0;
 			vidas.createImageBar(Assets.vidafull, Assets.vidaempty);
