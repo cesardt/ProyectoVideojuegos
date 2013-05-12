@@ -7,7 +7,7 @@ import org.flixel.FlxGame;
 		public function Flixel() {
 			
 			super(800, 400, Inicio, 1, 60 ,30 ,true );
-			saveData.load();
+			//saveData.load();
 		}
 	}
 }
