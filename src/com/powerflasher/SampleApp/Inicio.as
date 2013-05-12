@@ -33,16 +33,22 @@
 			FlxG.music = Music;
 			FlxG.playMusic(Assets.Music);
 			
- 	
+ 			
  			texto=new FlxText(0, 300, FlxG.width, "Astrid's Revenge").setFormat(null, 21, 0xFFFFFF, "center");
          
            add(texto);
 		   
 		   
 		 var botonInicio:FlxButton =  new FlxButton(FlxG.width / 2 - 40, FlxG.height / 2 - 60, "Start Game!", Iniciar);
+		var botonScore:FlxButton= new FlxButton(FlxG.width / 2 , FlxG.height / 2 , "Scores!", Score);	
 			add(botonInicio);
+			add(botonScore);
+			
 		}
 
+		private function Score() : void {
+			FlxG.switchState(new maxscore());
+		}
 		private function Iniciar() : void {
 			FlxG.switchState(new AreaUno());
 		}
