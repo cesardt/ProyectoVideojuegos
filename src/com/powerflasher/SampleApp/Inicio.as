@@ -15,6 +15,7 @@
 		private static var _vidas : Number=3;
 		private static var _soldados : Number=0;
 		private static var _health : Number=100;
+		public static var save:saveGame = new saveGame();
 		protected var Music:FlxSound = new FlxSound();
 		
 		
@@ -39,15 +40,33 @@
            add(texto);
 		   
 		   
-		 var botonInicio:FlxButton =  new FlxButton(FlxG.width / 2 - 40, FlxG.height / 2 - 60, "Start Game!", Iniciar);
+		 	var botonInicio:FlxButton =  new FlxButton(FlxG.width / 2 - 40, FlxG.height / 2 - 60, "Start Game!", Iniciar);
 			add(botonInicio);
+			
+			var botonCargar:FlxButton =  new FlxButton(FlxG.width / 2 - 40, FlxG.height / 2 - 30, "Continue", Cargar);
+			add(botonCargar);
 		}
 
 		private function Iniciar() : void {
 			FlxG.switchState(new AreaUno());
 		}
 
-		
+		private function Cargar() : void{
+			save.load();
+			_numitems = Inicio.save._save.data.items;
+			_soldados = Inicio.save._save.data.soldados;
+			var area:int = Inicio.save._save.data.area;
+			
+			if( area == 2){
+				FlxG.switchState(new AreaDos());
+			}
+			else if( area == 3){
+				FlxG.switchState(new AreaDos());
+			}
+			else{
+				FlxG.switchState(new AreaUno());
+			}
+		}
 		
 		
 		

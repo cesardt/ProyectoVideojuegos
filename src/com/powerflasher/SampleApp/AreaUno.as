@@ -62,6 +62,7 @@ package com.powerflasher.SampleApp {
 		private var vidaBrujo : FlxBar;
 		// Para guardar
 		private var Saver : FlxSave;
+		private var savePoints : FlxGroup;
 
 		public function AreaUno() {
 			super();
@@ -155,6 +156,8 @@ package com.powerflasher.SampleApp {
 
 			// inicializa el grupo de items, del mapa al grupo
 			parseItems();
+			parseSaves();
+			add(savePoints);
 			// inicializa el grupo de enemigos, del mapa al grupo
 			parseEnemigos();
 			parseSoldados();
@@ -238,6 +241,23 @@ package com.powerflasher.SampleApp {
 			}
 			// ("total de items: "+ totalItems);
 		}
+		
+		
+		private function parseSaves() : void {
+			var saveMap : FlxTilemap = new FlxTilemap();
+
+			saveMap.loadMap(new Assets.savesA1(), Assets.fogataSpriteSheet, 32, 32);
+
+			savePoints = new FlxGroup();
+
+			for (var ty : int = 0; ty < saveMap.heightInTiles; ty++) {
+				for (var tx : int = 0; tx < saveMap.widthInTiles; tx++) {
+					if (saveMap.getTile(tx, ty) == 1) {
+						savePoints.add(new savePoint(tx, ty));
+					}
+				}
+			}
+		}
 
 		private function parseEnemigos() : void {
 			var enemigoMap : FlxTilemap = new FlxTilemap();
@@ -318,6 +338,10 @@ package com.powerflasher.SampleApp {
 
 			if (FlxG.keys.justPressed("UP") && astrid.overlaps(puerta)) {
 				FlxG.switchState(new AreaDos());
+			}
+			//Guardar juego
+			if (FlxG.keys.justPressed("UP") && astrid.overlaps(savePoints)) {
+				FlxG.save;
 			}
 
 			if (vida.currentValue >= 100) {

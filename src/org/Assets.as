@@ -12,6 +12,17 @@ package org {
 		public static var Shuriken : Class;
 		[Embed(source = "Astrid/shuriken1.png")]
 		public static var shuriken : Class;
+		
+		//Punto Save
+		[Embed(source = "fogata.png")]
+		public static var fogataSpriteSheet : Class;
+		[Embed(source = "Area1/mapCSV_Group2_savePoints.csv" , mimeType="application/octet-stream")]
+		public static var savesA1 : Class;
+		/*[Embed(source = "Area2/mapCSV_Group2_savePoints.csv" , mimeType="application/octet-stream")]
+		public static var savesA2 : Class;
+		[Embed(source = "Area3/mapCSV_Group2_savePoints.csv" , mimeType="application/octet-stream")]
+		public static var savesA3 : Class;*/
+		
 		// Area1
 		[Embed(source = "Area1/Tiles_mapa1.png")]
 		public static var mapaPNG : Class;
