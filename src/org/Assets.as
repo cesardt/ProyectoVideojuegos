@@ -5,6 +5,8 @@ package org {
 	public class Assets {
 		[Embed(source="AstridRevenge.png")] 
 		public static var InicioAstrid:Class;
+		[Embed(source="final.png")] 
+		public static var fin:Class;
 		
 		[Embed(source="salvar.png")] 
 		public static var salvar:Class;

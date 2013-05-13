@@ -59,8 +59,8 @@ package com.powerflasher.SampleApp {
 			s.makeGraphic(FlxG.width, FlxG.height, 0x9345Da);
 			add(s);
 
-			// astrid = new Astrid(70, 4230);
-			astrid = new Astrid(900, 2900);
+			astrid = new Astrid(70, 4230);
+			//astrid = new Astrid(900, 2900);
 
 			boss = new BossArea3(818, 3030, astrid);
 			
@@ -133,6 +133,7 @@ package com.powerflasher.SampleApp {
 			add(plataforma);
 			add(boss);
 			add(piso);
+			add(puertasec);
 			add(puerta);
 			add(astrid);
 			add(picosagua);
@@ -268,12 +269,18 @@ package com.powerflasher.SampleApp {
 			}
 			ejercito.text = "Ejército: " + Inicio.soldados.toString() + " soldados ";
 
-			if (Inicio.numitems > 8 && Inicio.soldados > 150) {
-				add(puertasec);
+			if (Inicio.numitems > 10) {
+				puertasec.visible=true;
 				if (FlxG.keys.justPressed("UP") && astrid.overlaps(puertasec)) {
+					if(Inicio.soldados > 150){
 					FlxG.switchState(new FinalState());
 					Inicio.win=true;
-					trace("Ganaste. Recuperaste a tu hermano");
+					trace("Ganaste. Recuperaste a tu hermano");	
+					}
+					else{
+						hab.text = "No tienes el número suficiente de soldados, consigue mínimo 150";
+						hab.visible=true;
+					}
 				}
 			}
 

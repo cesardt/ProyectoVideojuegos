@@ -156,8 +156,10 @@ package com.powerflasher.SampleApp {
 			add(puerta);
 			// add(invisible);
 			add(frente);
+			add(puertasec);
 			add(astrid);
 			add(boss);
+			
 
 			// Añadirle arma a astrid
 			weapon = new FlxWeapon("shuriken", astrid, "x", "y");
@@ -286,12 +288,18 @@ package com.powerflasher.SampleApp {
 			
 			ejercito.text = "Ejército: " + Inicio.soldados.toString() + " soldados ";
 
-			if (Inicio.numitems > 10 && Inicio.soldados > 150) {
-				add(puertasec);
+			if (Inicio.numitems > 10) {
+				puertasec.visible=true;
 				if (FlxG.keys.justPressed("UP") && astrid.overlaps(puertasec)) {
+					if(Inicio.soldados > 150){
 					FlxG.switchState(new FinalState());
 					Inicio.win=true;
-					trace("Ganaste. Recuperaste a tu hermano");
+					trace("Ganaste. Recuperaste a tu hermano");	
+					}
+					else{
+						hab.text = "No tienes el número suficiente de soldados, consigue mínimo 150";
+						hab.visible=true;
+					}
 				}
 			}
 
