@@ -65,7 +65,7 @@
 			gameSave.data.items = 0;
 			gameSave.data.soldados = 0;
 			gameSave.data.area = 1;
-			FlxG.switchState(new AreaUno());
+			FlxG.switchState(new AnimationState());
 		}
 		private function Score() : void {
 			FlxG.switchState(new maxScore());

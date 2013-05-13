@@ -8,9 +8,9 @@ com.powerflasher.SampleApp{
     public class AnimationState extends FlxState
     {
         [Embed(source="Intro.swf")]private static var Animacion:Class;
-        private var noFrames:Number = 100;
     
         private var animacion:MovieClip;
+		private var count:Number =0;
         
         override public function create():void {
             animacion = new Animacion();
@@ -20,25 +20,14 @@ com.powerflasher.SampleApp{
         
            
         }
-        
-        private function cargar(e:Event):void {
-            
-            FlxG.stage.addChildAt(animacion, 1);
-            animacion.addEventListener(Event.EXIT_FRAME, queHacer);
-        }
-        
-        private function queHacer(e:Event):void {
-            noFrames--;
-            if (noFrames <= 0) {
-                FlxG.stage.removeChildAt(1);
-               animacion.removeEventListener(Event.EXIT_FRAME, cargar);
-             
-                FlxG.flashFramerate = 60;
-            
-                
-            }
-        }
-        
+		public override function update():void {
+			super.update();
+			count++;
+			if (count > 1218) {
+					FlxG.switchState(new AreaUno());	
+					FlxG.stage.removeChildAt(1);
+			}
+		}
         
         
 
