@@ -407,20 +407,8 @@ package com.powerflasher.SampleApp {
 		}
 
 		private function hitEnemigos(p : FlxSprite, enemigo : FlxObject) : void {
-<<<<<<< HEAD
-			// trace("colapse");
-			/*if (enemigo.alive) {
-			var emitter : FlxEmitter = new FlxEmitter();
-			// emitter.makeParticles(Assets.Shuriken, 4);
-			emitter.gravity = 400;
-			emitter.at(enemigo);
-			add(emitter);
-			emitter.start();
-			}*/
-=======
-			FlxSave(Saver);
 
->>>>>>> 55a7de4ea956ca4d7cdb481458e61b1160677d53
+
 			if (enemigo == robot || enemigo == robot1) {
 				// Vida de astrid
 				Inicio.health-=3;

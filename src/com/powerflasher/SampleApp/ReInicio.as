@@ -43,30 +43,13 @@ package com.powerflasher.SampleApp {
 		 	var botonInicio:FlxButton =  new FlxButton(FlxG.width / 2 - 40, FlxG.height / 2 - 60, "Start Game!", Iniciar);
 			add(botonInicio);
 			
-			var botonCargar:FlxButton =  new FlxButton(FlxG.width / 2 - 40, FlxG.height / 2 - 30, "Continue", Cargar);
-			add(botonCargar);
 		}
 
 		private function Iniciar() : void {
 			FlxG.switchState(new AreaTres());
 		}
 
-		private function Cargar() : void{
-			save.load();
-			_numitems = Inicio.save._save.data.items;
-			_soldados = Inicio.save._save.data.soldados;
-			var area:int = Inicio.save._save.data.area;
-			
-			if( area == 2){
-				FlxG.switchState(new AreaDos());
-			}
-			else if( area == 3){
-				FlxG.switchState(new AreaDos());
-			}
-			else{
-				FlxG.switchState(new AreaUno());
-			}
-		}
+
 		
 		
 		
