@@ -61,7 +61,7 @@ package com.powerflasher.SampleApp {
 		private var vidaBoss1 : FlxBar;
 		private var vidaBrujo : FlxBar;
 		// Para guardar
-		private var Saver : FlxSave;
+		private var savePoints : FlxGroup;
 
 		public function AreaUno() {
 			super();
@@ -71,7 +71,6 @@ package com.powerflasher.SampleApp {
 			var s : FlxSprite = new FlxSprite();
 			s.makeGraphic(FlxG.width, FlxG.height, 0x9345Da);
 			add(s);
-			Saver = new FlxSave();
 			// crear a astrid
 			astrid = new Astrid(150, 530);
 			// bosses
@@ -155,6 +154,8 @@ package com.powerflasher.SampleApp {
 
 			// inicializa el grupo de items, del mapa al grupo
 			parseItems();
+			parseSaves();
+			add(savePoints);
 			// inicializa el grupo de enemigos, del mapa al grupo
 			parseEnemigos();
 			parseSoldados();
@@ -174,7 +175,7 @@ package com.powerflasher.SampleApp {
 			score.text = "0 / " + totalItems.toString();
 
 			// barra de vida de astrid
-			vida = new FlxBar(620, 3);
+			vida = new FlxBar(610, 3);
 			vida.setRange(0, 100);
 			vida.scrollFactor.x = 0;
 			vida.scrollFactor.y = 0;
@@ -238,6 +239,24 @@ package com.powerflasher.SampleApp {
 			}
 			// ("total de items: "+ totalItems);
 		}
+		
+		
+		private function parseSaves() : void {
+			
+			var saveMap : FlxTilemap = new FlxTilemap();
+
+			saveMap.loadMap(new Assets.savesA1(), Assets.fogataSpriteSheet, 32, 32);
+
+			savePoints = new FlxGroup();
+
+			for (var ty : int = 0; ty < saveMap.heightInTiles; ty++) {
+				for (var tx : int = 0; tx < saveMap.widthInTiles; tx++) {
+					if (saveMap.getTile(tx, ty) == 1) {
+						savePoints.add(new savePoint(tx*31, ty*28));
+					}
+				}
+			}
+		}
 
 		private function parseEnemigos() : void {
 			var enemigoMap : FlxTilemap = new FlxTilemap();
@@ -276,9 +295,14 @@ package com.powerflasher.SampleApp {
 		}
 
 		override public function update() : void {
-			trace(Inicio.vidas);
-			trace(robot.health);
-			// trace(astrid.x+" "+astrid.y);
+			if(Inicio.vidas==0){
+				FlxG.resetGame();
+				Inicio.vidas=3;
+				Inicio.health=100;
+				Inicio.numitems=0;
+				Inicio.soldados=0;
+			}
+
 			ejercito.text = "Ejército: " + Inicio.soldados.toString() + " soldados ";
 			if (FlxG.keys.justPressed("Z") && astrid.facing == 1 && FlxG.keys.pressed("UP")) {
 				weapon.setBulletDirection(FlxWeapon.BULLET_NORTH_WEST, 300);
@@ -317,8 +341,18 @@ package com.powerflasher.SampleApp {
 			}
 
 			if (FlxG.keys.justPressed("UP") && astrid.overlaps(puerta)) {
-				FlxG.switchState(new AreaDos());
+				if(astrid.overlaps(puerta)){
+					FlxG.switchState(new AreaDos());
+				}
+				else if(astrid.overlaps(savePoints)){
+					saveStats();
+				}
 			}
+			
+			if(FlxG.keys.justPressed("S")){
+				saveStats();
+			}
+
 
 			if (vida.currentValue >= 100) {
 				astrid.kill();
@@ -366,22 +400,15 @@ package com.powerflasher.SampleApp {
 			}
 			if (Inicio.numitems == 9 || (Inicio.numitems > 11 && Inicio.numitems % 2 == 0)) {
 				Inicio.health += 20;
+				astrid.health+=20;
 				vida.currentValue -= 20;
 			}
 			score.text = FlxG.score.toString() + " / " + totalItems.toString();
 		}
 
 		private function hitEnemigos(p : FlxSprite, enemigo : FlxObject) : void {
-			FlxSave(Saver);
-			// trace("colapse");
-			/*if (enemigo.alive) {
-			var emitter : FlxEmitter = new FlxEmitter();
-			// emitter.makeParticles(Assets.Shuriken, 4);
-			emitter.gravity = 400;
-			emitter.at(enemigo);
-			add(emitter);
-			emitter.start();
-			}*/
+
+
 			if (enemigo == robot || enemigo == robot1) {
 				// Vida de astrid
 				Inicio.health-=3;
@@ -408,7 +435,6 @@ package com.powerflasher.SampleApp {
 		}
 
 		private function hitBullet(p : FlxObject, enemigo : FlxObject) : void {
-			Saver.bind("guardar");
 			p.kill();
 			if (enemigo == robot) {
 				add(vidaBoss);
@@ -453,6 +479,12 @@ package com.powerflasher.SampleApp {
 				FlxG.score += 1;
 				scoreE.text = FlxG.score.toString() + " / " + totalEnemigos.toString();
 			}
+		}
+		
+		private function saveStats():void{
+			Inicio.guardar(1);
+			vida.currentValue = 100-Inicio.health;
+			trace("Juego Guardado");
 		}
 	}
 }

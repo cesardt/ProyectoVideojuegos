@@ -1,4 +1,5 @@
 ﻿package com.powerflasher.SampleApp {
+	import org.flixel.FlxGame;
 	import org.Assets;
 	import org.osmf.traits.PlayState;
 	import org.flixel.FlxGroup;
@@ -159,13 +160,14 @@
 			super.kill();
 			flicker(0);
 			exists = true;
-			visible = false;
 			velocity.make();
 			acceleration.make();
 			FlxG.camera.shake(0.005,0.35);
 			FlxG.camera.flash(0xffd8eba2,0.35);
+			visible = false;
 			Inicio.vidas-=1;
 			Inicio.health=100;
+			FlxG.resetState();
 		}
 	}
 }

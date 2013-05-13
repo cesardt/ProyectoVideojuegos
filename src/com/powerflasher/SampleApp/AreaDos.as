@@ -52,6 +52,7 @@ package com.powerflasher.SampleApp {
 		// vida
 		private var vida : FlxBar;
 		private var vidas:FlxBar;
+		private var vidaBrujo : FlxBar;
 
 		public function AreaDos() {
 			super();
@@ -191,6 +192,13 @@ package com.powerflasher.SampleApp {
 			vidas.createImageBar(Assets.vidafull, Assets.vidaempty);
 			vidas.currentValue =12-Inicio.vidas;
 			add(vidas);
+			
+			vidaBrujo = new FlxBar(300, 3);
+			vidaBrujo.setRange(0, 50);
+			vidaBrujo.scrollFactor.x = 0;
+			vidaBrujo.scrollFactor.y = 0;
+			vidaBrujo.createImageBar(Assets.barravidabrujo, Assets.barravidabrujo1);
+			vidaBrujo.currentValue = 0;
 
 			// Propiedades de la camara
 			FlxG.camera.setBounds(0, 0, 3200, 1600, false);
@@ -255,8 +263,13 @@ package com.powerflasher.SampleApp {
 		}
 
 		override public function update() : void {
-			trace(Inicio.vidas);
-			trace(Inicio.numitems);
+			if(Inicio.vidas==0){
+				FlxG.resetGame();
+				Inicio.vidas=3;
+				Inicio.health=100;
+				Inicio.numitems=0;
+				Inicio.soldados=0;
+			}
 			
 			ejercito.text = "Ejército: " + Inicio.soldados.toString() + " soldados ";
 
@@ -392,21 +405,19 @@ package com.powerflasher.SampleApp {
 		private function hitBullet(p : FlxObject, enemigo : FlxObject) : void {
 			p.kill();
 			if (enemigo == boss) {
-				// add(vidaBoss);
+				add(vidaBrujo);
 				enemigo.health -= 2;
 				// Barra de vida
-				// vidaBoss.currentValue += 2;
+				vidaBrujo.currentValue += 2;
 
 				if (enemigo.health == 0) {
 					enemigo.kill();
-					// vidaBoss.kill();
+					vidaBrujo.kill();
 					Inicio.soldados += 5;
 				}
 			}
-			/*			else if (enemigo == soldados) {
-			enemigo.kill();
-			Inicio.soldados+=1;
-			}*/ else {
+
+			 else {
 				enemigo.kill();
 				Inicio.soldados += 1;
 				FlxG.score += 1;

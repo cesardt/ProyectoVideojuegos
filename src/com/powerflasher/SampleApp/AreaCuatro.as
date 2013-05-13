@@ -166,13 +166,14 @@ package com.powerflasher.SampleApp {
 			score.text = "0 / " + totalItems.toString();
 
 			// barra de vida de astrid
-			vida = new FlxBar(620, 3);
-			vida.setRange(0,100)
+			vida = new FlxBar(610, 3);
+			vida.setRange(0, 100);
 			vida.scrollFactor.x = 0;
 			vida.scrollFactor.y = 0;
 			vida.createImageBar(Assets.barravida, Assets.barravida1);
 			vida.currentValue = 100-Inicio.health;
 			add(vida);
+
 
 			vidas = new FlxBar(530, 40,1);
 			vidas.setRange(0, 12);
@@ -261,8 +262,13 @@ package com.powerflasher.SampleApp {
 		}
 
 		override public function update() : void {
-			//trace(Inicio.numitems);
-			trace(astrid.x+" "+astrid.y);
+			if(Inicio.vidas==0){
+				FlxG.resetGame();
+				Inicio.vidas=3;
+				Inicio.health=100;
+				Inicio.numitems=0;
+				Inicio.soldados=0;
+			}
 			ejercito.text = "Ejército: " + Inicio.soldados.toString() + " soldados ";
 			if (FlxG.keys.justPressed("Z") && astrid.facing == 1 && FlxG.keys.pressed("UP")) {
 				weapon.setBulletDirection(FlxWeapon.BULLET_NORTH_WEST, 300);
