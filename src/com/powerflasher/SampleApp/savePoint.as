@@ -7,7 +7,8 @@ package com.powerflasher.SampleApp {
 		public function savePoint(X:Number,Y:Number):void{
 			super(X,Y, Assets.fogataSpriteSheet);
 			loadGraphic(Assets.fogataSpriteSheet, true, true, 32, 32, true);
-			addAnimation("idle",[5],24,true);
+			addAnimation("idle",[0,1,2,3,4],10,true);
+			solid = true;
 		}
 		
 		override public function update() :void{
