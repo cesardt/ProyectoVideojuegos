@@ -55,8 +55,8 @@ package com.powerflasher.SampleApp {
 			s.makeGraphic(FlxG.width, FlxG.height, 0x9345Da);
 			add(s);
 
-			// astrid = new Astrid(70, 4230);
-			astrid = new Astrid(900, 2900);
+			astrid = new Astrid(70, 4230);
+			//astrid = new Astrid(900, 2900);
 
 			boss = new BossArea3(818, 3030, astrid);
 
