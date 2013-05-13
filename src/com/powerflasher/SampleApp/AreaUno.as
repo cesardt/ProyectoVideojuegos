@@ -175,7 +175,7 @@ package com.powerflasher.SampleApp {
 			score.text = "0 / " + totalItems.toString();
 
 			// barra de vida de astrid
-			vida = new FlxBar(620, 3);
+			vida = new FlxBar(610, 3);
 			vida.setRange(0, 100);
 			vida.scrollFactor.x = 0;
 			vida.scrollFactor.y = 0;
@@ -295,9 +295,14 @@ package com.powerflasher.SampleApp {
 		}
 
 		override public function update() : void {
-			trace(Inicio.vidas);
-			trace(robot.health);
-			// trace(astrid.x+" "+astrid.y);
+			if(Inicio.vidas==0){
+				FlxG.resetGame();
+				Inicio.vidas=3;
+				Inicio.health=100;
+				Inicio.numitems=0;
+				Inicio.soldados=0;
+			}
+
 			ejercito.text = "Ejército: " + Inicio.soldados.toString() + " soldados ";
 			if (FlxG.keys.justPressed("Z") && astrid.facing == 1 && FlxG.keys.pressed("UP")) {
 				weapon.setBulletDirection(FlxWeapon.BULLET_NORTH_WEST, 300);
@@ -395,12 +400,14 @@ package com.powerflasher.SampleApp {
 			}
 			if (Inicio.numitems == 9 || (Inicio.numitems > 11 && Inicio.numitems % 2 == 0)) {
 				Inicio.health += 20;
+				astrid.health+=20;
 				vida.currentValue -= 20;
 			}
 			score.text = FlxG.score.toString() + " / " + totalItems.toString();
 		}
 
 		private function hitEnemigos(p : FlxSprite, enemigo : FlxObject) : void {
+<<<<<<< HEAD
 			// trace("colapse");
 			/*if (enemigo.alive) {
 			var emitter : FlxEmitter = new FlxEmitter();
@@ -410,6 +417,10 @@ package com.powerflasher.SampleApp {
 			add(emitter);
 			emitter.start();
 			}*/
+=======
+			FlxSave(Saver);
+
+>>>>>>> 55a7de4ea956ca4d7cdb481458e61b1160677d53
 			if (enemigo == robot || enemigo == robot1) {
 				// Vida de astrid
 				Inicio.health-=3;

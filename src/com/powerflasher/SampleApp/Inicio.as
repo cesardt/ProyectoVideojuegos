@@ -18,6 +18,8 @@
 		private static var _health : Number=100;
 		protected var Music:FlxSound = new FlxSound();
 		
+		protected var back:FlxSprite = new FlxSprite(0, 0);
+		
 		
 		private var texto:FlxText;
 		 public function Inicio()
@@ -31,19 +33,21 @@
             var s:FlxSprite = new FlxSprite();
 			s.makeGraphic(FlxG.width, FlxG.height, 0x000000);
             add(s);
+			back.loadGraphic(Assets.InicioAstrid, false, false, 800, 400, false);
+			this.add(back);
 			FlxG.music = Music;
 			FlxG.playMusic(Assets.Music);
 			
  	
- 			texto=new FlxText(0, 300, FlxG.width, "Astrid's Revenge").setFormat(null, 21, 0xFFFFFF, "center");
+ 			//texto=new FlxText(0, 300, FlxG.width, "Astrid's Revenge").setFormat(null, 21, 0xFFFFFF, "center");
          
-           add(texto);
+           //add(texto);
 		   
 		   
-		 	var botonInicio:FlxButton =  new FlxButton(FlxG.width / 2 - 40, FlxG.height / 2 - 60, "Start Game!", Iniciar);
+		 	var botonInicio:FlxButton =  new FlxButton(FlxG.width / 2 - 40, FlxG.height / 2 +40, "Start Game!", Iniciar);
 			add(botonInicio);
 			
-			var botonCargar:FlxButton =  new FlxButton(FlxG.width / 2 - 40, FlxG.height / 2 - 30, "Continue", Cargar);
+			var botonCargar:FlxButton =  new FlxButton(FlxG.width / 2 - 40, FlxG.height / 2 +70 , "Continue", Cargar);
 			add(botonCargar);
 		}
 

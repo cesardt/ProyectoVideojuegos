@@ -12,7 +12,7 @@ package com.powerflasher.SampleApp {
 			
 			super(X,Y, Assets.brujo);
 			_player = ThePlayer;
-			health = 30;
+			health = 50;
 			acceleration.y = 600;
 			maxVelocity.x = 50;
             maxVelocity.y = 100;

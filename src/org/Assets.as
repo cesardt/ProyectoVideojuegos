@@ -3,6 +3,9 @@ package org {
 	 * @author Loree
 	 */
 	public class Assets {
+		[Embed(source="AstridRevenge.png")] 
+		public static var InicioAstrid:Class;
+		
 		[Embed(source="music2.mp3")] 	
 		public static var Music:Class;
 		// Astrid
@@ -153,7 +156,7 @@ package org {
 		public static var items3 : Class;
 		[Embed(source = "Area3/mapCSV_Group1_soldados.csv" , mimeType="application/octet-stream")]
 		public static var soldados3 : Class;
-		[Embed(source = "Area3/mapCSV_Group1_P_ultima.csv" , mimeType="application/octet-stream")]
+		[Embed(source = "Area3/mapCSV_Group1_PUltima.csv" , mimeType="application/octet-stream")]
 		public static var puertasec3 : Class;
 		// Barra de vida
 		[Embed(source = "Astrid/barra_vida_prueba.png")]

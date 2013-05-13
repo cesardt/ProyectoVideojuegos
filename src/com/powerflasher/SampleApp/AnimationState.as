@@ -7,7 +7,7 @@ com.powerflasher.SampleApp{
    
     public class AnimationState extends FlxState
     {
-        /*[Embed(source="Bienvenida.swf")]private static var Animacion:Class;
+        [Embed(source="Intro.swf")]private static var Animacion:Class;
         private var noFrames:Number = 100;
     
         private var animacion:MovieClip;
@@ -31,13 +31,13 @@ com.powerflasher.SampleApp{
             noFrames--;
             if (noFrames <= 0) {
                 FlxG.stage.removeChildAt(1);
-              //  animacion.removeEventListener(Event.EXIT_FRAME, cargar);
+               animacion.removeEventListener(Event.EXIT_FRAME, cargar);
              
-                //FlxG.flashFramerate = 60;
+                FlxG.flashFramerate = 60;
             
                 
             }
-        }*/
+        }
         
         
         
