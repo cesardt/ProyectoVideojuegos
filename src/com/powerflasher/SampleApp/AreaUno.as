@@ -24,6 +24,16 @@ package com.powerflasher.SampleApp {
 
 	public class AreaUno extends FlxState {
 		private var astrid : Astrid;
+		//mensajes
+		private static var hab1 : FlxText;
+		private static var hab2 : FlxText;
+		private static var hab3 : FlxText;
+		private static var hab4 : FlxText;
+		private static var hab5 : FlxText;
+		private static var hab6 : FlxText;
+		private static var hab8 : FlxText;
+		private static var hab11 : FlxText;
+		
 		// bosses
 		private var robot : BossRobot;
 		private var robot1 : BossRobot;
@@ -76,6 +86,18 @@ package com.powerflasher.SampleApp {
 			robot = new BossRobot(180, 780, astrid);
 			brujo = new Brujo(1749, 100, astrid);
 			robot1 = new BossRobot(600, 100, astrid);
+			//mensajes
+			
+			hab1=new FlxText(0, 100, FlxG.width, "Conseguiste la habilidad de doble salto");
+			hab2=new FlxText(0, 100, FlxG.width, "Conseguiste la habilidad de correr, puedes utilizarla con la letra C").setFormat(null, 21, 0xFFFFFF, "center");
+			hab3=new FlxText(0, 100, FlxG.width, "Conseguiste la habilidad de escalar paredes, puedes utilizarla con space").setFormat(null, 21, 0xFFFFFF, "center");
+			hab4=new FlxText(0, 100, FlxG.width, "Obtuviste una vida extra").setFormat(null, 21, 0xFFFFFF, "center");
+			hab5=new FlxText(0, 100, FlxG.width, "Conseguiste recuperar un poco tu nivel de vida").setFormat(null, 21, 0xFFFFFF, "center");
+			hab6=new FlxText(0, 100, FlxG.width, "Conseguiste la habilidad de escalar enredaderas, puedes utilizarla con arriba y abajo").setFormat(null, 21, 0xFFFFFF, "center");
+			hab8=new FlxText(0, 100, FlxG.width, "Conseguiste la habilidad de nadar, puedes utilizarla con X").setFormat(null, 21, 0xFFFFFF, "center");
+			hab11=new FlxText(0, 100, FlxG.width, "Conseguiste desbloquear la puerta hacia tu hermano, encuéntrala!").setFormat(null, 21, 0xFFFFFF, "center");
+			
+			
 			// Mapa
 			mapaPrincipal = new FlxTilemap();
 			agua = new FlxTilemap();
@@ -211,7 +233,15 @@ package com.powerflasher.SampleApp {
 			vidaBrujo.scrollFactor.y = 0;
 			vidaBrujo.createImageBar(Assets.barravidabrujo, Assets.barravidabrujo1);
 			vidaBrujo.currentValue = 0;
-
+			add(hab1);
+			add(hab2);
+			add(hab3);
+			add(hab4);
+			add(hab5);
+			add(hab6);
+			add(hab8);
+			add(hab11);
+			
 			// Prpiedades de la camara
 			FlxG.camera.setBounds(0, 0, 2670, 992, false);
 			FlxG.worldBounds = new FlxRect(0, 0, 2670, 992);
@@ -390,33 +420,33 @@ package com.powerflasher.SampleApp {
 			FlxG.score += 1;
 			Inicio.numitems++;
 			if (Inicio.numitems == 1) {
-				add(Inicio.hab1);
+				hab1.visible=true;
 			}
 			else if (Inicio.numitems == 2) {
-				add(Inicio.hab2);
+				hab2.visible=true;
 			}
 			else if (Inicio.numitems == 3) {
-				add(Inicio.hab3);
+				hab3.visible=true;
 			}
 			else if (Inicio.numitems == 4 || Inicio.numitems == 7 || Inicio.numitems == 10 || (Inicio.numitems > 11 && Inicio.numitems % 2 != 0)) {
 				Inicio.vidas++;
 				vidas.currentValue = 12 - Inicio.vidas;
-				add(Inicio.hab4);
+				hab4.visible=true;
 			}
 			else if (Inicio.numitems == 5 || Inicio.numitems == 9 || (Inicio.numitems > 11 && Inicio.numitems % 2 == 0)) {
 				Inicio.health += 20;
 				astrid.health += 20;
 				vida.currentValue -= 20;
-				add(Inicio.hab5);
+				hab5.visible=true;
 			}
 			else if (Inicio.numitems == 6) {
-				add(Inicio.hab6);
+				hab6.visible=true;
 			}
 			else if (Inicio.numitems == 8) {
-				add(Inicio.hab8);
+				hab8.visible=true;
 			}
 			else if (Inicio.numitems == 11) {
-				add(Inicio.hab11);
+				hab11.visible=true;
 			}
 			
 			score.text = FlxG.score.toString() + " / " + totalItems.toString();
