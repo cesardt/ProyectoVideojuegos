@@ -8,6 +8,12 @@ package org {
 		[Embed(source="final.png")] 
 		public static var fin:Class;
 		
+		
+		[Embed(source="historia.png")] 
+		public static var hist:Class;
+		[Embed(source="historia1.png")] 
+		public static var hist1:Class;
+		
 		[Embed(source="salvar.png")] 
 		public static var salvar:Class;
 		[Embed(source="salvarc.png")] 
