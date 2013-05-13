@@ -13,10 +13,11 @@ package com.powerflasher.SampleApp {
 
 		public class insertMAx extends FlxState {
 		private var sfs : SmartFox;
-		private var score: Number=103;
+		private var score: Number=0;
 
-		public function insertMAx() {
+		public function insertMAx(s: Number) {
 			super();
+			score=s;
 					}
 
 		override public function create() : void {

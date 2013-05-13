@@ -147,7 +147,7 @@
 =======
 		if(win){
 			puntaje = _numitems+_vidas+_soldados+_health;
-			insertMaximo = new insertMAx();
+			insertMaximo = new insertMAx(puntaje);
 			insertMaximo.create();
 			insertMaximo.guardaResultado();
 		}
