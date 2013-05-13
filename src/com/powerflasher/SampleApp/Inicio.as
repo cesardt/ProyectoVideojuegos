@@ -59,11 +59,8 @@
 			var botonCargar:FlxButton =  new FlxButton(FlxG.width / 2 - 40, FlxG.height / 2 +70 , "Continue", Cargar);
 			add(botonCargar);
 			
-<<<<<<< HEAD
-			var botonScore:FlxButton= new FlxButton(FlxG.width / 2  - 40, FlxG.height / 2 + 100, "Scores!", Score);			
-=======
+
 			var botonScore:FlxButton= new FlxButton(FlxG.width / 2 -40, FlxG.height / 2 +130, "Maximo Score!", Score);			
->>>>>>> Listo!
 			add(botonScore);
 			
 			var botonTuScore:FlxButton= new FlxButton(FlxG.width / 2 -40, FlxG.height / 2 +100, "Tu Score", tuScore);			
@@ -161,8 +158,7 @@
 		public static function set win(win:Boolean):void {
 			_win=win;
 		}
-<<<<<<< HEAD
-=======
+
 		if(win){
 			puntaje = _numitems+_vidas+_soldados+_health;
 			insertMaximo = new insertMAx(puntaje);
@@ -170,6 +166,5 @@
 			insertMaximo.guardaResultado();
 		}
 		
->>>>>>> y seguimos ahora con el insert
 	}
 }
