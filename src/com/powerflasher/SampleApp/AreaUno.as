@@ -353,27 +353,9 @@ package com.powerflasher.SampleApp {
 				astrid.kill();
 			}
 
-<<<<<<< HEAD
-			if (FlxG.keys.justPressed("UP") && astrid.overlaps(puerta)) {
-				if (astrid.overlaps(puerta)) {
-					FlxG.switchState(new AreaDos());
-				} else if (astrid.overlaps(savePoints)) {
-					saveStats();
-				}
-			}
 
-			if (FlxG.keys.justPressed("S")) {
-				saveStats();
-=======
-			if (FlxG.keys.justPressed("UP")/* && astrid.overlaps(puerta)*/) {
-				if(astrid.overlaps(puerta)){
+			if (FlxG.keys.justPressed("UP") && astrid.overlaps(puerta)) {
 					FlxG.switchState(new AreaDos());
-				}
-			}
-		
-			if(astrid.overlaps(savePoints)){
-				trace("overlaps");
->>>>>>> Ya guarda en los savePoints
 			}
 
 			if (vida.currentValue >= 100) {
@@ -518,13 +500,8 @@ package com.powerflasher.SampleApp {
 				scoreE.text = FlxG.score.toString() + " / " + totalEnemigos.toString();
 			}
 		}
-<<<<<<< HEAD
 
-		private function saveStats() : void {
-=======
-		
 		private function saveStats(p : FlxObject, savePoint : FlxObject):void{
->>>>>>> Ya guarda en los savePoints
 			Inicio.guardar(1);
 			vida.currentValue = 100 - Inicio.health;
 			trace("Juego Guardado");
