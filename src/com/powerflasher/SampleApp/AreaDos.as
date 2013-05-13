@@ -54,6 +54,7 @@ package com.powerflasher.SampleApp {
 		private var vida : FlxBar;
 		private var vidas:FlxBar;
 		private var vidaBrujo : FlxBar;
+		private var savePoints : FlxGroup;
 
 		public function AreaDos() {
 			super();
@@ -154,6 +155,8 @@ package com.powerflasher.SampleApp {
 			add(enredaderas);
 			add(picos);
 			add(puerta);
+			parseSaves();
+			add(savePoints);
 			// add(invisible);
 			add(frente);
 			add(puertasec);
@@ -239,6 +242,22 @@ package com.powerflasher.SampleApp {
 				}
 			}
 			// trace("total de items: "+ totalItems);
+		}
+		
+		private function parseSaves() : void {
+			var saveMap : FlxTilemap = new FlxTilemap();
+
+			saveMap.loadMap(new Assets.savesA2(), Assets.fogataSpriteSheet, 32, 32);
+
+			savePoints = new FlxGroup();
+
+			for (var ty : int = 0; ty < saveMap.heightInTiles; ty++) {
+				for (var tx : int = 0; tx < saveMap.widthInTiles; tx++) {
+					if (saveMap.getTile(tx, ty) == 1) {
+						savePoints.add(new savePoint(tx * 32, ty * 32));
+					}
+				}
+			}
 		}
 
 		private function parseEnemigos() : void {
@@ -349,10 +368,6 @@ package com.powerflasher.SampleApp {
 			}
 			
 			
-			if(FlxG.keys.justPressed("S")){
-				saveStats();
-			}
-			
 			if (FlxG.keys.justPressed("UP") && astrid.overlaps(puerta)) {
 				FlxG.switchState(new AreaTres());
 			}
@@ -375,6 +390,7 @@ package com.powerflasher.SampleApp {
 			FlxG.collide(boss, piso);
 			// overlap items
 			FlxG.overlap(astrid, items, hitItems);
+			FlxG.overlap(astrid, savePoints, saveStats);
 			// overlap enemigos
 			FlxG.overlap(astrid, enemigos, hitEnemigos);
 			FlxG.overlap(astrid, soldados, hitEnemigos);
@@ -472,9 +488,9 @@ package com.powerflasher.SampleApp {
 			}
 		}
 		
-		private function saveStats():void{
+			private function saveStats(p : FlxObject, savePoint : FlxObject):void{
 			Inicio.guardar(2);
-			vida.currentValue = 100-Inicio.health;
+			vida.currentValue = 100 - Inicio.health;
 			trace("Juego Guardado");
 		}
 	}
