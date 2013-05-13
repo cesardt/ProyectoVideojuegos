@@ -68,6 +68,9 @@
 			
 			var botonTuScore:FlxButton= new FlxButton(FlxG.width / 2 -40, FlxG.height / 2 +100, "Tu Score", tuScore);			
 			add(botonTuScore);
+			
+			var botonCreditos:FlxButton= new FlxButton(FlxG.width / 2 -40, FlxG.height / 2 +160, "Creditos", Creditos);			
+			add(botonCreditos);
 		}
 
 		private function Iniciar() : void {
@@ -80,6 +83,10 @@
 		}
 		private function Score() : void {
 			FlxG.switchState(new maxScore());
+		}
+		
+		private function Creditos() : void {
+			FlxG.switchState(new creditos());
 		}
 		private function tuScore() : void {
 			puntaje = _numitems+_vidas+_soldados+_health;
