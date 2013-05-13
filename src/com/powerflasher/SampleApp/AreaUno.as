@@ -23,7 +23,6 @@ package com.powerflasher.SampleApp {
 	import org.flixel.FlxState;
 
 	public class AreaUno extends FlxState {
-		private var hab : FlxText;
 		private var astrid : Astrid;
 		// bosses
 		private var robot : BossRobot;
@@ -180,7 +179,7 @@ package com.powerflasher.SampleApp {
 			vida.scrollFactor.x = 0;
 			vida.scrollFactor.y = 0;
 			vida.createImageBar(Assets.barravida, Assets.barravida1);
-			vida.currentValue = 100-Inicio.health;
+			vida.currentValue = 100 - Inicio.health;
 			add(vida);
 
 			vidas = new FlxBar(530, 40, 1);
@@ -239,10 +238,8 @@ package com.powerflasher.SampleApp {
 			}
 			// ("total de items: "+ totalItems);
 		}
-		
-		
+
 		private function parseSaves() : void {
-			
 			var saveMap : FlxTilemap = new FlxTilemap();
 
 			saveMap.loadMap(new Assets.savesA1(), Assets.fogataSpriteSheet, 32, 32);
@@ -252,7 +249,7 @@ package com.powerflasher.SampleApp {
 			for (var ty : int = 0; ty < saveMap.heightInTiles; ty++) {
 				for (var tx : int = 0; tx < saveMap.widthInTiles; tx++) {
 					if (saveMap.getTile(tx, ty) == 1) {
-						savePoints.add(new savePoint(tx*31, ty*28));
+						savePoints.add(new savePoint(tx * 31, ty * 28));
 					}
 				}
 			}
@@ -295,12 +292,12 @@ package com.powerflasher.SampleApp {
 		}
 
 		override public function update() : void {
-			if(Inicio.vidas==0){
+			if (Inicio.vidas == 0) {
 				FlxG.resetGame();
-				Inicio.vidas=3;
-				Inicio.health=100;
-				Inicio.numitems=0;
-				Inicio.soldados=0;
+				Inicio.vidas = 3;
+				Inicio.health = 100;
+				Inicio.numitems = 0;
+				Inicio.soldados = 0;
 			}
 
 			ejercito.text = "Ejército: " + Inicio.soldados.toString() + " soldados ";
@@ -341,18 +338,16 @@ package com.powerflasher.SampleApp {
 			}
 
 			if (FlxG.keys.justPressed("UP") && astrid.overlaps(puerta)) {
-				if(astrid.overlaps(puerta)){
+				if (astrid.overlaps(puerta)) {
 					FlxG.switchState(new AreaDos());
-				}
-				else if(astrid.overlaps(savePoints)){
+				} else if (astrid.overlaps(savePoints)) {
 					saveStats();
 				}
 			}
-			
-			if(FlxG.keys.justPressed("S")){
+
+			if (FlxG.keys.justPressed("S")) {
 				saveStats();
 			}
-
 
 			if (vida.currentValue >= 100) {
 				astrid.kill();
@@ -395,28 +390,42 @@ package com.powerflasher.SampleApp {
 			FlxG.score += 1;
 			Inicio.numitems++;
 			if (Inicio.numitems == 1) {
-				trace("hola");
-				hab=new FlxText(0, 100, FlxG.width, "Conseguiste la habilidad de doble salto").setFormat(null, 21, 0xFFFFFF, "center");	
-				add(hab);
+				add(Inicio.hab1);
 			}
-				if (Inicio.numitems == 7 || Inicio.numitems == 10 || (Inicio.numitems > 11 && Inicio.numitems % 2 != 0)) {
+			else if (Inicio.numitems == 2) {
+				add(Inicio.hab2);
+			}
+			else if (Inicio.numitems == 3) {
+				add(Inicio.hab3);
+			}
+			else if (Inicio.numitems == 4 || Inicio.numitems == 7 || Inicio.numitems == 10 || (Inicio.numitems > 11 && Inicio.numitems % 2 != 0)) {
 				Inicio.vidas++;
 				vidas.currentValue = 12 - Inicio.vidas;
+				add(Inicio.hab4);
 			}
-			if (Inicio.numitems == 9 || (Inicio.numitems > 11 && Inicio.numitems % 2 == 0)) {
+			else if (Inicio.numitems == 5 || Inicio.numitems == 9 || (Inicio.numitems > 11 && Inicio.numitems % 2 == 0)) {
 				Inicio.health += 20;
-				astrid.health+=20;
+				astrid.health += 20;
 				vida.currentValue -= 20;
+				add(Inicio.hab5);
 			}
+			else if (Inicio.numitems == 6) {
+				add(Inicio.hab6);
+			}
+			else if (Inicio.numitems == 8) {
+				add(Inicio.hab8);
+			}
+			else if (Inicio.numitems == 11) {
+				add(Inicio.hab11);
+			}
+			
 			score.text = FlxG.score.toString() + " / " + totalItems.toString();
 		}
 
 		private function hitEnemigos(p : FlxSprite, enemigo : FlxObject) : void {
-
-
 			if (enemigo == robot || enemigo == robot1) {
 				// Vida de astrid
-				Inicio.health-=3;
+				Inicio.health -= 3;
 				p.health -= 3;
 				// Barra de vida
 				vida.currentValue += 3;
@@ -424,13 +433,13 @@ package com.powerflasher.SampleApp {
 			if (enemigo == brujo) {
 				// Vida de astrid
 				p.health -= 5;
-				Inicio.health-=5;
+				Inicio.health -= 5;
 				// Barra de vida
 				vida.currentValue += 5;
 			} else {
 				// Vida de astrid
 				p.health -= 1;
-				Inicio.health-=1;
+				Inicio.health -= 1;
 				// Barra de vida
 				vida.currentValue += 1;
 			}
@@ -452,8 +461,7 @@ package com.powerflasher.SampleApp {
 					vidaBoss.kill();
 					Inicio.soldados += 5;
 				}
-			}
-			else if (enemigo == robot1) {
+			} else if (enemigo == robot1) {
 				add(vidaBoss1);
 				enemigo.health -= 2;
 				// Barra de vida
@@ -485,10 +493,10 @@ package com.powerflasher.SampleApp {
 				scoreE.text = FlxG.score.toString() + " / " + totalEnemigos.toString();
 			}
 		}
-		
-		private function saveStats():void{
+
+		private function saveStats() : void {
 			Inicio.guardar(1);
-			vida.currentValue = 100-Inicio.health;
+			vida.currentValue = 100 - Inicio.health;
 			trace("Juego Guardado");
 		}
 	}

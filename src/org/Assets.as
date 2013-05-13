@@ -8,6 +8,8 @@ package org {
 		
 		[Embed(source="salvar.png")] 
 		public static var salvar:Class;
+		[Embed(source="salvarc.png")] 
+		public static var salvarc:Class;
 		
 		[Embed(source="music2.mp3")] 	
 		public static var Music:Class;
