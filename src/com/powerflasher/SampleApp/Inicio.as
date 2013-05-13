@@ -65,8 +65,8 @@
 		}
 		
 		public static function guardar(Area: Number): void{
-			trace(gameSave.data.items = numitems);
-			trace(gameSave.data.soldados = soldados);
+			gameSave.data.items = numitems;
+			gameSave.data.soldados = soldados;
 			gameSave.data.area = Area;
 		}
 
