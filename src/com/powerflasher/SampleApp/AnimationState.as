@@ -28,7 +28,6 @@ package com.powerflasher.SampleApp {
 		public override function update() : void {
 			super.update();
 			count++;
-			trace(count);
 			if (count == 1270 ) {
 				FlxG.stage.removeChildAt(1);
 				this.add(back);
