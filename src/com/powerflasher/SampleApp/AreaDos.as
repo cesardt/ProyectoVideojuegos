@@ -325,6 +325,12 @@ package com.powerflasher.SampleApp {
 					astrid.play("brincar");
 				}
 			}
+			
+			
+			if(FlxG.keys.justPressed("S")){
+				saveStats();
+			}
+			
 			if (FlxG.keys.justPressed("UP") && astrid.overlaps(puerta)) {
 				FlxG.switchState(new AreaTres());
 			}
@@ -423,6 +429,12 @@ package com.powerflasher.SampleApp {
 				FlxG.score += 1;
 				scoreE.text = FlxG.score.toString() + " / " + totalEnemigos.toString();
 			}
+		}
+		
+		private function saveStats():void{
+			Inicio.guardar(2);
+			vida.currentValue = 100-Inicio.health;
+			trace("Juego Guardado");
 		}
 	}
 }
