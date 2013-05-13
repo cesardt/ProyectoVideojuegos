@@ -376,9 +376,6 @@ package com.powerflasher.SampleApp {
 			FlxG.collide(astrid, mapaPrincipal);
 			FlxG.collide(astrid, mapa4);
 			FlxG.collide(astrid, platagua);
-			/*if (FlxG.collide(astrid, flotar)) {
-			astrid.play("brincar");
-			}*/
 			FlxG.collide(soldados, mapaPrincipal);
 			FlxG.collide(soldados, mapa4);
 			FlxG.collide(robot, mapaPrincipal);
@@ -490,10 +487,8 @@ package com.powerflasher.SampleApp {
 					vidaBoss1.kill();
 					Inicio.soldados += 5;
 				}
-			}/*else if (enemigo == soldados ) {
-			enemigo.kill();
-			Inicio.soldados += 1;
-			} */ else if (enemigo == brujo) {
+			}
+			 else if (enemigo == brujo) {
 				add(vidaBrujo);
 				enemigo.health -= 2;
 				// Barra de vida

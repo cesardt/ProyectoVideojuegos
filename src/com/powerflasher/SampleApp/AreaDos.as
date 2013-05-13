@@ -356,12 +356,6 @@ package com.powerflasher.SampleApp {
 			if (FlxG.keys.justPressed("UP") && astrid.overlaps(puerta)) {
 				FlxG.switchState(new AreaTres());
 			}
-			/*if (FlxG.collide(astrid, pared) && FlxG.keys.pressed("Z")) {
-			astrid.velocity.y = -astrid.maxVelocity.y;
-			if (astrid.velocity.y != 0 ) {
-			astrid.play("caminar");
-			}
-			}*/
 			if (FlxG.collide(astrid, picos)) {
 				astrid.kill();
 			}
