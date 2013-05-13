@@ -1,4 +1,5 @@
 ﻿package com.powerflasher.SampleApp {
+	import org.flixel.FlxSave;
 	import org.Assets;
 	import org.flixel.FlxSound;
 	import org.flixel.FlxButton;
@@ -15,7 +16,6 @@
 		private static var _vidas : Number=3;
 		private static var _soldados : Number=0;
 		private static var _health : Number=100;
-		public static var save:saveGame = new saveGame();
 		protected var Music:FlxSound = new FlxSound();
 		
 		
@@ -48,25 +48,47 @@
 		}
 
 		private function Iniciar() : void {
+			var gameSave:FlxSave = new FlxSave();
+			gameSave.bind("AstridsRevenge");
+			gameSave.data.items = 0;
+			gameSave.data.soldados = 0;
+			gameSave.data.area = 1;
 			FlxG.switchState(new AreaUno());
+		}
+		
+		public static function guardar(Area: Number): void{
+			var gameSave:FlxSave = new FlxSave();
+			gameSave.bind("AstridsRevenge");
+			gameSave.data.items = numitems;
+			gameSave.data.soldados = numitems;
+			gameSave.data.area = Area;
 		}
 
 		private function Cargar() : void{
-			save.load();
-			_numitems = Inicio.save._save.data.items;
-			_soldados = Inicio.save._save.data.soldados;
-			var area:int = Inicio.save._save.data.area;
 			
-			if( area == 2){
-				FlxG.switchState(new AreaDos());
-			}
-			else if( area == 3){
-				FlxG.switchState(new AreaDos());
+			var gameSave:FlxSave = new FlxSave();
+			gameSave.bind("AstridsRevenge");
+			
+			if(gameSave.data.items != null){
+				trace(gameSave.data.items);
+				_numitems = gameSave.data.items;
+				_soldados = gameSave.data.soldados;
+				var Loadarea:int = gameSave.data.area;
+				if(Loadarea == 2){
+					FlxG.switchState(new AreaDos());
+				}
+				else if( Loadarea == 3){
+					FlxG.switchState(new AreaDos());
+				}
+				else{
+					FlxG.switchState(new AreaUno());
+				}
 			}
 			else{
-				FlxG.switchState(new AreaUno());
+				trace("No hay nada guardado");
 			}
 		}
+		
 		
 		
 		

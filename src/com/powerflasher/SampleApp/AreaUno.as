@@ -61,7 +61,6 @@ package com.powerflasher.SampleApp {
 		private var vidaBoss1 : FlxBar;
 		private var vidaBrujo : FlxBar;
 		// Para guardar
-		private var Saver : FlxSave;
 		private var savePoints : FlxGroup;
 
 		public function AreaUno() {
@@ -72,7 +71,6 @@ package com.powerflasher.SampleApp {
 			var s : FlxSprite = new FlxSprite();
 			s.makeGraphic(FlxG.width, FlxG.height, 0x9345Da);
 			add(s);
-			Saver = new FlxSave();
 			// crear a astrid
 			astrid = new Astrid(150, 530);
 			// bosses
@@ -244,6 +242,7 @@ package com.powerflasher.SampleApp {
 		
 		
 		private function parseSaves() : void {
+			
 			var saveMap : FlxTilemap = new FlxTilemap();
 
 			saveMap.loadMap(new Assets.savesA1(), Assets.fogataSpriteSheet, 32, 32);
@@ -253,7 +252,7 @@ package com.powerflasher.SampleApp {
 			for (var ty : int = 0; ty < saveMap.heightInTiles; ty++) {
 				for (var tx : int = 0; tx < saveMap.widthInTiles; tx++) {
 					if (saveMap.getTile(tx, ty) == 1) {
-						savePoints.add(new savePoint(tx, ty));
+						savePoints.add(new savePoint(tx*31, ty*28));
 					}
 				}
 			}
@@ -337,12 +336,18 @@ package com.powerflasher.SampleApp {
 			}
 
 			if (FlxG.keys.justPressed("UP") && astrid.overlaps(puerta)) {
-				FlxG.switchState(new AreaDos());
+				if(astrid.overlaps(puerta)){
+					FlxG.switchState(new AreaDos());
+				}
+				else if(astrid.overlaps(savePoints)){
+					saveStats();
+				}
 			}
-			//Guardar juego
-			if (FlxG.keys.justPressed("UP") && astrid.overlaps(savePoints)) {
-				FlxG.save;
+			
+			if(FlxG.keys.justPressed("S")){
+				saveStats();
 			}
+
 
 			if (vida.currentValue >= 100) {
 				astrid.kill();
@@ -396,7 +401,6 @@ package com.powerflasher.SampleApp {
 		}
 
 		private function hitEnemigos(p : FlxSprite, enemigo : FlxObject) : void {
-			FlxSave(Saver);
 			// trace("colapse");
 			/*if (enemigo.alive) {
 			var emitter : FlxEmitter = new FlxEmitter();
@@ -432,7 +436,6 @@ package com.powerflasher.SampleApp {
 		}
 
 		private function hitBullet(p : FlxObject, enemigo : FlxObject) : void {
-			Saver.bind("guardar");
 			p.kill();
 			if (enemigo == robot) {
 				add(vidaBoss);
@@ -477,6 +480,12 @@ package com.powerflasher.SampleApp {
 				FlxG.score += 1;
 				scoreE.text = FlxG.score.toString() + " / " + totalEnemigos.toString();
 			}
+		}
+		
+		private function saveStats():void{
+			Inicio.guardar(1);
+			vida.currentValue = 100-Inicio.health;
+			trace("Juego Guardado");
 		}
 	}
 }
