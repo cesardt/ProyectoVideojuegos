@@ -13,6 +13,7 @@
     import org.flixel.FlxText;
 	
 	public class Inicio extends FlxState {
+		private static var puntaje: Number=0;
 		private static var _numitems : Number=0;
 		private static var _vidas : Number=3;
 		private static var _soldados : Number=0;
@@ -140,5 +141,13 @@
 		public static function set win(win:Boolean):void {
 			_win=win;
 		}
+<<<<<<< HEAD
+=======
+		if(win){
+			puntaje = _numitems+_vidas+_soldados+_health;
+			var gano: FlxState=insertMAx(puntaje);
+		}
+		
+>>>>>>> y seguimos ahora con el insert
 	}
 }

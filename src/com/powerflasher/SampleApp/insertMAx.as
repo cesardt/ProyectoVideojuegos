@@ -12,13 +12,14 @@ package com.powerflasher.SampleApp {
 	import com.smartfoxserver.v2.requests.*;
 
 		public class insertMAx extends FlxState {
-		private var max : Number = 0;
 		private var user : String = "";
 		private var sfs : SmartFox;
 		private var maxsc : FlxText;
+		private var score: Number=0;
 
-		public function insertMAx() {
+		public function insertMAx(s: Number) {
 			super();
+			score=s;
 					}
 
 		override public function create() : void {
@@ -81,9 +82,6 @@ package com.powerflasher.SampleApp {
 
 		private function onExtensionResponse(evt : SFSEvent) : void {
 			trace("Me han respondido");
-			max = evt.params.params.getInt("maxscore");
-			maxsc.text="MAXSCORE: " + max;
-			trace("maxscore= ", max);
 			//user= evt.params.get("user");
 			
 		}
@@ -91,6 +89,7 @@ package com.powerflasher.SampleApp {
 		private function onLogin(evt : SFSEvent) : void {
 			trace("si se pudo");
 			var fedex:ISFSObject= SFSObject.newInstance();
+			fedex.putInt("score", score);
 			sfs.send(new ExtensionRequest("insert",fedex));
 			sfs.send( new JoinRoomRequest("TEC") );
 //			trace("Estoy en un cuarto");
