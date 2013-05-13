@@ -92,7 +92,7 @@ package com.powerflasher.SampleApp {
 			trace("si se pudo");
 			var fedex:ISFSObject= SFSObject.newInstance();
 			sfs.send(new ExtensionRequest("solicitud",fedex));
-			sfs.send( new JoinRoomRequest("cuarto") );
+			sfs.send( new JoinRoomRequest("TEC") );
 //			trace("Estoy en un cuarto");
 		}
 
