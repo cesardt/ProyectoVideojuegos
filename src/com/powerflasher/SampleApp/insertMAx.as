@@ -12,14 +12,11 @@ package com.powerflasher.SampleApp {
 	import com.smartfoxserver.v2.requests.*;
 
 		public class insertMAx extends FlxState {
-		private var user : String = "";
 		private var sfs : SmartFox;
-		private var maxsc : FlxText;
-		private var score: Number=0;
+		private var score: Number=103;
 
-		public function insertMAx(s: Number) {
+		public function insertMAx() {
 			super();
-			score=s;
 					}
 
 		override public function create() : void {
@@ -28,7 +25,7 @@ package com.powerflasher.SampleApp {
 			sfs.addEventListener(SFSEvent.CONFIG_LOAD_SUCCESS, onConfigLoadSuccess);
 			sfs.addEventListener(SFSEvent.CONFIG_LOAD_FAILURE, onConfigLoadFailure);
 			sfs.addEventListener(SFSEvent.CONNECTION, onConnection);
-			// sfs.addEventListener(SFSEvent.CONNECTION_LOST, onConnectionLost);
+//			sfs.addEventListener(SFSEvent.CONNECTION_LOST, onConnectionLost);
 			sfs.addEventListener(SFSEvent.EXTENSION_RESPONSE, onExtensionResponse);
 						
 			
@@ -38,19 +35,15 @@ package com.powerflasher.SampleApp {
 			sfs.addEventListener(SFSEvent.ROOM_JOIN, onJoin);
 			sfs.addEventListener(SFSEvent.ROOM_JOIN_ERROR, onJoinError);
 
-			var s : FlxSprite = new FlxSprite();
-			// Boton back
-			maxsc= new FlxText(FlxG.width / 2, FlxG.height / 2, 100, "MAXSCORE: ");
 			
-			//maxsc.text("MAXSCORE: " max);
-			var startButton : FlxButton = new FlxButton(FlxG.width / 4 - 60, FlxG.height / 4 + 70, "Back", back);
+		}
 
-			s.makeGraphic(FlxG.width, FlxG.height, 0x000000);
-			// FlxG.bgColor = 0x00000000;
-			add(s);
-			add(maxsc);
-			add(startButton);
+		public function guardaResultado():void{
+			sfs.addEventListener(SFSEvent.EXTENSION_RESPONSE, onExtensionResponse);
+						
 			
+			sfs.addEventListener(SFSEvent.LOGIN, onLogin);
+			sfs.addEventListener(SFSEvent.LOGIN_ERROR, onLoginError);
 		}
 
 		private function back() : void {
@@ -82,6 +75,8 @@ package com.powerflasher.SampleApp {
 
 		private function onExtensionResponse(evt : SFSEvent) : void {
 			trace("Me han respondido");
+			
+			
 			//user= evt.params.get("user");
 			
 		}
@@ -89,7 +84,7 @@ package com.powerflasher.SampleApp {
 		private function onLogin(evt : SFSEvent) : void {
 			trace("si se pudo");
 			var fedex:ISFSObject= SFSObject.newInstance();
-			fedex.putInt("score", score);
+			fedex.putInt("maxscoreF", score);
 			sfs.send(new ExtensionRequest("insert",fedex));
 			sfs.send( new JoinRoomRequest("TEC") );
 //			trace("Estoy en un cuarto");

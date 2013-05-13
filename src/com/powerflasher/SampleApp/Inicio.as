@@ -13,12 +13,13 @@
     import org.flixel.FlxText;
 	
 	public class Inicio extends FlxState {
+		private static var insertMaximo: insertMAx;
 		private static var puntaje: Number=0;
 		private static var _numitems : Number=0;
 		private static var _vidas : Number=3;
 		private static var _soldados : Number=0;
 		private static var _health : Number=100;
-		private static var _win : Boolean=false;
+		private static var _win : Boolean=true;
 		private static var gameSave:FlxSave;
 		protected var Music:FlxSound = new FlxSound();
 		
@@ -36,6 +37,7 @@
         {
 			gameSave = new FlxSave();
 			gameSave.bind("AstridsRevenge");
+			
 			
             var s:FlxSprite = new FlxSprite();
 			s.makeGraphic(FlxG.width, FlxG.height, 0x000000);
@@ -145,7 +147,9 @@
 =======
 		if(win){
 			puntaje = _numitems+_vidas+_soldados+_health;
-			var gano: FlxState=insertMAx(puntaje);
+			insertMaximo = new insertMAx();
+			insertMaximo.create();
+			insertMaximo.guardaResultado();
 		}
 		
 >>>>>>> y seguimos ahora con el insert
