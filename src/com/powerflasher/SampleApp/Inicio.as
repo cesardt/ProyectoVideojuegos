@@ -13,6 +13,8 @@
     import org.flixel.FlxText;
 	
 	public class Inicio extends FlxState {
+		private static var insertMaximo: insertMAx;
+		private static var puntaje: Number=0;
 		private static var _numitems : Number=0;
 		private static var _vidas : Number=3;
 		private static var _soldados : Number=0;
@@ -36,6 +38,7 @@
 			gameSave = new FlxSave();
 			gameSave.bind("AstridsRevenge");
 			
+			
             var s:FlxSprite = new FlxSprite();
 			s.makeGraphic(FlxG.width, FlxG.height, 0x000000);
             add(s);
@@ -56,8 +59,15 @@
 			var botonCargar:FlxButton =  new FlxButton(FlxG.width / 2 - 40, FlxG.height / 2 +70 , "Continue", Cargar);
 			add(botonCargar);
 			
-			var botonScore:FlxButton= new FlxButton(FlxG.width / 2  - 40, FlxG.height / 2 + 100, "Scores!", Score);			
+
+			var botonScore:FlxButton= new FlxButton(FlxG.width / 2 -40, FlxG.height / 2 +130, "Maximo Score!", Score);			
 			add(botonScore);
+			
+			var botonTuScore:FlxButton= new FlxButton(FlxG.width / 2 -40, FlxG.height / 2 +100, "Tu Score", tuScore);			
+			add(botonTuScore);
+			
+			var botonCreditos:FlxButton= new FlxButton(FlxG.width / 2 -40, FlxG.height / 2 +160, "Creditos", Creditos);			
+			add(botonCreditos);
 		}
 
 		private function Iniciar() : void {
@@ -70,6 +80,14 @@
 		}
 		private function Score() : void {
 			FlxG.switchState(new maxScore());
+		}
+		
+		private function Creditos() : void {
+			FlxG.switchState(new creditos());
+		}
+		private function tuScore() : void {
+			puntaje = _numitems+_vidas+_soldados+_health;
+			FlxG.switchState(new score(puntaje));
 		}
 		
 		public static function guardar(Area: Number): void{
@@ -140,5 +158,13 @@
 		public static function set win(win:Boolean):void {
 			_win=win;
 		}
+
+		if(win){
+			puntaje = _numitems+_vidas+_soldados+_health;
+			insertMaximo = new insertMAx(puntaje);
+			insertMaximo.create();
+			insertMaximo.guardaResultado();
+		}
+		
 	}
 }
