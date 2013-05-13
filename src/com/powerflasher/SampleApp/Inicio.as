@@ -53,6 +53,9 @@
 			
 			var botonCargar:FlxButton =  new FlxButton(FlxG.width / 2 - 40, FlxG.height / 2 +70 , "Continue", Cargar);
 			add(botonCargar);
+			
+			var botonScore:FlxButton= new FlxButton(FlxG.width / 2 , FlxG.height / 2 , "Scores!", Score);			add(botonMax);
+			add(botonScore);
 		}
 
 		private function Iniciar() : void {
@@ -62,6 +65,9 @@
 			gameSave.data.soldados = 0;
 			gameSave.data.area = 1;
 			FlxG.switchState(new AreaUno());
+		}
+		private function Score() : void {
+			FlxG.switchState(new maxScore());
 		}
 		
 		public static function guardar(Area: Number): void{
