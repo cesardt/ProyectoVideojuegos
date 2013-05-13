@@ -25,14 +25,7 @@ package com.powerflasher.SampleApp {
 	public class AreaUno extends FlxState {
 		private var astrid : Astrid;
 		//mensajes
-		private static var hab1 : FlxText;
-		private static var hab2 : FlxText;
-		private static var hab3 : FlxText;
-		private static var hab4 : FlxText;
-		private static var hab5 : FlxText;
-		private static var hab6 : FlxText;
-		private static var hab8 : FlxText;
-		private static var hab11 : FlxText;
+		private var hab : FlxText;
 		
 		// bosses
 		private var robot : BossRobot;
@@ -88,15 +81,13 @@ package com.powerflasher.SampleApp {
 			robot1 = new BossRobot(600, 100, astrid);
 			//mensajes
 			
-			hab1=new FlxText(0, 100, FlxG.width, "Conseguiste la habilidad de doble salto");
-			hab2=new FlxText(0, 100, FlxG.width, "Conseguiste la habilidad de correr, puedes utilizarla con la letra C").setFormat(null, 21, 0xFFFFFF, "center");
-			hab3=new FlxText(0, 100, FlxG.width, "Conseguiste la habilidad de escalar paredes, puedes utilizarla con space").setFormat(null, 21, 0xFFFFFF, "center");
-			hab4=new FlxText(0, 100, FlxG.width, "Obtuviste una vida extra").setFormat(null, 21, 0xFFFFFF, "center");
-			hab5=new FlxText(0, 100, FlxG.width, "Conseguiste recuperar un poco tu nivel de vida").setFormat(null, 21, 0xFFFFFF, "center");
-			hab6=new FlxText(0, 100, FlxG.width, "Conseguiste la habilidad de escalar enredaderas, puedes utilizarla con arriba y abajo").setFormat(null, 21, 0xFFFFFF, "center");
-			hab8=new FlxText(0, 100, FlxG.width, "Conseguiste la habilidad de nadar, puedes utilizarla con X").setFormat(null, 21, 0xFFFFFF, "center");
-			hab11=new FlxText(0, 100, FlxG.width, "Conseguiste desbloquear la puerta hacia tu hermano, encuéntrala!").setFormat(null, 21, 0xFFFFFF, "center");
-			
+			//habilidades mensaje
+			hab = new FlxText(150, 20, 350);
+			hab.color = 0xffffffff;
+			hab.size=15;
+			hab.shadow = 0xff000000;
+			hab.scrollFactor.x = 0;
+			hab.scrollFactor.y = 0;
 			
 			// Mapa
 			mapaPrincipal = new FlxTilemap();
@@ -138,8 +129,9 @@ package com.powerflasher.SampleApp {
 			scoreE.scrollFactor.x = 0;
 			scoreE.scrollFactor.y = 0;
 			// Ejercito
-			ejercito = new FlxText(0, 0, 100);
+			ejercito = new FlxText(0, 0, 120);
 			ejercito.color = 0xffffffff;
+			ejercito.size = 9;
 			ejercito.shadow = 0xff000000;
 			ejercito.scrollFactor.x = 0;
 			ejercito.scrollFactor.y = 0;
@@ -233,14 +225,8 @@ package com.powerflasher.SampleApp {
 			vidaBrujo.scrollFactor.y = 0;
 			vidaBrujo.createImageBar(Assets.barravidabrujo, Assets.barravidabrujo1);
 			vidaBrujo.currentValue = 0;
-			add(hab1);
-			add(hab2);
-			add(hab3);
-			add(hab4);
-			add(hab5);
-			add(hab6);
-			add(hab8);
-			add(hab11);
+			add(hab);
+
 			
 			// Prpiedades de la camara
 			FlxG.camera.setBounds(0, 0, 2670, 992, false);
@@ -415,44 +401,45 @@ package com.powerflasher.SampleApp {
 		}
 
 		private function hitItems(p : FlxObject, item : FlxObject) : void {
-			// trace("colapse");
+			hab.visible=true;
 			item.kill();
 			FlxG.score += 1;
 			Inicio.numitems++;
 			if (Inicio.numitems == 1) {
-				hab1.visible=true;
+				hab.text = "Conseguiste la habilidad de doble salto";
 			}
 			else if (Inicio.numitems == 2) {
-				hab2.visible=true;
+				hab.text = "Conseguiste la habilidad de correr, utilizala con 'C'";
 			}
 			else if (Inicio.numitems == 3) {
-				hab3.visible=true;
+				hab.text = "Conseguiste la habilidad de escalar, utilizala con 'SPACE'";
 			}
 			else if (Inicio.numitems == 4 || Inicio.numitems == 7 || Inicio.numitems == 10 || (Inicio.numitems > 11 && Inicio.numitems % 2 != 0)) {
 				Inicio.vidas++;
 				vidas.currentValue = 12 - Inicio.vidas;
-				hab4.visible=true;
+				hab.text = "Obtuviste una vida extra";
 			}
 			else if (Inicio.numitems == 5 || Inicio.numitems == 9 || (Inicio.numitems > 11 && Inicio.numitems % 2 == 0)) {
 				Inicio.health += 20;
 				astrid.health += 20;
 				vida.currentValue -= 20;
-				hab5.visible=true;
+				hab.text = "Conseguiste recuperar un poco de vida";
 			}
 			else if (Inicio.numitems == 6) {
-				hab6.visible=true;
+				hab.text = "Conseguiste la habilidad de escalar enredaderas con arriba y abajo";
 			}
 			else if (Inicio.numitems == 8) {
-				hab8.visible=true;
+				hab.text = "Conseguiste la habilidad de nadar, úsala con 'X'";
 			}
 			else if (Inicio.numitems == 11) {
-				hab11.visible=true;
+				hab.text = "Desbloqueaste la puerta para llegar al imperio, encuentralà y consigue un gran nùmero de soldados apra rescatarlo";
 			}
 			
 			score.text = FlxG.score.toString() + " / " + totalItems.toString();
 		}
 
 		private function hitEnemigos(p : FlxSprite, enemigo : FlxObject) : void {
+			hab.visible=false;
 			if (enemigo == robot || enemigo == robot1) {
 				// Vida de astrid
 				Inicio.health -= 3;
@@ -479,6 +466,7 @@ package com.powerflasher.SampleApp {
 		}
 
 		private function hitBullet(p : FlxObject, enemigo : FlxObject) : void {
+			hab.visible=false;
 			p.kill();
 			if (enemigo == robot) {
 				add(vidaBoss);

@@ -23,8 +23,12 @@ package com.powerflasher.SampleApp {
 	import org.flixel.FlxState;
 
 	public class AreaCuatro extends FlxState {
-		private var hab : FlxText;
+		
+		
 		private var astrid : Astrid;
+		//mensajes
+		private var hab : FlxText;
+		
 		// bosses
 		private var robot : BossRobot;
 		private var robot1 : BossRobot;
@@ -75,6 +79,16 @@ package com.powerflasher.SampleApp {
 			// bosses
 			robot = new BossRobot(180, 780, astrid);
 			robot1 = new BossRobot(600, 100, astrid);
+			
+			//mensajes
+			
+			hab = new FlxText(150, 20, 350);
+			hab.color = 0xffffffff;
+			hab.size=15;
+			hab.shadow = 0xff000000;
+			hab.scrollFactor.x = 0;
+			hab.scrollFactor.y = 0;
+			
 			// Mapa
 			mapaPrincipal = new FlxTilemap();
 			agua = new FlxTilemap();
@@ -198,6 +212,9 @@ package com.powerflasher.SampleApp {
 			vidaBoss1.scrollFactor.y = 0;
 			vidaBoss1.createImageBar(Assets.barravidaboss, Assets.barravidaboss1);
 			vidaBoss1.currentValue = 0;
+			
+			
+			add(hab);
 
 			// Prpiedades de la camara
 			FlxG.camera.setBounds(0, 0, 2670, 992, false);
@@ -343,31 +360,47 @@ package com.powerflasher.SampleApp {
 		}
 
 		private function hitItems(p : FlxObject, item : FlxObject) : void {
-			// trace("colapse");
+			hab.visible=true;
+		
 			item.kill();
 			FlxG.score += 1;
 			Inicio.numitems++;
-			if(Inicio.numitems==7 || Inicio.numitems==10 || (Inicio.numitems>11 && Inicio.numitems%2 !=0)){
-				Inicio.vidas++;
+			if (Inicio.numitems == 1) {
+				hab.text = "Conseguiste la habilidad de doble salto";
 			}
-			if(Inicio.numitems==9 ||  (Inicio.numitems>11 && Inicio.numitems%2 ==0)){
-				Inicio.health+=20;
-				vida.currentValue-=20;
+			else if (Inicio.numitems == 2) {
+				hab.text = "Conseguiste la habilidad de correr, utilizala con 'C'";
+			}
+			else if (Inicio.numitems == 3) {
+				hab.text = "Conseguiste la habilidad de escalar, utilizala con 'SPACE'";
+			}
+			else if (Inicio.numitems == 4 || Inicio.numitems == 7 || Inicio.numitems == 10 || (Inicio.numitems > 11 && Inicio.numitems % 2 != 0)) {
+				Inicio.vidas++;
+				vidas.currentValue = 12 - Inicio.vidas;
+				hab.text = "Obtuviste una vida extra";
+			}
+			else if (Inicio.numitems == 5 || Inicio.numitems == 9 || (Inicio.numitems > 11 && Inicio.numitems % 2 == 0)) {
+				Inicio.health += 20;
+				astrid.health += 20;
+				vida.currentValue -= 20;
+				hab.text = "Conseguiste recuperar un poco de vida";
+			}
+			else if (Inicio.numitems == 6) {
+				hab.text = "Conseguiste la habilidad de escalar enredaderas con arriba y abajo";
+			}
+			else if (Inicio.numitems == 8) {
+				hab.text = "Conseguiste la habilidad de nadar, úsala con 'X'";
+			}
+			else if (Inicio.numitems == 11) {
+				hab.text = "Desbloqueaste la puerta para llegar al imperio, encuentralà y consigue un gran nùmero de soldados apra rescatarlo";
 			}
 			score.text = FlxG.score.toString() + " / " + totalItems.toString();
 		}
 
 		private function hitEnemigos(p : FlxSprite, enemigo : FlxObject) : void {
+			hab.visible=false;
+
 			FlxSave(Saver);
-			// trace("colapse");
-			/*if (enemigo.alive) {
-			var emitter : FlxEmitter = new FlxEmitter();
-			// emitter.makeParticles(Assets.Shuriken, 4);
-			emitter.gravity = 400;
-			emitter.at(enemigo);
-			add(emitter);
-			emitter.start();
-			}*/
 			if (enemigo == robot || enemigo==robot1) {
 				// Vida de astrid
 				p.health -= 3;
@@ -388,6 +421,8 @@ package com.powerflasher.SampleApp {
 		}
 
 		private function hitBullet(p : FlxObject, enemigo : FlxObject) : void {
+			hab.visible=false;
+			
 			Saver.bind("guardar");
 			p.kill();
 			if (enemigo == robot) {
