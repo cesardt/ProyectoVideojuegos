@@ -55,7 +55,7 @@
 			var botonCargar:FlxButton =  new FlxButton(FlxG.width / 2 - 40, FlxG.height / 2 +70 , "Continue", Cargar);
 			add(botonCargar);
 			
-			var botonScore:FlxButton= new FlxButton(FlxG.width / 2 , FlxG.height / 2 , "Scores!", Score);			add(botonMax);
+			var botonScore:FlxButton= new FlxButton(FlxG.width / 2 , FlxG.height / 2 , "Scores!", Score);			
 			add(botonScore);
 		}
 
