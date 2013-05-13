@@ -10,11 +10,11 @@ package com.powerflasher.SampleApp {
 	import flash.display.MovieClip;
 
 	public class FinalState extends FlxState {
-		protected var back : FlxSprite = new FlxSprite(0, 0);
+		protected var final : FlxSprite = new FlxSprite(0, 0);
 
 		override public function create() : void {
-			back.loadGraphic(Assets.fin, false, false, 800, 400, false);
-			add(back);
+			final.loadGraphic(Assets.fin, false, false, 800, 400, false);
+			add(final);
 		}
 
 		public override function update() : void {
