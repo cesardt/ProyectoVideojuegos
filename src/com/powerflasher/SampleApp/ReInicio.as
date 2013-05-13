@@ -1,4 +1,5 @@
 package com.powerflasher.SampleApp {
+	import org.flixel.FlxSave;
 	import org.Assets;
 	import org.flixel.FlxSound;
 	import org.flixel.FlxButton;
@@ -15,8 +16,9 @@ package com.powerflasher.SampleApp {
 		private static var _vidas : Number=3;
 		private static var _soldados : Number=0;
 		private static var _health : Number=100;
-		public static var save:saveGame = new saveGame();
 		protected var Music:FlxSound = new FlxSound();
+		
+		protected var back:FlxSprite = new FlxSprite(0, 0);
 		
 		
 		private var texto:FlxText;
@@ -31,25 +33,66 @@ package com.powerflasher.SampleApp {
             var s:FlxSprite = new FlxSprite();
 			s.makeGraphic(FlxG.width, FlxG.height, 0x000000);
             add(s);
+			back.loadGraphic(Assets.InicioAstrid, false, false, 800, 400, false);
+			this.add(back);
 			FlxG.music = Music;
 			FlxG.playMusic(Assets.Music);
 			
  	
- 			texto=new FlxText(0, 300, FlxG.width, "Astrid's Revenge").setFormat(null, 21, 0xFFFFFF, "center");
+ 			//texto=new FlxText(0, 300, FlxG.width, "Astrid's Revenge").setFormat(null, 21, 0xFFFFFF, "center");
          
-           add(texto);
+           //add(texto);
 		   
 		   
-		 	var botonInicio:FlxButton =  new FlxButton(FlxG.width / 2 - 40, FlxG.height / 2 - 60, "Start Game!", Iniciar);
+		 	var botonInicio:FlxButton =  new FlxButton(FlxG.width / 2 - 40, FlxG.height / 2 +40, "Start Game!", Iniciar);
 			add(botonInicio);
 			
+			var botonCargar:FlxButton =  new FlxButton(FlxG.width / 2 - 40, FlxG.height / 2 +70 , "Continue", Cargar);
+			add(botonCargar);
 		}
 
 		private function Iniciar() : void {
-			FlxG.switchState(new AreaTres());
+			var gameSave:FlxSave = new FlxSave();
+			gameSave.bind("AstridsRevenge");
+			gameSave.data.items = 0;
+			gameSave.data.soldados = 0;
+			gameSave.data.area = 1;
+			FlxG.switchState(new AreaUno());
+		}
+		
+		public static function guardar(Area: Number): void{
+			var gameSave:FlxSave = new FlxSave();
+			gameSave.bind("AstridsRevenge");
+			gameSave.data.items = numitems;
+			gameSave.data.soldados = numitems;
+			gameSave.data.area = Area;
 		}
 
-
+		private function Cargar() : void{
+			
+			var gameSave:FlxSave = new FlxSave();
+			gameSave.bind("AstridsRevenge");
+			
+			if(gameSave.data.items != null){
+				trace(gameSave.data.items);
+				_numitems = gameSave.data.items;
+				_soldados = gameSave.data.soldados;
+				var Loadarea:int = gameSave.data.area;
+				if(Loadarea == 2){
+					FlxG.switchState(new AreaDos());
+				}
+				else if( Loadarea == 3){
+					FlxG.switchState(new AreaDos());
+				}
+				else{
+					FlxG.switchState(new AreaUno());
+				}
+			}
+			else{
+				trace("No hay nada guardado");
+			}
+		}
+		
 		
 		
 		
