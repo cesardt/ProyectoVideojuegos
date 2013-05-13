@@ -79,7 +79,7 @@ package com.powerflasher.SampleApp {
 
 		private function onConfigLoadFailure(evt : SFSEvent) : void {
 			trace("La configuracion NO charcha");
-			//trace("Server settings: " + sfs.config.host + ":" + sfs.config.port +sfs.config.zone);
+			trace("Server settings: " + sfs.config.host + ":" + sfs.config.port +sfs.config.zone);
 		}
 
 		private function onExtensionResponse(evt : SFSEvent) : void {
@@ -87,15 +87,15 @@ package com.powerflasher.SampleApp {
 			max = evt.params.params.getInt("maxscore");
 			maxsc.text="MAXSCORE: " + max;
 			trace("maxscore= ", max);
-			//user= evt.params.get("user");
+			user= evt.params.get("user");
 			
 		}
 
 		private function onLogin(evt : SFSEvent) : void {
 			trace("si se pudo");
 			var fedex:ISFSObject= SFSObject.newInstance();
-			sfs.send(new ExtensionRequest("solicitud",fedex));
-			sfs.send( new JoinRoomRequest("cuarto") );
+			sfs.send(new ExtensionRequest("otrasolicitud",fedex));
+			sfs.send( new JoinRoomRequest("TEC") );
 //			trace("Estoy en un cuarto");
 		}
 
