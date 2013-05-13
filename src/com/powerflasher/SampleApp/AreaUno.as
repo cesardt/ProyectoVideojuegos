@@ -177,7 +177,7 @@ package com.powerflasher.SampleApp {
 			score.text = "0 / " + totalItems.toString();
 
 			// barra de vida de astrid
-			vida = new FlxBar(620, 3);
+			vida = new FlxBar(610, 3);
 			vida.setRange(0, 100);
 			vida.scrollFactor.x = 0;
 			vida.scrollFactor.y = 0;

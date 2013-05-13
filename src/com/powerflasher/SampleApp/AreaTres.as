@@ -137,13 +137,14 @@ package com.powerflasher.SampleApp {
 
 			add(weaponB.group);
 
-			vida = new FlxBar(620, 3);
+			vida = new FlxBar(610, 3);
+			vida.setRange(0, 100);
 			vida.scrollFactor.x = 0;
 			vida.scrollFactor.y = 0;
-			// vida.setParent(astrid,"vida");
-			vida.createImageBar(Assets.barravida, Assets.barravida1, 0x00AB00, 0xFF00FF00);
-			vida.currentValue =100- Inicio.health;
+			vida.createImageBar(Assets.barravida, Assets.barravida1);
+			vida.currentValue = 100-Inicio.health;
 			add(vida);
+
 			
 			vidas = new FlxBar(530, 40,1);
 			vidas.setRange(0, 12);
