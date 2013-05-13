@@ -130,8 +130,14 @@
 		public static function get health() : Number {
 			return _health;
 		}
-		public static function set health(vidas:Number):void {
+		public static function set health(health:Number):void {
 			_health=health;
+		}
+		public static function get win() : Boolean {
+			return _win;
+		}
+		public static function set win(win:Boolean):void {
+			_win=win;
 		}
 		
 	}
