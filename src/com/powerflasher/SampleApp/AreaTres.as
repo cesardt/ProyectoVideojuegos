@@ -107,7 +107,7 @@ package com.powerflasher.SampleApp {
 			score.scrollFactor.y = 0;
 
 			// atributos del score ejercito
-			ejercito = new FlxText(0, 0, 100);
+			ejercito = new FlxText(0, 0, 120);
 			ejercito.color = 0xffffffff;
 			ejercito.shadow = 0xff000000;
 			ejercito.scrollFactor.x = 0;
