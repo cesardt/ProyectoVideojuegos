@@ -23,6 +23,7 @@ package com.powerflasher.SampleApp {
 	import org.flixel.FlxState;
 
 	public class AreaCuatro extends FlxState {
+		private var hab : FlxText;
 		private var astrid : Astrid;
 		// bosses
 		private var robot : BossRobot;

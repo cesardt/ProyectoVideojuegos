@@ -16,6 +16,7 @@
 		private static var _vidas : Number=3;
 		private static var _soldados : Number=0;
 		private static var _health : Number=100;
+		private static var _win : Boolean=false;
 		private static var gameSave:FlxSave;
 		protected var Music:FlxSound = new FlxSound();
 		

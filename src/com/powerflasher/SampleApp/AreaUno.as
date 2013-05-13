@@ -23,7 +23,7 @@ package com.powerflasher.SampleApp {
 	import org.flixel.FlxState;
 
 	public class AreaUno extends FlxState {
-		private var texto : FlxText;
+		private var hab : FlxText;
 		private var astrid : Astrid;
 		// bosses
 		private var robot : BossRobot;
@@ -394,7 +394,12 @@ package com.powerflasher.SampleApp {
 			item.kill();
 			FlxG.score += 1;
 			Inicio.numitems++;
-			if (Inicio.numitems == 7 || Inicio.numitems == 10 || (Inicio.numitems > 11 && Inicio.numitems % 2 != 0)) {
+			if (Inicio.numitems == 1) {
+				trace("hola");
+				hab=new FlxText(0, 100, FlxG.width, "Conseguiste la habilidad de doble salto").setFormat(null, 21, 0xFFFFFF, "center");	
+				add(hab);
+			}
+				if (Inicio.numitems == 7 || Inicio.numitems == 10 || (Inicio.numitems > 11 && Inicio.numitems % 2 != 0)) {
 				Inicio.vidas++;
 				vidas.currentValue = 12 - Inicio.vidas;
 			}

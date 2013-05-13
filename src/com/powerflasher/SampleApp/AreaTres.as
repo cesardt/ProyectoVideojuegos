@@ -15,6 +15,7 @@ package com.powerflasher.SampleApp {
 	import org.flixel.FlxState;
 
 	public class AreaTres extends FlxState {
+		private var hab : FlxText;
 		private var astrid : Astrid;
 		// bosses
 		private var boss : BossArea3;
@@ -256,6 +257,7 @@ package com.powerflasher.SampleApp {
 				add(puertasec);
 				if (FlxG.keys.justPressed("UP") && astrid.overlaps(puertasec)) {
 					FlxG.switchState(new FinalState());
+					Inicio.win=true;
 					trace("Ganaste. Recuperaste a tu hermano");
 				}
 			}
