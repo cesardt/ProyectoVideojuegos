@@ -3,6 +3,9 @@ package org {
 	 * @author Loree
 	 */
 	public class Assets {
+		[Embed(source="AstridRevenge.png")] 
+		public static var InicioAstrid:Class;
+		
 		[Embed(source="music2.mp3")] 	
 		public static var Music:Class;
 		// Astrid
