@@ -16,6 +16,7 @@
 		private static var _vidas : Number=3;
 		private static var _soldados : Number=0;
 		private static var _health : Number=100;
+		private static var gameSave:FlxSave;
 		protected var Music:FlxSound = new FlxSound();
 		
 		protected var back:FlxSprite = new FlxSprite(0, 0);
@@ -30,6 +31,9 @@
 		
 		 override public function create():void
         {
+			gameSave = new FlxSave();
+			gameSave.bind("AstridsRevenge");
+			
             var s:FlxSprite = new FlxSprite();
 			s.makeGraphic(FlxG.width, FlxG.height, 0x000000);
             add(s);
@@ -52,8 +56,8 @@
 		}
 
 		private function Iniciar() : void {
-			var gameSave:FlxSave = new FlxSave();
-			gameSave.bind("AstridsRevenge");
+			/*var gameSave:FlxSave = new FlxSave();
+			gameSave.bind("AstridsRevenge");*/
 			gameSave.data.items = 0;
 			gameSave.data.soldados = 0;
 			gameSave.data.area = 1;
@@ -61,22 +65,17 @@
 		}
 		
 		public static function guardar(Area: Number): void{
-			var gameSave:FlxSave = new FlxSave();
-			gameSave.bind("AstridsRevenge");
-			gameSave.data.items = numitems;
-			gameSave.data.soldados = numitems;
+			trace(gameSave.data.items = numitems);
+			trace(gameSave.data.soldados = soldados);
 			gameSave.data.area = Area;
 		}
 
 		private function Cargar() : void{
 			
-			var gameSave:FlxSave = new FlxSave();
-			gameSave.bind("AstridsRevenge");
-			
 			if(gameSave.data.items != null){
 				trace(gameSave.data.items);
-				_numitems = gameSave.data.items;
-				_soldados = gameSave.data.soldados;
+				numitems = gameSave.data.items;
+				soldados = gameSave.data.soldados;
 				var Loadarea:int = gameSave.data.area;
 				if(Loadarea == 2){
 					FlxG.switchState(new AreaDos());
