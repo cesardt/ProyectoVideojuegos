@@ -148,6 +148,8 @@ package com.powerflasher.SampleApp {
 			add(picosagua);
 			add(mapa4);
 			add(puerta);
+			parseSaves();
+			add(savePoints);
 			add(invisible);
 			add(mapaPrincipal);
 			add(astrid);
@@ -167,8 +169,6 @@ package com.powerflasher.SampleApp {
 
 			// inicializa el grupo de items, del mapa al grupo
 			parseItems();
-			parseSaves();
-			add(savePoints);
 			// inicializa el grupo de enemigos, del mapa al grupo
 			parseEnemigos();
 			parseSoldados();
@@ -353,6 +353,7 @@ package com.powerflasher.SampleApp {
 				astrid.kill();
 			}
 
+<<<<<<< HEAD
 			if (FlxG.keys.justPressed("UP") && astrid.overlaps(puerta)) {
 				if (astrid.overlaps(puerta)) {
 					FlxG.switchState(new AreaDos());
@@ -363,6 +364,16 @@ package com.powerflasher.SampleApp {
 
 			if (FlxG.keys.justPressed("S")) {
 				saveStats();
+=======
+			if (FlxG.keys.justPressed("UP")/* && astrid.overlaps(puerta)*/) {
+				if(astrid.overlaps(puerta)){
+					FlxG.switchState(new AreaDos());
+				}
+			}
+		
+			if(astrid.overlaps(savePoints)){
+				trace("overlaps");
+>>>>>>> Ya guarda en los savePoints
 			}
 
 			if (vida.currentValue >= 100) {
@@ -383,6 +394,7 @@ package com.powerflasher.SampleApp {
 			FlxG.collide(brujo, mapaPrincipal);
 			FlxG.collide(brujo, invisible);
 			FlxG.overlap(astrid, items, hitItems);
+			FlxG.overlap(astrid, savePoints, saveStats);
 			// overlap enemigos
 			FlxG.overlap(astrid, enemigos, hitEnemigos);
 			FlxG.overlap(astrid, soldados, hitEnemigos);
@@ -506,8 +518,13 @@ package com.powerflasher.SampleApp {
 				scoreE.text = FlxG.score.toString() + " / " + totalEnemigos.toString();
 			}
 		}
+<<<<<<< HEAD
 
 		private function saveStats() : void {
+=======
+		
+		private function saveStats(p : FlxObject, savePoint : FlxObject):void{
+>>>>>>> Ya guarda en los savePoints
 			Inicio.guardar(1);
 			vida.currentValue = 100 - Inicio.health;
 			trace("Juego Guardado");
