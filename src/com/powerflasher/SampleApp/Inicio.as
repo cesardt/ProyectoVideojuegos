@@ -19,7 +19,7 @@
 		private static var _vidas : Number=3;
 		private static var _soldados : Number=0;
 		private static var _health : Number=100;
-		private static var _win : Boolean=true;
+		private static var _win : Boolean=false;
 		private static var gameSave:FlxSave;
 		protected var Music:FlxSound = new FlxSound();
 		
@@ -59,8 +59,15 @@
 			var botonCargar:FlxButton =  new FlxButton(FlxG.width / 2 - 40, FlxG.height / 2 +70 , "Continue", Cargar);
 			add(botonCargar);
 			
+<<<<<<< HEAD
 			var botonScore:FlxButton= new FlxButton(FlxG.width / 2  - 40, FlxG.height / 2 + 100, "Scores!", Score);			
+=======
+			var botonScore:FlxButton= new FlxButton(FlxG.width / 2 -40, FlxG.height / 2 +130, "Maximo Score!", Score);			
+>>>>>>> Listo!
 			add(botonScore);
+			
+			var botonTuScore:FlxButton= new FlxButton(FlxG.width / 2 -40, FlxG.height / 2 +100, "Tu Score", tuScore);			
+			add(botonTuScore);
 		}
 
 		private function Iniciar() : void {
@@ -73,6 +80,10 @@
 		}
 		private function Score() : void {
 			FlxG.switchState(new maxScore());
+		}
+		private function tuScore() : void {
+			puntaje = _numitems+_vidas+_soldados+_health;
+			FlxG.switchState(new score(puntaje));
 		}
 		
 		public static function guardar(Area: Number): void{
