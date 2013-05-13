@@ -65,26 +65,7 @@
 					
 				}
 			}
-			/*if (FlxG.keys.justPressed("X")) {
-				play("ataque");
-			}*/
-			
-			/*if (FlxG.keys.pressed("RIGHT") && FlxG.keys.pressed("Z")) {
-				runV = 200;
-				acceleration.x += drag.x;
-				trace(acceleration.x);
-				_facing=RIGHT;
-				if (velocity.y == 0 && !FlxG.keys.pressed("X")) {
-					play("derecha");
-				}
-			}
-			if (FlxG.keys.pressed("LEFT") && FlxG.keys.pressed("Z")) {
-				acceleration.x -= drag.x * 1000;
-				_facing=LEFT;
-				if (velocity.y == 0 && !FlxG.keys.pressed("X")) {
-					play("derecha");
-				}
-			}*/
+
 			if (FlxG.keys.pressed("RIGHT")) {
 				acceleration.x += drag.x;
 				_facing=RIGHT;
@@ -128,18 +109,18 @@
 				}
 			}
 			
-			if (FlxG.keys.pressed("C") && Inicio.numitems > 1 ) {
+			if (FlxG.keys.pressed("X") && Inicio.numitems > 1 ) {
 				if (FlxG.keys.pressed("RIGHT")) {
 					this.x+=2;
 					_facing=RIGHT;
-					if (velocity.y == 0 && !FlxG.keys.pressed("X")) {
+					if (velocity.y == 0) {
 						play("caminar");
 					}
 				}
 				if (FlxG.keys.pressed("LEFT")) {
 					this.x-=2;
 					_facing=LEFT;
-					if (velocity.y == 0 && !FlxG.keys.pressed("X")) {
+					if (velocity.y == 0) {
 						play("caminar");
 					}
 				}

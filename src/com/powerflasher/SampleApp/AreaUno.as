@@ -342,7 +342,7 @@ package com.powerflasher.SampleApp {
 					astrid.play("brincar");
 				}
 				if (Inicio.numitems > 7) {
-					if (FlxG.keys.justPressed("X")) {
+					if (FlxG.keys.justPressed("C")) {
 						astrid.velocity.y = -astrid.maxVelocity.y / 3;
 					}
 				} else {
@@ -409,7 +409,7 @@ package com.powerflasher.SampleApp {
 				hab.text = "Conseguiste la habilidad de doble salto";
 			}
 			else if (Inicio.numitems == 2) {
-				hab.text = "Conseguiste la habilidad de correr, utilizala con 'C'";
+				hab.text = "Conseguiste la habilidad de correr, utilizala con 'X'";
 			}
 			else if (Inicio.numitems == 3) {
 				hab.text = "Conseguiste la habilidad de escalar, utilizala con 'SPACE'";
@@ -429,7 +429,7 @@ package com.powerflasher.SampleApp {
 				hab.text = "Conseguiste la habilidad de escalar enredaderas con arriba y abajo";
 			}
 			else if (Inicio.numitems == 8) {
-				hab.text = "Conseguiste la habilidad de nadar, úsala con 'X'";
+				hab.text = "Conseguiste la habilidad de nadar, úsala con 'C'";
 			}
 			else if (Inicio.numitems == 11) {
 				hab.text = "Desbloqueaste la puerta para llegar al imperio, encuentralà y consigue un gran nùmero de soldados apra rescatarlo";
