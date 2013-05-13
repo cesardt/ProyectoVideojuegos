@@ -11,13 +11,13 @@ package com.powerflasher.SampleApp {
 	import com.smartfoxserver.v2.core.SFSEvent;
 	import com.smartfoxserver.v2.requests.*;
 
-		public class maxScore extends FlxState {
+		public class insertMAx extends FlxState {
 		private var max : Number = 0;
 		private var user : String = "";
 		private var sfs : SmartFox;
 		private var maxsc : FlxText;
 
-		public function maxScore() {
+		public function insertMAx() {
 			super();
 					}
 
@@ -91,7 +91,7 @@ package com.powerflasher.SampleApp {
 		private function onLogin(evt : SFSEvent) : void {
 			trace("si se pudo");
 			var fedex:ISFSObject= SFSObject.newInstance();
-			sfs.send(new ExtensionRequest("ver",fedex));
+			sfs.send(new ExtensionRequest("insert",fedex));
 			sfs.send( new JoinRoomRequest("TEC") );
 //			trace("Estoy en un cuarto");
 		}
